@@ -339,6 +339,7 @@ export function FoundersGame() {
               <div>
                 <h2 className="text-2xl font-semibold">{displayName(currentLearn)}</h2>
                 <p className="mt-1 text-slate-700">{currentLearn.tagline}</p>
+                <LinkedInProfileLink attendee={currentLearn} className="mt-3" />
               </div>
             </div>
             <p className="mt-3 text-sm text-slate-600">{currentLearn.profile_summary?.background}</p>
@@ -363,6 +364,7 @@ export function FoundersGame() {
               <div>
               <p className="text-sm text-slate-600">Tagline clue:</p>
               <p>{playTarget.tagline}</p>
+              <LinkedInProfileLink attendee={playTarget} className="mt-3" />
               </div>
             </div>
 
@@ -610,6 +612,10 @@ function attendeePhoto(attendee: Attendee) {
   return attendee.photo_url || attendee.image_url || attendee.photo || attendee.image || attendee.avatar || null;
 }
 
+function linkedinUrl(attendee: Attendee) {
+  return attendee.identified_person?.linkedin_url || attendee.likely_match?.linkedin_url || null;
+}
+
 function isStudyReady(attendee: Attendee) {
   return isNamed(attendee);
 }
@@ -638,6 +644,38 @@ function FounderAvatar({ attendee, size = "md" }: { attendee: Attendee; size?: "
     >
       {initialsFor(attendee)}
     </div>
+  );
+}
+
+function LinkedInProfileLink({
+  attendee,
+  variant = "light",
+  compact = false,
+  className = "",
+}: {
+  attendee: Attendee;
+  variant?: "light" | "dark";
+  compact?: boolean;
+  className?: string;
+}) {
+  const url = linkedinUrl(attendee);
+  if (!url) return null;
+  const classes =
+    variant === "dark"
+      ? "bg-white/15 text-white ring-white/25 hover:bg-white hover:text-[#0f1933]"
+      : "bg-[#0a66c2]/10 text-[#0a66c2] ring-[#0a66c2]/15 hover:bg-[#0a66c2] hover:text-white";
+  return (
+    <a
+      className={`${className} inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-black transition ring-1 ${classes}`}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={(event) => event.stopPropagation()}
+      aria-label={`Open ${displayName(attendee)} LinkedIn profile to view their photo`}
+    >
+      <span aria-hidden="true">in</span>
+      {compact ? "Profile" : "View LinkedIn profile/photo"}
+    </a>
   );
 }
 
@@ -910,6 +948,7 @@ function MatchMakerPanel({
                   <div>
                     <h2 className="text-4xl font-black">{displayName(selectedAttendee)}</h2>
                     <p className="mt-2 text-white/80">{selectedAttendee.tagline}</p>
+                    <LinkedInProfileLink attendee={selectedAttendee} variant="dark" className="mt-4" />
                   </div>
                 </div>
               </div>
@@ -1001,6 +1040,7 @@ function RelationshipCard({
           <span>
           <span className="block text-lg font-black text-[#0f1933]">{displayName(other)}</span>
           <p className="mt-1 text-sm text-slate-500">{humanize(edge.relationship_type)}</p>
+          <LinkedInProfileLink attendee={other} className="mt-2" compact />
           </span>
         </button>
         <span className="rounded-full bg-[#4fb77c]/15 px-3 py-1 text-sm font-bold text-[#25734b]">{Math.round(edge.score * 100)}% fit</span>
@@ -1175,6 +1215,7 @@ function PairsPanel({
               <FounderAvatar attendee={a} size="sm" />
               <p className="font-medium">{displayName(a)}</p>
               <p className="text-xs opacity-80">{a.category}</p>
+              <LinkedInProfileLink attendee={a} className="mt-2" compact />
             </button>
           );
         })}
