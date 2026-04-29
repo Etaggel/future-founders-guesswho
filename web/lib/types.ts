@@ -6,6 +6,7 @@ export type Attendee = {
     name: string | null;
     confidence: number;
     linkedin_url: string | null;
+    photo_url?: string;
     company?: string;
     role?: string;
     notes?: string;
@@ -14,6 +15,7 @@ export type Attendee = {
     name: string;
     confidence: number;
     linkedin_url?: string;
+    photo_url?: string;
     role?: string;
     company?: string;
   };
