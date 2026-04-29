@@ -342,7 +342,6 @@ export function FoundersGame() {
               <div className="bg-gradient-to-br from-[#0f1933] via-[#274b78] to-[#cb5549] p-6 text-white">
                 <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-white/65">Learn {learnIndex + 1}/3</p>
                 <FounderAvatar attendee={currentLearn} size="xl" />
-                <p className="mt-4 text-sm text-white/70">Face first. Name second. Facts third.</p>
               </div>
               <div className="p-6">
                 <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#cb5549]">Study this founder</p>
