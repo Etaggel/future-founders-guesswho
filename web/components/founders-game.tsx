@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   buildEasyOptions,
   buildFactsChallenge,
@@ -13,7 +13,7 @@ import {
 } from "@/lib/game";
 import { beginLogin, clearTokens, getTokens, logout } from "@/lib/auth";
 import { loadRuntimeConfig, RuntimeConfig } from "@/lib/runtime-config";
-import { Attendee, FactsChallenge, Mastery, MatchData, MatchProfile, RelationshipEdge, RelationshipInsight } from "@/lib/types";
+import { Attendee, FactsChallenge, Mastery, MatchData, RelationshipEdge, RelationshipInsight } from "@/lib/types";
 
 type Mode = "learn" | "play-easy" | "play-hard" | "pairs";
 type AppView = "chooser" | "guess-who" | "match-maker";
@@ -233,6 +233,11 @@ export function FoundersGame() {
     setAppView("chooser");
   }
 
+  function openMatchMaker() {
+    setSelectedMatchId(null);
+    setAppView("match-maker");
+  }
+
   if (!attendees.length) {
     return <LoadingScreen />;
   }
@@ -276,7 +281,7 @@ export function FoundersGame() {
 
           <button
             className="group rounded-[2rem] bg-gradient-to-br from-[#cb5549] via-[#d97d4d] to-[#f0c36a] p-7 text-left text-white shadow-2xl shadow-[#cb5549]/25 transition hover:-translate-y-1 hover:shadow-[#cb5549]/35"
-            onClick={() => setAppView("match-maker")}
+            onClick={openMatchMaker}
           >
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/80">Match Maker</p>
             <h2 className="mt-4 text-3xl font-black">Relationship map and why it matters</h2>
@@ -299,7 +304,7 @@ export function FoundersGame() {
             </div>
             <div className="flex gap-2">
               <button className={`rounded-full px-4 py-2 text-sm font-semibold ${appView === "guess-who" ? "bg-[#0f1933] text-white" : "bg-white text-slate-700"}`} onClick={() => setAppView("guess-who")}>Guess Who</button>
-              <button className={`rounded-full px-4 py-2 text-sm font-semibold ${appView === "match-maker" ? "bg-[#cb5549] text-white" : "bg-white text-slate-700"}`} onClick={() => setAppView("match-maker")}>Match Maker</button>
+              <button className={`rounded-full px-4 py-2 text-sm font-semibold ${appView === "match-maker" ? "bg-[#cb5549] text-white" : "bg-white text-slate-700"}`} onClick={openMatchMaker}>Match Maker</button>
               <SignOutButton onClick={handleSignOut} />
             </div>
           </div>
@@ -332,25 +337,35 @@ export function FoundersGame() {
         {appView === "guess-who" && (
           <>
         {mode === "learn" && currentLearn && (
-          <section className="rounded-[2rem] border border-white/50 bg-white/90 p-6 shadow-xl shadow-slate-900/10 backdrop-blur">
-            <p className="mb-2 text-sm uppercase tracking-wide">Learn Mode {learnIndex + 1}/3</p>
-            <div className="flex items-center gap-4">
-              <FounderAvatar attendee={currentLearn} size="lg" />
-              <div>
-                <h2 className="text-2xl font-semibold">{displayName(currentLearn)}</h2>
-                <p className="mt-1 text-slate-700">{currentLearn.tagline}</p>
-                <LinkedInProfileLink attendee={currentLearn} className="mt-3" />
+          <section className="overflow-hidden rounded-[2rem] border border-white/50 bg-white/90 shadow-xl shadow-slate-900/10 backdrop-blur">
+            <div className="grid gap-0 lg:grid-cols-[18rem_1fr]">
+              <div className="bg-gradient-to-br from-[#0f1933] via-[#274b78] to-[#cb5549] p-6 text-white">
+                <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-white/65">Learn {learnIndex + 1}/3</p>
+                <FounderAvatar attendee={currentLearn} size="xl" />
+                <p className="mt-4 text-sm text-white/70">Face first. Name second. Facts third.</p>
               </div>
-            </div>
-            <p className="mt-3 text-sm text-slate-600">{currentLearn.profile_summary?.background}</p>
-            {isUncertain(currentLearn) && (
-              <p className="mt-3 rounded-lg bg-amber-100 p-2 text-sm text-amber-900">
-                Identity not fully confirmed yet. I’ll flag this profile in enrichment reports.
-              </p>
-            )}
-            <div className="mt-5 flex gap-2">
-              <button className="rounded-xl border px-3 py-2" onClick={() => completeLearnCard(false)}>Needs Review</button>
-              <button className="rounded-xl bg-[#5583b7] px-3 py-2 text-white" onClick={() => completeLearnCard(true)}>I Know This Person</button>
+              <div className="p-6">
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#cb5549]">Study this founder</p>
+                <h2 className="mt-2 text-4xl font-black tracking-tight text-[#0f1933]">{displayName(currentLearn)}</h2>
+                <p className="mt-2 text-lg text-slate-700">{currentLearn.tagline}</p>
+                <LinkedInProfileLink attendee={currentLearn} className="mt-4" />
+                <p className="mt-5 text-sm leading-6 text-slate-600">{currentLearn.profile_summary?.background}</p>
+                <div className="mt-5 rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-100">
+                  <p className="font-black text-[#0f1933]">Key facts to remember</p>
+                  <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
+                    {profileFacts(currentLearn).map((fact) => <li key={fact}>• {fact}</li>)}
+                  </ul>
+                </div>
+                {isUncertain(currentLearn) && (
+                  <p className="mt-3 rounded-lg bg-amber-100 p-2 text-sm text-amber-900">
+                    Identity not fully confirmed yet. I’ll flag this profile in enrichment reports.
+                  </p>
+                )}
+                <div className="mt-6 flex flex-col gap-2 sm:flex-row">
+                  <button className="rounded-xl border border-slate-200 bg-white px-4 py-3 font-semibold text-slate-700" onClick={() => completeLearnCard(false)}>Show another profile</button>
+                  <button className="rounded-xl bg-[#5583b7] px-4 py-3 font-bold text-white" onClick={() => completeLearnCard(true)}>I’m ready to practice recall</button>
+                </div>
+              </div>
             </div>
           </section>
         )}
@@ -359,8 +374,8 @@ export function FoundersGame() {
           <section className="rounded-[2rem] border border-white/50 bg-white/90 p-6 shadow-xl shadow-slate-900/10 backdrop-blur">
             <p className="mb-2 text-sm uppercase tracking-wide">{mode === "play-easy" ? "Play Easy" : "Play Hard"}</p>
             <h2 className="text-2xl font-semibold">Who is this attendee?</h2>
-            <div className="mt-3 flex items-center gap-4 rounded-2xl border bg-gradient-to-br from-white to-slate-50 p-4">
-              <FounderAvatar attendee={playTarget} size="lg" />
+            <div className="mt-3 flex flex-col gap-4 rounded-2xl border bg-gradient-to-br from-white to-slate-50 p-4 sm:flex-row sm:items-center">
+              <FounderAvatar attendee={playTarget} size="xl" />
               <div>
               <p className="text-sm text-slate-600">Tagline clue:</p>
               <p>{playTarget.tagline}</p>
@@ -370,7 +385,7 @@ export function FoundersGame() {
 
             {mode === "play-easy" ? (
               <div className="mt-4 grid gap-2 sm:grid-cols-3">
-                {buildEasyOptions(learnedPool.length > 2 ? learnedPool : attendees, playTarget).map((x) => (
+                {buildEasyOptions(learnedPool.length > 2 ? learnedPool : studyPool, playTarget).map((x) => (
                   <button
                     key={x.id}
                     className="rounded-xl border px-3 py-2 text-left"
@@ -492,6 +507,20 @@ function MetricCard({ label, value, detail }: { label: string; value: string; de
   );
 }
 
+function ScrollNudge({ direction }: { direction: "up" | "down" }) {
+  const isUp = direction === "up";
+  return (
+    <div
+      className={`pointer-events-none absolute left-0 right-1 z-10 flex justify-center ${isUp ? "top-0 bg-gradient-to-b from-white via-white/90 to-transparent pb-5 pt-1" : "bottom-0 bg-gradient-to-t from-white via-white/90 to-transparent pb-1 pt-5"}`}
+      aria-hidden="true"
+    >
+      <span className="grid h-7 w-7 place-items-center rounded-full bg-[#0f1933] text-xs font-black text-white shadow-lg shadow-slate-900/20">
+        {isUp ? "↑" : "↓"}
+      </span>
+    </div>
+  );
+}
+
 function MatchGraphPanel({
   attendees,
   edges,
@@ -609,7 +638,16 @@ function isNamed(attendee: Attendee) {
 }
 
 function attendeePhoto(attendee: Attendee) {
-  return attendee.photo_url || attendee.image_url || attendee.photo || attendee.image || attendee.avatar || null;
+  return (
+    attendee.photo_url ||
+    attendee.identified_person?.photo_url ||
+    attendee.likely_match?.photo_url ||
+    attendee.image_url ||
+    attendee.photo ||
+    attendee.image ||
+    attendee.avatar ||
+    null
+  );
 }
 
 function linkedinUrl(attendee: Attendee) {
@@ -618,6 +656,12 @@ function linkedinUrl(attendee: Attendee) {
 
 function isStudyReady(attendee: Attendee) {
   return isNamed(attendee);
+}
+
+function profileFacts(attendee: Attendee) {
+  const facts = (attendee.extra_facts ?? []).map((item) => item.fact).slice(0, 4);
+  if (facts.length) return facts;
+  return [attendee.tagline, ...(attendee.profile_summary?.interests ?? []).slice(0, 3).map((interest) => `Interested in ${interest}`)];
 }
 
 function initialsFor(attendee: Attendee) {
@@ -629,16 +673,16 @@ function initialsFor(attendee: Attendee) {
     .join("") || `#${attendee.id}`;
 }
 
-function FounderAvatar({ attendee, size = "md" }: { attendee: Attendee; size?: "sm" | "md" | "lg" }) {
+function FounderAvatar({ attendee, size = "md" }: { attendee: Attendee; size?: "sm" | "md" | "lg" | "xl" }) {
   const photo = attendeePhoto(attendee);
-  const sizeClass = size === "lg" ? "h-20 w-20 text-2xl" : size === "sm" ? "h-10 w-10 text-sm" : "h-14 w-14 text-lg";
+  const sizeClass = size === "xl" ? "h-56 w-56 text-5xl" : size === "lg" ? "h-20 w-20 text-2xl" : size === "sm" ? "h-10 w-10 text-sm" : "h-14 w-14 text-lg";
   if (photo) {
-    return <div className={`${sizeClass} rounded-2xl bg-cover bg-center shadow-inner`} style={{ backgroundImage: `url(${photo})` }} aria-label={`${displayName(attendee)} photo`} />;
+    return <div className={`${sizeClass} rounded-full bg-cover bg-center shadow-inner ring-2 ring-white`} style={{ backgroundImage: `url(${photo})` }} aria-label={`${displayName(attendee)} photo`} />;
   }
   const hue = (attendee.id * 47) % 360;
   return (
     <div
-      className={`${sizeClass} grid shrink-0 place-items-center rounded-2xl font-black text-white shadow-inner ring-1 ring-white/50`}
+      className={`${sizeClass} grid shrink-0 place-items-center rounded-full font-black text-white shadow-inner ring-1 ring-white/50`}
       style={{ background: `linear-gradient(135deg, hsl(${hue} 72% 34%), hsl(${(hue + 42) % 360} 68% 54%))` }}
       aria-label={`${displayName(attendee)} generated avatar`}
     >
@@ -650,12 +694,10 @@ function FounderAvatar({ attendee, size = "md" }: { attendee: Attendee; size?: "
 function LinkedInProfileLink({
   attendee,
   variant = "light",
-  compact = false,
   className = "",
 }: {
   attendee: Attendee;
   variant?: "light" | "dark";
-  compact?: boolean;
   className?: string;
 }) {
   const url = linkedinUrl(attendee);
@@ -671,10 +713,10 @@ function LinkedInProfileLink({
       target="_blank"
       rel="noopener noreferrer"
       onClick={(event) => event.stopPropagation()}
-      aria-label={`Open ${displayName(attendee)} LinkedIn profile to view their photo`}
+      aria-label={`Open ${displayName(attendee)} LinkedIn profile`}
     >
-      <span aria-hidden="true">in</span>
-      {compact ? "Profile" : "View LinkedIn profile/photo"}
+      <span className="grid h-4 w-4 place-items-center rounded-[0.2rem] bg-[#0a66c2] text-[0.62rem] leading-none text-white" aria-hidden="true">in</span>
+      LinkedIn
     </a>
   );
 }
@@ -800,6 +842,9 @@ function MatchMakerPanel({
   const [deepDiveEdge, setDeepDiveEdge] = useState<RelationshipEdge | null>(null);
   const [deepDive, setDeepDive] = useState<RelationshipInsight | null>(null);
   const [deepDiveLoading, setDeepDiveLoading] = useState(false);
+  const attendeeRailRef = useRef<HTMLDivElement | null>(null);
+  const profileRef = useRef<HTMLDivElement | null>(null);
+  const [railOverflow, setRailOverflow] = useState({ up: false, down: false });
   const attendeeById = useMemo(() => new Map(attendees.map((attendee) => [attendee.id, attendee])), [attendees]);
   const profileById = useMemo(
     () => new Map((matchData?.attendees ?? []).map((profile) => [profile.id, profile])),
@@ -839,6 +884,32 @@ function MatchMakerPanel({
     [selectedId, visibleEdges],
   );
 
+  function updateRailOverflow() {
+    const rail = attendeeRailRef.current;
+    if (!rail) return;
+    setRailOverflow({
+      up: rail.scrollTop > 4,
+      down: rail.scrollTop + rail.clientHeight < rail.scrollHeight - 4,
+    });
+  }
+
+  function handleSelect(id: number | null) {
+    onSelect(id);
+  }
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(updateRailOverflow);
+    return () => window.cancelAnimationFrame(frame);
+  }, [visibleAttendees.length, selectedId]);
+
+  useEffect(() => {
+    if (!selectedAttendee) return;
+    const frame = window.requestAnimationFrame(() => {
+      profileRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [selectedAttendee]);
+
   async function studyRelationship(edge: RelationshipEdge) {
     setDeepDiveEdge(edge);
     setDeepDiveLoading(true);
@@ -874,6 +945,12 @@ function MatchMakerPanel({
     }
   }
 
+  function collapseRelationship() {
+    setDeepDiveEdge(null);
+    setDeepDive(null);
+    setDeepDiveLoading(false);
+  }
+
   if (!matchData) {
     return (
       <section className="rounded-[2rem] border border-white/50 bg-white/90 p-8 shadow-xl shadow-slate-900/10 backdrop-blur">
@@ -884,31 +961,30 @@ function MatchMakerPanel({
   }
 
   return (
-    <div className="grid min-h-[calc(100vh-11rem)] gap-5 lg:grid-cols-[19rem_1fr]">
-      <aside className="sticky top-4 flex max-h-[calc(100vh-2rem)] flex-col rounded-[2rem] border border-white/50 bg-white/90 p-4 shadow-xl shadow-slate-900/10 backdrop-blur">
+    <div className="min-h-[calc(100vh-11rem)]">
+      <aside className="sticky top-4 z-20 flex h-[calc(100vh-2rem)] flex-col rounded-[2rem] border border-white/50 bg-white/90 p-4 shadow-xl shadow-slate-900/10 backdrop-blur lg:fixed lg:left-[max(1.5rem,calc((100vw-64rem)/2))] lg:top-6 lg:h-[calc(100vh-3rem)] lg:w-[19rem]">
         <div className="flex items-center justify-between gap-3 px-2">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#cb5549]">Attendees</p>
           <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-bold text-slate-500">{visibleAttendees.length}</span>
         </div>
         <button
           className={`mt-3 w-full rounded-2xl p-3 text-left transition ${selectedId === null ? "bg-[#cb5549] text-white shadow-lg shadow-[#cb5549]/20" : "bg-white hover:bg-slate-50"}`}
-          onClick={() => onSelect(null)}
+          onClick={() => handleSelect(null)}
         >
           <p className="font-bold">Map overview</p>
           <p className={`mt-1 text-xs ${selectedId === null ? "text-white/75" : "text-slate-500"}`}>Clusters, filters, and strongest paths</p>
         </button>
-        <div className="mt-3 flex items-center gap-2 rounded-2xl bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-500">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-[#cb5549]" />
-          Scroll the attendee rail
-        </div>
-        <div className="mt-3 flex-1 space-y-2 overflow-auto pr-1 [scrollbar-gutter:stable]">
+        <div className="relative mt-3 min-h-0 flex-1">
+          {railOverflow.up && <ScrollNudge direction="up" />}
+          {railOverflow.down && <ScrollNudge direction="down" />}
+        <div ref={attendeeRailRef} className="h-full space-y-2 overflow-auto pr-1 [scrollbar-gutter:stable]" onScroll={updateRailOverflow}>
           {visibleAttendees.map((attendee) => {
             const active = attendee.id === selectedId;
             return (
               <button
                 key={attendee.id}
                 className={`flex w-full items-center gap-3 rounded-2xl p-3 text-left transition ${active ? "bg-[#0f1933] text-white shadow-lg shadow-[#0f1933]/20" : "bg-white hover:bg-slate-50"}`}
-                onClick={() => onSelect(attendee.id)}
+                onClick={() => handleSelect(attendee.id)}
               >
                 <FounderAvatar attendee={attendee} size="sm" />
                 <span>
@@ -919,9 +995,10 @@ function MatchMakerPanel({
             );
           })}
         </div>
+        </div>
       </aside>
 
-      <section className="space-y-5">
+      <section className="mt-5 space-y-5 lg:ml-[20.25rem] lg:mt-0">
         <MatchGraphPanel
           attendees={visibleAttendees}
           edges={visibleEdges}
@@ -932,13 +1009,13 @@ function MatchMakerPanel({
           relationshipTypes={relationshipTypes}
           onClusterFilter={setClusterFilter}
           onTypeFilter={setTypeFilter}
-          onSelect={onSelect}
+          onSelect={handleSelect}
         />
 
         {!selectedAttendee || !selectedProfile ? (
-          <MatchMakerLanding matchData={matchData} attendees={attendees} visibleEdges={visibleEdges} clusters={clusters} onSelect={onSelect} />
+          <MatchMakerLanding matchData={matchData} attendees={attendees} visibleEdges={visibleEdges} clusters={clusters} onSelect={handleSelect} />
         ) : (
-        <div className="overflow-hidden rounded-[2rem] border border-white/50 bg-white/90 shadow-xl shadow-slate-900/10 backdrop-blur">
+        <div ref={profileRef} className="scroll-mt-6 overflow-hidden rounded-[2rem] border border-white/50 bg-white/90 shadow-xl shadow-slate-900/10 backdrop-blur">
           <div className="bg-gradient-to-br from-[#0f1933] via-[#274b78] to-[#cb5549] p-7 text-white">
             <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
               <div>
@@ -952,7 +1029,6 @@ function MatchMakerPanel({
                   </div>
                 </div>
               </div>
-              <ConfidenceBadge attendee={selectedAttendee} />
             </div>
             <div className="mt-6 grid gap-3 md:grid-cols-3">
               <SignalCard title="Orientation" values={[humanize(selectedProfile.orientation)]} />
@@ -972,8 +1048,12 @@ function MatchMakerPanel({
                   edge={edge}
                   selectedId={selectedAttendee.id}
                   attendeeById={attendeeById}
-                  onSelect={onSelect}
+                  onSelect={handleSelect}
                   onStudy={studyRelationship}
+                  expanded={deepDiveEdge ? relationshipEdgeKey(edge) === relationshipEdgeKey(deepDiveEdge) : false}
+                  insight={deepDive}
+                  loading={deepDiveLoading && deepDiveEdge ? relationshipEdgeKey(edge) === relationshipEdgeKey(deepDiveEdge) : false}
+                  onCollapse={collapseRelationship}
                 />
               ))}
             </div>
@@ -981,36 +1061,6 @@ function MatchMakerPanel({
         </div>
         )}
 
-        {(deepDiveEdge || deepDiveLoading || deepDive) && (
-          <RelationshipDeepDive edge={deepDiveEdge} insight={deepDive} loading={deepDiveLoading} attendeeById={attendeeById} />
-        )}
-
-        <div className="grid gap-5 xl:grid-cols-[1fr_0.9fr]">
-          <div className="rounded-[2rem] border border-white/50 bg-white/90 p-6 shadow-xl shadow-slate-900/10 backdrop-blur">
-            <h3 className="text-xl font-black">How to use the map in the room</h3>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              {buildBenefitIdeas(selectedProfile).map((idea) => (
-                <div key={idea.title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
-                  <p className="font-bold text-[#0f1933]">{idea.title}</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">{idea.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-[2rem] border border-white/50 bg-white/90 p-6 shadow-xl shadow-slate-900/10 backdrop-blur">
-            <h3 className="text-xl font-black">Dense opportunity clusters</h3>
-            <div className="mt-4 space-y-3">
-              {clusters.slice(0, 4).map((cluster) => (
-                <div key={cluster.cluster} className="rounded-2xl bg-gradient-to-br from-white to-slate-50 p-4 ring-1 ring-slate-100">
-                  <p className="font-bold">{humanize(cluster.cluster)}</p>
-                  <p className="mt-1 text-sm text-slate-500">{cluster.members.length} attendees</p>
-                  <p className="mt-2 text-sm text-slate-700">{cluster.opportunities.slice(0, 2).join(" · ")}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
       </section>
     </div>
   );
@@ -1022,35 +1072,46 @@ function RelationshipCard({
   attendeeById,
   onSelect,
   onStudy,
+  expanded,
+  insight,
+  loading,
+  onCollapse,
 }: {
   edge: RelationshipEdge;
   selectedId: number;
   attendeeById: Map<number, Attendee>;
   onSelect: (id: number | null) => void;
   onStudy: (edge: RelationshipEdge) => void;
+  expanded: boolean;
+  insight: RelationshipInsight | null;
+  loading: boolean;
+  onCollapse: () => void;
 }) {
   const otherId = edge.source === selectedId ? edge.target : edge.source;
   const other = attendeeById.get(otherId);
   if (!other) return null;
   return (
-    <article className="rounded-2xl border border-slate-100 bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+    <article className={`rounded-2xl border bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${expanded ? "border-[#5583b7] ring-2 ring-[#8fb7e8]/40" : "border-slate-100"}`}>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <button className="flex items-center gap-3 text-left" onClick={() => onSelect(otherId)}>
+        <button className="flex items-center gap-3 text-left" onClick={(event) => { event.stopPropagation(); onSelect(otherId); }}>
           <FounderAvatar attendee={other} size="sm" />
           <span>
           <span className="block text-lg font-black text-[#0f1933]">{displayName(other)}</span>
           <p className="mt-1 text-sm text-slate-500">{humanize(edge.relationship_type)}</p>
-          <LinkedInProfileLink attendee={other} className="mt-2" compact />
+          <LinkedInProfileLink attendee={other} className="mt-2" />
           </span>
         </button>
         <span className="rounded-full bg-[#4fb77c]/15 px-3 py-1 text-sm font-bold text-[#25734b]">{Math.round(edge.score * 100)}% fit</span>
       </div>
-      <ul className="mt-3 space-y-1 text-sm text-slate-600">
-        {edge.reasons.slice(0, 3).map((reason) => (
-          <li key={reason}>• {reason}</li>
-        ))}
-      </ul>
-      <button className="mt-3 text-sm font-semibold text-[#5583b7] hover:text-[#0f1933]" onClick={() => onStudy(edge)}>Study this relationship →</button>
+      <button className="mt-3 block w-full rounded-2xl bg-slate-50 p-3 text-left transition hover:bg-[#eef5ff]" onClick={() => onStudy(edge)}>
+        <ul className="space-y-1 text-sm text-slate-600">
+          {edge.reasons.slice(0, 3).map((reason) => (
+            <li key={reason}>• {reason}</li>
+          ))}
+        </ul>
+        <span className="mt-3 block text-sm font-semibold text-[#5583b7]">{expanded ? "Refresh relationship study" : "Study this relationship →"}</span>
+      </button>
+      {expanded && <RelationshipDeepDive edge={edge} insight={insight} loading={loading} attendeeById={attendeeById} onCollapse={onCollapse} />}
     </article>
   );
 }
@@ -1060,21 +1121,30 @@ function RelationshipDeepDive({
   insight,
   loading,
   attendeeById,
+  onCollapse,
 }: {
   edge: RelationshipEdge | null;
   insight: RelationshipInsight | null;
   loading: boolean;
   attendeeById: Map<number, Attendee>;
+  onCollapse: () => void;
 }) {
   if (!edge) return null;
   const source = attendeeById.get(edge.source);
   const target = attendeeById.get(edge.target);
   return (
-    <section className="rounded-[2rem] border border-white/50 bg-white/90 p-6 shadow-xl shadow-slate-900/10 backdrop-blur">
-      <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#cb5549]">Relationship deep dive</p>
-      <h3 className="mt-2 text-2xl font-black">
-        {source ? displayName(source) : `Attendee #${edge.source}`} × {target ? displayName(target) : `Attendee #${edge.target}`}
-      </h3>
+    <section className="mt-5 rounded-[1.5rem] border border-[#8fb7e8]/30 bg-gradient-to-br from-slate-50 to-white p-5 shadow-inner">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#cb5549]">Relationship deep dive</p>
+          <h3 className="mt-2 text-2xl font-black">
+            {source ? displayName(source) : `Attendee #${edge.source}`} × {target ? displayName(target) : `Attendee #${edge.target}`}
+          </h3>
+        </div>
+        <button className="grid h-9 w-9 place-items-center self-start rounded-full border border-slate-200 bg-white text-lg font-black text-slate-600 transition hover:bg-slate-100" onClick={onCollapse} aria-label="Close relationship study">
+          ×
+        </button>
+      </div>
       {loading && <p className="mt-4 rounded-2xl bg-slate-100 p-4 text-sm text-slate-600">Studying the relationship with AI...</p>}
       {insight && !loading && (
         <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_1fr]">
@@ -1102,6 +1172,10 @@ function InsightList({ title, items }: { title: string; items: string[] }) {
   );
 }
 
+function relationshipEdgeKey(edge: RelationshipEdge) {
+  return `${edge.source}-${edge.target}-${edge.relationship_type}`;
+}
+
 function buildRelationshipFallback(edge: RelationshipEdge, attendeeById: Map<number, Attendee>): RelationshipInsight {
   const source = attendeeById.get(edge.source);
   const target = attendeeById.get(edge.target);
@@ -1126,57 +1200,6 @@ function SignalCard({ title, values }: { title: string; values: string[] }) {
       <p className="mt-2 text-sm font-semibold text-white">{values.map(humanize).join(" · ")}</p>
     </div>
   );
-}
-
-function ConfidenceBadge({ attendee }: { attendee: Attendee }) {
-  const confidence = attendee.identified_person?.confidence ?? attendee.likely_match?.confidence ?? 0;
-  const label = confidence >= 0.85 ? "Confirmed" : confidence >= 0.75 ? "Probable" : "Unconfirmed";
-  return (
-    <span className="rounded-full bg-white/15 px-4 py-2 text-sm font-bold text-white ring-1 ring-white/25">
-      {label} identity · {Math.round(confidence * 100)}%
-    </span>
-  );
-}
-
-function buildBenefitIdeas(profile?: MatchProfile) {
-  if (!profile) {
-    return [
-      {
-        title: "Pick an intent first",
-        body: "Use the graph filters to decide whether you want cofounder fit, customer discovery, technical depth, or distribution help.",
-      },
-      {
-        title: "Move from map to intro",
-        body: "Open a relationship card and turn the reasons into one concrete question before you approach someone.",
-      },
-      {
-        title: "Create a mini-mastermind",
-        body: "Use clusters to form 3-person groups: one domain expert, one builder, and one operator with distribution or market access.",
-      },
-      {
-        title: "Ask better questions",
-        body: "Instead of pitching, ask why the suggested fit might fail. The objections will teach you faster than the score.",
-      },
-    ];
-  }
-  return [
-    {
-      title: "Find a useful intro",
-      body: `Lead with ${humanize(profile.core_domains[0] ?? profile.segment)} and ask who in the room has lived that problem before.`,
-    },
-    {
-      title: "Spot complementarity",
-      body: `This attendee brings ${profile.strengths.slice(0, 2).join(" and ")}; the best match may cover ${profile.needs[0] ?? "a missing founder skill"}.`,
-    },
-    {
-      title: "Create a mini-mastermind",
-      body: "Use clusters to form 3-person groups: one domain expert, one builder, and one operator with distribution or market access.",
-    },
-    {
-      title: "Ask better questions",
-      body: "Instead of pitching, ask why the suggested fit might fail. The objections will teach you faster than the score.",
-    },
-  ];
 }
 
 function humanize(value: string) {
@@ -1215,7 +1238,7 @@ function PairsPanel({
               <FounderAvatar attendee={a} size="sm" />
               <p className="font-medium">{displayName(a)}</p>
               <p className="text-xs opacity-80">{a.category}</p>
-              <LinkedInProfileLink attendee={a} className="mt-2" compact />
+              <LinkedInProfileLink attendee={a} className="mt-2" />
             </button>
           );
         })}
