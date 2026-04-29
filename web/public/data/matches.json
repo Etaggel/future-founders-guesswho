@@ -1,0 +1,768 @@
+{
+  "schema_version": "1.0",
+  "attendee_segments": {
+    "technical_builder": [1, 3, 4, 8, 15, 16, 20, 22, 23, 25],
+    "commercial_operator": [2, 5, 6, 7, 9, 10, 13, 14, 18, 19, 21, 24, 26],
+    "hybrid_operator_builder": [11, 17],
+    "deep_tech": [1, 4, 15, 20, 22, 23],
+    "ai_native": [2, 8, 12, 14, 15, 16, 22, 23, 24, 25, 26],
+    "regulated_or_high_stakes_domains": [1, 7, 17, 19, 20, 21, 24],
+    "marketplace_or_gtm_strength": [5, 6, 7, 10, 12, 13, 14, 16],
+    "climate_energy_built_environment": [9, 10, 19, 20, 21, 23, 24, 25, 26],
+    "health_life_sciences": [3, 17, 19, 20],
+    "real_world_operations": [4, 7, 10, 16, 17, 18, 20, 25, 26]
+  },
+  "attendees": [
+    {
+      "id": 1,
+      "orientation": "technical",
+      "segment": "deep_tech_systems_engineer",
+      "core_domains": ["aviation", "aerospace", "urban_air_mobility", "systems_engineering"],
+      "strengths": ["systems thinking", "safety-critical engineering", "big-picture analysis"],
+      "needs": ["commercial storytelling", "marketing", "outward-facing cofounder"],
+      "high_potential_matches": [5, 7, 10, 12, 14, 23]
+    },
+    {
+      "id": 2,
+      "orientation": "commercial",
+      "segment": "consumer_data_strategist",
+      "core_domains": ["FMCG", "consumer_insights", "AI_data_tools"],
+      "strengths": ["domain expertise", "consumer behaviour", "data insight"],
+      "needs": ["technical builder", "execution partner"],
+      "high_potential_matches": [8, 15, 16, 22, 25]
+    },
+    {
+      "id": 3,
+      "orientation": "technical_hybrid",
+      "segment": "technical_business_builder",
+      "core_domains": ["healthtech", "B2B SaaS", "pharma_logistics", "compliance"],
+      "strengths": ["technical architecture", "commercial awareness", "team building"],
+      "needs": ["distribution", "customer discovery", "GTM"],
+      "high_potential_matches": [6, 7, 10, 13, 14, 19]
+    },
+    {
+      "id": 4,
+      "orientation": "technical",
+      "segment": "robotics_autonomy_builder",
+      "core_domains": ["robotics", "drones", "autonomy", "systems_integration"],
+      "strengths": ["hardware/software integration", "real-world deployment", "regulatory systems"],
+      "needs": ["commercialisation", "customer discovery", "market framing"],
+      "high_potential_matches": [5, 7, 10, 12, 16, 23]
+    },
+    {
+      "id": 5,
+      "orientation": "commercial",
+      "segment": "narrative_strategy_operator",
+      "core_domains": ["communications", "fintech", "emerging_tech", "leadership"],
+      "strengths": ["positioning", "fundraising narrative", "crisis comms", "organisational leadership"],
+      "needs": ["technical/product builder"],
+      "high_potential_matches": [1, 4, 8, 15, 16, 22, 23]
+    },
+    {
+      "id": 6,
+      "orientation": "commercial",
+      "segment": "gtm_systems_operator",
+      "core_domains": ["B2B SaaS", "GTM", "CRM", "AI_prototyping"],
+      "strengths": ["customer discovery", "commercial systems", "problem validation"],
+      "needs": ["technical/product builder"],
+      "high_potential_matches": [3, 8, 15, 16, 25, 26]
+    },
+    {
+      "id": 7,
+      "orientation": "commercial",
+      "segment": "fintech_execution_operator",
+      "core_domains": ["fintech", "neobanking", "regulated_markets", "AI_accessibility"],
+      "strengths": ["execution", "regulated launch", "zero-to-one", "market entry"],
+      "needs": ["technical cofounder", "AI/product builder"],
+      "high_potential_matches": [3, 8, 15, 16, 22, 24]
+    },
+    {
+      "id": 8,
+      "orientation": "technical",
+      "segment": "ai_knowledge_systems_builder",
+      "core_domains": ["AI", "edtech", "language", "expert_knowledge_systems"],
+      "strengths": ["AI systems", "evaluation", "domain knowledge extraction"],
+      "needs": ["domain expert", "customer bridge", "commercial cofounder"],
+      "high_potential_matches": [2, 5, 6, 7, 14, 19, 24]
+    },
+    {
+      "id": 9,
+      "orientation": "commercial",
+      "segment": "real_estate_capital_operator",
+      "core_domains": ["real_estate", "capital_markets", "AI_productivity"],
+      "strengths": ["capital awareness", "business judgement", "real estate domain"],
+      "needs": ["technical cofounder"],
+      "high_potential_matches": [16, 25, 26, 14, 23]
+    },
+    {
+      "id": 10,
+      "orientation": "commercial",
+      "segment": "growth_operator_founder",
+      "core_domains": ["fintech", "home_services", "energy", "vertical_AI"],
+      "strengths": ["GTM scaling", "aggressive execution", "operations", "distribution"],
+      "needs": ["technical cofounder"],
+      "high_potential_matches": [4, 16, 22, 23, 25, 26]
+    },
+    {
+      "id": 11,
+      "orientation": "hybrid",
+      "segment": "emerging_markets_product_founder",
+      "core_domains": ["emerging_markets", "construction", "AI", "incentive_systems"],
+      "strengths": ["product thinking", "systems thinking", "startup experience"],
+      "needs": ["technical AI builder", "commercial validation partner"],
+      "high_potential_matches": [8, 14, 15, 16, 21, 24]
+    },
+    {
+      "id": 12,
+      "orientation": "commercial_hybrid",
+      "segment": "global_gtm_scaler",
+      "core_domains": ["Google", "startups", "venture", "deeptech", "AI"],
+      "strengths": ["global GTM", "network", "venture pattern recognition", "scaling"],
+      "needs": ["technical product cofounder"],
+      "high_potential_matches": [1, 15, 16, 22, 23]
+    },
+    {
+      "id": 13,
+      "orientation": "commercial",
+      "segment": "exited_saas_operator",
+      "core_domains": ["SaaS", "construction", "EHS", "workplace_safety"],
+      "strengths": ["SaaS scaling", "marketing", "exit experience", "enterprise buying"],
+      "needs": ["technical AI/computer vision builder"],
+      "high_potential_matches": [15, 16, 20, 25, 26]
+    },
+    {
+      "id": 14,
+      "orientation": "commercial_hybrid",
+      "segment": "strategy_consulting_ai_founder",
+      "core_domains": ["consulting", "enterprise_AI", "professional_services"],
+      "strengths": ["structured thinking", "customer validation", "enterprise sales", "strategy"],
+      "needs": ["technical/product builder"],
+      "high_potential_matches": [3, 8, 15, 16, 22, 26]
+    },
+    {
+      "id": 15,
+      "orientation": "technical",
+      "segment": "production_ai_ml_builder",
+      "core_domains": ["ML", "agentic_AI", "NLP", "production_systems"],
+      "strengths": ["rapid prototyping", "production ML", "technical feasibility"],
+      "needs": ["commercial/GTM cofounder"],
+      "high_potential_matches": [5, 6, 7, 10, 13, 14, 19, 24]
+    },
+    {
+      "id": 16,
+      "orientation": "technical_product",
+      "segment": "product_cto_ai_systems_builder",
+      "core_domains": ["AI", "marketplaces", "complex_data", "emergency_response"],
+      "strengths": ["rapid prototyping", "product judgement", "AWS/cloud", "real-world systems"],
+      "needs": ["commercial/distribution cofounder"],
+      "high_potential_matches": [5, 6, 7, 10, 13, 14, 19, 24, 26]
+    },
+    {
+      "id": 17,
+      "orientation": "technical_operator",
+      "segment": "biopharma_operations_builder",
+      "core_domains": ["biopharma", "manufacturing", "continuous_improvement"],
+      "strengths": ["root cause analysis", "operations", "regulated manufacturing", "leadership"],
+      "needs": ["commercial/product cofounder"],
+      "high_potential_matches": [3, 7, 14, 16, 19, 21]
+    },
+    {
+      "id": 18,
+      "orientation": "commercial_operator",
+      "segment": "global_operations_silver_economy",
+      "core_domains": ["silver_economy", "workforce", "global_operations"],
+      "strengths": ["execution", "global adaptability", "mission focus"],
+      "needs": ["financial/analytics", "technical/product builder"],
+      "high_potential_matches": [8, 14, 15, 16, 24, 26]
+    },
+    {
+      "id": 19,
+      "orientation": "commercial",
+      "segment": "climate_finance_strategy",
+      "core_domains": ["climate_finance", "decarbonisation", "regulation"],
+      "strengths": ["climate strategy", "capital flows", "regulation", "problem discovery"],
+      "needs": ["product/technical cofounder"],
+      "high_potential_matches": [8, 15, 16, 21, 23, 24]
+    },
+    {
+      "id": 20,
+      "orientation": "technical",
+      "segment": "medtech_hardware_builder",
+      "core_domains": ["medtech", "hardware", "clinical_trials", "robotics"],
+      "strengths": ["electromechanical prototyping", "clinical implementation", "hardware/software"],
+      "needs": ["commercial/market access", "product strategy"],
+      "high_potential_matches": [7, 13, 16, 17, 25]
+    },
+    {
+      "id": 21,
+      "orientation": "commercial_hybrid",
+      "segment": "deeptech_founder_venture_builder",
+      "core_domains": ["deeptech", "environmental_monitoring", "AI_infrastructure", "venture_building"],
+      "strengths": ["fundraising", "deeptech commercialisation", "resilience", "customer/investor selling"],
+      "needs": ["technical cofounder", "customer-facing executor"],
+      "high_potential_matches": [1, 15, 16, 22, 23]
+    },
+    {
+      "id": 22,
+      "orientation": "technical",
+      "segment": "silicon_ai_quantum_engineer",
+      "core_domains": ["AI_hardware", "silicon", "quantum", "edge_inference"],
+      "strengths": ["deep technical ability", "first-principles thinking", "hardware/software"],
+      "needs": ["commercial/GTM cofounder", "executive operator"],
+      "high_potential_matches": [5, 7, 10, 12, 21]
+    },
+    {
+      "id": 23,
+      "orientation": "technical_deeptech",
+      "segment": "climate_geospatial_ai_builder",
+      "core_domains": ["Google", "weather", "climate", "geospatial_AI", "energy_markets"],
+      "strengths": ["deeptech invention", "zero-to-one", "climate/geospatial systems"],
+      "needs": ["commercial monetisation", "market maker"],
+      "high_potential_matches": [5, 10, 12, 19, 21, 24]
+    },
+    {
+      "id": 24,
+      "orientation": "commercial",
+      "segment": "climate_policy_builder",
+      "core_domains": ["climate_finance", "energy_systems", "policy", "AI_tools"],
+      "strengths": ["rapid learning", "policy insight", "ideation", "climate domain"],
+      "needs": ["technical/product cofounder", "finance/commercial partner"],
+      "high_potential_matches": [8, 15, 16, 19, 23]
+    },
+    {
+      "id": 25,
+      "orientation": "technical_product",
+      "segment": "software_builder_clean_energy",
+      "core_domains": ["software", "constructiontech", "AI_safety", "heat_pumps", "clean_energy"],
+      "strengths": ["software delivery", "product curiosity", "domain learning"],
+      "needs": ["commercial/sales cofounder"],
+      "high_potential_matches": [10, 13, 16, 20, 26]
+    },
+    {
+      "id": 26,
+      "orientation": "commercial_operator_builder",
+      "segment": "ops_ai_real_estate_builder",
+      "core_domains": ["operations", "real_estate", "people_systems", "AI_tools"],
+      "strengths": ["systems building", "stakeholder alignment", "operations", "AI-assisted building"],
+      "needs": ["technical/product cofounder", "commercial real estate network"],
+      "high_potential_matches": [9, 10, 14, 16, 25]
+    }
+  ],
+  "relationship_edges": [
+    {
+      "source": 16,
+      "target": 7,
+      "score": 0.94,
+      "relationship_type": "high_potential_cofounder_fit",
+      "reasons": ["technical/product + fintech execution", "regulated real-world systems", "both move fast", "clear technical/commercial complement"]
+    },
+    {
+      "source": 16,
+      "target": 10,
+      "score": 0.91,
+      "relationship_type": "high_potential_cofounder_fit",
+      "reasons": ["technical/product + aggressive GTM", "shared interest in AI operations", "energy/home services adjacency", "both builder/operator profiles"]
+    },
+    {
+      "source": 16,
+      "target": 5,
+      "score": 0.88,
+      "relationship_type": "strategic_partner",
+      "reasons": ["technical/product + narrative/comms", "emerging tech overlap", "fundraising/storytelling leverage"]
+    },
+    {
+      "source": 16,
+      "target": 14,
+      "score": 0.87,
+      "relationship_type": "enterprise_ai_fit",
+      "reasons": ["AI/product builder + consulting domain expertise", "shared interest in AI replacing manual expert workflows", "design partner traction"]
+    },
+    {
+      "source": 16,
+      "target": 19,
+      "score": 0.84,
+      "relationship_type": "climate_ai_fit",
+      "reasons": ["AI systems + climate finance problem discovery", "technical/product complement to climate strategy", "both focused on action over hype"]
+    },
+    {
+      "source": 16,
+      "target": 24,
+      "score": 0.83,
+      "relationship_type": "climate_policy_builder_fit",
+      "reasons": ["AI builder + climate policy/domain insight", "both experiment quickly", "Climate MOT shows AI-building intent"]
+    },
+    {
+      "source": 16,
+      "target": 13,
+      "score": 0.82,
+      "relationship_type": "enterprise_safety_ai_fit",
+      "reasons": ["AI/product + exited SaaS/operator", "workplace safety data overlap", "enterprise SaaS relevance"]
+    },
+    {
+      "source": 16,
+      "target": 26,
+      "score": 0.81,
+      "relationship_type": "operator_builder_fit",
+      "reasons": ["both build tools quickly", "operations automation overlap", "real estate/workflow AI potential"]
+    },
+    {
+      "source": 16,
+      "target": 15,
+      "score": 0.79,
+      "relationship_type": "technical_build_partner",
+      "reasons": ["agentic AI overlap", "rapid prototyping", "production systems mindset", "less commercial complement but strong build energy"]
+    },
+    {
+      "source": 16,
+      "target": 23,
+      "score": 0.76,
+      "relationship_type": "deeptech_peer",
+      "reasons": ["AI/data systems overlap", "climate/geospatial infrastructure", "strong technical alignment but weaker commercial complement"]
+    },
+
+    {
+      "source": 1,
+      "target": 23,
+      "score": 0.9,
+      "relationship_type": "deeptech_systems_peer",
+      "reasons": ["aerospace/weather/geospatial systems", "safety-critical complex systems", "infrastructure-scale thinking"]
+    },
+    {
+      "source": 1,
+      "target": 12,
+      "score": 0.82,
+      "relationship_type": "technical_commercial_complement",
+      "reasons": ["deeptech technical + global GTM", "climate/planetary systems overlap", "Google/startup scaling"]
+    },
+    {
+      "source": 1,
+      "target": 5,
+      "score": 0.78,
+      "relationship_type": "technical_narrative_complement",
+      "reasons": ["emerging tech needs market narrative", "technical depth + outward-facing storytelling"]
+    },
+
+    {
+      "source": 2,
+      "target": 8,
+      "score": 0.86,
+      "relationship_type": "domain_ai_builder_fit",
+      "reasons": ["FMCG domain expertise + AI knowledge extraction", "expert workflows into AI systems", "data insight product"]
+    },
+    {
+      "source": 2,
+      "target": 15,
+      "score": 0.84,
+      "relationship_type": "domain_ai_builder_fit",
+      "reasons": ["consumer data agent + production AI", "need for reliable workflows and APIs"]
+    },
+    {
+      "source": 2,
+      "target": 6,
+      "score": 0.72,
+      "relationship_type": "commercial_peer",
+      "reasons": ["GTM/data/problem validation", "commercial insight overlap", "less technical complement"]
+    },
+
+    {
+      "source": 3,
+      "target": 7,
+      "score": 0.83,
+      "relationship_type": "regulated_operator_fit",
+      "reasons": ["pharma compliance + fintech regulated launch", "execution in complex environments"]
+    },
+    {
+      "source": 3,
+      "target": 14,
+      "score": 0.81,
+      "relationship_type": "expert_workflow_ai_fit",
+      "reasons": ["compliance/manual expert workflow + professional services AI", "enterprise customer thinking"]
+    },
+    {
+      "source": 3,
+      "target": 19,
+      "score": 0.76,
+      "relationship_type": "regulated_strategy_peer",
+      "reasons": ["regulation/compliance overlap", "complex advisory-to-action workflows"]
+    },
+
+    {
+      "source": 4,
+      "target": 10,
+      "score": 0.84,
+      "relationship_type": "hardware_gtm_complement",
+      "reasons": ["real-world systems + aggressive GTM", "autonomy/ops + scaling/commercialisation"]
+    },
+    {
+      "source": 4,
+      "target": 22,
+      "score": 0.8,
+      "relationship_type": "hardware_systems_peer",
+      "reasons": ["hardware/software boundary", "systems integration", "deep technical constraints"]
+    },
+    {
+      "source": 4,
+      "target": 20,
+      "score": 0.75,
+      "relationship_type": "hardware_builder_peer",
+      "reasons": ["physical systems", "real-world deployment", "regulated/safety environments"]
+    },
+
+    {
+      "source": 5,
+      "target": 23,
+      "score": 0.9,
+      "relationship_type": "deeptech_commercialisation_fit",
+      "reasons": ["deeptech builder needs narrative/market", "commercialisation of complex infrastructure"]
+    },
+    {
+      "source": 5,
+      "target": 22,
+      "score": 0.86,
+      "relationship_type": "technical_commercial_complement",
+      "reasons": ["deep hardware technical + persuasion/narrative", "explicit commercial gap"]
+    },
+    {
+      "source": 5,
+      "target": 15,
+      "score": 0.8,
+      "relationship_type": "ai_commercialisation_fit",
+      "reasons": ["AI builder + narrative/GTM", "agentic AI needs trust and positioning"]
+    },
+
+    {
+      "source": 6,
+      "target": 15,
+      "score": 0.88,
+      "relationship_type": "gtm_ai_builder_fit",
+      "reasons": ["GTM problem validation + agentic AI builder", "AI tooling for commercial workflows"]
+    },
+    {
+      "source": 6,
+      "target": 26,
+      "score": 0.82,
+      "relationship_type": "systems_gtm_fit",
+      "reasons": ["CRM/workflow systems", "commercial operations", "AI tooling"]
+    },
+    {
+      "source": 6,
+      "target": 8,
+      "score": 0.78,
+      "relationship_type": "ai_gtm_tooling_fit",
+      "reasons": ["AI workflow builder + GTM operator", "customer discovery and knowledge systems"]
+    },
+
+    {
+      "source": 7,
+      "target": 22,
+      "score": 0.86,
+      "relationship_type": "commercial_technical_complement",
+      "reasons": ["fintech execution + deep technical builder", "commercial gap explicitly stated"]
+    },
+    {
+      "source": 7,
+      "target": 15,
+      "score": 0.84,
+      "relationship_type": "fintech_ai_fit",
+      "reasons": ["regulated fintech operator + production AI/agents", "execution bias"]
+    },
+    {
+      "source": 7,
+      "target": 24,
+      "score": 0.76,
+      "relationship_type": "finance_policy_peer",
+      "reasons": ["financial services + climate finance", "regulated-market execution"]
+    },
+
+    {
+      "source": 8,
+      "target": 19,
+      "score": 0.84,
+      "relationship_type": "domain_expert_ai_builder_fit",
+      "reasons": ["climate domain expertise + AI knowledge-system builder", "expert workflows and actionability"]
+    },
+    {
+      "source": 8,
+      "target": 24,
+      "score": 0.82,
+      "relationship_type": "climate_ai_builder_fit",
+      "reasons": ["climate policy domain + AI workflow/product builder", "both exploratory and AI-native"]
+    },
+    {
+      "source": 8,
+      "target": 14,
+      "score": 0.8,
+      "relationship_type": "expert_workflow_ai_fit",
+      "reasons": ["AI externalising expert knowledge + consulting workflows"]
+    },
+
+    {
+      "source": 9,
+      "target": 26,
+      "score": 0.86,
+      "relationship_type": "real_estate_ai_fit",
+      "reasons": ["real estate capital + commercial real estate workflow automation", "domain + operator-builder"]
+    },
+    {
+      "source": 9,
+      "target": 25,
+      "score": 0.74,
+      "relationship_type": "built_environment_fit",
+      "reasons": ["real estate + clean energy/home systems", "AI productivity in built environment"]
+    },
+
+    {
+      "source": 10,
+      "target": 25,
+      "score": 0.9,
+      "relationship_type": "clean_energy_commercial_technical_fit",
+      "reasons": ["home energy services + heat pump software/domain interest", "commercial operator + technical builder"]
+    },
+    {
+      "source": 10,
+      "target": 23,
+      "score": 0.82,
+      "relationship_type": "energy_market_fit",
+      "reasons": ["energy systems + commercial scaling", "AI/infra monetisation"]
+    },
+    {
+      "source": 10,
+      "target": 26,
+      "score": 0.78,
+      "relationship_type": "ops_automation_peer",
+      "reasons": ["both use AI in operations", "real-world workflow automation"]
+    },
+
+    {
+      "source": 11,
+      "target": 14,
+      "score": 0.78,
+      "relationship_type": "systems_strategy_peer",
+      "reasons": ["consulting/professional workflows + incentive systems", "structured thinking"]
+    },
+    {
+      "source": 11,
+      "target": 21,
+      "score": 0.75,
+      "relationship_type": "venture_builder_peer",
+      "reasons": ["serial founder + venture builder", "deeptech commercialisation"]
+    },
+
+    {
+      "source": 12,
+      "target": 23,
+      "score": 0.88,
+      "relationship_type": "google_deeptech_commercial_fit",
+      "reasons": ["Google ecosystem", "deeptech/climate scaling", "GTM + builder complement"]
+    },
+    {
+      "source": 12,
+      "target": 22,
+      "score": 0.82,
+      "relationship_type": "deeptech_gtm_fit",
+      "reasons": ["global GTM/network + silicon/AI hardware", "explicit technical/commercial complement"]
+    },
+
+    {
+      "source": 13,
+      "target": 25,
+      "score": 0.86,
+      "relationship_type": "construction_safety_ai_fit",
+      "reasons": ["workplace safety AI + Protex AI/construction tech", "domain overlap"]
+    },
+    {
+      "source": 13,
+      "target": 20,
+      "score": 0.74,
+      "relationship_type": "safety_healthtech_fit",
+      "reasons": ["EHS/computer vision + medtech hardware", "real-world safety systems"]
+    },
+
+    {
+      "source": 14,
+      "target": 26,
+      "score": 0.81,
+      "relationship_type": "enterprise_workflow_ai_fit",
+      "reasons": ["professional services AI + operations workflow automation", "customer/value focus"]
+    },
+    {
+      "source": 14,
+      "target": 15,
+      "score": 0.84,
+      "relationship_type": "enterprise_ai_technical_fit",
+      "reasons": ["consulting workflows + production AI/agents", "technical/commercial complement"]
+    },
+
+    {
+      "source": 17,
+      "target": 20,
+      "score": 0.82,
+      "relationship_type": "health_life_sciences_peer",
+      "reasons": ["regulated healthcare/life sciences", "operations + hardware/clinical", "root cause + real-world deployment"]
+    },
+    {
+      "source": 17,
+      "target": 21,
+      "score": 0.75,
+      "relationship_type": "operations_deeptech_peer",
+      "reasons": ["regulated/industrial systems", "continuous improvement + deeptech commercialisation"]
+    },
+
+    {
+      "source": 18,
+      "target": 24,
+      "score": 0.76,
+      "relationship_type": "policy_workforce_systems_peer",
+      "reasons": ["systems-level societal problem", "global perspective", "policy/market transition"]
+    },
+    {
+      "source": 18,
+      "target": 26,
+      "score": 0.78,
+      "relationship_type": "people_systems_fit",
+      "reasons": ["workforce/silver economy + people systems/operator builder", "workflow/productisation potential"]
+    },
+
+    {
+      "source": 19,
+      "target": 24,
+      "score": 0.9,
+      "relationship_type": "climate_finance_policy_peer",
+      "reasons": ["climate finance", "policy/capital flows", "problem discovery", "AI for action"]
+    },
+    {
+      "source": 19,
+      "target": 23,
+      "score": 0.84,
+      "relationship_type": "climate_ai_infrastructure_fit",
+      "reasons": ["climate finance + climate/geospatial/energy AI", "capital-action gap + infrastructure data"]
+    },
+    {
+      "source": 19,
+      "target": 21,
+      "score": 0.78,
+      "relationship_type": "climate_deeptech_fit",
+      "reasons": ["climate capital + deeptech venture building", "infrastructure and commercialisation"]
+    },
+
+    {
+      "source": 20,
+      "target": 25,
+      "score": 0.74,
+      "relationship_type": "hardware_clean_energy_peer",
+      "reasons": ["physical systems", "home renovation/heat systems", "hardware/software pragmatic building"]
+    },
+
+    {
+      "source": 21,
+      "target": 23,
+      "score": 0.86,
+      "relationship_type": "deeptech_infrastructure_peer",
+      "reasons": ["AI infrastructure", "climate/energy", "deeptech commercialization", "physical constraints"]
+    },
+    {
+      "source": 21,
+      "target": 22,
+      "score": 0.8,
+      "relationship_type": "hardware_infrastructure_fit",
+      "reasons": ["AI infrastructure + silicon/hardware", "physical constraints and compute"]
+    },
+
+    {
+      "source": 22,
+      "target": 23,
+      "score": 0.78,
+      "relationship_type": "deeptech_builder_peer",
+      "reasons": ["foundational tech", "AI hardware + planetary infrastructure", "strong technical depth"]
+    },
+
+    {
+      "source": 24,
+      "target": 23,
+      "score": 0.84,
+      "relationship_type": "climate_energy_market_fit",
+      "reasons": ["energy systems/geopolitics + weather/energy trading", "policy + deeptech complement"]
+    },
+
+    {
+      "source": 25,
+      "target": 26,
+      "score": 0.72,
+      "relationship_type": "product_engineer_operator_fit",
+      "reasons": ["AI tool building", "built environment", "software + operations"]
+    }
+  ],
+  "insight_dimensions": {
+    "best_commercial_to_technical_pairings": [
+      {"commercial": 7, "technical": 16, "reason": "fintech execution + product/AI CTO"},
+      {"commercial": 10, "technical": 25, "reason": "home energy operator + heat pump software builder"},
+      {"commercial": 5, "technical": 23, "reason": "deeptech builder + narrative/commercial strategy"},
+      {"commercial": 14, "technical": 15, "reason": "consulting AI domain + production agentic AI"},
+      {"commercial": 19, "technical": 23, "reason": "climate finance + weather/energy deeptech"},
+      {"commercial": 13, "technical": 25, "reason": "EHS/construction SaaS + safety/AI software builder"},
+      {"commercial": 24, "technical": 16, "reason": "climate policy builder + rapid AI/product prototyping"},
+      {"commercial": 12, "technical": 22, "reason": "global GTM/network + silicon/AI hardware"}
+    ],
+    "highest_domain_density_clusters": [
+      {
+        "cluster": "climate_energy_built_environment",
+        "members": [9, 10, 19, 21, 23, 24, 25, 26],
+        "opportunities": ["AI energy workflows", "climate finance execution", "commercial real estate automation", "heat pump/retrofit tooling", "weather-driven energy trading"]
+      },
+      {
+        "cluster": "agentic_ai_and_expert_workflows",
+        "members": [2, 8, 14, 15, 16, 24, 26],
+        "opportunities": ["AI consultants", "domain expert agents", "workflow automation", "decision intelligence"]
+      },
+      {
+        "cluster": "regulated_real_world_systems",
+        "members": [1, 4, 7, 17, 20, 21],
+        "opportunities": ["compliance automation", "safety-critical systems", "regulated market execution"]
+      },
+      {
+        "cluster": "enterprise_saas_gtm",
+        "members": [5, 6, 10, 12, 13, 14, 26],
+        "opportunities": ["enterprise GTM AI", "sales workflow automation", "vertical SaaS", "narrative-led scaling"]
+      }
+    ],
+    "people_likely_looking_for_technical_cofounder": [5, 7, 9, 10, 12, 13, 14, 18, 19, 21, 24, 26],
+    "people_likely_looking_for_commercial_cofounder": [1, 2, 3, 4, 8, 15, 16, 17, 20, 22, 23, 25],
+    "strongest_potential_matches_for_founder_16": [
+      {
+        "id": 7,
+        "fit": "cofounder",
+        "why": "Elite regulated fintech execution + clear need for technical/product partner."
+      },
+      {
+        "id": 10,
+        "fit": "cofounder",
+        "why": "Commercial energy/home-services operator with explicit technical cofounder need."
+      },
+      {
+        "id": 14,
+        "fit": "venture_build_partner",
+        "why": "Validated enterprise AI/professional services opportunity with commercial depth."
+      },
+      {
+        "id": 19,
+        "fit": "domain_partner",
+        "why": "Climate finance domain expertise needing product/AI execution."
+      },
+      {
+        "id": 24,
+        "fit": "exploration_partner",
+        "why": "Climate policy insight + already using AI tools; could benefit from rapid productisation."
+      },
+      {
+        "id": 13,
+        "fit": "operator_advisor_or_cofounder",
+        "why": "Exited SaaS/operator with workplace safety AI focus; complements AI/product build."
+      },
+      {
+        "id": 26,
+        "fit": "operator_builder_partner",
+        "why": "Strong operations systems builder; likely complementary in workflow automation."
+      }
+    ]
+  }
+}

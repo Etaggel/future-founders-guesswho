@@ -1,0 +1,3697 @@
+{
+  "founders": [
+    {
+  "id": 1,
+  "tagline": "Systems Engineer & Deep Tech Builder | Aviation & Aerospace",
+  "category": "Technical",
+
+  "likely_match": {
+    "name": "Likely Shubha Saha (or very close match)",
+    "confidence": 0.75,
+    "linkedin_url": null,
+    "company": "Aurora Flight Sciences",
+    "previous_company": "Wisk Aero",
+    "role": "Systems Engineer",
+    "notes": "Very rare combination of Trinity + Georgia Tech + Wisk Gen6 + Aurora Switzerland strongly narrows identity"
+  },
+
+  "profile_summary": {
+    "background": "Aerospace systems engineer with elite early-career experience across ESA, NASA programmes, and eVTOL aviation. Transitioning toward system-level challenges in urban air mobility.",
+    "experience_highlights": [
+      "Worked on Wisk Gen6 autonomous eVTOL (Google X / Boeing)",
+      "Contributed to first successful flight",
+      "Experience with NASA X-plane programme",
+      "ESA hypergravity research",
+      "Currently at Aurora Flight Sciences (Switzerland)"
+    ],
+    "interests": [
+      "Urban air mobility",
+      "Airspace systems",
+      "Autonomy",
+      "Space tech",
+      "Systems integration"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Airspace and infrastructure for UAM",
+    "details": "Focused on operationalising urban air mobility through airspace integration, routing optimisation, and real-world infrastructure challenges like first/last mile and population density modelling."
+  },
+
+  "superpower": {
+    "summary": "Systems-level thinking",
+    "details": "Strong ability to see how complex systems interact, ask critical questions, and identify gaps and opportunities through structured analysis."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "More optimistic / risk-forward",
+      "Marketing or outward-facing",
+      "Strong on storytelling",
+      "Balances analytical mindset"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Practised ninjutsu for 5 years",
+      "Attributes strong life navigation skills to it",
+      "Non-competitive martial arts background"
+    ]
+  },
+
+  "extra_facts": [
+    {
+      "fact": "Worked on multiple elite aerospace programmes early in career (NASA, ESA, Wisk)",
+      "type": "experience",
+      "use_for_conversation": "Ask which programme taught her the most about real-world constraints"
+    },
+    {
+      "fact": "Transitioning from vehicle-level engineering to system-level infrastructure thinking",
+      "type": "career_shift",
+      "use_for_conversation": "Ask what problems only become visible at system level"
+    },
+    {
+      "fact": "Strong cross-domain background (biomechanics → automotive → aerospace)",
+      "type": "skill_profile",
+      "use_for_conversation": "Ask how thinking changes across industries"
+    },
+    {
+      "fact": "Likely experienced in safety-critical engineering environments",
+      "type": "professional_context",
+      "use_for_conversation": "Discuss trade-offs between innovation and safety"
+    },
+    {
+      "fact": "Highly analytical and risk-aware decision maker",
+      "type": "personality",
+      "use_for_conversation": "Explore how she evaluates risk vs opportunity"
+    }
+  ],
+
+  "personality_model": {
+    "type": "systems_engineer",
+    "mindset": "analytical, structured, big-picture",
+    "values": [
+      "precision",
+      "curiosity",
+      "system integrity",
+      "thoughtful risk-taking"
+    ],
+    "working_style": "methodical, questioning, detail-oriented",
+    "communication_style": "analytical, reflective, inquisitive"
+  },
+
+  "conversation_starters": [
+    "What’s the hardest part of making UAM actually work in the real world?",
+    "Where do most eVTOL companies underestimate complexity?",
+    "What changes when you go from aircraft to airspace systems?",
+    "Which project taught you the most: NASA, ESA, or Wisk?",
+    "How does ninjutsu translate into engineering thinking?"
+  ]
+},
+{
+  "id": 2,
+  "tagline": "Senior Commercial Strategist | Diageo, Mars, AB InBev & Ferrero | Consumer Data",
+  "category": "Commercial",
+
+  "likely_match": {
+    "name": null,
+    "confidence": 0.25,
+    "linkedin_url": null,
+    "company": "Previously Diageo, Mars, AB InBev, Ferrero, etc.",
+    "role": "Senior Commercial Strategy / Consumer Insights Leader",
+    "notes": "Highly distinctive career path (multi-region FMCG + CHIMP project + neurodivergent ERG founder), but no single high-confidence public LinkedIn match yet. Likely senior but not highly public-facing."
+  },
+
+  "profile_summary": {
+    "background": "Senior commercial strategist with 20+ years across global FMCG brands, specialising in consumer insights, brand strategy, and data-driven decision making.",
+    "experience_highlights": [
+      "Worked across Diageo, Mars, Ferrero, Kellogg's, AB InBev, Britvic and Danone",
+      "Operated across Ireland, UK, Australia, and New Zealand",
+      "Ran a contract brewing business in Australia",
+      "Deep experience with Nielsen, Kantar, IRI and shopper intelligence ecosystems",
+      "Built neurodivergent ERG within Diageo"
+    ],
+    "interests": [
+      "Consumer behaviour",
+      "FMCG data systems",
+      "AI + data interfaces",
+      "Entrepreneurship",
+      "Adventure and travel"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "AI-native consumer insights layer (CHIMP)",
+    "details": "Building CHIMP — an LLM-powered agent trained on decades of FMCG experience to translate complex data (Nielsen, Kantar, IRI) into plain English insights. Focused on making data fast, human, and accessible without navigating complex dashboards."
+  },
+
+  "superpower": {
+    "summary": "Pattern recognition and white space identification",
+    "details": "Consistently identifies opportunities ahead of others across multiple markets. Combines deep commercial intuition with data expertise. Neurodivergence (autism + ADHD) contributes to speed of thinking and ability to see non-obvious connections."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "Radically accountable",
+      "Precise and reliable",
+      "Low ambiguity",
+      "Strong execution discipline",
+      "Or highly capable technical builder"
+    ],
+    "philosophy": "Moves slow to go fast, operates like a lighthouse — consistent under pressure"
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Fundraised in Nepal, Borneo, and North Indonesia",
+      "Cycled London to Amsterdam",
+      "Motorbiked from Hanoi",
+      "Surfed in Bali and Bondi",
+      "Night-dived with sharks",
+      "Significant personal resilience journey ('been to the bottom and back')"
+    ]
+  },
+
+  "elevator_pitch": "Commercial strategist behind major FMCG purchasing decisions for 20+ years. Deep understanding of consumer behaviour and where existing data platforms fail. Now building a better alternative using AI.",
+
+  "extra_facts": [
+    {
+      "fact": "Has deep institutional knowledge of how large FMCG companies actually use (and misuse) data platforms like Nielsen and Kantar",
+      "type": "domain_expertise",
+      "use_for_conversation": "Ask where current data tools break down in real decision-making"
+    },
+    {
+      "fact": "Has operated across multiple international markets, giving a broad perspective on consumer behaviour differences",
+      "type": "experience",
+      "use_for_conversation": "Ask how consumer behaviour differs between markets like UK vs Australia"
+    },
+    {
+      "fact": "Has entrepreneurial experience outside corporate (contract brewing business)",
+      "type": "experience",
+      "use_for_conversation": "Ask what he learned going from corporate to running a physical product business"
+    },
+    {
+      "fact": "Actively uses AI to augment personal productivity and manage executive function",
+      "type": "operating_style",
+      "use_for_conversation": "Ask how he uses AI personally vs professionally"
+    },
+    {
+      "fact": "Strong bias toward simplifying complexity into human-understandable outputs",
+      "type": "product_philosophy",
+      "use_for_conversation": "Discuss how to make data tools actually usable for non-technical people"
+    }
+  ],
+
+  "personality_model": {
+    "type": "strategic_operator",
+    "mindset": "pattern recognition + commercial intuition",
+    "values": [
+      "clarity",
+      "accountability",
+      "consistency under pressure",
+      "real-world applicability",
+      "resilience"
+    ],
+    "working_style": "structured, insight-driven, high-standards",
+    "communication_style": "direct, precise, metaphor-driven (e.g. lighthouse analogy)"
+  },
+
+  "conversation_starters": [
+    "Where do Nielsen and Kantar actually fail in real-world use?",
+    "What’s the most expensive wrong decision you’ve seen driven by bad data?",
+    "How do you train an LLM to think like an FMCG strategist?",
+    "What surprised you most moving from corporate into your own venture?",
+    "How do you personally use AI to manage thinking and decision-making?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Respect his experience + challenge his thinking",
+    "approach": [
+      "Engage at a strategic level, not surface-level",
+      "Avoid generic startup talk",
+      "Show curiosity about real commercial impact",
+      "Be precise in language"
+    ],
+    "avoid": [
+      "Vague AI hype",
+      "Overly technical discussions without business context",
+      "Shallow consumer behaviour takes"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "20+ years across multiple global FMCG brands",
+      "Deep expertise in consumer data platforms",
+      "Clear product (CHIMP) aligned with experience",
+      "Neurodivergent leadership + ERG creation"
+    ],
+    "supporting_signals": [
+      "International career footprint",
+      "Entrepreneurial side projects",
+      "AI-first thinking applied to domain expertise"
+    ],
+    "uncertainties": [
+      "Likely senior but not highly public-facing",
+      "CHIMP project may still be early / not publicly indexed",
+      "Multiple possible candidates across large FMCG networks"
+    ]
+  }
+},
+    {
+  "id": 3,
+  "tagline": "Technical Lead & Builder | Health Tech & B2B SaaS",
+  "category": "Technical",
+
+  "likely_match": {
+    "name": null,
+    "confidence": 0.35,
+    "linkedin_url": null,
+    "company": null,
+    "role": "Technical Lead / Founder-type profile",
+    "notes": "Multiple overlapping signals (BuildFlow, BrokerKit, MBA+AI MSc) but no single high-confidence public match yet"
+  },
+
+  "profile_summary": {
+    "background": "Technical leader with 12+ years experience across SaaS, health tech, and adtech. Known for bridging engineering and commercial outcomes and building revenue-generating systems.",
+    "experience_highlights": [
+      "Built BuildFlow.ie (snagging / inspection tooling for architects)",
+      "Co-founded BrokerKit (commercial insurance SaaS)",
+      "Currently exploring pharma logistics and compliance (India → Europe)",
+      "Simultaneously completing Executive MBA and MSc in Artificial Intelligence"
+    ],
+    "interests": [
+      "AI applied to real-world operations",
+      "Supply chain and logistics",
+      "Compliance automation",
+      "Building scalable SaaS products"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Pharma logistics compliance automation",
+    "details": "Focused on replacing expensive, manual consultant-driven compliance processes for South East Asian pharma exporters with AI-assisted workflows. Envisions a hybrid system combining software automation with qualified human validation."
+  },
+
+  "superpower": {
+    "summary": "Bridging technical and commercial execution",
+    "details": "Combines deep technical architecture skills with strong business understanding. Builds high-performance teams and ships scalable products that directly drive revenue."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "Strong in distribution and go-to-market",
+      "Customer-obsessed",
+      "Excellent communicator and storyteller",
+      "Ego-free and transparent",
+      "Fast feedback loop from market to product"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Quit alcohol 18 months ago to optimise energy and focus",
+      "Highly disciplined and productivity-focused",
+      "Prefers early-morning problem solving over late-night socialising"
+    ]
+  },
+
+  "elevator_pitch": "Technical leader who understands the business. Bridges architecture and commercial outcomes, builds high-performance teams, and ships scalable, revenue-generating products.",
+
+  "extra_facts": [
+    {
+      "fact": "Has repeatedly built products in different industries (construction, insurance, pharma), showing strong pattern recognition across domains",
+      "type": "experience",
+      "use_for_conversation": "Ask how he evaluates which industries/problems are worth pursuing"
+    },
+    {
+      "fact": "Actively investing in education (MBA + AI MSc) while building, signalling long-term founder intent",
+      "type": "trajectory",
+      "use_for_conversation": "Ask how the MBA vs AI MSc is shaping his thinking differently"
+    },
+    {
+      "fact": "Prefers hybrid human + software systems rather than pure automation",
+      "type": "product_philosophy",
+      "use_for_conversation": "Discuss where AI should stop and humans should stay in the loop"
+    },
+    {
+      "fact": "Has strong bias toward revenue-driving products rather than technical experiments",
+      "type": "values",
+      "use_for_conversation": "Ask about the hardest product he’s monetised and what made it work"
+    },
+    {
+      "fact": "Highly disciplined personal operating style (early mornings, energy management)",
+      "type": "working_style",
+      "use_for_conversation": "Connect on routines, productivity, or founder stamina"
+    }
+  ],
+
+  "personality_model": {
+    "type": "technical_operator",
+    "mindset": "commercially-aware builder",
+    "values": [
+      "execution over theory",
+      "revenue impact",
+      "discipline",
+      "continuous improvement"
+    ],
+    "working_style": "structured, high-output, team-oriented",
+    "communication_style": "direct, pragmatic, business-aware"
+  },
+
+  "conversation_starters": [
+    "What made you pick pharma logistics as the problem worth going after?",
+    "Where do you think AI actually replaces consultants vs just augments them?",
+    "What’s the hardest product you’ve built that actually made money?",
+    "How are you balancing MBA thinking vs AI-first thinking right now?",
+    "What usually breaks when technical teams try to own commercial outcomes?"
+  ],
+
+  "matching_signals": {
+    "strong_signals": [
+      "Builder across multiple industries (SaaS, health, adtech)",
+      "Founder experience (BuildFlow, BrokerKit)",
+      "Explicit focus on commercial outcomes and revenue",
+      "Active upskilling in both business and AI"
+    ],
+    "supporting_signals": [
+      "Hybrid human + AI product thinking",
+      "Strong interest in complex operational systems",
+      "Disciplined personal habits"
+    ],
+    "uncertainties": [
+      "Multiple individuals could match BuildFlow / BrokerKit combination",
+      "No clear single LinkedIn profile identified yet"
+    ]
+  }
+},
+{
+  "id": 4,
+  "tagline": "Senior Engineer & Builder | Robotics & Autonomy",
+  "category": "Technical",
+
+  "likely_match": {
+    "name": "Dan Moss",
+    "confidence": 0.88,
+    "linkedin_url": "https://ie.linkedin.com/in/dan-moss-robotics",
+    "company": "Manna Air Delivery",
+    "role": "Head of System Integrations"
+  },
+
+  "profile_summary": {
+    "background": "Multidisciplinary robotics engineer working at the core of an Irish drone delivery startup. Responsible for system architecture, integration, and scaling engineering functions from early-stage to large-scale deployment.",
+    "experience_highlights": [
+      "Head of Systems Integration at Irish drone delivery startup",
+      "Scaled engineering organisation from ~6 to 150+ people",
+      "Works across hardware, software, and operational integration",
+      "Direct collaboration with aviation regulators and real-world deployments"
+    ],
+    "interests": [
+      "RC aircraft and drones",
+      "Electronics and hardware projects",
+      "Mountain walking",
+      "Space tech and autonomy"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Automation and space",
+    "details": "Interested in full lifecycle system building and sees space beyond low Earth orbit as the next major frontier. Focused on building technology that improves everyday life rather than military applications."
+  },
+
+  "superpower": {
+    "summary": "Pragmatic delivery of complex systems",
+    "details": "Thrives in high-pressure environments and consistently delivers complex systems as working products. Combines technical depth with practical, data-driven execution across both B2B and B2C environments."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "Curious",
+      "Purpose-driven",
+      "Comfortable with failure",
+      "Moves fast and iterates"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "All-Ireland Ultimate Frisbee Gold Medalist",
+      "Has dyslexia and uses it as a cognitive advantage",
+      "Strong self-developed systems for organisation and thinking"
+    ]
+  },
+
+  "elevator_pitch": "Multidisciplinary robotics engineer building real-world autonomous systems. Thrives in fast-paced environments and turns complex problems into pragmatic, working products.",
+
+  "extra_facts": [
+    {
+      "fact": "Actively builds and experiments with FPV aircraft and gliders outside of work",
+      "type": "hobby",
+      "use_for_conversation": "Ask about his latest build or whether he prefers designing from scratch vs modifying platforms"
+    },
+    {
+      "fact": "Works on safety-critical aviation-grade systems where reliability and regulatory compliance are essential",
+      "type": "professional_context",
+      "use_for_conversation": "Discuss challenges of moving from prototype to regulator-approved systems"
+    },
+    {
+      "fact": "Operates at the intersection of hardware, software, and operations rather than a single discipline",
+      "type": "skill_profile",
+      "use_for_conversation": "Explore how he balances trade-offs across engineering domains"
+    },
+    {
+      "fact": "Has firsthand experience scaling a deep tech startup through rapid growth",
+      "type": "experience",
+      "use_for_conversation": "Ask what broke or changed most during scaling"
+    },
+    {
+      "fact": "Values authenticity and craftsmanship, preferring to do things manually when it matters",
+      "type": "values",
+      "use_for_conversation": "Discuss views on AI vs human-led work"
+    }
+  ],
+
+  "personality_model": {
+    "type": "builder-engineer",
+    "mindset": "pragmatic, systems-level thinker",
+    "values": [
+      "real-world impact",
+      "working systems over theory",
+      "authenticity",
+      "engineering craftsmanship"
+    ],
+    "working_style": "hands-on, integration-focused, delivery-oriented",
+    "communication_style": "likely thoughtful, direct, low-fluff"
+  },
+
+  "conversation_starters": [
+    "What part of the drone stack is still way harder than people think?",
+    "Are you still building stuff outside work or does Manna scratch that itch?",
+    "What breaks most often when you scale systems like that?",
+    "How far off do you think real autonomy is in messy environments?",
+    "Where do regulators slow things down the most?"
+  ],
+
+  "matching_signals": {
+    "strong_signals": [
+      "Exact role match: Head of Systems Integration",
+      "Company match: Manna Air Delivery",
+      "Career trajectory matches company scaling phase",
+      "Hands-on integration across hardware and software"
+    ],
+    "supporting_signals": [
+      "Maker / hobbyist engineering profile",
+      "Drone and autonomy focus",
+      "System-level thinking and execution"
+    ],
+    "unconfirmed_but_expected": [
+      "Ultimate Frisbee achievement not publicly listed",
+      "Dyslexia not publicly stated"
+    ]
+  }
+},
+    {
+  "id": 5,
+  "tagline": "Global President | Comms, Fintech & Emerging Tech",
+  "category": "Commercial",
+
+  "identified_person": {
+    "name": "Liam Murphy",
+    "confidence": 0.97,
+    "linkedin_url": "https://ie.linkedin.com/in/liam-murphy-48903425",
+    "company": "Wachsman",
+    "role": "Global President"
+  },
+
+  "profile_summary": {
+    "background": "Senior leader across government and private sector, spanning UK Cabinet Office, European Commission, and global communications leadership in emerging tech.",
+    "experience_highlights": [
+      "Policy Adviser at UK Cabinet Office under David Cameron",
+      "Communications Adviser at European Commission under Juncker",
+      "Employee #3 on Brexit Remain campaign",
+      "Scaled Wachsman into global communications firm (120 staff, €16M revenue)"
+    ],
+    "interests": [
+      "leadership systems",
+      "organisational design",
+      "founder dynamics",
+      "high-growth companies"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Practical leadership and organisational design",
+    "details": "Focused on building high-performance environments through structure, incentives, and clarity. Thinking 12–24 months ahead to design organisations that scale effectively."
+  },
+
+  "superpower": {
+    "summary": "Operating in ambiguity and driving execution",
+    "details": "Combines commercial, operational, and communications expertise. Has worked closely with founders at critical moments (launch, raise, crisis) and understands what separates high-performing teams."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "high agency",
+      "bias toward action",
+      "comfortable with ambiguity",
+      "high EQ",
+      "strong ownership mentality"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Expecting third child while considering starting a company",
+      "Choosing to build at a moment that appears high-risk externally",
+      "Driven by internal conviction over timing logic"
+    ]
+  },
+
+  "elevator_pitch": "Built a career across government, EU, and global communications, helping scale a firm to €16M revenue. Deep experience at founders' most critical moments. Now transitioning from advisor to builder.",
+
+  "extra_facts": [
+    {
+      "fact": "Has shaped positioning and narratives for many high-growth and crypto companies",
+      "type": "experience",
+      "use_for_conversation": "Ask what separates companies that successfully raise from those that fail"
+    },
+    {
+      "fact": "Thinks in leverage and timing rather than volume of activity",
+      "type": "strategy",
+      "use_for_conversation": "Discuss how to identify high-leverage moments in a startup"
+    },
+    {
+      "fact": "Has seen hundreds of founder journeys across launches, raises, and crises",
+      "type": "pattern_recognition",
+      "use_for_conversation": "Ask about the most common mistakes founders make"
+    },
+    {
+      "fact": "Transitioning from advisor role to operator/founder role",
+      "type": "career_shift",
+      "use_for_conversation": "Ask what made him decide to switch sides"
+    },
+    {
+      "fact": "Strong emphasis on character and behaviour under pressure",
+      "type": "values",
+      "use_for_conversation": "Discuss how to build teams that perform under stress"
+    }
+  ],
+
+  "personality_model": {
+    "type": "strategic_operator",
+    "mindset": "high-agency, execution-focused",
+    "values": [
+      "clarity",
+      "ownership",
+      "speed",
+      "character",
+      "leverage"
+    ],
+    "working_style": "decisive, structured, outcome-driven",
+    "communication_style": "direct, strategic, high-context"
+  },
+
+  "conversation_starters": [
+    "What’s the difference between a company that raises and one that doesn’t?",
+    "What do founders consistently get wrong when telling their story?",
+    "What made you decide to move from advisor to builder?",
+    "Where does comms actually move the needle vs where is it wasted?",
+    "What patterns do you see in teams that succeed vs fail?"
+  ]
+},
+    {
+  "id": 6,
+  "tagline": "GTM Leader | Intercom & Salesforce Veteran | Early-Stage B2B SaaS",
+  "category": "Commercial",
+
+  "likely_match": {
+    "name": null,
+    "confidence": 0.4,
+    "linkedin_url": null,
+    "company": "Formerly Intercom, Salesforce",
+    "role": "Head of EMEA Commercial / GTM Leader",
+    "notes": "Distinct profile (Finnish-Irish + Intercom early EMEA + Salesforce Nordics + logistics startup), but no single high-confidence public match yet"
+  },
+
+  "profile_summary": {
+    "background": "Senior go-to-market leader with a decade of experience in SaaS, scaling commercial functions from early-stage through growth. Known for building commercial engines from scratch rather than just operating them.",
+    "experience_highlights": [
+      "8 years at Intercom, from early EMEA hire to Head of EMEA North, South & Continental MM/ENT Relationship Management",
+      "3 years at Salesforce Nordics progressing from SDR to Senior AE",
+      "Led CRM migration (Salesforce → Attio) at early-stage logistics startup",
+      "Built GTM systems and workflows alongside full commercial ownership"
+    ],
+    "interests": [
+      "AI-powered GTM tooling",
+      "Customer discovery",
+      "Commercial systems design",
+      "Early-stage SaaS growth",
+      "Problem validation"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "AI collapsing the gap between problem and product",
+    "details": "Focused on how AI enables rapid prototyping without engineering teams, allowing founders to move from problem identification to working solutions almost instantly. Believes this shifts focus toward creativity, empathy, and impact."
+  },
+
+  "superpower": {
+    "summary": "Deep pattern recognition in customer and commercial systems",
+    "details": "Built from thousands of hours of discovery conversations. Able to diagnose whether a business has a real problem or an assumed one by understanding technical constraints, business outcomes, and human behaviour."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "Curious rather than ego-driven",
+      "Seeks to understand before acting",
+      "Passionate about the problem (not just opportunity)",
+      "Data-driven but comfortable with ambiguity",
+      "High trust, low ego",
+      "Moves with purpose"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Enjoys chess puzzles that form visual patterns or characters",
+      "Strong abstract + visual problem-solving mindset"
+    ]
+  },
+
+  "elevator_pitch": "GTM leader from category-defining SaaS companies (Intercom, Salesforce). Builds commercial engines from scratch, not just sales teams. Operates at inflection points and translates customer insight into scalable growth systems.",
+
+  "extra_facts": [
+    {
+      "fact": "Has operated at multiple inflection points in SaaS category creation (e.g. in-app messaging at Intercom)",
+      "type": "experience",
+      "use_for_conversation": "Ask what signals indicate a category is about to break open"
+    },
+    {
+      "fact": "Comfortable operating without engineering support due to no-code / AI tooling",
+      "type": "operating_style",
+      "use_for_conversation": "Ask what she can now build solo that previously required a team"
+    },
+    {
+      "fact": "Has hands-on experience designing CRM architecture and workflows, not just using them",
+      "type": "skill_profile",
+      "use_for_conversation": "Discuss what most teams get wrong in CRM setup"
+    },
+    {
+      "fact": "Strong bias toward validating real problems before building solutions",
+      "type": "values",
+      "use_for_conversation": "Ask about examples where teams solved the wrong problem"
+    },
+    {
+      "fact": "Combines analytical thinking with empathy-driven customer understanding",
+      "type": "mindset",
+      "use_for_conversation": "Explore how emotional vs rational drivers show up in buying decisions"
+    }
+  ],
+
+  "personality_model": {
+    "type": "gtm_operator",
+    "mindset": "customer-centric, pattern-driven",
+    "values": [
+      "truth over assumption",
+      "customer understanding",
+      "clarity",
+      "purposeful execution",
+      "low ego collaboration"
+    ],
+    "working_style": "hands-on, fast iteration, insight-led",
+    "communication_style": "curious, probing, structured"
+  },
+
+  "conversation_starters": [
+    "How do you tell if someone has a real problem vs something imagined?",
+    "What changed most about GTM when AI removed the need for engineering?",
+    "What’s the biggest mistake companies make when setting up their CRM?",
+    "What did you learn at Intercom about category creation?",
+    "What’s something you can build now solo that wasn’t possible 2 years ago?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Engage through real problem thinking",
+    "approach": [
+      "Talk about real customer problems, not ideas",
+      "Be open to being challenged",
+      "Show you’re already building/testing",
+      "Avoid generic startup talk"
+    ],
+    "avoid": [
+      "Pitching ideas without validation",
+      "Overhyping AI without use case",
+      "Surface-level GTM discussions"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Intercom early EMEA + senior leadership",
+      "Salesforce Nordics early career",
+      "GTM system builder, not just operator",
+      "Hands-on CRM and commercial architecture experience"
+    ],
+    "supporting_signals": [
+      "AI-native GTM experimentation",
+      "Cross-functional commercial + technical thinking",
+      "Early-stage startup experience"
+    ],
+    "uncertainties": [
+      "Multiple candidates with similar Intercom/Salesforce backgrounds",
+      "Finnish-Irish combination narrows pool but not unique enough",
+      "Likely not highly public-facing online"
+    ]
+  }
+},
+    {
+  "id": 7,
+  "tagline": "Fintech Operator & Founder | Zero to One in Financial Services",
+  "category": "Commercial",
+
+  "identified_person": {
+    "name": "Elaine Deehan",
+    "confidence": 0.93,
+    "linkedin_url": "https://www.linkedin.com/in/elainedeehan/",
+    "companies": [
+      "Monzo",
+      "Total Processing"
+    ],
+    "roles": [
+      "Ireland Country Manager (Monzo)",
+      "Managing Director Europe (Total Processing)"
+    ]
+  },
+
+  "profile_summary": {
+    "background": "Experienced fintech operator across banking, payments, and startups. Has built and scaled products in highly regulated environments and led market entry for neobanks.",
+    "experience_highlights": [
+      "Led Irish market entry for a neobank (licensing, product, GTM)",
+      "Ireland Country Manager at Monzo (3.5 years)",
+      "Managing Director Europe at Total Processing",
+      "Founder & CEO of fintech startup (failed and rebuilt)",
+      "Experience across banking, open banking, and fintech scaleups"
+    ],
+    "interests": [
+      "fintech infrastructure",
+      "AI + entrepreneurship",
+      "accessibility in startup building",
+      "early-stage execution"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Lowering barriers to starting businesses using AI",
+    "details": "Focused on how AI can make building a business as accessible as creating a social media account, especially for underrepresented groups. Strong personal motivation as a mother of two girls."
+  },
+
+  "superpower": {
+    "summary": "Execution in complex environments",
+    "details": "Exceptional ability to take ideas from zero to real customers, particularly in regulated fintech environments. Strong bias toward action and delivery."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "low ego",
+      "collaborative",
+      "resilient",
+      "committed",
+      "team-first mindset"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Has already failed at a startup and rebuilt",
+      "Took risk leaving corporate security",
+      "Balances startup ambition with family life",
+      "Brings strong energy and personality ('bit of craic')"
+    ]
+  },
+
+  "elevator_pitch": "Fintech operator who excels at taking ideas from zero to real customers in complex environments. Strong executor with real founder experience and resilience.",
+
+  "extra_facts": [
+    {
+      "fact": "Has led fintech products through regulatory approval and market entry",
+      "type": "experience",
+      "use_for_conversation": "Ask about the hardest part of getting licensed products live"
+    },
+    {
+      "fact": "Has direct experience building neobank operations from scratch",
+      "type": "skill_profile",
+      "use_for_conversation": "Discuss what breaks when scaling financial products"
+    },
+    {
+      "fact": "Has experienced startup failure firsthand and restarted",
+      "type": "experience",
+      "use_for_conversation": "Ask what she would do differently second time around"
+    },
+    {
+      "fact": "Strong focus on accessibility and inclusion in entrepreneurship",
+      "type": "values",
+      "use_for_conversation": "Explore how AI can democratise startup building"
+    },
+    {
+      "fact": "Operates with high energy and resilience in demanding environments",
+      "type": "personality",
+      "use_for_conversation": "Connect on founder stamina and mindset"
+    }
+  ],
+
+  "personality_model": {
+    "type": "execution_operator",
+    "mindset": "pragmatic, resilient, action-oriented",
+    "values": [
+      "execution",
+      "resilience",
+      "doing the right thing",
+      "teamwork",
+      "accessibility"
+    ],
+    "working_style": "hands-on, fast-moving, delivery-focused",
+    "communication_style": "direct, energetic, grounded"
+  },
+
+  "conversation_starters": [
+    "What’s the hardest part of going from idea to something regulators approve?",
+    "What would you do differently after your first startup?",
+    "What actually breaks when launching a neobank?",
+    "How can AI really lower the barrier to starting a business?",
+    "What separates people who execute from those who don’t?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Execution + real-world building",
+    "approach": [
+      "Talk about real things you’ve built",
+      "Be practical and grounded",
+      "Show willingness to get hands dirty",
+      "Avoid theory-heavy discussions"
+    ],
+    "avoid": [
+      "overly abstract startup ideas",
+      "AI hype without execution",
+      "lack of ownership"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Monzo Ireland Country Manager",
+      "Total Processing MD Europe",
+      "Neobank market entry experience",
+      "Fintech founder experience"
+    ],
+    "supporting_signals": [
+      "AI + accessibility focus",
+      "Resilience narrative",
+      "Operator mindset"
+    ]
+  }
+},
+    {
+  "id": 8,
+  "tagline": "AI Builder & Co-founder | EdTech & Enterprise AI",
+  "category": "Technical",
+
+  "identified_person": {
+    "name": "Oisín Thomas",
+    "confidence": 0.88,
+    "linkedin_url": "https://www.linkedin.com/in/oisinthomas/",
+    "website": "https://caideiseach.com"
+  },
+
+  "profile_summary": {
+    "background": "AI engineer and startup CTO with experience building production AI systems across both consumer and enterprise domains.",
+    "experience_highlights": [
+      "Co-founder & CTO of B2C language learning startup (~10,000 users)",
+      "Head of AI at Irish EdTech startup",
+      "Built first LLM grammar benchmark for Irish language",
+      "Published Irish translation of Winnie the Pooh"
+    ],
+    "interests": [
+      "AI agents",
+      "language modelling",
+      "education",
+      "knowledge systems",
+      "evaluation frameworks"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Process → AI automation",
+    "details": "Focused on breaking down real-world processes into reusable AI workflows. Interested in what is tractable with current AI paradigms and how to build automaticity through skills and evaluation loops."
+  },
+
+  "superpower": {
+    "summary": "Externalising expert knowledge into AI systems",
+    "details": "Works directly with domain experts to extract tacit knowledge, structure it, build evaluation systems, and iterate toward production-grade AI."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "Deep domain expertise",
+      "Strong customer relationships",
+      "Empathy for users",
+      "Curious and open-minded",
+      "Willing to experiment daily"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Translated Winnie the Pooh into Irish",
+      "Built Irish language LLM benchmark",
+      "Work referenced on Paul Graham's website",
+      "Bridges programming and linguistic systems"
+    ]
+  },
+
+  "elevator_pitch": "AI engineer building production AI systems across startups. Specialises in turning expert knowledge into scalable AI through structured workflows and evaluation systems.",
+
+  "extra_facts": [
+    {
+      "fact": "Writes publicly about AI systems and language modelling",
+      "type": "behavior",
+      "use_for_conversation": "Ask what he’s changed his mind on recently"
+    },
+    {
+      "fact": "Focuses heavily on evaluation and correctness in AI systems",
+      "type": "technical_philosophy",
+      "use_for_conversation": "Discuss how to measure if AI systems are actually working"
+    },
+    {
+      "fact": "Combines academic-style thinking with startup execution",
+      "type": "skill_profile",
+      "use_for_conversation": "Ask how he balances theory vs shipping"
+    },
+    {
+      "fact": "Highly iterative and experimental in approach to building",
+      "type": "working_style",
+      "use_for_conversation": "Ask what he’s currently experimenting with"
+    },
+    {
+      "fact": "Strong interest in language as a structured system",
+      "type": "interest",
+      "use_for_conversation": "Discuss how language thinking applies to AI systems"
+    }
+  ],
+
+  "personality_model": {
+    "type": "ai_builder",
+    "mindset": "analytical, experimental, systems-oriented",
+    "values": [
+      "correctness",
+      "understanding",
+      "iteration",
+      "knowledge transfer",
+      "curiosity"
+    ],
+    "working_style": "deep thinking + rapid experimentation",
+    "communication_style": "thoughtful, technical, reflective"
+  },
+
+  "conversation_starters": [
+    "What’s the hardest part of turning expert knowledge into AI?",
+    "How do you actually evaluate whether an AI system works?",
+    "What processes are easiest vs hardest to automate right now?",
+    "What’s something people misunderstand about AI agents?",
+    "What have you changed your mind on recently in AI?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Deep technical curiosity",
+    "approach": [
+      "Engage at concept level, not surface",
+      "Ask thoughtful questions",
+      "Show genuine interest in systems",
+      "Avoid hype"
+    ],
+    "avoid": [
+      "shallow AI discussions",
+      "buzzwords",
+      "pure product talk without technical depth"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Irish language LLM benchmark",
+      "Winnie the Pooh Irish translation",
+      "AI + language + Substack",
+      "Startup CTO experience"
+    ],
+    "supporting_signals": [
+      "Process-oriented AI thinking",
+      "Cross-domain experience",
+      "Public writing"
+    ]
+  }
+},{
+  "id": 9,
+  "tagline": "Senior Operator & Entrepreneur | Real Estate & Capital",
+  "category": "Commercial",
+
+  "likely_match": {
+    "name": null,
+    "confidence": 0.2,
+    "linkedin_url": null,
+    "company": "Real Estate Investment Firm (Ireland/UK likely)",
+    "role": "Managing Director",
+    "notes": "Insufficient unique identifiers. Likely senior but not public-facing. Multiple candidates across Irish real estate investment firms."
+  },
+
+  "profile_summary": {
+    "background": "Senior real estate operator with deep experience in capital markets and asset investment. Has prior founder experience and understands the realities of building a business.",
+    "experience_highlights": [
+      "Managing Director at real estate investment firm",
+      "Experience across real assets and capital markets",
+      "Previously founded a business",
+      "Understands cost, risk, and execution of building ventures"
+    ],
+    "interests": [
+      "real estate investment",
+      "capital allocation",
+      "AI productivity",
+      "business building",
+      "entrepreneurship"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "AI-driven productivity in real estate",
+    "details": "Believes real estate is one of the most under-optimised sectors for AI-driven productivity gains. Interested in applying AI to workflows, efficiency, and decision-making across the property lifecycle."
+  },
+
+  "superpower": {
+    "summary": "Resilience and real-world business understanding",
+    "details": "Has firsthand founder experience and understands the emotional and operational realities of building a business. Combines capital awareness with a long-term mindset."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "Technically strong",
+      "Aligned on long-term goals",
+      "Compatible working style",
+      "Resilient",
+      "Comfortable with setbacks"
+    ],
+    "gap": "Self-identified lack of technical background, actively looking to complement this"
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Former high-level Irish dancer",
+      "Reached All-Ireland final",
+      "Publicly failed on stage and recovered",
+      "Uses this as a metaphor for resilience"
+    ]
+  },
+
+  "elevator_pitch": "Real estate and capital markets operator with founder experience. Brings resilience, business judgment, and a focus on building something meaningful while enjoying the journey.",
+
+  "extra_facts": [
+    {
+      "fact": "Likely has strong capital allocation instincts from real estate background",
+      "type": "inferred_expertise",
+      "use_for_conversation": "Ask how he evaluates risk vs return in early-stage ventures"
+    },
+    {
+      "fact": "Understands real-world cost structures of building businesses, not just theory",
+      "type": "experience",
+      "use_for_conversation": "Discuss what founders consistently underestimate financially"
+    },
+    {
+      "fact": "Sees AI primarily as a productivity tool rather than a technical domain",
+      "type": "product_philosophy",
+      "use_for_conversation": "Explore where AI can actually save time in traditional industries"
+    },
+    {
+      "fact": "Likely strong network in finance and property sectors",
+      "type": "network",
+      "use_for_conversation": "Ask about where capital is currently flowing in real estate"
+    },
+    {
+      "fact": "Values enjoyment of the journey alongside achieving outcomes",
+      "type": "values",
+      "use_for_conversation": "Connect on why building something enjoyable matters long-term"
+    }
+  ],
+
+  "personality_model": {
+    "type": "capital_operator",
+    "mindset": "pragmatic, resilient, long-term oriented",
+    "values": [
+      "resilience",
+      "enjoyment of journey",
+      "goal alignment",
+      "real-world execution",
+      "risk awareness"
+    ],
+    "working_style": "steady, reflective, business-focused",
+    "communication_style": "calm, grounded, experience-driven"
+  },
+
+  "conversation_starters": [
+    "Where do you think AI can actually move the needle in real estate?",
+    "What do founders underestimate most when starting a business?",
+    "How do you think about risk differently after building something yourself?",
+    "Where is capital currently underestimating opportunity?",
+    "What would you build in real estate if you had a technical co-founder tomorrow?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Practical business + real-world execution",
+    "approach": [
+      "Talk about real businesses, not abstract ideas",
+      "Show understanding of cost and execution",
+      "Be grounded and realistic",
+      "Engage on opportunities, not hype"
+    ],
+    "avoid": [
+      "overly technical discussions",
+      "AI hype without application",
+      "theoretical startup talk"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Managing Director in real estate investment",
+      "Founder experience",
+      "Focus on resilience and execution",
+      "Interest in AI productivity"
+    ],
+    "supporting_signals": [
+      "Capital markets exposure",
+      "Real assets experience",
+      "Entrepreneurial mindset"
+    ],
+    "uncertainties": [
+      "No unique company or role identifiers",
+      "Multiple similar profiles in Irish real estate sector",
+      "Likely private / low-public-profile individual"
+    ]
+  }
+},
+{
+  "id": 10,
+  "tagline": "Founder & Commercial Operator | Fintech & Home Services",
+  "category": "Commercial",
+
+  "likely_match": {
+    "name": null,
+    "confidence": 0.6,
+    "linkedin_url": null,
+    "companies": [
+      "Wayflyer",
+      "Home energy services startup (Ireland)"
+    ],
+    "role": "Founder / MD + former GTM leader",
+    "notes": "Strong candidate likely exists among early Wayflyer commercial hires who later founded an Irish home energy services company (heat pumps / boilers). Narrowable with targeted LinkedIn search."
+  },
+
+  "profile_summary": {
+    "background": "Founder and commercial operator with experience scaling high-growth fintech (Wayflyer) and building a real-world services business.",
+    "experience_highlights": [
+      "Early commercial hire at Wayflyer during hypergrowth phase",
+      "Scaled enterprise revenue from €40M → €400M deployed capital",
+      "Closed ~300 new business deals",
+      "Co-founded and scaled a home energy services company (20 people, boilers + heat pumps)",
+      "Currently stepping back from operations to focus on next venture"
+    ],
+    "interests": [
+      "AI in operations",
+      "vertical SaaS",
+      "payments infrastructure",
+      "home services",
+      "energy transition"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Vertical AI + infrastructure",
+    "details": "Believes AI will fragment software into highly verticalised tools. Focused on AI middleware, agent-based workflows, and embedded payments infrastructure. Thinks software spend will expand significantly as AI replaces headcount."
+  },
+
+  "superpower": {
+    "summary": "Execution and aggressive scaling",
+    "details": "Highly driven operator with strong track record scaling go-to-market functions and closing large volumes of deals. Comfortable operating across sales, marketing, finance, and customer success."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "Strong technical ability",
+      "Problem solver",
+      "Ambitious",
+      "Commercially aware",
+      "Collaborative and fun to work with"
+    ],
+    "gap": "Explicitly looking for a technical co-founder"
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Built and ran a home services business (not typical SaaS path)",
+      "Stepped back from running it to build something new",
+      "Balances physical-world operations with software thinking"
+    ]
+  },
+
+  "elevator_pitch": "Founder and commercial operator with experience scaling fintech and building a services company. Strong executor with cross-functional experience and a bias toward aggressive growth.",
+
+  "extra_facts": [
+    {
+      "fact": "Has operated in both software (Wayflyer) and physical services (energy installs)",
+      "type": "experience",
+      "use_for_conversation": "Ask what changed moving from SaaS to real-world operations"
+    },
+    {
+      "fact": "Already actively integrating AI into operational workflows (HubSpot, Jobber, Slack)",
+      "type": "operating_style",
+      "use_for_conversation": "Ask what automations have delivered the most value"
+    },
+    {
+      "fact": "Strong belief that distribution will become the main competitive advantage",
+      "type": "strategy",
+      "use_for_conversation": "Discuss how distribution changes in an AI-native world"
+    },
+    {
+      "fact": "Understands unit economics from both capital deployment and services margins",
+      "type": "skill_profile",
+      "use_for_conversation": "Ask how he evaluates business models quickly"
+    },
+    {
+      "fact": "Has transitioned from operator → founder → builder again",
+      "type": "trajectory",
+      "use_for_conversation": "Ask why he stepped back to build again"
+    }
+  ],
+
+  "personality_model": {
+    "type": "growth_operator",
+    "mindset": "ambitious, execution-driven, competitive",
+    "values": [
+      "hard work",
+      "growth",
+      "ownership",
+      "results",
+      "momentum"
+    ],
+    "working_style": "high-intensity, goal-oriented, cross-functional",
+    "communication_style": "direct, energetic, commercially focused"
+  },
+
+  "conversation_starters": [
+    "What broke most when scaling Wayflyer that fast?",
+    "What’s harder: SaaS or real-world services?",
+    "Which AI automations actually saved time vs just looked cool?",
+    "Where do you think vertical SaaS wins vs horizontal?",
+    "If you started again tomorrow, what would you build?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Execution + ambition",
+    "approach": [
+      "Talk about real things you’ve built",
+      "Engage on growth and scaling",
+      "Be direct and energetic",
+      "Show ambition"
+    ],
+    "avoid": [
+      "slow theoretical discussion",
+      "lack of urgency",
+      "purely technical conversations without business angle"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Wayflyer early commercial hire",
+      "Scaled capital deployment significantly",
+      "Founded Irish home energy services company",
+      "Active AI integration into operations"
+    ],
+    "supporting_signals": [
+      "Vertical SaaS thinking",
+      "Payments + infrastructure interest",
+      "Operator → founder transition"
+    ],
+    "uncertainties": [
+      "No company name for home services business",
+      "Multiple Wayflyer early hires fit partial profile",
+      "Identity requires cross-matching with energy startup founders"
+    ]
+  }
+},
+{
+  "id": 11,
+  "tagline": "Serial Founder & Product Leader | Emerging Markets & AI",
+  "category": "Technical",
+
+  "likely_match": {
+    "name": null,
+    "confidence": 0.45,
+    "linkedin_url": null,
+    "location": "Dublin (with African tech background)",
+    "role": "Serial Founder / Product Leader / EIR",
+    "notes": "Distinct combination of African startup experience + digital addressing + Dogpatch + Antler EIR narrows pool significantly but no single confirmed identity yet"
+  },
+
+  "profile_summary": {
+    "background": "Serial founder and product leader with experience building startups across emerging markets, particularly Africa. Has worked across the full lifecycle from founding to scaling to stepping back and advising.",
+    "experience_highlights": [
+      "Co-founded digital addressing startup solving 'last address' problem (2014–2019)",
+      "Three startup co-founding experiences",
+      "Entrepreneur in Residence at Dogpatch Labs and Antler",
+      "Led technology at construction supply chain startup",
+      "Built AI-first operating system for African construction supply chains"
+    ],
+    "interests": [
+      "emerging markets",
+      "AI systems",
+      "market infrastructure",
+      "incentive design",
+      "product strategy"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Trusted intermediary incentive problem",
+    "details": "Exploring how intermediaries (contractors, mechanics, advisors) are incentivised in systems where commissions distort outcomes. Interested in building infrastructure to formalise advisory layers with transparency, attribution, and fair compensation."
+  },
+
+  "superpower": {
+    "summary": "End-to-end startup and product building",
+    "details": "Experience across ideation, execution, scaling, and iteration. Combines product thinking with founder experience and a strong ability to contribute across domains and perspectives."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "Complementary skill set",
+      "Strong technical background",
+      "Emotionally mature",
+      "Calm under pressure",
+      "Focused and resilient"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Deeply philosophical about technology and society",
+      "Interested in how AI reshapes human thinking and reality",
+      "Focuses on mindset shifts, not just product building"
+    ]
+  },
+
+  "elevator_pitch": "Serial founder with experience building and scaling startups across emerging markets. Strong product leader who can take ideas from concept to execution and solve real-world problems.",
+
+  "extra_facts": [
+    {
+      "fact": "Has direct experience solving infrastructure problems in emerging markets (e.g. addressing systems)",
+      "type": "experience",
+      "use_for_conversation": "Ask what surprised him most about building in emerging markets vs developed ones"
+    },
+    {
+      "fact": "Has transitioned from founder → operator → advisor → explorer",
+      "type": "trajectory",
+      "use_for_conversation": "Ask what changed in how he evaluates ideas after multiple startups"
+    },
+    {
+      "fact": "Strong focus on incentive design as a core system problem",
+      "type": "thinking_style",
+      "use_for_conversation": "Discuss how incentives shape behaviour in different industries"
+    },
+    {
+      "fact": "Comfortable exploring multiple problem spaces rather than committing immediately",
+      "type": "approach",
+      "use_for_conversation": "Ask how he decides when to commit to a problem"
+    },
+    {
+      "fact": "Values orthogonal thinking and cross-pollination of ideas",
+      "type": "mindset",
+      "use_for_conversation": "Invite him to critique or challenge your ideas"
+    }
+  ],
+
+  "personality_model": {
+    "type": "philosophical_builder",
+    "mindset": "systems + incentives + long-term thinking",
+    "values": [
+      "curiosity",
+      "understanding systems",
+      "impact",
+      "thoughtfulness",
+      "resilience"
+    ],
+    "working_style": "exploratory, reflective, systems-oriented",
+    "communication_style": "conceptual, probing, thoughtful"
+  },
+
+  "conversation_starters": [
+    "Where do you see incentive problems causing the most damage today?",
+    "What did building in emerging markets teach you that others miss?",
+    "How do you decide which problem is worth committing to?",
+    "What’s the biggest shift AI will cause beyond productivity?",
+    "Where do you think intermediaries will disappear vs evolve?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Deep thinking + systems discussion",
+    "approach": [
+      "Engage on ideas, not just execution",
+      "Invite critique of your thinking",
+      "Discuss systems and incentives",
+      "Be open to abstract conversation"
+    ],
+    "avoid": [
+      "purely tactical discussions",
+      "surface-level startup talk",
+      "overly narrow thinking"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "African startup ecosystem experience",
+      "Digital addressing startup",
+      "Dogpatch + Antler EIR",
+      "Construction + AI systems work"
+    ],
+    "supporting_signals": [
+      "Serial founder track record",
+      "Product leadership",
+      "Philosophical orientation"
+    ],
+    "uncertainties": [
+      "Multiple African founders fit partial profile",
+      "Digital addressing startups exist across several regions",
+      "Limited public visibility for EIR roles"
+    ]
+  }
+},
+{
+  "id": 12,
+  "tagline": "Senior GTM Leader & Angel Investor | Google | B2B SaaS & Deep Tech",
+  "category": "Commercial",
+
+  "likely_match": {
+    "name": null,
+    "confidence": 0.5,
+    "linkedin_url": null,
+    "companies": ["Google", "ABRT VC"],
+    "role": "Global Startups & Digital Natives Sales Leader",
+    "notes": "Distinct signals (15y Google + StartupX + ABRT VC + Kyiv background + weather MSc) narrow the pool significantly, but no single high-confidence public match without deeper verification."
+  },
+
+  "profile_summary": {
+    "background": "Senior GTM leader with 15 years at Google across emerging markets, MENA, and global startups. Combines engineering background with venture, investing, and ecosystem building.",
+    "experience_highlights": [
+      "15 years at Google; now leading global Startups & Digital Natives sales",
+      "Designed framework filtering 5,000+ founders into a 500-company portfolio",
+      "Founder of StartupX community (1,400+ Googlers)",
+      "Angel investor in fintech and AI startups (e.g. Karat Financial, Celly.AI)",
+      "Head of Platform at ABRT VC",
+      "Background in distributed systems (Intel) and startup building"
+    ],
+    "interests": [
+      "AI at scale",
+      "climate resilience",
+      "food systems",
+      "drug discovery",
+      "global GTM systems",
+      "venture ecosystems"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "AI at computational scale across critical systems",
+    "details": "Exploring AI applications in climate resilience, global food systems, and drug discovery. Also focused on AI-powered GTM tooling that allows startups to operate globally from day one with minimal teams."
+  },
+
+  "superpower": {
+    "summary": "Scaling across ecosystems and borders",
+    "details": "Rare combination of engineering depth, venture empathy, and corporate execution. Able to identify high-potential founders, connect networks, and scale products internationally."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "Strong technical ability",
+      "Bias toward action",
+      "Product-focused",
+      "Accountable",
+      "Sense of humour"
+    ],
+    "dynamic": "Prefers to focus on GTM and operations while co-founder focuses on product"
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Master’s degree in weather forecasting",
+      "Applied mathematics background from Kyiv",
+      "Enjoys interpreting complex dynamic systems (e.g. weather)"
+    ]
+  },
+
+  "elevator_pitch": "Global GTM leader and investor with engineering roots. Brings network, execution, and ability to scale products across borders. Once committed, finds a way to make things happen.",
+
+  "extra_facts": [
+    {
+      "fact": "Has evaluated thousands of founders and startups through Google programs",
+      "type": "experience",
+      "use_for_conversation": "Ask what separates top 1% founders from the rest"
+    },
+    {
+      "fact": "Operates at the intersection of big tech, venture, and startups",
+      "type": "positioning",
+      "use_for_conversation": "Discuss differences between corporate vs startup scaling"
+    },
+    {
+      "fact": "Strong global network across multiple startup ecosystems",
+      "type": "network",
+      "use_for_conversation": "Ask where the most interesting startup ecosystems are emerging"
+    },
+    {
+      "fact": "Engineering background influences GTM thinking",
+      "type": "mindset",
+      "use_for_conversation": "Explore how technical thinking shapes go-to-market strategy"
+    },
+    {
+      "fact": "Interested in mission-driven, large-scale impact problems",
+      "type": "values",
+      "use_for_conversation": "Discuss what problems are worth building for long-term"
+    }
+  ],
+
+  "personality_model": {
+    "type": "global_scaler",
+    "mindset": "systems + scale + impact",
+    "values": [
+      "impact",
+      "execution",
+      "network leverage",
+      "global thinking",
+      "persistence"
+    ],
+    "working_style": "high-output, network-driven, strategic",
+    "communication_style": "clear, structured, big-picture"
+  },
+
+  "conversation_starters": [
+    "What separates the top 1% of founders you’ve seen?",
+    "Where do startups fail when trying to scale globally?",
+    "What’s changing most in GTM with AI?",
+    "Which ecosystems are underrated right now?",
+    "What would you build today if starting from scratch?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Leverage + scale + ambition",
+    "approach": [
+      "Engage at a high level (not tactical only)",
+      "Show ambition and global thinking",
+      "Be clear and structured",
+      "Demonstrate execution, not just ideas"
+    ],
+    "avoid": [
+      "small/local thinking",
+      "vague ideas",
+      "lack of clarity"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "15 years at Google",
+      "Global startups GTM leadership",
+      "StartupX community creation",
+      "ABRT VC Head of Platform",
+      "Kyiv + weather forecasting background"
+    ],
+    "supporting_signals": [
+      "Angel investing",
+      "Deep tech + climate interest",
+      "Cross-market experience"
+    ],
+    "uncertainties": [
+      "Multiple senior Google startup leaders exist",
+      "StartupX may not be widely indexed publicly",
+      "Identity requires cross-referencing ABRT VC + Google profiles"
+    ]
+  }
+},
+{
+  "id": 13,
+  "tagline": "Exited Founder & Marketing Operator | SaaS, VCs & Workplace Safety",
+  "category": "Commercial",
+
+  "identified_person": {
+    "name": "James McHugh",
+    "confidence": 0.98,
+    "linkedin_url": "https://www.linkedin.com/in/jamesmchugh/",
+    "companies": [
+      "GoContractor",
+      "Zutec",
+      "EcoOnline"
+    ],
+    "roles": [
+      "Co-Founder & COO (GoContractor)",
+      "CMO (Zutec)",
+      "SVP Corporate Marketing (EcoOnline)"
+    ]
+  },
+
+  "profile_summary": {
+    "background": "Experienced SaaS founder and marketing leader with deep expertise in construction tech and workplace safety platforms.",
+    "experience_highlights": [
+      "Co-founded GoContractor and scaled over 8 years",
+      "Worked through investment and exit lifecycle",
+      "CMO at Zutec (construction SaaS)",
+      "SVP Marketing at EcoOnline, integrating 14 acquisitions"
+    ],
+    "interests": [
+      "construction technology",
+      "workplace safety",
+      "AI in real-world environments",
+      "data systems",
+      "enterprise SaaS"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "AI for workplace safety",
+    "details": "Focused on extracting insights from unstructured EHS data (photos, notes, observations) using computer vision to identify patterns and improve safety outcomes. Longer term vision includes connected worker systems."
+  },
+
+  "superpower": {
+    "summary": "Scaling and positioning SaaS companies",
+    "details": "Deep experience building, scaling, and exiting SaaS businesses. Strong in marketing, narrative, and aligning product with market needs."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "Driven",
+      "Execution-focused",
+      "Technically capable",
+      "Resilient"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Nearly eaten by a crocodile",
+      "Experienced high-risk real-world situations",
+      "Grounded despite strong professional background"
+    ]
+  },
+
+  "elevator_pitch": "Experienced founder and operator with SaaS, marketing, and exit experience. Has built and scaled companies and is now looking to do it again at a larger level.",
+
+  "extra_facts": [
+    {
+      "fact": "Has deep expertise in construction and safety tech ecosystems",
+      "type": "domain_expertise",
+      "use_for_conversation": "Ask what problems in construction are still unsolved"
+    },
+    {
+      "fact": "Has led integration of multiple acquisitions into a single platform",
+      "type": "experience",
+      "use_for_conversation": "Discuss challenges of merging products and brands"
+    },
+    {
+      "fact": "Shifting from marketing-led roles to data and product-focused thinking",
+      "type": "career_shift",
+      "use_for_conversation": "Ask what changed in how he thinks about value creation"
+    },
+    {
+      "fact": "Strong understanding of enterprise SaaS buying cycles",
+      "type": "skill_profile",
+      "use_for_conversation": "Ask what drives enterprise adoption decisions"
+    },
+    {
+      "fact": "Connected to EU research and funding ecosystem for AI",
+      "type": "network",
+      "use_for_conversation": "Discuss opportunities in EU-backed AI programmes"
+    }
+  ],
+
+  "personality_model": {
+    "type": "experienced_operator",
+    "mindset": "pragmatic, experienced, outcome-driven",
+    "values": [
+      "execution",
+      "real-world impact",
+      "clarity",
+      "resilience",
+      "long-term thinking"
+    ],
+    "working_style": "steady, strategic, execution-focused",
+    "communication_style": "direct, grounded, experienced"
+  },
+
+  "conversation_starters": [
+    "What patterns do you think are hidden in EHS data today?",
+    "What did you learn from building GoContractor that you’d do differently?",
+    "What’s the hardest part of integrating multiple SaaS products?",
+    "Where is AI actually useful in construction vs overhyped?",
+    "What would you build differently second time around?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Experience + real-world building",
+    "approach": [
+      "Talk about real systems and products",
+      "Show you understand execution challenges",
+      "Be grounded and practical",
+      "Avoid hype"
+    ],
+    "avoid": [
+      "theoretical ideas",
+      "AI hype without use case",
+      "lack of experience"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "GoContractor co-founder",
+      "Zutec CMO",
+      "EcoOnline SVP",
+      "Construction + safety tech focus"
+    ],
+    "supporting_signals": [
+      "AI + EHS interest",
+      "Enterprise SaaS experience",
+      "Exit experience"
+    ]
+  }
+},
+{
+  "id": 14,
+  "tagline": "Strategy Consultant turned Founder | BCG & Accenture | Professional Services & AI",
+  "category": "Commercial",
+
+  "identified_person": {
+    "name": "Felix Wolfberg",
+    "confidence": 0.95,
+    "linkedin_url": "https://www.linkedin.com/in/felixwolfberg/",
+    "company": "Wolfberg",
+    "previous_companies": [
+      "Boston Consulting Group",
+      "BCG X",
+      "Accenture"
+    ]
+  },
+
+  "profile_summary": {
+    "background": "Strategy consultant turned founder with deep experience across enterprise industries including banking, pharma, retail, and tech.",
+    "experience_highlights": [
+      "Project Leader at BCG and BCG X",
+      "Former Accenture consultant",
+      "Founder of Wolfberg consultancy",
+      "Currently building AI-native startup with early design partners"
+    ],
+    "interests": [
+      "AI in professional services",
+      "enterprise software",
+      "consulting disruption",
+      "business models",
+      "customer value"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "AI disruption of consulting",
+    "details": "Believes management consulting is a $1T industry ripe for disruption. Focused on delivering consulting outcomes using AI with software-like margins."
+  },
+
+  "superpower": {
+    "summary": "Structured thinking + execution",
+    "details": "Combines deep domain expertise, analytical rigor, and operational credibility. Strong at translating vision into executable plans that customers will pay for."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "technical or product-focused",
+      "bias to action",
+      "low ego",
+      "high trust",
+      "comfortable debating ideas"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Introverted personality despite consulting background",
+      "Prefers quiet downtime with his dog",
+      "Values calm and reflection"
+    ]
+  },
+
+  "elevator_pitch": "Strategy consultant turned founder with 15+ years experience across industries. Brings rigorous thinking, domain expertise, and ability to turn vision into execution.",
+
+  "extra_facts": [
+    {
+      "fact": "Has deep experience in enterprise consulting and transformation projects",
+      "type": "experience",
+      "use_for_conversation": "Ask what problems consulting consistently fails to solve"
+    },
+    {
+      "fact": "Understands enterprise buying behaviour and decision-making cycles",
+      "type": "skill_profile",
+      "use_for_conversation": "Discuss how to sell AI products to large organisations"
+    },
+    {
+      "fact": "Already working with design partners before fully building product",
+      "type": "execution",
+      "use_for_conversation": "Ask what early customers are telling him"
+    },
+    {
+      "fact": "Focused on outcome-based software rather than tools",
+      "type": "product_philosophy",
+      "use_for_conversation": "Discuss how AI changes value delivery models"
+    },
+    {
+      "fact": "Strong preference for clarity and structured thinking",
+      "type": "mindset",
+      "use_for_conversation": "Engage with clear, well-formed ideas"
+    }
+  ],
+
+  "personality_model": {
+    "type": "structured_strategist",
+    "mindset": "analytical, rigorous, outcome-focused",
+    "values": [
+      "clarity",
+      "execution",
+      "customer value",
+      "rigor",
+      "trust"
+    ],
+    "working_style": "methodical, hypothesis-driven",
+    "communication_style": "precise, structured, thoughtful"
+  },
+
+  "conversation_starters": [
+    "Where do consulting firms actually fail to deliver value?",
+    "What changes when you turn consulting into software?",
+    "What are your design partners telling you so far?",
+    "How do enterprises really decide to buy AI products?",
+    "What parts of consulting will never be automated?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Structured thinking + real problems",
+    "approach": [
+      "Be clear and logical",
+      "Discuss real customer problems",
+      "Avoid fluff",
+      "Engage in thoughtful debate"
+    ],
+    "avoid": [
+      "vague ideas",
+      "unstructured thinking",
+      "overhyping AI"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Founder of Wolfberg",
+      "BCG + BCG X + Accenture background",
+      "Consulting → AI transition",
+      "Design partner validation"
+    ],
+    "supporting_signals": [
+      "Enterprise focus",
+      "Cross-industry experience",
+      "Structured thinking"
+    ]
+  }
+},
+{
+  "id": 15,
+  "tagline": "Senior ML Engineer & Builder | Agentic AI & NLP",
+  "category": "Technical",
+
+  "identified_person": {
+    "name": "Manuel Valentim Loureiro",
+    "confidence": 0.96,
+    "linkedin_url": "https://ie.linkedin.com/in/manuelloureiro",
+    "company": "Aer Lingus",
+    "previous_company": "Huawei Ireland Research Center",
+    "role": "Lead AI Engineer",
+    "notes": "Direct match across Huawei Principal Machine Learning Engineer, LREC-COLING 2024 authorship, NLP/recommender systems, and current Aer Lingus AI role"
+  },
+
+  "profile_summary": {
+    "background": "Senior ML engineer with 10+ years experience across research, prototyping, and production deployment. Strong focus on bridging the gap between AI demos and real-world systems.",
+    "experience_highlights": [
+      "Principal ML Engineer at Huawei Ireland Research Center",
+      "Published research at LREC-COLING 2024 (LLMs + graph neural networks)",
+      "Led ML team of 5 engineers",
+      "Built MHEN recommender system across multiple domains",
+      "Developed Aer Lingus fare estimation ML pipeline on Databricks",
+      "Founder of AI consultancy"
+    ],
+    "interests": [
+      "agentic AI",
+      "NLP",
+      "recommendation systems",
+      "workflow automation",
+      "production ML systems"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Agentic AI that actually works",
+    "details": "Focused on building AI systems that take real action: calling APIs, orchestrating workflows, handling failures, and delivering reliable outcomes. Believes infrastructure has finally matured to support this."
+  },
+
+  "superpower": {
+    "summary": "Fast execution from idea to working system",
+    "details": "Strong ability to quickly translate ideas into working prototypes or pilots. Covers traditional ML, generative AI, and agentic systems. Also skilled at evaluating feasibility and defining technical roadmaps."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "commercial / GTM experience",
+      "technically literate",
+      "direct communicator",
+      "comfortable with disagreement",
+      "complementary skill set"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Studied industrial engineering, finance, and public policy before AI",
+      "Non-linear path into machine learning",
+      "Comfortable across multiple disciplines"
+    ]
+  },
+
+  "elevator_pitch": "Senior AI engineer with 10+ years across research and production. Specialises in turning ideas into working systems and translating technical feasibility into business outcomes.",
+
+  "extra_facts": [
+    {
+      "fact": "Has experience across the full ML lifecycle from research to production deployment",
+      "type": "experience",
+      "use_for_conversation": "Ask what breaks when moving from prototype to production"
+    },
+    {
+      "fact": "Has worked on large-scale enterprise systems (airlines, ads, research labs)",
+      "type": "domain_expertise",
+      "use_for_conversation": "Discuss differences between startup vs enterprise ML systems"
+    },
+    {
+      "fact": "Strong bias toward practical, working AI rather than demos",
+      "type": "values",
+      "use_for_conversation": "Ask what makes an AI system truly production-ready"
+    },
+    {
+      "fact": "Comfortable building across multiple paradigms (ML, GenAI, agents)",
+      "type": "skill_profile",
+      "use_for_conversation": "Explore trade-offs between approaches"
+    },
+    {
+      "fact": "Actively building and experimenting (travel agent, consultancy)",
+      "type": "working_style",
+      "use_for_conversation": "Ask what he's currently prototyping"
+    }
+  ],
+
+  "personality_model": {
+    "type": "pragmatic_ai_builder",
+    "mindset": "execution-first, systems-oriented",
+    "values": [
+      "working systems",
+      "feasibility",
+      "speed",
+      "clarity",
+      "technical honesty"
+    ],
+    "working_style": "hands-on, fast prototyping, iterative",
+    "communication_style": "direct, technical, solution-focused"
+  },
+
+  "conversation_starters": [
+    "What actually breaks when you try to productionise an AI system?",
+    "Where are most AI products still just demos?",
+    "What’s now possible with agents that wasn’t 12 months ago?",
+    "How do you decide what’s technically feasible quickly?",
+    "What would you build in a week if you had the right co-founder?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Build something together",
+    "approach": [
+      "Propose ideas that could be prototyped quickly",
+      "Be concrete and practical",
+      "Engage at technical level where possible",
+      "Focus on feasibility and execution"
+    ],
+    "avoid": [
+      "AI hype without substance",
+      "purely conceptual discussions",
+      "unclear problem definitions"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Huawei Ireland ML leadership",
+      "LREC-COLING 2024 publication",
+      "Agentic AI focus",
+      "Production ML experience"
+    ],
+    "supporting_signals": [
+      "Recommender systems",
+      "Travel / airline ML",
+      "AI consultancy founder"
+    ],
+    "uncertainties": [
+      "Multiple Huawei researchers in Dublin",
+      "Paper authorship needs cross-checking",
+      "No public personal branding signal"
+    ]
+  }
+},
+{
+  "id": 16,
+  "tagline": "CTO & AWS Hero (AI) | AI, Data & Complex Systems",
+  "category": "Technical",
+
+  "identified_person": {
+    "name": "Lyndon Leggate",
+    "confidence": 1.0,
+    "linkedin_url": null,
+    "roles": [
+      "CTO, Automotive Marketplace Startup",
+      "AWS Hero (AI)",
+      "Founder, AWS DeepRacer Community"
+    ]
+  },
+
+  "profile_summary": {
+    "background": "Product-focused CTO with deep experience in AI, marketplaces, and real-world systems. Combines leadership with hands-on building and rapid prototyping.",
+    "experience_highlights": [
+      "CTO of automotive marketplace startup",
+      "AWS Hero (AI)",
+      "Founded AWS DeepRacer global community (50,000+ members)",
+      "Built Callouts app used in Coast Guard operations",
+      "Multiple startup attempts across fintech and AI"
+    ],
+    "interests": [
+      "agentic AI",
+      "real-world data systems",
+      "marketplaces",
+      "emergency response tech",
+      "decision support systems"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Agentic AI for real-world decision making",
+    "details": "Focused on AI systems that go beyond chat and actively reason over complex datasets to drive real-world decisions. Interested in agents operating at data scientist level to surface actionable insights."
+  },
+
+  "superpower": {
+    "summary": "Rapid productisation of messy real-world problems",
+    "details": "Strong ability to take complex, unstructured problems and quickly turn them into working products. Combines technical depth with product intuition and speed of execution."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "smart",
+      "outcome-focused",
+      "comfortable with ambiguity",
+      "strong in commercial/distribution",
+      "low ego",
+      "honest",
+      "moves fast"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Irish Coast Guard first responder",
+      "Participates in cliff rescues and search operations",
+      "Built tools used in real emergency situations",
+      "Founder of large global ML community"
+    ]
+  },
+
+  "elevator_pitch": "Product-focused CTO who builds quickly and tests ideas in the real world. Combines leadership with hands-on execution and a bias toward solving real problems with technology.",
+
+  "extra_facts": [
+    {
+      "fact": "Combines high-stakes real-world operations (Coast Guard) with software building",
+      "type": "unique_context",
+      "use_for_conversation": "Leverage stories of real-world decision making under pressure"
+    },
+    {
+      "fact": "Strong community-building experience at global scale",
+      "type": "network",
+      "use_for_conversation": "Highlight ability to attract and engage large communities"
+    },
+    {
+      "fact": "Prefers validating ideas quickly over long planning cycles",
+      "type": "working_style",
+      "use_for_conversation": "Lean into rapid experimentation mindset"
+    },
+    {
+      "fact": "Deep AWS and cloud-native AI expertise",
+      "type": "technical_strength",
+      "use_for_conversation": "Position as infrastructure + AI expert"
+    },
+    {
+      "fact": "Has repeatedly explored startup ideas across domains",
+      "type": "experience",
+      "use_for_conversation": "Frame as iterative founder, not first-time"
+    }
+  ],
+
+  "personality_model": {
+    "type": "product_cto_builder",
+    "mindset": "pragmatic, curious, execution-driven",
+    "values": [
+      "real-world impact",
+      "speed",
+      "honesty",
+      "learning",
+      "experimentation"
+    ],
+    "working_style": "hands-on, iterative, fast-moving",
+    "communication_style": "direct, thoughtful, exploratory"
+  },
+
+  "conversation_starters": [
+    "What real-world problem are you most interested in solving?",
+    "What’s the fastest way we could test this idea?",
+    "What data would we need to prove this works?",
+    "What’s actually feasible in a week?",
+    "Where could AI genuinely improve decision making here?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Builder + collaborator",
+    "approach": [
+      "Engage by building with others",
+      "Offer to prototype ideas quickly",
+      "Focus on real-world problems",
+      "Encourage open debate"
+    ],
+    "avoid": [
+      "overplanning",
+      "theoretical discussions without action",
+      "slow iteration cycles"
+    ]
+  }
+},
+{
+  "id": 17,
+  "tagline": "Senior Engineer & Operator | Biopharma Manufacturing",
+  "category": "Technical",
+
+  "likely_match": {
+    "name": null,
+    "confidence": 0.35,
+    "linkedin_url": null,
+    "company": "Global Biopharma (multiple)",
+    "role": "Senior Process / Manufacturing Engineer",
+    "notes": "Distinct signals (Irish international tag rugby captain + Lean Six Sigma Black Belt + sterile biologics manufacturing + recent 5-month travel break) narrow the pool, but no single high-confidence public match without deeper cross-referencing."
+  },
+
+  "profile_summary": {
+    "background": "Chemical engineer with 7+ years in highly regulated biopharma manufacturing environments. Strong operational leader with experience in process improvement, system ownership, and team management.",
+    "experience_highlights": [
+      "7+ years across global biopharma companies (sterile biologics, fill-finish)",
+      "Lean Six Sigma Black Belt",
+      "Reduced line turnaround time by 11 hours via engineering changes",
+      "Led 24/7 shift team of 20 people",
+      "UCD/Intel Engineering Scholarship winner",
+      "Captain of Irish Women's International Tag Rugby team"
+    ],
+    "interests": [
+      "manufacturing systems",
+      "continuous improvement",
+      "operations",
+      "AI in industrial systems",
+      "real-world problem solving"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "True root-cause analysis in pharma manufacturing",
+    "details": "Focused on why pharma manufacturing underperforms in continuous improvement. Believes existing frameworks treat symptoms rather than causes, and that there is a gap between reported metrics and real operational performance."
+  },
+
+  "superpower": {
+    "summary": "Finding the real problem",
+    "details": "Exceptional ability to identify root causes rather than surface issues. Combines technical depth with operational leadership and trust-building across teams."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "bias toward action",
+      "critical thinker",
+      "commercial or product-focused",
+      "honest and direct",
+      "comfortable with challenge"
+    ],
+    "gap": "Looking for commercial/product complement to strong domain expertise"
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Captain of Irish Women's International Tag Rugby team",
+      "Motorbike rider",
+      "DIY home renovator",
+      "Recently completed 5 months of travel across Asia, Australia, and New Zealand",
+      "More outgoing and relaxed than CV suggests"
+    ]
+  },
+
+  "elevator_pitch": "Chemical engineer with deep experience in high-stakes manufacturing. Combines technical expertise, operational leadership, and ability to move fast and bring teams along to solve real problems.",
+
+  "extra_facts": [
+    {
+      "fact": "Has operated in extremely high-stakes environments where failure is not an option",
+      "type": "experience",
+      "use_for_conversation": "Ask what 'zero margin for error' actually feels like in practice"
+    },
+    {
+      "fact": "Strong leadership experience from both engineering and elite sport",
+      "type": "leadership",
+      "use_for_conversation": "Ask how leading a sports team differs from leading engineering teams"
+    },
+    {
+      "fact": "Deep frustration with current continuous improvement frameworks",
+      "type": "insight",
+      "use_for_conversation": "Ask what Lean/Six Sigma gets wrong in pharma"
+    },
+    {
+      "fact": "Has proactively initiated projects without being asked",
+      "type": "initiative",
+      "use_for_conversation": "Ask about something she built that nobody asked for"
+    },
+    {
+      "fact": "Recently stepped away from career to explore and reset",
+      "type": "trajectory",
+      "use_for_conversation": "Ask what she’s looking for next after stepping off the corporate path"
+    }
+  ],
+
+  "personality_model": {
+    "type": "operator_engineer",
+    "mindset": "pragmatic, investigative, action-oriented",
+    "values": [
+      "truth over assumption",
+      "action over theory",
+      "trust",
+      "leadership",
+      "resilience"
+    ],
+    "working_style": "hands-on, decisive, team-oriented",
+    "communication_style": "direct, grounded, energetic"
+  },
+
+  "conversation_starters": [
+    "What do most people misunderstand about pharma manufacturing?",
+    "Where do Lean and Six Sigma actually fail in practice?",
+    "What was the hardest system you ever had to fix?",
+    "How do you find the real problem when everyone else misses it?",
+    "What made you step away and decide to build something new?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Real-world problem solving",
+    "approach": [
+      "Talk about real operational problems",
+      "Be practical and grounded",
+      "Show willingness to act",
+      "Invite challenge and critique"
+    ],
+    "avoid": [
+      "abstract discussions",
+      "AI hype without application",
+      "overly theoretical thinking"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Biopharma manufacturing experience",
+      "Lean Six Sigma Black Belt",
+      "Irish international tag rugby captain",
+      "Operational leadership"
+    ],
+    "supporting_signals": [
+      "Continuous improvement focus",
+      "Root cause analysis mindset",
+      "Career break + reset phase"
+    ],
+    "uncertainties": [
+      "Multiple candidates in Irish biopharma sector",
+      "Sports signal narrows pool but still not unique",
+      "No public company identifiers"
+    ]
+  }
+},
+{
+  "id": 18,
+  "tagline": "Senior Operator turned Founder | Silver Economy & Workforce",
+  "category": "Technical",
+
+  "likely_match": {
+    "name": null,
+    "confidence": 0.25,
+    "linkedin_url": null,
+    "location": "Ireland (global background)",
+    "role": "Senior Operations Leader / Founder",
+    "notes": "Signals (23+ years maritime/energy ops, IESE Global EMBA, KIA background, recent Korea/Japan research) narrow the pool but no single high-confidence public match."
+  },
+
+  "profile_summary": {
+    "background": "Senior global operator with 23+ years in complex maritime and energy operations across multiple countries. Transitioning into founder role focused on workforce challenges in the aging economy.",
+    "experience_highlights": [
+      "23+ years across global maritime and energy operations",
+      "Extensive international experience living and working across dozens of countries",
+      "Completed Global Executive MBA at IESE",
+      "Conducted primary research in Korea and Japan on workforce aging",
+      "Building a platform focused on the silver economy"
+    ],
+    "interests": [
+      "workforce dynamics",
+      "silver economy",
+      "human capital utilisation",
+      "global operations",
+      "talent ecosystems"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Silver economy and workforce utilisation",
+    "details": "Focused on the systemic underutilisation of experienced professionals in their 50s and 60s. Building a platform to match them with meaningful work, mentorship opportunities, and provide coaching/upskilling to stay relevant."
+  },
+
+  "superpower": {
+    "summary": "Execution in complex global environments",
+    "details": "Ability to deliver outcomes across unpredictable, high-stakes international environments. Deep adaptability from lived global experience, not just working globally but operating within different cultures."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "moves fast",
+      "strong belief in mission",
+      "adaptive",
+      "independent",
+      "willing to challenge",
+      "financial/analytical strength"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Multicultural identity (Korean, Irish, American)",
+      "Extensive global life experience",
+      "Dynamic personal and professional background",
+      "Highly layered personality beyond initial impressions"
+    ]
+  },
+
+  "elevator_pitch": "Highly experienced global operator with a track record of delivering in complex environments. Deep adaptability and execution capability, now focused on solving the workforce challenges of an aging population.",
+
+  "extra_facts": [
+    {
+      "fact": "Has lived and operated across multiple cultures, not just worked internationally",
+      "type": "experience",
+      "use_for_conversation": "Ask which country shaped her leadership style the most"
+    },
+    {
+      "fact": "Has firsthand exposure to aging workforce dynamics in advanced economies like Japan",
+      "type": "domain_expertise",
+      "use_for_conversation": "Discuss what other countries can learn from Japan/Korea"
+    },
+    {
+      "fact": "Strong operational mindset rather than purely strategic thinking",
+      "type": "working_style",
+      "use_for_conversation": "Ask how she turns large systemic problems into actionable steps"
+    },
+    {
+      "fact": "Mission-driven focus on human capital and societal impact",
+      "type": "values",
+      "use_for_conversation": "Explore why this problem matters to her personally"
+    },
+    {
+      "fact": "Comfortable navigating ambiguity and rapidly changing environments",
+      "type": "skill_profile",
+      "use_for_conversation": "Ask how she makes decisions without full information"
+    }
+  ],
+
+  "personality_model": {
+    "type": "global_operator",
+    "mindset": "adaptive, mission-driven, execution-focused",
+    "values": [
+      "impact",
+      "adaptability",
+      "resilience",
+      "speed",
+      "belief"
+    ],
+    "working_style": "high-energy, action-oriented, flexible",
+    "communication_style": "direct, engaging, layered"
+  },
+
+  "conversation_starters": [
+    "What did you learn from Japan and Korea about workforce aging that others miss?",
+    "Where is the biggest waste of human capital today?",
+    "What makes this problem urgent right now?",
+    "How do you turn such a large systemic issue into a product?",
+    "What has surprised you most in your research so far?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Mission + execution",
+    "approach": [
+      "Engage on the importance of the problem",
+      "Show willingness to move fast",
+      "Be adaptive in conversation",
+      "Focus on real-world impact"
+    ],
+    "avoid": [
+      "overly technical discussions",
+      "detached theoretical thinking",
+      "lack of urgency"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Global maritime and energy operations experience",
+      "IESE Global EMBA",
+      "Silver economy focus",
+      "Research in Japan/Korea"
+    ],
+    "supporting_signals": [
+      "Multicultural identity",
+      "Founder transition",
+      "Operational leadership"
+    ],
+    "uncertainties": [
+      "No unique company identifiers",
+      "Multiple candidates in global operations space",
+      "Limited public footprint likely"
+    ]
+  }
+},
+{
+  "id": 19,
+  "tagline": "Senior Advisor turned Founder | Climate Finance & Decarbonisation",
+  "category": "Commercial",
+
+  "likely_match": {
+    "name": null,
+    "confidence": 0.2,
+    "linkedin_url": null,
+    "location": "Ireland / UK / Global (currently Asia)",
+    "role": "Climate Strategy Advisor / Founder",
+    "notes": "Strong signals (Cambridge MPhil Dev Econ + TCD + climate advisory across F500/PE/government), but no unique identifiers. Likely from top-tier consulting or advisory (e.g. McKinsey/BCG/Big 4/think tank)."
+  },
+
+  "profile_summary": {
+    "background": "Senior climate and decarbonisation advisor with experience across corporates, private equity, governments, and international institutions. Transitioning into building a product-led solution.",
+    "experience_highlights": [
+      "10+ years advising Fortune 500 companies, PE firms, and governments",
+      "Deep expertise in climate regulation, capital flows, and decarbonisation strategy",
+      "Cambridge MPhil in Development Economics",
+      "Trinity College Dublin BA in Economics and Social Sciences",
+      "Currently conducting market research in Asia"
+    ],
+    "interests": [
+      "climate finance",
+      "decarbonisation",
+      "capital allocation",
+      "AI for market execution",
+      "policy and regulation"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Closing the capital → action gap in climate",
+    "details": "Focused on why large pools of climate capital are not translating into real-world decarbonisation. Believes the problem is execution-driven, rooted in weak incentives and information asymmetry. Exploring how AI can enable targeted, commercially viable action at scale."
+  },
+
+  "superpower": {
+    "summary": "Navigating complexity and driving clarity",
+    "details": "Strong ability to cut through ambiguity across regulation, capital, and operations. Comfortable operating at all organisational levels and driving decisions in complex environments."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "complementary perspective",
+      "strong product thinking",
+      "creative ideation partner",
+      "willing to challenge assumptions",
+      "collaborative"
+    ],
+    "gap": "Looking for product/technical complement to strategy/regulation expertise"
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Deliberately not committed to a single idea yet",
+      "Prioritises problem discovery over solution building",
+      "Comfortable with ambiguity at early stage"
+    ]
+  },
+
+  "elevator_pitch": "Climate and decarbonisation expert with deep experience across public, private, and financial sectors. Brings strong network, regulatory knowledge, and now a focus on building real solutions.",
+
+  "extra_facts": [
+    {
+      "fact": "Has operated across multiple sectors (corporate, government, finance)",
+      "type": "experience",
+      "use_for_conversation": "Ask how incentives differ across sectors"
+    },
+    {
+      "fact": "Deep understanding of how capital flows in climate markets",
+      "type": "domain_expertise",
+      "use_for_conversation": "Ask why capital isn’t reaching real-world projects"
+    },
+    {
+      "fact": "Actively conducting primary research in Asia",
+      "type": "approach",
+      "use_for_conversation": "Ask what she’s learning from Asian markets"
+    },
+    {
+      "fact": "Strong bias toward evidence-based problem selection",
+      "type": "mindset",
+      "use_for_conversation": "Discuss how she evaluates which problems matter"
+    },
+    {
+      "fact": "Likely strong network across climate finance ecosystem",
+      "type": "network",
+      "use_for_conversation": "Ask where real momentum is building globally"
+    }
+  ],
+
+  "personality_model": {
+    "type": "strategic_thinker",
+    "mindset": "analytical, systems-oriented, impact-driven",
+    "values": [
+      "evidence",
+      "impact",
+      "clarity",
+      "rigor",
+      "long-term thinking"
+    ],
+    "working_style": "deliberate, research-driven, structured",
+    "communication_style": "clear, analytical, thoughtful"
+  },
+
+  "conversation_starters": [
+    "Why isn’t climate capital translating into real-world action?",
+    "Where do you think the biggest bottleneck is today?",
+    "What surprised you most from your research in Asia?",
+    "How can AI actually move the needle here?",
+    "What makes a climate solution commercially viable?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Problem exploration + depth",
+    "approach": [
+      "Engage in thoughtful discussion",
+      "Respect problem complexity",
+      "Ask insightful questions",
+      "Avoid rushing to solutions"
+    ],
+    "avoid": [
+      "quick solution pitching",
+      "surface-level climate discussions",
+      "overconfidence without data"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Climate advisory experience",
+      "Cambridge MPhil Development Economics",
+      "Cross-sector experience",
+      "Focus on capital allocation"
+    ],
+    "supporting_signals": [
+      "AI interest",
+      "Global perspective",
+      "Founder transition"
+    ],
+    "uncertainties": [
+      "No company identifiers",
+      "Multiple candidates in climate advisory space",
+      "Likely mid-to-senior consultant without public profile"
+    ]
+  }
+},
+{
+  "id": 20,
+  "tagline": "Engineer & Founder | MedTech & Hardware",
+  "category": "Technical",
+
+  "identified_person": {
+    "name": "Alice Shaughnessy",
+    "confidence": 0.96,
+    "linkedin_url": "https://www.linkedin.com/in/alice-shaughnessy-90ba12195",
+    "company": "Luminate",
+    "previous_company": "Mirr",
+    "role": "Clinical Engineering Specialist",
+    "notes": "Direct match across Luminate Clinical Engineering Specialist, Lily/Lilac device work, software/prototyping responsibilities, and Mirr founder history"
+  },
+
+  "profile_summary": {
+    "background": "Hands-on engineer and founder with deep experience across hardware startups and clinical medtech environments. Strong in electromechanical systems, prototyping, and translating ideas into real-world devices.",
+    "experience_highlights": [
+      "Clinical Engineering Specialist at oncology-focused medical device startup",
+      "Led development across 3 generations of 'Lily' device",
+      "Founded Mirr (B2C smart mirror startup)",
+      "Contracted to develop confidential electromechanical prototypes for global medtech company",
+      "Built robotics-related project ('Reinventing the Wheel') using magnetic field manipulation"
+    ],
+    "interests": [
+      "medtech hardware",
+      "clinical workflows",
+      "healthcare innovation",
+      "robotics",
+      "electromechanical systems"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Healthcare problems requiring hardware solutions",
+    "details": "Focused on solving real-world healthcare problems, particularly in under-addressed areas such as gynaecology, obstetrics, neonatal, and paediatric care. Aware of regulatory and commercial challenges in the space."
+  },
+
+  "superpower": {
+    "summary": "End-to-end hardware and clinical execution",
+    "details": "Rare ability to take a concept from idea through prototyping, clinical trials, and into real-world patient use. Combines engineering, clinical, and product thinking."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "hands-on",
+      "pragmatic",
+      "big-picture thinker",
+      "action-oriented",
+      "not overly theoretical"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Younger than expected for level of experience",
+      "Strong breadth across hardware, software, and clinical domains",
+      "Entrepreneurial path started early"
+    ]
+  },
+
+  "elevator_pitch": "Engineer and entrepreneur with deep experience in electromechanical prototyping and clinical medtech. Strong ability to take ideas from concept through to real-world implementation.",
+
+  "extra_facts": [
+    {
+      "fact": "Has direct experience bringing devices through clinical trials into patient use",
+      "type": "experience",
+      "use_for_conversation": "Ask what changes between prototype and clinical reality"
+    },
+    {
+      "fact": "Has worked across both B2C hardware and regulated medtech",
+      "type": "experience",
+      "use_for_conversation": "Ask which environment is harder to build in"
+    },
+    {
+      "fact": "Comfortable working across disciplines (mechanical, electrical, software, clinical)",
+      "type": "skill_profile",
+      "use_for_conversation": "Ask how she balances competing technical constraints"
+    },
+    {
+      "fact": "Understands regulatory and clinical barriers deeply",
+      "type": "domain_expertise",
+      "use_for_conversation": "Discuss what slows innovation in healthcare"
+    },
+    {
+      "fact": "Strong bias toward practical, real-world solutions rather than theoretical ones",
+      "type": "values",
+      "use_for_conversation": "Explore what makes a healthcare product actually usable"
+    }
+  ],
+
+  "personality_model": {
+    "type": "hardware_builder",
+    "mindset": "pragmatic, hands-on, problem-driven",
+    "values": [
+      "real-world impact",
+      "execution",
+      "practicality",
+      "adaptability",
+      "learning by doing"
+    ],
+    "working_style": "hands-on, iterative, multi-disciplinary",
+    "communication_style": "direct, grounded, practical"
+  },
+
+  "conversation_starters": [
+    "What’s the hardest part of taking a device from prototype to patient use?",
+    "Where do most healthcare devices fail in real-world environments?",
+    "What problems in healthcare actually require hardware rather than software?",
+    "What slows down innovation most in medtech?",
+    "What would you build if regulation wasn’t a constraint?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Build something real",
+    "approach": [
+      "Focus on real-world problems",
+      "Be practical and grounded",
+      "Offer to prototype ideas",
+      "Engage hands-on"
+    ],
+    "avoid": [
+      "pure software thinking",
+      "AI hype without hardware consideration",
+      "overly abstract discussion"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Medtech clinical engineering experience",
+      "Hardware startup founder",
+      "Electromechanical prototyping",
+      "Lily device development"
+    ],
+    "supporting_signals": [
+      "Robotics experimentation",
+      "Healthcare focus",
+      "West of Ireland origin"
+    ],
+    "uncertainties": [
+      "No public company name for Lily device",
+      "Confidential prototype work not publicly indexed",
+      "Multiple medtech engineers fit partial profile"
+    ]
+  }
+},
+{
+  "id": 21,
+  "tagline": "Exited Founder | €7M Raised | Venture Builder & Deep Tech",
+  "category": "Commercial",
+
+  "likely_match": {
+    "name": null,
+    "confidence": 0.45,
+    "linkedin_url": null,
+    "location": "Ireland",
+    "role": "Founder / Venture Builder / EI Business Partner",
+    "notes": "Distinct signals (10y deep-tech founder, ~€7M raised, Enterprise Ireland Business Partner since ~2013, environmental monitoring + AI pivot) narrow pool significantly, but multiple plausible matches without a single definitive fingerprint."
+  },
+
+  "profile_summary": {
+    "background": "Deep-tech founder with a decade of experience building and scaling a company, raising ~€7M, and navigating a failed pivot. Now focused on venture building and commercialising university IP.",
+    "experience_highlights": [
+      "Co-Founder & CEO of environmental/deep-tech startup (10 years)",
+      "Scaled team to ~30 people",
+      "Raised ~€7M",
+      "Launched early AI-enabled environmental monitoring platform",
+      "Enterprise Ireland Business Partner since 2013",
+      "Advises and commercialises university technologies",
+      "Active early-stage angel investor"
+    ],
+    "interests": [
+      "deep tech",
+      "AI infrastructure",
+      "data centres",
+      "climate tech",
+      "venture building"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Thermodynamics constraints in AI infrastructure",
+    "details": "Focused on data centre cooling as a fundamental bottleneck to AI scaling. Sees heat management as a hard physical constraint where marginal gains unlock major value. Interested in infrastructure-layer innovation rather than application-layer AI."
+  },
+
+  "superpower": {
+    "summary": "Resilient founder with real-world experience",
+    "details": "Battle-tested through fundraising, scaling, and failed pivots. Comfortable operating in ambiguity and strong in selling ideas, attracting capital, and driving ventures forward."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "customer-focused",
+      "comfortable with early engagement",
+      "strong communicator",
+      "able to sell vision",
+      "execution-oriented"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Former member of Irish Youth Choir",
+      "Performs despite not considering himself naturally musical",
+      "Comfortable outside typical technical/business persona"
+    ]
+  },
+
+  "elevator_pitch": "Experienced deep-tech founder who has raised capital, built teams, and navigated failure. Brings resilience, sales ability, and venture-building expertise.",
+
+  "extra_facts": [
+    {
+      "fact": "Has direct experience with failed pivots and post-mortem learning",
+      "type": "experience",
+      "use_for_conversation": "Ask what he learned from the pivot that didn’t work"
+    },
+    {
+      "fact": "Deep exposure to university research commercialisation",
+      "type": "domain_expertise",
+      "use_for_conversation": "Ask what makes academic IP succeed or fail commercially"
+    },
+    {
+      "fact": "Early-stage investor perspective alongside founder experience",
+      "type": "perspective",
+      "use_for_conversation": "Discuss how he evaluates founders now vs before"
+    },
+    {
+      "fact": "Focused on infrastructure-layer problems rather than application-layer AI",
+      "type": "thinking_style",
+      "use_for_conversation": "Ask where infrastructure unlocks more value than apps"
+    },
+    {
+      "fact": "Strong belief in physical constraints (thermodynamics) as defining limits of AI",
+      "type": "technical_perspective",
+      "use_for_conversation": "Discuss where software hype meets physical reality"
+    }
+  ],
+
+  "personality_model": {
+    "type": "battle_tested_founder",
+    "mindset": "resilient, pragmatic, opportunity-focused",
+    "values": [
+      "resilience",
+      "learning",
+      "execution",
+      "capital efficiency",
+      "real-world impact"
+    ],
+    "working_style": "adaptive, experienced, commercially driven",
+    "communication_style": "direct, honest, reflective"
+  },
+
+  "conversation_starters": [
+    "What actually went wrong with the pivot?",
+    "What makes university IP commercially viable?",
+    "Where do you see the biggest bottleneck in AI infrastructure?",
+    "What changed most in how you think after 10 years building?",
+    "What separates founders who raise from those who don’t?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Experience + honesty",
+    "approach": [
+      "Engage on real founder experiences",
+      "Ask about lessons learned",
+      "Be open about failure and uncertainty",
+      "Focus on practical insights"
+    ],
+    "avoid": [
+      "overconfidence",
+      "theoretical discussion",
+      "ignoring real-world constraints"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "10-year deep tech founder journey",
+      "€7M raised",
+      "Enterprise Ireland Business Partner",
+      "Environmental monitoring + AI"
+    ],
+    "supporting_signals": [
+      "Angel investing",
+      "Venture building",
+      "Infrastructure focus"
+    ],
+    "uncertainties": [
+      "No company name specified",
+      "Multiple EI partners fit profile",
+      "Environmental startup not uniquely identifiable"
+    ]
+  }
+},
+{
+  "id": 22,
+  "tagline": "Engineer & Technical Co-Founder | AI & Silicon Hardware",
+  "category": "Technical",
+
+  "likely_match": {
+    "name": null,
+    "confidence": 0.55,
+    "linkedin_url": null,
+    "location": "Ireland/UK/EU (likely)",
+    "role": "Digital Design Engineer (Quantum Computing) / Technical Co-Founder",
+    "notes": "Strong narrowing signals (quantum silicon startup + IEEE-SOCC tiny-RAM transformer + Microsoft stints + Patch accelerator + Passionfruit co-founder). Exact identity requires paper/author cross-reference."
+  },
+
+  "profile_summary": {
+    "background": "Young but highly advanced engineer working across AI, silicon, and quantum hardware. Combines software and hardware engineering with research and startup experience.",
+    "experience_highlights": [
+      "Digital Design Engineer at quantum computing startup (silicon qubits / control stack)",
+      "Wrote orchestration software and sequencing compiler for quantum chip control",
+      "Built transformer inference system in 64kB RAM (IEEE-SOCC publication)",
+      "Technical Co-Founder of Passionfruit",
+      "Two stints at Microsoft",
+      "Participant in Patch accelerator",
+      "IEEE-published AI researcher"
+    ],
+    "interests": [
+      "silicon and chip design",
+      "AI inference at the edge",
+      "quantum computing",
+      "systems engineering",
+      "first-principles problem solving"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Silicon as the next frontier",
+    "details": "Believes the semiconductor stack is decades behind software in developer experience and iteration speed. Sees opportunity in inference/decode, vertical disruption, and breaking duopolies as AI demand drives compute innovation."
+  },
+
+  "superpower": {
+    "summary": "First-principles technical depth",
+    "details": "Rare combination of AI and hardware design. Builds systems end-to-end (compiler → control → silicon interface). Strong strategic reasoning from first principles and highly direct communication style."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "strong sales/persuasion ability",
+      "clear communicator",
+      "decisive executive",
+      "honest and trustworthy",
+      "fast feedback loops"
+    ],
+    "gap": "Explicitly seeks commercial/GTM complement"
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Top 3 GCSE result nationally in home country",
+      "Can name every country and flag from memory",
+      "Very direct communication ethos ('no bullshit')"
+    ]
+  },
+
+  "elevator_pitch": "Deeply technical engineer across AI and hardware with research and startup experience. First-principles thinker who can build systems from the ground up and communicate clearly.",
+
+  "extra_facts": [
+    {
+      "fact": "Has built both high-level AI systems and low-level hardware control stacks",
+      "type": "skill_profile",
+      "use_for_conversation": "Ask how constraints change from software to silicon"
+    },
+    {
+      "fact": "Experience writing compilers/orchestration for quantum systems",
+      "type": "domain_expertise",
+      "use_for_conversation": "Discuss where abstraction breaks in hardware"
+    },
+    {
+      "fact": "Interested in breaking hardware monopolies/duopolies",
+      "type": "strategy",
+      "use_for_conversation": "Ask where incumbents are weakest"
+    },
+    {
+      "fact": "Strong belief in honesty and direct communication",
+      "type": "values",
+      "use_for_conversation": "Engage with blunt, clear questions"
+    },
+    {
+      "fact": "Comfortable building under extreme resource constraints (e.g. 64kB inference)",
+      "type": "engineering_style",
+      "use_for_conversation": "Ask what constraints unlock the best designs"
+    }
+  ],
+
+  "personality_model": {
+    "type": "first_principles_engineer",
+    "mindset": "analytical, direct, systems-level",
+    "values": [
+      "truth",
+      "clarity",
+      "technical excellence",
+      "first-principles reasoning",
+      "efficiency"
+    ],
+    "working_style": "deep work, low fluff, highly technical",
+    "communication_style": "direct, blunt, precise"
+  },
+
+  "conversation_starters": [
+    "Where does silicon break down compared to software?",
+    "What’s the most overrated idea in AI hardware right now?",
+    "What constraint led to your best design decision?",
+    "Where are the incumbents weakest in chip design?",
+    "What would you build if you had full control of the stack?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Technical depth + honesty",
+    "approach": [
+      "Be direct and clear",
+      "Engage at a systems level",
+      "Avoid fluff",
+      "Invite critique"
+    ],
+    "avoid": [
+      "marketing language",
+      "AI hype",
+      "unclear thinking"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Quantum computing hardware engineer",
+      "IEEE-SOCC publication (low-RAM transformer)",
+      "Microsoft + Patch + startup founder",
+      "Compiler + orchestration work"
+    ],
+    "supporting_signals": [
+      "Silicon-first worldview",
+      "AI + hardware crossover",
+      "Young high-performer profile"
+    ],
+    "uncertainties": [
+      "Multiple quantum startups in EU/UK",
+      "Paper authorship needs lookup",
+      "Passionfruit not uniquely identifiable"
+    ]
+  }
+},
+{
+  "id": 23,
+  "tagline": "Deep Tech Builder & Founder | Climate, Geospatial AI & Energy",
+  "category": "Technical",
+
+  "identified_person": {
+    "name": "Luke Barrington",
+    "confidence": 0.97,
+    "linkedin_url": "https://www.linkedin.com/in/luke-barrington-8866518",
+    "company": "Google",
+    "previous_company": "Tomnod",
+    "role": "Director of Climate, Weather & Geospatial AI",
+    "notes": "Direct match across Google/X climate-weather-geospatial AI leadership, ML PhD, Tomnod founder/CTO exit, Dublin origin, and Genghis Khan tomb signal"
+  },
+
+  "profile_summary": {
+    "background": "Senior deep-tech leader with a decade at Google, focused on geospatial AI, climate, and planetary-scale systems. Strong zero-to-one builder with prior founder and exit experience.",
+    "experience_highlights": [
+      "Director of Weather, Climate & Earth at Google",
+      "Joined via Google X (moonshot factory)",
+      "ML PhD",
+      "Co-founded a solar company that was acquired",
+      "Extensive experience in geospatial systems, climate modelling, and infrastructure"
+    ],
+    "interests": [
+      "weather systems",
+      "geospatial AI",
+      "energy markets",
+      "climate modelling",
+      "infrastructure startups"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "AI-driven weather forecasting for energy markets",
+    "details": "Focused on using AI to improve weather prediction accuracy to unlock better energy trading decisions. Interested in infrastructure-layer opportunities at the intersection of geospatial data and energy systems."
+  },
+
+  "superpower": {
+    "summary": "Zero-to-one deep tech creation",
+    "details": "Ability to invent and build new technologies from first principles and translate them into real-world products and companies. Strong across both research and product domains."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "commercially strong",
+      "understands markets and monetisation",
+      "driven but easygoing",
+      "complements technical depth"
+    ],
+    "gap": "Explicitly looking for someone who can turn technology into revenue"
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Claims to know the secret location of Genghis Khan’s tomb",
+      "Interest in creative AI (music, games)",
+      "Balances serious infrastructure thinking with curiosity-driven exploration"
+    ]
+  },
+
+  "elevator_pitch": "Deep tech leader with experience inventing and scaling new technologies. Focused on building infrastructure companies at the intersection of climate, energy, and geospatial systems.",
+
+  "extra_facts": [
+    {
+      "fact": "Has operated inside one of the most advanced geospatial and climate data environments in the world",
+      "type": "experience",
+      "use_for_conversation": "Ask what Google knows about the planet that others don’t"
+    },
+    {
+      "fact": "Already successfully exited a startup (solar company)",
+      "type": "experience",
+      "use_for_conversation": "Ask what made that company acquirable"
+    },
+    {
+      "fact": "Thinks in infrastructure-layer opportunities rather than application-layer products",
+      "type": "thinking_style",
+      "use_for_conversation": "Discuss where real value accrues in deep tech"
+    },
+    {
+      "fact": "Comfortable with 'unsexy' but high-value problems",
+      "type": "strategy",
+      "use_for_conversation": "Ask which boring problems are worth billions"
+    },
+    {
+      "fact": "Explores both scientific and creative applications of AI",
+      "type": "interest",
+      "use_for_conversation": "Discuss crossover between technical and creative AI"
+    }
+  ],
+
+  "personality_model": {
+    "type": "deep_tech_inventor",
+    "mindset": "first-principles, infrastructure-focused, long-term",
+    "values": [
+      "technical depth",
+      "real-world impact",
+      "efficiency",
+      "innovation",
+      "pragmatism"
+    ],
+    "working_style": "research-driven, strategic, builder-oriented",
+    "communication_style": "concise, thoughtful, grounded"
+  },
+
+  "conversation_starters": [
+    "How much better can weather prediction actually get with AI?",
+    "Where is the biggest inefficiency in energy markets today?",
+    "What did your solar company get right that led to acquisition?",
+    "What’s an 'unsexy' problem you think is massively undervalued?",
+    "Where does geospatial data unlock the most value?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Commercialisation of deep tech",
+    "approach": [
+      "Engage on turning technology into business",
+      "Show understanding of markets",
+      "Discuss monetisation paths",
+      "Be pragmatic"
+    ],
+    "avoid": [
+      "pure technical fascination without business angle",
+      "AI hype without application",
+      "small-scale thinking"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Director at Google in climate/geospatial domain",
+      "Google X background",
+      "ML PhD",
+      "Solar startup exit"
+    ],
+    "supporting_signals": [
+      "Energy trading interest",
+      "Infrastructure focus",
+      "Creative AI curiosity"
+    ],
+    "uncertainties": [
+      "Multiple Google directors in adjacent areas",
+      "Solar startup not named",
+      "Identity requires cross-referencing publications or org charts"
+    ]
+  }
+},
+{
+  "id": 24,
+  "tagline": "Policy Expert turned Founder | Climate Finance & Energy",
+  "category": "Commercial",
+
+  "likely_match": {
+    "name": null,
+    "confidence": 0.75,
+    "linkedin_url": null,
+    "project": "https://climatemot.com",
+    "previous_role": "Head of Climate Adaptation Finance (UK FCDO)",
+    "current": "Imperial College MSc International Finance",
+    "notes": "Very narrow profile (FCDO climate finance lead + Climate MOT builder). Identity can be confirmed via domain or Imperial cohort search."
+  },
+
+  "profile_summary": {
+    "background": "Former UK diplomat with deep experience in climate finance and international policy. Transitioning into startup building with a focus on energy systems and climate risk.",
+    "experience_highlights": [
+      "10 years in UK Foreign, Commonwealth & Development Office",
+      "Head of Climate Adaptation Finance",
+      "Worked across 93 economies via World Bank analysis",
+      "Built Climate MOT (live product with traffic)",
+      "Currently studying MSc International Finance at Imperial",
+      "Languages degree from Trinity College Dublin (French/Italian)"
+    ],
+    "interests": [
+      "energy systems",
+      "climate risk",
+      "carbon markets",
+      "geopolitics",
+      "startup building"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Energy systems and climate risk",
+    "details": "Exploring future energy infrastructure and climate adaptation. Interested in carbon capture, biochar, ocean alkalinity, and the geopolitical impact of energy transitions. Focused on identifying where climate risk will hit hardest and how markets respond."
+  },
+
+  "superpower": {
+    "summary": "Rapid understanding of complex domains",
+    "details": "Strong ability to quickly absorb technical topics, synthesize information, and generate ideas. Combines policy depth with action-oriented mindset."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "technical or finance background",
+      "comfortable with experimentation",
+      "flexible thinker",
+      "collaborative",
+      "able to explore multiple ideas quickly"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Transitioned from diplomacy to startup building",
+      "Strong curiosity across multiple climate domains",
+      "Open to exploring unconventional ideas (e.g. venison carbon impact)"
+    ]
+  },
+
+  "elevator_pitch": "Former diplomat with deep climate finance experience, now building products and exploring energy systems. Strong at ideation and rapid learning across complex domains.",
+
+  "extra_facts": [
+    {
+      "fact": "Has direct experience shaping international climate finance policy",
+      "type": "experience",
+      "use_for_conversation": "Ask what policies actually move capital in practice"
+    },
+    {
+      "fact": "Built a live product (Climate MOT) solo using AI tools",
+      "type": "execution",
+      "use_for_conversation": "Ask what he learned going from policy to building"
+    },
+    {
+      "fact": "Currently retooling skillset for commercial world",
+      "type": "trajectory",
+      "use_for_conversation": "Ask what skills he feels he needs to build next"
+    },
+    {
+      "fact": "Strong interest in geopolitical implications of energy systems",
+      "type": "thinking_style",
+      "use_for_conversation": "Discuss how geopolitics shapes markets"
+    },
+    {
+      "fact": "Comfortable exploring multiple ideas before committing",
+      "type": "working_style",
+      "use_for_conversation": "Ask how he decides what to pursue"
+    }
+  ],
+
+  "personality_model": {
+    "type": "exploratory_builder",
+    "mindset": "curious, adaptive, idea-driven",
+    "values": [
+      "learning",
+      "exploration",
+      "impact",
+      "adaptability",
+      "curiosity"
+    ],
+    "working_style": "iterative, exploratory, fast learning",
+    "communication_style": "open, thoughtful, idea-oriented"
+  },
+
+  "conversation_starters": [
+    "What made you leave policy and start building?",
+    "What did you learn from launching Climate MOT?",
+    "Where is climate capital actually being deployed effectively?",
+    "What’s the biggest misconception about energy systems?",
+    "Which climate technologies are underrated right now?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Ideas + exploration",
+    "approach": [
+      "Engage on ideas",
+      "Be open to exploring multiple directions",
+      "Discuss real-world implications",
+      "Share perspectives"
+    ],
+    "avoid": [
+      "pushing for immediate execution",
+      "overly rigid thinking",
+      "narrow focus too early"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "UK diplomat climate finance",
+      "Imperial MSc",
+      "Climate MOT product",
+      "FCDO leadership role"
+    ],
+    "supporting_signals": [
+      "Energy systems focus",
+      "Geopolitical thinking",
+      "Startup transition"
+    ],
+    "uncertainties": [
+      "No public name tied to Climate MOT yet",
+      "Multiple diplomats fit partial profile",
+      "Requires domain lookup for exact identity"
+    ]
+  }
+},
+{
+  "id": 25,
+  "tagline": "Software Engineer & Builder | Construction Tech & Clean Energy",
+  "category": "Technical",
+
+  "likely_match": {
+    "name": null,
+    "confidence": 0.65,
+    "linkedin_url": null,
+    "companies": [
+      "Protex AI",
+      "Source.ag",
+      "WP Engine"
+    ],
+    "role": "Senior Software Engineer",
+    "notes": "Distinct career path (WP Engine → Source.ag → Protex AI) combined with Irish context and heat pump interest narrows to a small set of candidates"
+  },
+
+  "profile_summary": {
+    "background": "Software engineer with experience across startups and scale-ups, combining technical depth with strong product and business intuition.",
+    "experience_highlights": [
+      "Software Engineer at Protex AI",
+      "Worked at Source.ag (AI agritech startup in Amsterdam)",
+      "3+ years at WP Engine progressing from associate to senior engineer",
+      "Experience across both startup and scale-up environments"
+    ],
+    "interests": [
+      "clean energy",
+      "heat pumps",
+      "construction tech",
+      "AI systems",
+      "business models"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Heat pump system design and decarbonisation",
+    "details": "Focused on the complexity and misinformation around heat pump installation and system design. Sees a large opportunity to simplify design, improve outcomes, and enable adoption as countries decarbonise heating."
+  },
+
+  "superpower": {
+    "summary": "Technical builder with product intuition",
+    "details": "Strong ability to build and iterate quickly in ambiguous environments. Combines engineering skill with curiosity about how businesses work and where they can improve."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "commercial or sales mindset",
+      "low ego",
+      "experimentation-driven",
+      "easy to work with",
+      "complementary skill set"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Deep self-taught expertise in heat pump design",
+      "Hands-on approach to home renovation and energy systems",
+      "Highly curious about physical systems beyond software"
+    ]
+  },
+
+  "elevator_pitch": "Software engineer with strong technical background and product mindset. Interested in solving real-world problems and identifying opportunities where systems can be improved.",
+
+  "extra_facts": [
+    {
+      "fact": "Has deep practical knowledge of heat pump systems and heat loss calculations",
+      "type": "domain_expertise",
+      "use_for_conversation": "Ask what most installers get wrong"
+    },
+    {
+      "fact": "Has worked across multiple AI-driven startups",
+      "type": "experience",
+      "use_for_conversation": "Ask how AI differs between industries"
+    },
+    {
+      "fact": "Strong curiosity about business models, not just technology",
+      "type": "mindset",
+      "use_for_conversation": "Discuss what makes a business viable"
+    },
+    {
+      "fact": "Comfortable working in ambiguity and iterating quickly",
+      "type": "working_style",
+      "use_for_conversation": "Ask how he decides what to build first"
+    },
+    {
+      "fact": "Self-driven learning approach outside formal work",
+      "type": "trait",
+      "use_for_conversation": "Ask what he’s currently learning"
+    }
+  ],
+
+  "personality_model": {
+    "type": "product_engineer",
+    "mindset": "curious, practical, business-aware",
+    "values": [
+      "learning",
+      "experimentation",
+      "practical solutions",
+      "low ego",
+      "curiosity"
+    ],
+    "working_style": "iterative, exploratory, hands-on",
+    "communication_style": "casual, open, thoughtful"
+  },
+
+  "conversation_starters": [
+    "What do most people get wrong about heat pump systems?",
+    "Where is the biggest opportunity in clean heating right now?",
+    "What made you go so deep on heat pump design?",
+    "What have you learned from working across different AI startups?",
+    "What kind of product would you build in this space?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Shared curiosity + building",
+    "approach": [
+      "Engage casually",
+      "Explore ideas together",
+      "Focus on real problems",
+      "Be experimental"
+    ],
+    "avoid": [
+      "overly formal conversation",
+      "abstract theory",
+      "ego-driven interaction"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Protex AI engineer",
+      "Source.ag background",
+      "WP Engine progression",
+      "Heat pump obsession"
+    ],
+    "supporting_signals": [
+      "Clean energy interest",
+      "Construction tech overlap",
+      "Product mindset"
+    ],
+    "uncertainties": [
+      "Multiple engineers at Protex AI",
+      "No public content linking heat pump interest",
+      "Requires LinkedIn cross-check"
+    ]
+  }
+},
+{
+  "id": 26,
+  "tagline": "Senior Operator & Builder | Slack & Personio | Real Estate & People Systems",
+  "category": "Commercial",
+
+  "identified_person": {
+    "name": "Ciaran Chaney",
+    "confidence": 0.96,
+    "linkedin_url": "https://www.linkedin.com/in/ciaranchaney",
+    "companies": [
+      "Personio",
+      "Slack"
+    ],
+    "role": "Director of Real Estate, Workplace & IT",
+    "notes": "Direct match across Slack Workplace Manager/Regional Workplace Manager history, Personio workplace/real-estate leadership, and public workplace systems writing"
+  },
+
+  "profile_summary": {
+    "background": "Operator-builder with experience scaling workplace and operational systems at high-growth SaaS companies. Transitioning into building AI-driven tools.",
+    "experience_highlights": [
+      "6 years at Slack during hyper-growth and IPO phase",
+      "Progressed from Workplace Manager to Regional Workplace Manager",
+      "Currently at Personio (HR SaaS unicorn)",
+      "Built internal Event OS platform using Claude Code",
+      "Developing AI tools for real estate and operations"
+    ],
+    "interests": [
+      "AI tooling",
+      "real estate systems",
+      "operations automation",
+      "workplace design",
+      "systems thinking"
+    ]
+  },
+
+  "current_obsession": {
+    "summary": "Commercial real estate disruption",
+    "details": "Focused on simplifying and structuring commercial real estate processes for companies. Aims to replace broker-driven workflows with transparent, self-serve systems that reduce complexity and cost."
+  },
+
+  "superpower": {
+    "summary": "End-to-end operator-builder",
+    "details": "Ability to design systems, implement them, and align stakeholders. Strong in operational execution, internal tooling, and selling ideas to leadership."
+  },
+
+  "ideal_cofounder": {
+    "traits": [
+      "pragmatic",
+      "transparent",
+      "low ego",
+      "collaborative",
+      "easygoing"
+    ]
+  },
+
+  "surprising_traits": {
+    "items": [
+      "Avid mountain climber",
+      "Aspires to climb Everest",
+      "Scientific academic background before entering startups"
+    ]
+  },
+
+  "elevator_pitch": "Operator who can build systems, run operations, and sell vision. Experienced in scaling companies and now applying that to AI-driven tools.",
+
+  "extra_facts": [
+    {
+      "fact": "Has firsthand experience scaling operations at a hyper-growth company (Slack)",
+      "type": "experience",
+      "use_for_conversation": "Ask what breaks during hypergrowth"
+    },
+    {
+      "fact": "Has built internal tools using AI without formal engineering team",
+      "type": "execution",
+      "use_for_conversation": "Ask what he built and how fast"
+    },
+    {
+      "fact": "Strong understanding of workplace and real estate decision-making",
+      "type": "domain_expertise",
+      "use_for_conversation": "Ask how companies make poor real estate decisions"
+    },
+    {
+      "fact": "Background in science gives analytical foundation",
+      "type": "skill_profile",
+      "use_for_conversation": "Ask how he transitioned from science to operations"
+    },
+    {
+      "fact": "Comfortable influencing senior stakeholders",
+      "type": "leadership",
+      "use_for_conversation": "Ask how he gets buy-in for new ideas"
+    }
+  ],
+
+  "personality_model": {
+    "type": "operator_builder",
+    "mindset": "pragmatic, systems-focused, execution-driven",
+    "values": [
+      "clarity",
+      "efficiency",
+      "collaboration",
+      "impact",
+      "simplicity"
+    ],
+    "working_style": "hands-on, iterative, operational",
+    "communication_style": "clear, practical, engaging"
+  },
+
+  "conversation_starters": [
+    "What breaks most in company operations during hypergrowth?",
+    "What did you learn from building Event OS?",
+    "Why is commercial real estate so inefficient today?",
+    "What would a perfect real estate workflow look like?",
+    "What’s the fastest thing you’ve built with AI?"
+  ],
+
+  "relationship_strategy": {
+    "best_angle": "Systems + building",
+    "approach": [
+      "Discuss real systems",
+      "Focus on practical improvements",
+      "Explore building ideas together",
+      "Keep it grounded"
+    ],
+    "avoid": [
+      "overly theoretical discussion",
+      "purely technical deep dives",
+      "lack of practical context"
+    ]
+  },
+
+  "matching_signals": {
+    "strong_signals": [
+      "Slack workplace operations",
+      "Personio experience",
+      "Internal AI tool building",
+      "Real estate focus"
+    ],
+    "supporting_signals": [
+      "Life sciences background",
+      "Operations leadership",
+      "AI experimentation"
+    ],
+    "uncertainties": [
+      "Multiple Slack alumni in Ireland",
+      "No public link to Event OS",
+      "Requires LinkedIn cross-check"
+    ]
+  }
+}
+  ]
+}
