@@ -65,6 +65,15 @@ exports.handler = async (event) => {
     return respond(200, generated);
   }
 
+  if (path.startsWith("/ai/relationship") && method === "POST") {
+    const body = parseBody(event);
+    const generated = await generateJson(
+      `Study this founder relationship for an in-person Future Founders event. Return JSON only with {"headline":"...","openingMove":"...","whyItWorks":["..."],"watchOuts":["..."],"usefulQuestions":["..."]}. Keep it practical, specific, and non-creepy. Relationship: ${JSON.stringify(body).slice(0, 8000)}`,
+      fallbackRelationship(body),
+    );
+    return respond(200, generated);
+  }
+
   return respond(404, { error: "Not found" });
 };
 
@@ -110,6 +119,27 @@ function fallbackPairs(profiles) {
     question: "Select everyone whose profile is currently tagged Technical.",
     answerIds: technical,
     explanation: "Fallback pairs prompt based on the dataset category field.",
+  };
+}
+
+function fallbackRelationship(body) {
+  const sourceName = body?.source?.identified_person?.name || body?.source?.likely_match?.name || `Attendee #${body?.edge?.source || "A"}`;
+  const targetName = body?.target?.identified_person?.name || body?.target?.likely_match?.name || `Attendee #${body?.edge?.target || "B"}`;
+  const reasons = body?.edge?.reasons || [];
+  return {
+    headline: `${sourceName} × ${targetName}: ${body?.edge?.relationship_type || "relationship"}`,
+    openingMove: `Ask ${targetName} which part of ${sourceName}'s work feels most relevant to what they are building now.`,
+    whyItWorks: reasons.slice(0, 3),
+    watchOuts: [
+      "Use the score as a prompt for curiosity, not as a claim of guaranteed fit.",
+      "Confirm current priorities before suggesting a collaboration.",
+    ],
+    usefulQuestions: [
+      "What would make this connection useful in the next month?",
+      "Where do your assumptions about this market differ?",
+      "Who else in the room should join this thread?",
+    ],
+    generated: false,
   };
 }
 

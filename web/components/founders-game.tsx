@@ -8,14 +8,16 @@ import {
   isUncertain,
   pickNewAndWeak,
   scoreRound,
+  shuffle,
   updateMastery,
 } from "@/lib/game";
 import { beginLogin, clearTokens, getTokens, logout } from "@/lib/auth";
 import { loadRuntimeConfig, RuntimeConfig } from "@/lib/runtime-config";
-import { Attendee, FactsChallenge, Mastery, MatchData, MatchProfile, RelationshipEdge } from "@/lib/types";
+import { Attendee, FactsChallenge, Mastery, MatchData, MatchProfile, RelationshipEdge, RelationshipInsight } from "@/lib/types";
 
 type Mode = "learn" | "play-easy" | "play-hard" | "pairs";
 type AppView = "chooser" | "guess-who" | "match-maker";
+type PairChallenge = { question: string; answerIds: number[]; explanation?: string };
 
 const STORAGE_KEY = "ff-game-progress-v1";
 
@@ -34,12 +36,15 @@ export function FoundersGame() {
   const [pairQuestion, setPairQuestion] = useState<string>("");
   const [pairAnswers, setPairAnswers] = useState<number[]>([]);
   const [pairResult, setPairResult] = useState<string>("");
+  const [pairKey, setPairKey] = useState(0);
   const [runtimeConfig, setRuntimeConfig] = useState<RuntimeConfig | null>(null);
   const [authLoaded, setAuthLoaded] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [appView, setAppView] = useState<AppView>("chooser");
   const [matchData, setMatchData] = useState<MatchData | null>(null);
-  const [selectedMatchId, setSelectedMatchId] = useState(16);
+  const [selectedMatchId, setSelectedMatchId] = useState<number | null>(null);
+
+  const studyPool = useMemo(() => attendees.filter(isStudyReady), [attendees]);
 
   useEffect(() => {
     fetch("/data/attendees.json")
@@ -85,17 +90,17 @@ export function FoundersGame() {
   }, [mastery, runtimeConfig, score]);
 
   useEffect(() => {
-    if (!attendees.length) return;
+    if (!studyPool.length) return;
     if (mode === "learn" && learnBatch.length === 0) {
       window.setTimeout(() => {
-        setLearnBatch(pickNewAndWeak(attendees, mastery));
+        setLearnBatch(pickNewAndWeak(studyPool, mastery));
         setLearnIndex(0);
       }, 0);
     }
-  }, [attendees, mode, learnBatch.length, mastery]);
+  }, [studyPool, mode, learnBatch.length, mastery]);
 
   const learnedPool = useMemo(
-    () => attendees.filter((a) => (mastery[a.id] ?? 0) > 0),
+    () => attendees.filter((a) => isStudyReady(a) && (mastery[a.id] ?? 0) > 0),
     [attendees, mastery],
   );
 
@@ -115,7 +120,7 @@ export function FoundersGame() {
   }
 
   function startPlay(nextMode: Mode) {
-    const pool = learnedPool.length > 0 ? learnedPool : attendees;
+    const pool = learnedPool.length > 0 ? learnedPool : studyPool;
     const target = pool[Math.floor(Math.random() * pool.length)] ?? null;
     setPlayTarget(target);
     setFactsChallenge(target ? buildFactsChallenge(target) : null);
@@ -175,11 +180,12 @@ export function FoundersGame() {
   }
 
   function createPairsQuestion() {
-    const pool = (learnedPool.length > 3 ? learnedPool : attendees).slice(0, 8);
-    const selected = pool.filter((a) => a.category === "Technical").map((a) => a.id);
-    setPairQuestion("Tap all attendees in the Technical category.");
-    setPairAnswers(selected);
+    const pool = shuffleForPrompt(learnedPool.length > 3 ? learnedPool : studyPool).slice(0, 8);
+    const challenge = buildLocalPairsChallenge(pool);
+    setPairQuestion(challenge.question);
+    setPairAnswers(challenge.answerIds);
     setPairResult("");
+    setPairKey((key) => key + 1);
     void loadAiPairs(pool);
   }
 
@@ -200,6 +206,7 @@ export function FoundersGame() {
       if (generated.question && generated.answerIds?.length) {
         setPairQuestion(generated.question);
         setPairAnswers(generated.answerIds);
+        setPairKey((key) => key + 1);
       }
     } catch {
       // Local category fallback remains active.
@@ -300,7 +307,7 @@ export function FoundersGame() {
           {appView === "guess-who" && (
             <>
           <p className="mt-1 text-sm text-slate-600">
-            Score: <strong>{score}</strong> | Learned: {Object.values(mastery).filter((x) => x > 0).length}/{attendees.length}
+            Score: <strong>{score}</strong> | Learned: {studyPool.filter((a) => (mastery[a.id] ?? 0) > 0).length}/{studyPool.length} named profiles
           </p>
           <div className="mt-4 flex gap-2">
             <button className="rounded-xl bg-[#5583b7] px-3 py-2 text-white" onClick={() => setMode("learn")}>Learn</button>
@@ -318,6 +325,7 @@ export function FoundersGame() {
             matchData={matchData}
             selectedId={selectedMatchId}
             onSelect={setSelectedMatchId}
+            runtimeConfig={runtimeConfig}
           />
         )}
 
@@ -326,8 +334,13 @@ export function FoundersGame() {
         {mode === "learn" && currentLearn && (
           <section className="rounded-[2rem] border border-white/50 bg-white/90 p-6 shadow-xl shadow-slate-900/10 backdrop-blur">
             <p className="mb-2 text-sm uppercase tracking-wide">Learn Mode {learnIndex + 1}/3</p>
-            <h2 className="text-2xl font-semibold">{displayName(currentLearn)}</h2>
-            <p className="mt-1 text-slate-700">{currentLearn.tagline}</p>
+            <div className="flex items-center gap-4">
+              <FounderAvatar attendee={currentLearn} size="lg" />
+              <div>
+                <h2 className="text-2xl font-semibold">{displayName(currentLearn)}</h2>
+                <p className="mt-1 text-slate-700">{currentLearn.tagline}</p>
+              </div>
+            </div>
             <p className="mt-3 text-sm text-slate-600">{currentLearn.profile_summary?.background}</p>
             {isUncertain(currentLearn) && (
               <p className="mt-3 rounded-lg bg-amber-100 p-2 text-sm text-amber-900">
@@ -345,9 +358,12 @@ export function FoundersGame() {
           <section className="rounded-[2rem] border border-white/50 bg-white/90 p-6 shadow-xl shadow-slate-900/10 backdrop-blur">
             <p className="mb-2 text-sm uppercase tracking-wide">{mode === "play-easy" ? "Play Easy" : "Play Hard"}</p>
             <h2 className="text-2xl font-semibold">Who is this attendee?</h2>
-            <div className="mt-3 rounded-2xl border p-3">
+            <div className="mt-3 flex items-center gap-4 rounded-2xl border bg-gradient-to-br from-white to-slate-50 p-4">
+              <FounderAvatar attendee={playTarget} size="lg" />
+              <div>
               <p className="text-sm text-slate-600">Tagline clue:</p>
               <p>{playTarget.tagline}</p>
+              </div>
             </div>
 
             {mode === "play-easy" ? (
@@ -404,12 +420,172 @@ export function FoundersGame() {
         )}
 
         {mode === "pairs" && (
-          <PairsPanel attendees={attendees} question={pairQuestion} onSubmit={scorePairs} result={pairResult} />
+          <PairsPanel key={pairKey} attendees={studyPool} question={pairQuestion} onSubmit={scorePairs} result={pairResult} onNext={createPairsQuestion} />
         )}
           </>
         )}
       </div>
     </Shell>
+  );
+}
+
+function MatchMakerLanding({
+  matchData,
+  attendees,
+  visibleEdges,
+  clusters,
+  onSelect,
+}: {
+  matchData: MatchData;
+  attendees: Attendee[];
+  visibleEdges: RelationshipEdge[];
+  clusters: MatchData["insight_dimensions"]["highest_domain_density_clusters"];
+  onSelect: (id: number | null) => void;
+}) {
+  const strongest = visibleEdges[0];
+  const namedCount = attendees.filter(isNamed).length;
+  return (
+    <section className="overflow-hidden rounded-[2rem] border border-white/50 bg-white/90 shadow-xl shadow-slate-900/10 backdrop-blur">
+      <div className="grid gap-0 lg:grid-cols-[1fr_18rem]">
+        <div className="p-7">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#cb5549]">Map overview</p>
+          <h2 className="mt-3 text-4xl font-black tracking-tight text-[#0f1933]">Start with the network, then choose a founder.</h2>
+          <p className="mt-4 max-w-2xl text-slate-600">
+            This view shows compatibility paths without assuming Lyndon, or anyone else, is the default starting point. Use the filters above to reveal a cluster, then open a person or relationship to prepare a sharper conversation.
+          </p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            <MetricCard label="Profiles" value={String(matchData.attendees.length)} detail={`${namedCount} named`} />
+            <MetricCard label="Relationships" value={String(matchData.relationship_edges.length)} detail="Scored paths" />
+            <MetricCard label="Clusters" value={String(clusters?.length ?? 0)} detail="Opportunity groups" />
+          </div>
+          {strongest && (
+            <button
+              className="mt-6 rounded-2xl bg-[#0f1933] px-5 py-4 text-left font-bold text-white shadow-xl shadow-[#0f1933]/20 transition hover:-translate-y-0.5 hover:bg-[#cb5549]"
+              onClick={() => onSelect(strongest.source)}
+            >
+              Explore strongest visible path · {Math.round(strongest.score * 100)}% fit
+            </button>
+          )}
+        </div>
+        <div className="bg-gradient-to-br from-[#0f1933] to-[#cb5549] p-7 text-white">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-white/65">Suggested workflow</p>
+          <ol className="mt-5 space-y-4 text-sm leading-6 text-white/85">
+            <li><strong>1.</strong> Filter by cluster or relationship type.</li>
+            <li><strong>2.</strong> Pick a node with a dense set of strong paths.</li>
+            <li><strong>3.</strong> Study the relationship before starting the conversation.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MetricCard({ label, value, detail }: { label: string; value: string; detail: string }) {
+  return (
+    <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+      <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">{label}</p>
+      <p className="mt-2 text-3xl font-black text-[#0f1933]">{value}</p>
+      <p className="mt-1 text-sm text-slate-500">{detail}</p>
+    </div>
+  );
+}
+
+function MatchGraphPanel({
+  attendees,
+  edges,
+  selectedId,
+  clusters,
+  clusterFilter,
+  typeFilter,
+  relationshipTypes,
+  onClusterFilter,
+  onTypeFilter,
+  onSelect,
+}: {
+  attendees: Attendee[];
+  edges: RelationshipEdge[];
+  selectedId: number | null;
+  clusters: MatchData["insight_dimensions"]["highest_domain_density_clusters"];
+  clusterFilter: string;
+  typeFilter: string;
+  relationshipTypes: string[];
+  onClusterFilter: (cluster: string) => void;
+  onTypeFilter: (type: string) => void;
+  onSelect: (id: number | null) => void;
+}) {
+  const topNodes = attendees.slice(0, 16);
+  const angleStep = (Math.PI * 2) / Math.max(topNodes.length, 1);
+  const center = 150;
+  const radius = 110;
+  const positions = new Map(
+    topNodes.map((attendee, index) => [
+      attendee.id,
+      {
+        x: center + Math.cos(index * angleStep - Math.PI / 2) * radius,
+        y: center + Math.sin(index * angleStep - Math.PI / 2) * radius,
+      },
+    ]),
+  );
+  const graphEdges = edges.filter((edge) => positions.has(edge.source) && positions.has(edge.target)).slice(0, 36);
+  return (
+    <section className="rounded-[2rem] border border-white/50 bg-white/90 p-5 shadow-xl shadow-slate-900/10 backdrop-blur">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#5583b7]">Relationship graph</p>
+          <h3 className="mt-2 text-2xl font-black">Filter the room by cluster and connection type.</h3>
+        </div>
+        <div className="grid gap-2 sm:grid-cols-2">
+          <select className="rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold" value={clusterFilter} onChange={(event) => onClusterFilter(event.target.value)}>
+            <option value="all">All clusters</option>
+            {(clusters ?? []).map((cluster) => <option key={cluster.cluster} value={cluster.cluster}>{humanize(cluster.cluster)}</option>)}
+          </select>
+          <select className="rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold" value={typeFilter} onChange={(event) => onTypeFilter(event.target.value)}>
+            <option value="all">All relationships</option>
+            {relationshipTypes.map((type) => <option key={type} value={type}>{humanize(type)}</option>)}
+          </select>
+        </div>
+      </div>
+      <div className="mt-5 grid gap-5 xl:grid-cols-[22rem_1fr]">
+        <div className="relative overflow-hidden rounded-[1.75rem] bg-[#0f1933] p-2 text-white shadow-inner">
+          <svg viewBox="0 0 300 300" className="h-80 w-full">
+            <defs>
+              <radialGradient id="graphGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="#8fb7e8" stopOpacity="0.35" />
+                <stop offset="100%" stopColor="#0f1933" stopOpacity="0" />
+              </radialGradient>
+            </defs>
+            <circle cx="150" cy="150" r="145" fill="url(#graphGlow)" />
+            {graphEdges.map((edge) => {
+              const source = positions.get(edge.source);
+              const target = positions.get(edge.target);
+              if (!source || !target) return null;
+              const active = selectedId === edge.source || selectedId === edge.target;
+              return <line key={`${edge.source}-${edge.target}-${edge.relationship_type}`} x1={source.x} y1={source.y} x2={target.x} y2={target.y} stroke={active ? "#f0c36a" : "rgba(255,255,255,0.28)"} strokeWidth={1 + edge.score * 3} />;
+            })}
+            {topNodes.map((attendee) => {
+              const point = positions.get(attendee.id);
+              if (!point) return null;
+              const active = selectedId === attendee.id;
+              return (
+                <g key={attendee.id} className="cursor-pointer" onClick={() => onSelect(attendee.id)}>
+                  <circle cx={point.x} cy={point.y} r={active ? 16 : 12} fill={active ? "#f0c36a" : "#cb5549"} stroke="white" strokeWidth="2" />
+                  <text x={point.x} y={point.y + 4} textAnchor="middle" className="fill-white text-[9px] font-black">{attendee.id}</text>
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+        <div className="grid content-start gap-3 sm:grid-cols-2">
+          {(clusters ?? []).slice(0, 4).map((cluster) => (
+            <button key={cluster.cluster} className={`rounded-2xl p-4 text-left ring-1 transition ${clusterFilter === cluster.cluster ? "bg-[#0f1933] text-white ring-[#0f1933]" : "bg-slate-50 ring-slate-100 hover:bg-white"}`} onClick={() => onClusterFilter(clusterFilter === cluster.cluster ? "all" : cluster.cluster)}>
+              <p className="font-black">{humanize(cluster.cluster)}</p>
+              <p className={`mt-1 text-sm ${clusterFilter === cluster.cluster ? "text-white/70" : "text-slate-500"}`}>{cluster.members.length} members</p>
+              <p className={`mt-2 text-sm ${clusterFilter === cluster.cluster ? "text-white/80" : "text-slate-600"}`}>{cluster.opportunities[0]}</p>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -423,6 +599,73 @@ function loadLocalProgress(): { mastery: Mastery; score: number } {
   } catch {
     return { mastery: {}, score: 0 };
   }
+}
+
+function isNamed(attendee: Attendee) {
+  const name = attendee.identified_person?.name || attendee.likely_match?.name;
+  return Boolean(name && !name.startsWith("Likely "));
+}
+
+function attendeePhoto(attendee: Attendee) {
+  return attendee.photo_url || attendee.image_url || attendee.photo || attendee.image || attendee.avatar || null;
+}
+
+function isStudyReady(attendee: Attendee) {
+  return isNamed(attendee);
+}
+
+function initialsFor(attendee: Attendee) {
+  return displayName(attendee)
+    .split(/\s+/u)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join("") || `#${attendee.id}`;
+}
+
+function FounderAvatar({ attendee, size = "md" }: { attendee: Attendee; size?: "sm" | "md" | "lg" }) {
+  const photo = attendeePhoto(attendee);
+  const sizeClass = size === "lg" ? "h-20 w-20 text-2xl" : size === "sm" ? "h-10 w-10 text-sm" : "h-14 w-14 text-lg";
+  if (photo) {
+    return <div className={`${sizeClass} rounded-2xl bg-cover bg-center shadow-inner`} style={{ backgroundImage: `url(${photo})` }} aria-label={`${displayName(attendee)} photo`} />;
+  }
+  const hue = (attendee.id * 47) % 360;
+  return (
+    <div
+      className={`${sizeClass} grid shrink-0 place-items-center rounded-2xl font-black text-white shadow-inner ring-1 ring-white/50`}
+      style={{ background: `linear-gradient(135deg, hsl(${hue} 72% 34%), hsl(${(hue + 42) % 360} 68% 54%))` }}
+      aria-label={`${displayName(attendee)} generated avatar`}
+    >
+      {initialsFor(attendee)}
+    </div>
+  );
+}
+
+function buildLocalPairsChallenge(pool: Attendee[]): PairChallenge {
+  const categories = Array.from(new Set(pool.map((attendee) => attendee.category))).filter(Boolean);
+  for (const category of shuffle(categories)) {
+    const answerIds = pool.filter((attendee) => attendee.category === category).map((attendee) => attendee.id);
+    if (answerIds.length >= 2) {
+      return {
+        question: `Select everyone whose profile is tagged ${category}.`,
+        answerIds,
+        explanation: "Fallback prompt generated from local categories.",
+      };
+    }
+  }
+  const keyword = "AI";
+  const answerIds = pool
+    .filter((attendee) => `${attendee.tagline} ${attendee.profile_summary?.background ?? ""}`.toLowerCase().includes(keyword.toLowerCase()))
+    .map((attendee) => attendee.id);
+  return {
+    question: `Select everyone with ${keyword} in their profile clues.`,
+    answerIds: answerIds.length ? answerIds : pool.slice(0, 2).map((attendee) => attendee.id),
+    explanation: "Fallback prompt generated from local profile text.",
+  };
+}
+
+function shuffleForPrompt(pool: Attendee[]) {
+  return shuffle(pool.length ? pool : []);
 }
 
 function Shell({ children }: { children: React.ReactNode }) {
@@ -506,29 +749,94 @@ function MatchMakerPanel({
   matchData,
   selectedId,
   onSelect,
+  runtimeConfig,
 }: {
   attendees: Attendee[];
   matchData: MatchData | null;
-  selectedId: number;
-  onSelect: (id: number) => void;
+  selectedId: number | null;
+  onSelect: (id: number | null) => void;
+  runtimeConfig: RuntimeConfig | null;
 }) {
+  const [clusterFilter, setClusterFilter] = useState<string>("all");
+  const [typeFilter, setTypeFilter] = useState<string>("all");
+  const [deepDiveEdge, setDeepDiveEdge] = useState<RelationshipEdge | null>(null);
+  const [deepDive, setDeepDive] = useState<RelationshipInsight | null>(null);
+  const [deepDiveLoading, setDeepDiveLoading] = useState(false);
   const attendeeById = useMemo(() => new Map(attendees.map((attendee) => [attendee.id, attendee])), [attendees]);
   const profileById = useMemo(
     () => new Map((matchData?.attendees ?? []).map((profile) => [profile.id, profile])),
     [matchData],
   );
-  const selectedAttendee = attendeeById.get(selectedId) ?? attendees[0];
+  const clusters = useMemo(
+    () => matchData?.insight_dimensions.highest_domain_density_clusters ?? [],
+    [matchData],
+  );
+  const clusterMemberIds = useMemo(() => {
+    if (clusterFilter === "all") return null;
+    return new Set(clusters.find((cluster) => cluster.cluster === clusterFilter)?.members ?? []);
+  }, [clusterFilter, clusters]);
+  const relationshipTypes = useMemo(
+    () => Array.from(new Set((matchData?.relationship_edges ?? []).map((edge) => edge.relationship_type))).sort(),
+    [matchData],
+  );
+  const visibleAttendees = useMemo(
+    () => attendees.filter((attendee) => !clusterMemberIds || clusterMemberIds.has(attendee.id)),
+    [attendees, clusterMemberIds],
+  );
+  const visibleEdges = useMemo(
+    () =>
+      (matchData?.relationship_edges ?? [])
+        .filter((edge) => typeFilter === "all" || edge.relationship_type === typeFilter)
+        .filter((edge) => !clusterMemberIds || (clusterMemberIds.has(edge.source) && clusterMemberIds.has(edge.target)))
+        .sort((a, b) => b.score - a.score),
+    [clusterMemberIds, matchData, typeFilter],
+  );
+  const selectedAttendee = selectedId ? attendeeById.get(selectedId) : undefined;
   const selectedProfile = selectedAttendee ? profileById.get(selectedAttendee.id) : undefined;
   const selectedEdges = useMemo(
     () =>
-      (matchData?.relationship_edges ?? [])
-        .filter((edge) => edge.source === selectedId || edge.target === selectedId)
+      visibleEdges
+        .filter((edge) => selectedId !== null && (edge.source === selectedId || edge.target === selectedId))
         .sort((a, b) => b.score - a.score),
-    [matchData, selectedId],
+    [selectedId, visibleEdges],
   );
-  const clusters = matchData?.insight_dimensions.highest_domain_density_clusters ?? [];
 
-  if (!matchData || !selectedAttendee || !selectedProfile) {
+  async function studyRelationship(edge: RelationshipEdge) {
+    setDeepDiveEdge(edge);
+    setDeepDiveLoading(true);
+    setDeepDive(null);
+    const fallback = buildRelationshipFallback(edge, attendeeById);
+    const tokens = getTokens();
+    if (!runtimeConfig || !tokens?.access_token) {
+      setDeepDive(fallback);
+      setDeepDiveLoading(false);
+      return;
+    }
+    try {
+      const response = await fetch(`${runtimeConfig.apiBaseUrl}ai/relationship`, {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${tokens.access_token}`,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          edge,
+          source: attendeeById.get(edge.source),
+          target: attendeeById.get(edge.target),
+          sourceProfile: profileById.get(edge.source),
+          targetProfile: profileById.get(edge.target),
+        }),
+      });
+      if (!response.ok) throw new Error("Relationship endpoint unavailable");
+      setDeepDive((await response.json()) as RelationshipInsight);
+    } catch {
+      setDeepDive(fallback);
+    } finally {
+      setDeepDiveLoading(false);
+    }
+  }
+
+  if (!matchData) {
     return (
       <section className="rounded-[2rem] border border-white/50 bg-white/90 p-8 shadow-xl shadow-slate-900/10 backdrop-blur">
         <h2 className="text-2xl font-black">Loading match intelligence...</h2>
@@ -538,20 +846,37 @@ function MatchMakerPanel({
   }
 
   return (
-    <div className="grid gap-5 lg:grid-cols-[18rem_1fr]">
-      <aside className="rounded-[2rem] border border-white/50 bg-white/90 p-4 shadow-xl shadow-slate-900/10 backdrop-blur">
-        <p className="px-2 text-xs font-bold uppercase tracking-[0.25em] text-[#cb5549]">Attendees</p>
-        <div className="mt-3 max-h-[38rem] space-y-2 overflow-auto pr-1">
-          {attendees.map((attendee) => {
+    <div className="grid min-h-[calc(100vh-11rem)] gap-5 lg:grid-cols-[19rem_1fr]">
+      <aside className="sticky top-4 flex max-h-[calc(100vh-2rem)] flex-col rounded-[2rem] border border-white/50 bg-white/90 p-4 shadow-xl shadow-slate-900/10 backdrop-blur">
+        <div className="flex items-center justify-between gap-3 px-2">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#cb5549]">Attendees</p>
+          <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-bold text-slate-500">{visibleAttendees.length}</span>
+        </div>
+        <button
+          className={`mt-3 w-full rounded-2xl p-3 text-left transition ${selectedId === null ? "bg-[#cb5549] text-white shadow-lg shadow-[#cb5549]/20" : "bg-white hover:bg-slate-50"}`}
+          onClick={() => onSelect(null)}
+        >
+          <p className="font-bold">Map overview</p>
+          <p className={`mt-1 text-xs ${selectedId === null ? "text-white/75" : "text-slate-500"}`}>Clusters, filters, and strongest paths</p>
+        </button>
+        <div className="mt-3 flex items-center gap-2 rounded-2xl bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-500">
+          <span className="h-2 w-2 animate-pulse rounded-full bg-[#cb5549]" />
+          Scroll the attendee rail
+        </div>
+        <div className="mt-3 flex-1 space-y-2 overflow-auto pr-1 [scrollbar-gutter:stable]">
+          {visibleAttendees.map((attendee) => {
             const active = attendee.id === selectedId;
             return (
               <button
                 key={attendee.id}
-                className={`w-full rounded-2xl p-3 text-left transition ${active ? "bg-[#0f1933] text-white shadow-lg shadow-[#0f1933]/20" : "bg-white hover:bg-slate-50"}`}
+                className={`flex w-full items-center gap-3 rounded-2xl p-3 text-left transition ${active ? "bg-[#0f1933] text-white shadow-lg shadow-[#0f1933]/20" : "bg-white hover:bg-slate-50"}`}
                 onClick={() => onSelect(attendee.id)}
               >
-                <p className="font-bold">{displayName(attendee)}</p>
-                <p className={`mt-1 text-xs ${active ? "text-white/70" : "text-slate-500"}`}>{profileById.get(attendee.id)?.orientation ?? attendee.category}</p>
+                <FounderAvatar attendee={attendee} size="sm" />
+                <span>
+                  <p className="font-bold">{displayName(attendee)}</p>
+                  <p className={`mt-1 text-xs ${active ? "text-white/70" : "text-slate-500"}`}>{profileById.get(attendee.id)?.orientation ?? attendee.category}</p>
+                </span>
               </button>
             );
           })}
@@ -559,13 +884,34 @@ function MatchMakerPanel({
       </aside>
 
       <section className="space-y-5">
+        <MatchGraphPanel
+          attendees={visibleAttendees}
+          edges={visibleEdges}
+          selectedId={selectedId}
+          clusters={clusters}
+          clusterFilter={clusterFilter}
+          typeFilter={typeFilter}
+          relationshipTypes={relationshipTypes}
+          onClusterFilter={setClusterFilter}
+          onTypeFilter={setTypeFilter}
+          onSelect={onSelect}
+        />
+
+        {!selectedAttendee || !selectedProfile ? (
+          <MatchMakerLanding matchData={matchData} attendees={attendees} visibleEdges={visibleEdges} clusters={clusters} onSelect={onSelect} />
+        ) : (
         <div className="overflow-hidden rounded-[2rem] border border-white/50 bg-white/90 shadow-xl shadow-slate-900/10 backdrop-blur">
           <div className="bg-gradient-to-br from-[#0f1933] via-[#274b78] to-[#cb5549] p-7 text-white">
             <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/65">Match profile</p>
-                <h2 className="mt-3 text-4xl font-black">{displayName(selectedAttendee)}</h2>
-                <p className="mt-2 text-white/80">{selectedAttendee.tagline}</p>
+                <div className="mt-3 flex items-center gap-4">
+                  <FounderAvatar attendee={selectedAttendee} size="lg" />
+                  <div>
+                    <h2 className="text-4xl font-black">{displayName(selectedAttendee)}</h2>
+                    <p className="mt-2 text-white/80">{selectedAttendee.tagline}</p>
+                  </div>
+                </div>
               </div>
               <ConfidenceBadge attendee={selectedAttendee} />
             </div>
@@ -585,18 +931,24 @@ function MatchMakerPanel({
                 <RelationshipCard
                   key={`${edge.source}-${edge.target}-${edge.relationship_type}`}
                   edge={edge}
-                  selectedId={selectedId}
+                  selectedId={selectedAttendee.id}
                   attendeeById={attendeeById}
                   onSelect={onSelect}
+                  onStudy={studyRelationship}
                 />
               ))}
             </div>
           </div>
         </div>
+        )}
+
+        {(deepDiveEdge || deepDiveLoading || deepDive) && (
+          <RelationshipDeepDive edge={deepDiveEdge} insight={deepDive} loading={deepDiveLoading} attendeeById={attendeeById} />
+        )}
 
         <div className="grid gap-5 xl:grid-cols-[1fr_0.9fr]">
           <div className="rounded-[2rem] border border-white/50 bg-white/90 p-6 shadow-xl shadow-slate-900/10 backdrop-blur">
-            <h3 className="text-xl font-black">How other attendees can use this</h3>
+            <h3 className="text-xl font-black">How to use the map in the room</h3>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {buildBenefitIdeas(selectedProfile).map((idea) => (
                 <div key={idea.title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
@@ -630,22 +982,27 @@ function RelationshipCard({
   selectedId,
   attendeeById,
   onSelect,
+  onStudy,
 }: {
   edge: RelationshipEdge;
   selectedId: number;
   attendeeById: Map<number, Attendee>;
-  onSelect: (id: number) => void;
+  onSelect: (id: number | null) => void;
+  onStudy: (edge: RelationshipEdge) => void;
 }) {
   const otherId = edge.source === selectedId ? edge.target : edge.source;
   const other = attendeeById.get(otherId);
   if (!other) return null;
   return (
-    <button className="rounded-2xl border border-slate-100 bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md" onClick={() => onSelect(otherId)}>
+    <article className="rounded-2xl border border-slate-100 bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <div>
-          <p className="text-lg font-black text-[#0f1933]">{displayName(other)}</p>
+        <button className="flex items-center gap-3 text-left" onClick={() => onSelect(otherId)}>
+          <FounderAvatar attendee={other} size="sm" />
+          <span>
+          <span className="block text-lg font-black text-[#0f1933]">{displayName(other)}</span>
           <p className="mt-1 text-sm text-slate-500">{humanize(edge.relationship_type)}</p>
-        </div>
+          </span>
+        </button>
         <span className="rounded-full bg-[#4fb77c]/15 px-3 py-1 text-sm font-bold text-[#25734b]">{Math.round(edge.score * 100)}% fit</span>
       </div>
       <ul className="mt-3 space-y-1 text-sm text-slate-600">
@@ -653,9 +1010,73 @@ function RelationshipCard({
           <li key={reason}>• {reason}</li>
         ))}
       </ul>
-      <p className="mt-3 text-sm font-semibold text-[#5583b7]">Study this relationship →</p>
-    </button>
+      <button className="mt-3 text-sm font-semibold text-[#5583b7] hover:text-[#0f1933]" onClick={() => onStudy(edge)}>Study this relationship →</button>
+    </article>
   );
+}
+
+function RelationshipDeepDive({
+  edge,
+  insight,
+  loading,
+  attendeeById,
+}: {
+  edge: RelationshipEdge | null;
+  insight: RelationshipInsight | null;
+  loading: boolean;
+  attendeeById: Map<number, Attendee>;
+}) {
+  if (!edge) return null;
+  const source = attendeeById.get(edge.source);
+  const target = attendeeById.get(edge.target);
+  return (
+    <section className="rounded-[2rem] border border-white/50 bg-white/90 p-6 shadow-xl shadow-slate-900/10 backdrop-blur">
+      <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#cb5549]">Relationship deep dive</p>
+      <h3 className="mt-2 text-2xl font-black">
+        {source ? displayName(source) : `Attendee #${edge.source}`} × {target ? displayName(target) : `Attendee #${edge.target}`}
+      </h3>
+      {loading && <p className="mt-4 rounded-2xl bg-slate-100 p-4 text-sm text-slate-600">Studying the relationship with AI...</p>}
+      {insight && !loading && (
+        <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_1fr]">
+          <div className="rounded-2xl bg-[#0f1933] p-5 text-white">
+            <p className="text-xl font-black">{insight.headline}</p>
+            <p className="mt-3 text-sm leading-6 text-white/80">{insight.openingMove}</p>
+          </div>
+          <InsightList title="Why it works" items={insight.whyItWorks} />
+          <InsightList title="Watch outs" items={insight.watchOuts} />
+          <InsightList title="Useful questions" items={insight.usefulQuestions} />
+        </div>
+      )}
+    </section>
+  );
+}
+
+function InsightList({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div className="rounded-2xl border border-slate-100 bg-slate-50 p-5">
+      <p className="font-black text-[#0f1933]">{title}</p>
+      <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
+        {items.slice(0, 4).map((item) => <li key={item}>• {item}</li>)}
+      </ul>
+    </div>
+  );
+}
+
+function buildRelationshipFallback(edge: RelationshipEdge, attendeeById: Map<number, Attendee>): RelationshipInsight {
+  const source = attendeeById.get(edge.source);
+  const target = attendeeById.get(edge.target);
+  return {
+    headline: `${humanize(edge.relationship_type)} with ${Math.round(edge.score * 100)}% fit`,
+    openingMove: `Ask ${target ? displayName(target) : "the other attendee"} which part of ${source?.tagline ?? "this opportunity"} feels most useful or risky for their current work.`,
+    whyItWorks: edge.reasons.slice(0, 3),
+    watchOuts: ["Treat the score as a prompt, not a verdict.", "Check whether their current priorities match the inferred overlap before pitching."],
+    usefulQuestions: [
+      "What would make this collaboration useful in the next 30 days?",
+      "Where do your assumptions about this market differ?",
+      "Who else in the room would make this conversation stronger?",
+    ],
+    generated: false,
+  };
 }
 
 function SignalCard({ title, values }: { title: string; values: string[] }) {
@@ -677,7 +1098,27 @@ function ConfidenceBadge({ attendee }: { attendee: Attendee }) {
   );
 }
 
-function buildBenefitIdeas(profile: MatchProfile) {
+function buildBenefitIdeas(profile?: MatchProfile) {
+  if (!profile) {
+    return [
+      {
+        title: "Pick an intent first",
+        body: "Use the graph filters to decide whether you want cofounder fit, customer discovery, technical depth, or distribution help.",
+      },
+      {
+        title: "Move from map to intro",
+        body: "Open a relationship card and turn the reasons into one concrete question before you approach someone.",
+      },
+      {
+        title: "Create a mini-mastermind",
+        body: "Use clusters to form 3-person groups: one domain expert, one builder, and one operator with distribution or market access.",
+      },
+      {
+        title: "Ask better questions",
+        body: "Instead of pitching, ask why the suggested fit might fail. The objections will teach you faster than the score.",
+      },
+    ];
+  }
   return [
     {
       title: "Find a useful intro",
@@ -707,11 +1148,13 @@ function PairsPanel({
   question,
   onSubmit,
   result,
+  onNext,
 }: {
   attendees: Attendee[];
   question: string;
   onSubmit: (chosen: number[]) => void;
   result: string;
+  onNext: () => void;
 }) {
   const shown = attendees.slice(0, 8);
   const [picked, setPicked] = useState<number[]>([]);
@@ -719,6 +1162,7 @@ function PairsPanel({
     <section className="rounded-[2rem] border border-white/50 bg-white/90 p-6 shadow-xl shadow-slate-900/10 backdrop-blur">
       <p className="mb-3 text-sm uppercase tracking-wide">Pairs Game</p>
       <h2 className="text-xl font-semibold">{question}</h2>
+      <p className="mt-2 text-sm text-slate-600">Generated from the named attendee pool with deterministic avatars because the dataset has no source photo URLs yet.</p>
       <div className="mt-4 grid gap-2 sm:grid-cols-4">
         {shown.map((a) => {
           const on = picked.includes(a.id);
@@ -726,8 +1170,9 @@ function PairsPanel({
             <button
               key={a.id}
               onClick={() => setPicked((prev) => (on ? prev.filter((x) => x !== a.id) : [...prev, a.id]))}
-              className={`rounded-xl border p-3 text-left ${on ? "bg-[#5583b7] text-white" : "bg-white"}`}
+              className={`rounded-2xl border p-3 text-left transition ${on ? "bg-[#5583b7] text-white shadow-lg shadow-[#5583b7]/20" : "bg-white hover:-translate-y-0.5"}`}
             >
+              <FounderAvatar attendee={a} size="sm" />
               <p className="font-medium">{displayName(a)}</p>
               <p className="text-xs opacity-80">{a.category}</p>
             </button>
@@ -736,6 +1181,9 @@ function PairsPanel({
       </div>
       <button className="mt-4 rounded-xl bg-[#cb5549] px-3 py-2 text-white" onClick={() => onSubmit(picked)}>
         Check Answer
+      </button>
+      <button className="ml-2 mt-4 rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700" onClick={onNext}>
+        Next Question
       </button>
       {result && <p className="mt-3 rounded-xl bg-slate-100 p-2 text-sm">{result}</p>}
     </section>

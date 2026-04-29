@@ -27,6 +27,11 @@ export type Attendee = {
     use_for_conversation?: string;
   }>;
   conversation_starters?: string[];
+  photo?: string;
+  image?: string;
+  image_url?: string;
+  photo_url?: string;
+  avatar?: string;
 };
 
 export type FactsChallenge = {
@@ -52,6 +57,16 @@ export type RelationshipEdge = {
   score: number;
   relationship_type: string;
   reasons: string[];
+};
+
+export type RelationshipInsight = {
+  headline: string;
+  openingMove: string;
+  whyItWorks: string[];
+  watchOuts: string[];
+  usefulQuestions: string[];
+  generated?: boolean;
+  reason?: string;
 };
 
 export type InsightCluster = {
