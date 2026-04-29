@@ -10,7 +10,7 @@ import {
   scoreRound,
   updateMastery,
 } from "@/lib/game";
-import { beginLogin, getTokens, logout } from "@/lib/auth";
+import { beginLogin, clearTokens, getTokens, logout } from "@/lib/auth";
 import { loadRuntimeConfig, RuntimeConfig } from "@/lib/runtime-config";
 import { Attendee, FactsChallenge, Mastery, MatchData, MatchProfile, RelationshipEdge } from "@/lib/types";
 
@@ -216,6 +216,16 @@ export function FoundersGame() {
     if (correct) setScore((s) => s + 30);
   }
 
+  function handleSignOut() {
+    if (runtimeConfig) {
+      logout(runtimeConfig);
+      return;
+    }
+    clearTokens();
+    setIsSignedIn(false);
+    setAppView("chooser");
+  }
+
   if (!attendees.length) {
     return <LoadingScreen />;
   }
@@ -242,11 +252,7 @@ export function FoundersGame() {
                 Learn faces and facts, then study the compatibility map to spot warm intros, cofounder fits, and useful conversation angles.
               </p>
             </div>
-            {runtimeConfig && (
-              <button className="self-start rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50" onClick={() => logout(runtimeConfig)}>
-                Sign Out
-              </button>
-            )}
+            <SignOutButton onClick={handleSignOut} />
           </div>
         </header>
 
@@ -287,6 +293,7 @@ export function FoundersGame() {
             <div className="flex gap-2">
               <button className={`rounded-full px-4 py-2 text-sm font-semibold ${appView === "guess-who" ? "bg-[#0f1933] text-white" : "bg-white text-slate-700"}`} onClick={() => setAppView("guess-who")}>Guess Who</button>
               <button className={`rounded-full px-4 py-2 text-sm font-semibold ${appView === "match-maker" ? "bg-[#cb5549] text-white" : "bg-white text-slate-700"}`} onClick={() => setAppView("match-maker")}>Match Maker</button>
+              <SignOutButton onClick={handleSignOut} />
             </div>
           </div>
 
@@ -300,9 +307,6 @@ export function FoundersGame() {
             <button className="rounded-xl bg-[#4fb77c] px-3 py-2 text-white" onClick={() => startPlay("play-easy")}>Play Easy</button>
             <button className="rounded-xl bg-[#1e2d40] px-3 py-2 text-white" onClick={() => startPlay("play-hard")}>Play Hard</button>
             <button className="rounded-xl bg-[#cb5549] px-3 py-2 text-white" onClick={() => { setMode("pairs"); createPairsQuestion(); }}>Pairs</button>
-            {runtimeConfig && isSignedIn && (
-              <button className="rounded-xl border px-3 py-2" onClick={() => logout(runtimeConfig)}>Sign Out</button>
-            )}
           </div>
             </>
           )}
@@ -438,6 +442,17 @@ function LoadingScreen() {
         <h1 className="mt-4 text-3xl font-black">Loading your prep room...</h1>
       </section>
     </Shell>
+  );
+}
+
+function SignOutButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      className="self-start rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-50"
+      onClick={onClick}
+    >
+      Sign Out
+    </button>
   );
 }
 
