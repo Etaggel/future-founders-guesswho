@@ -9,6 +9,10 @@ permissions:
   id-token: write
   contents: read
 
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
 env:
   HOSTED_ZONE_ID: Z08719171MVGZ075P75Y8
   CERTIFICATE_ARN: arn:aws:acm:us-east-1:899654269390:certificate/0c919015-4cf0-456f-a6e0-e76a1d5c50fd
@@ -48,7 +52,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: validate
-    if: ${{ vars.ENABLE_AWS_DEPLOY == 'true' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -79,3 +82,8 @@ jobs:
       - name: CDK deploy
         run: npx cdk deploy FfGameEuWestStack --require-approval never
         working-directory: infra
+
+      - name: Smoke test production
+        run: |
+          curl --fail --silent --show-error https://founders.legg.ie/ >/dev/null
+          curl --fail --silent --show-error https://founders.legg.ie/runtime-config.json >/dev/null
