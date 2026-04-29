@@ -161,7 +161,7 @@ export class FfGameStack extends cdk.Stack {
   if (uri.endsWith('/')) {
     request.uri = uri + 'index.html';
   } else if (!uri.includes('.')) {
-    request.uri = uri + '/index.html';
+    request.uri = uri + '.html';
   }
   return request;
 }`),
