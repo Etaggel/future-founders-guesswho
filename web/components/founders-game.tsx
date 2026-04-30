@@ -937,7 +937,7 @@ function IdeaExplorerPanel({
               >
                 {loading ? "Finding matches..." : "Find founder matches"}
               </button>
-              <p className="text-sm text-slate-500">Uses all {profileCount} founder profiles, including uncertain matches. Nothing from this box is saved by the app.</p>
+              <p className="text-sm text-slate-500">Uses all {profileCount} founder profiles. Your idea and matches are not stored anywhere.</p>
             </div>
           </form>
 
@@ -947,9 +947,8 @@ function IdeaExplorerPanel({
         <div className="bg-gradient-to-br from-[#0f1933] via-[#284b76] to-[#4fb77c] p-7 text-white">
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-white/65">Privacy guardrails</p>
           <ul className="mt-5 space-y-4 text-sm leading-6 text-white/85">
-            <li><strong>No app logging.</strong> Your idea is sent only for this request and is not written to DynamoDB or local storage.</li>
-            <li><strong>No saved matches.</strong> Generated explanations stay on this screen and are not cached.</li>
-            <li><strong>Grounded output.</strong> Recommendations must use the known founder profiles, not invented facts.</li>
+            <li><strong>Not stored anywhere.</strong> Your idea is used only for this request.</li>
+            <li><strong>No saved matches.</strong> Generated matches and explanations stay on this screen.</li>
           </ul>
         </div>
       </div>
