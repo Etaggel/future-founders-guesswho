@@ -21,7 +21,22 @@ export type Attendee = {
   };
   profile_summary?: {
     background?: string;
+    experience_highlights?: string[];
     interests?: string[];
+  };
+  current_obsession?: {
+    summary?: string;
+    details?: string;
+  };
+  superpower?: {
+    summary?: string;
+    details?: string;
+  };
+  ideal_cofounder?: {
+    traits?: string[];
+  };
+  surprising_traits?: {
+    items?: string[];
   };
   extra_facts?: Array<{
     fact: string;
