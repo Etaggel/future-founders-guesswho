@@ -7,6 +7,7 @@ import {
   displayName,
   isUncertain,
   pickNewAndWeak,
+  sanitizeFactForAttendee,
   scoreRound,
   shuffle,
   updateMastery,
@@ -180,7 +181,7 @@ export function FoundersGame() {
       const facts = generated.facts ?? [];
       if (facts.length === 3) {
         setFactsChallenge({
-          options: facts.map((fact) => fact.text),
+          options: facts.map((fact) => sanitizeFactForAttendee(fact.text, target)),
           lieIndex: facts.findIndex((fact) => !fact.truth),
         });
       }
@@ -649,7 +650,7 @@ function MatchGraphPanel({
   onTypeFilter: (type: string) => void;
   onSelect: (id: number | null) => void;
 }) {
-  const topNodes = attendees.slice(0, 16);
+  const topNodes = attendees;
   const angleStep = (Math.PI * 2) / Math.max(topNodes.length, 1);
   const center = 150;
   const radius = 110;
@@ -662,7 +663,7 @@ function MatchGraphPanel({
       },
     ]),
   );
-  const graphEdges = edges.filter((edge) => positions.has(edge.source) && positions.has(edge.target)).slice(0, 36);
+  const graphEdges = edges.filter((edge) => positions.has(edge.source) && positions.has(edge.target));
   return (
     <section className="rounded-[2rem] border border-white/50 bg-white/90 p-5 shadow-xl shadow-slate-900/10 backdrop-blur">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
@@ -1362,7 +1363,6 @@ function FounderProfileDetails({ attendee }: { attendee: Attendee }) {
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#5583b7]">Known profile details</p>
           <h3 className="mt-2 text-2xl font-black text-[#0f1933]">More about {founderDisplayName(attendee)}</h3>
         </div>
-        <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-bold text-slate-500">From founder JSON</span>
       </div>
 
       <div className="mt-5 grid gap-4 lg:grid-cols-2">
