@@ -442,7 +442,7 @@ export function FoundersGame() {
           <section className="overflow-hidden rounded-[2rem] border border-white/50 bg-white/90 shadow-xl shadow-slate-900/10 backdrop-blur">
             <div className="grid gap-0 lg:grid-cols-[18rem_1fr]">
               <div className="bg-gradient-to-br from-[#0f1933] via-[#274b78] to-[#cb5549] p-6 text-white">
-                <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-white/65">Learn {learnIndex + 1}/3</p>
+                <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-white/65">Learn mode</p>
                 <FounderAvatar attendee={currentLearn} size="xl" />
               </div>
               <div className="p-6">
