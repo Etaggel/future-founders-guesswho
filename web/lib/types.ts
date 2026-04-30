@@ -73,6 +73,23 @@ export type RelationshipInsight = {
   reason?: string;
 };
 
+export type IdeaExplorerRecommendation = {
+  attendeeId: number;
+  name: string;
+  relevance: string;
+  why: string[];
+  questions: string[];
+  evidence: string[];
+};
+
+export type IdeaExplorerInsight = {
+  headline: string;
+  summary: string;
+  recommendations: IdeaExplorerRecommendation[];
+  privacyNote: string;
+  generated?: boolean;
+};
+
 export type InsightCluster = {
   cluster: string;
   members: number[];

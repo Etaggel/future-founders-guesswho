@@ -13,10 +13,10 @@ import {
 } from "@/lib/game";
 import { beginLogin, clearTokens, getTokens, logout } from "@/lib/auth";
 import { loadRuntimeConfig, RuntimeConfig } from "@/lib/runtime-config";
-import { Attendee, FactsChallenge, Mastery, MatchData, RelationshipEdge, RelationshipInsight } from "@/lib/types";
+import { Attendee, FactsChallenge, IdeaExplorerInsight, Mastery, MatchData, RelationshipEdge, RelationshipInsight } from "@/lib/types";
 
 type Mode = "learn" | "play-easy" | "play-hard" | "pairs";
-type AppView = "chooser" | "guess-who" | "match-maker";
+type AppView = "chooser" | "guess-who" | "match-maker" | "idea-explorer";
 type PairChallenge = { question: string; answerIds: number[]; explanation?: string };
 
 const STORAGE_KEY = "ff-game-progress-v1";
@@ -43,6 +43,10 @@ export function FoundersGame() {
   const [appView, setAppView] = useState<AppView>("chooser");
   const [matchData, setMatchData] = useState<MatchData | null>(null);
   const [selectedMatchId, setSelectedMatchId] = useState<number | null>(null);
+  const [ideaText, setIdeaText] = useState("");
+  const [ideaInsight, setIdeaInsight] = useState<IdeaExplorerInsight | null>(null);
+  const [ideaLoading, setIdeaLoading] = useState(false);
+  const [ideaError, setIdeaError] = useState("");
 
   const studyPool = useMemo(() => attendees.filter(isStudyReady), [attendees]);
 
@@ -238,6 +242,39 @@ export function FoundersGame() {
     setAppView("match-maker");
   }
 
+  async function exploreIdea() {
+    const trimmedIdea = ideaText.trim();
+    if (!trimmedIdea) {
+      setIdeaError("Describe the idea or problem first.");
+      return;
+    }
+    setIdeaLoading(true);
+    setIdeaError("");
+    setIdeaInsight(null);
+    const tokens = getTokens();
+    if (!runtimeConfig || !tokens?.access_token) {
+      setIdeaLoading(false);
+      setIdeaError("Sign in again before using Idea Explorer.");
+      return;
+    }
+    try {
+      const response = await fetch(`${runtimeConfig.apiBaseUrl}ai/idea-explorer`, {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${tokens.access_token}`,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ idea: trimmedIdea, profiles: attendees }),
+      });
+      if (!response.ok) throw new Error("Idea Explorer endpoint unavailable");
+      setIdeaInsight((await response.json()) as IdeaExplorerInsight);
+    } catch {
+      setIdeaError("Idea Explorer is unavailable right now. Try again in a minute.");
+    } finally {
+      setIdeaLoading(false);
+    }
+  }
+
   if (!attendees.length) {
     return <LoadingScreen />;
   }
@@ -268,7 +305,7 @@ export function FoundersGame() {
           </div>
         </header>
 
-        <div className="mt-6 grid gap-5 lg:grid-cols-2">
+        <div className="mt-6 grid gap-5 lg:grid-cols-3">
           <button
             className="group rounded-[2rem] bg-[#0f1933] p-7 text-left text-white shadow-2xl shadow-[#0f1933]/20 transition hover:-translate-y-1 hover:shadow-[#0f1933]/30"
             onClick={() => setAppView("guess-who")}
@@ -288,6 +325,16 @@ export function FoundersGame() {
             <p className="mt-3 text-white/90">Explore high-potential matches, shared domains, complementary gaps, and smart intro prompts.</p>
             <span className="mt-8 inline-flex rounded-full bg-white px-5 py-3 font-semibold text-[#9b352d] transition group-hover:bg-[#0f1933] group-hover:text-white">Explore matches</span>
           </button>
+
+          <button
+            className="group rounded-[2rem] bg-white p-7 text-left text-[#0f1933] shadow-2xl shadow-slate-900/10 ring-1 ring-white/70 transition hover:-translate-y-1 hover:shadow-slate-900/15"
+            onClick={() => setAppView("idea-explorer")}
+          >
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#4fb77c]">Idea Explorer</p>
+            <h2 className="mt-4 text-3xl font-black">Find who to ask about an idea</h2>
+            <p className="mt-3 text-slate-600">Describe a business idea or customer problem, then get founder matches, reasons, and questions to ask.</p>
+            <span className="mt-8 inline-flex rounded-full bg-[#0f1933] px-5 py-3 font-semibold text-white transition group-hover:bg-[#4fb77c]">Explore privately</span>
+          </button>
         </div>
       </Shell>
     );
@@ -300,11 +347,12 @@ export function FoundersGame() {
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <button className="mb-3 text-sm font-semibold text-[#5583b7] hover:text-[#0f1933]" onClick={() => setAppView("chooser")}>← Prep modes</button>
-              <h1 className="text-3xl font-black">{appView === "guess-who" ? "Guess Who" : "Match Maker"}</h1>
+              <h1 className="text-3xl font-black">{appView === "guess-who" ? "Guess Who" : appView === "match-maker" ? "Match Maker" : "Idea Explorer"}</h1>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button className={`rounded-full px-4 py-2 text-sm font-semibold ${appView === "guess-who" ? "bg-[#0f1933] text-white" : "bg-white text-slate-700"}`} onClick={() => setAppView("guess-who")}>Guess Who</button>
               <button className={`rounded-full px-4 py-2 text-sm font-semibold ${appView === "match-maker" ? "bg-[#cb5549] text-white" : "bg-white text-slate-700"}`} onClick={openMatchMaker}>Match Maker</button>
+              <button className={`rounded-full px-4 py-2 text-sm font-semibold ${appView === "idea-explorer" ? "bg-[#4fb77c] text-white" : "bg-white text-slate-700"}`} onClick={() => setAppView("idea-explorer")}>Idea Explorer</button>
               <SignOutButton onClick={handleSignOut} />
             </div>
           </div>
@@ -331,6 +379,19 @@ export function FoundersGame() {
             selectedId={selectedMatchId}
             onSelect={setSelectedMatchId}
             runtimeConfig={runtimeConfig}
+          />
+        )}
+
+        {appView === "idea-explorer" && (
+          <IdeaExplorerPanel
+            attendees={attendees}
+            profileCount={attendees.length}
+            ideaText={ideaText}
+            onIdeaTextChange={setIdeaText}
+            insight={ideaInsight}
+            loading={ideaLoading}
+            error={ideaError}
+            onSubmit={exploreIdea}
           />
         )}
 
@@ -808,7 +869,7 @@ function LoginScreen({ runtimeConfig }: { runtimeConfig: RuntimeConfig | null })
               {[
                 ["Private prep", "Sign in before any attendee data or study tools are shown."],
                 ["Relationship insight", "Understand why a conversation might be worth having."],
-                ["Better intros", "Turn compatibility signals into useful first conversations."],
+                ["Idea privacy", "Idea Explorer does not log your idea or store the generated matches."],
               ].map(([title, body]) => (
                 <div key={title} className="rounded-2xl bg-white/10 p-4">
                   <h2 className="font-bold">{title}</h2>
@@ -820,6 +881,118 @@ function LoginScreen({ runtimeConfig }: { runtimeConfig: RuntimeConfig | null })
         </div>
       </section>
     </Shell>
+  );
+}
+
+function IdeaExplorerPanel({
+  attendees,
+  profileCount,
+  ideaText,
+  onIdeaTextChange,
+  insight,
+  loading,
+  error,
+  onSubmit,
+}: {
+  attendees: Attendee[];
+  profileCount: number;
+  ideaText: string;
+  onIdeaTextChange: (value: string) => void;
+  insight: IdeaExplorerInsight | null;
+  loading: boolean;
+  error: string;
+  onSubmit: () => void;
+}) {
+  const attendeeById = useMemo(() => new Map(attendees.map((attendee) => [attendee.id, attendee])), [attendees]);
+  return (
+    <section className="overflow-hidden rounded-[2rem] border border-white/50 bg-white/90 shadow-xl shadow-slate-900/10 backdrop-blur">
+      <div className="grid gap-0 lg:grid-cols-[1fr_20rem]">
+        <div className="p-7">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#4fb77c]">Idea Explorer</p>
+          <h2 className="mt-3 text-4xl font-black tracking-tight text-[#0f1933]">Find the best founders to ask.</h2>
+          <p className="mt-4 max-w-2xl text-slate-600">
+            Paste a business idea, customer problem, or market thesis. The AI compares it with all named founder profiles and returns who to speak to, why, and what to ask.
+          </p>
+
+          <form
+            className="mt-6"
+            onSubmit={(event) => {
+              event.preventDefault();
+              onSubmit();
+            }}
+          >
+            <label className="text-sm font-bold text-[#0f1933]" htmlFor="idea-explorer-input">Your idea or problem</label>
+            <textarea
+              id="idea-explorer-input"
+              className="mt-2 min-h-36 w-full rounded-2xl border border-slate-200 bg-white p-4 text-base leading-7 text-slate-700 shadow-inner outline-none transition focus:border-[#4fb77c] focus:ring-4 focus:ring-[#4fb77c]/15"
+              value={ideaText}
+              onChange={(event) => onIdeaTextChange(event.target.value)}
+              placeholder="Example: AI workflow tooling for small finance teams that still run client reporting in spreadsheets..."
+            />
+            <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <button
+                className="rounded-full bg-[#4fb77c] px-6 py-3 font-bold text-white shadow-xl shadow-[#4fb77c]/20 transition hover:-translate-y-0.5 hover:bg-[#0f1933] disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
+                disabled={loading}
+                type="submit"
+              >
+                {loading ? "Finding matches..." : "Find founder matches"}
+              </button>
+              <p className="text-sm text-slate-500">Uses all {profileCount} founder profiles, including uncertain matches. Nothing from this box is saved by the app.</p>
+            </div>
+          </form>
+
+          {error && <p className="mt-4 rounded-2xl bg-amber-100 p-4 text-sm font-semibold text-amber-900">{error}</p>}
+        </div>
+
+        <div className="bg-gradient-to-br from-[#0f1933] via-[#284b76] to-[#4fb77c] p-7 text-white">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-white/65">Privacy guardrails</p>
+          <ul className="mt-5 space-y-4 text-sm leading-6 text-white/85">
+            <li><strong>No app logging.</strong> Your idea is sent only for this request and is not written to DynamoDB or local storage.</li>
+            <li><strong>No saved matches.</strong> Generated explanations stay on this screen and are not cached.</li>
+            <li><strong>Grounded output.</strong> Recommendations must use the known founder profiles, not invented facts.</li>
+          </ul>
+        </div>
+      </div>
+
+      {loading && <p className="mx-7 mb-7 rounded-2xl bg-slate-100 p-4 text-sm text-slate-600">Thinking across the founder profiles...</p>}
+
+      {insight && !loading && (
+        <div className="border-t border-slate-100 p-7">
+          <div className="rounded-[1.75rem] bg-[#0f1933] p-6 text-white">
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-white/55">Explorer result</p>
+            <h3 className="mt-2 text-3xl font-black">{insight.headline}</h3>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-white/80">{insight.summary}</p>
+            <p className="mt-4 rounded-2xl bg-white/10 p-3 text-sm text-white/80">{insight.privacyNote}</p>
+          </div>
+
+          <div className="mt-5 grid gap-4 lg:grid-cols-2">
+            {insight.recommendations.map((recommendation) => {
+              const attendee = attendeeById.get(recommendation.attendeeId);
+              return (
+                <article key={recommendation.attendeeId} className="rounded-[1.5rem] border border-slate-100 bg-white p-5 shadow-sm">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="flex items-center gap-3">
+                      {attendee && <FounderAvatar attendee={attendee} size="sm" />}
+                      <div>
+                        <h4 className="text-xl font-black text-[#0f1933]">{attendee ? displayName(attendee) : recommendation.name}</h4>
+                        {attendee && <p className="mt-1 text-sm text-slate-500">{attendee.tagline}</p>}
+                        {attendee && <LinkedInProfileLink attendee={attendee} className="mt-2" />}
+                      </div>
+                    </div>
+                    <span className="self-start rounded-full bg-[#4fb77c]/15 px-3 py-1 text-sm font-bold text-[#25734b]">{recommendation.relevance}</span>
+                  </div>
+                  <div className="mt-5 grid gap-4 md:grid-cols-3">
+                    <InsightList title="Why useful" items={recommendation.why} />
+                    <InsightList title="What to ask" items={recommendation.questions} />
+                    <InsightList title="Evidence" items={recommendation.evidence} />
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </section>
   );
 }
 
