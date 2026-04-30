@@ -83,7 +83,7 @@ function parseBody(event) {
 
 async function generateJson(prompt, fallback) {
   try {
-    const modelId = process.env.BEDROCK_MODEL_ID || "amazon.nova-lite-v1:0";
+    const modelId = process.env.BEDROCK_MODEL_ID || "eu.amazon.nova-lite-v1:0";
     const command = new InvokeModelCommand({
       modelId,
       contentType: "application/json",

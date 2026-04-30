@@ -123,6 +123,8 @@ export class FfGameStack extends cdk.Stack {
       new iam.PolicyStatement({
         actions: ["bedrock:InvokeModel"],
         resources: [
+          `arn:${cdk.Aws.PARTITION}:bedrock:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:inference-profile/eu.amazon.nova-lite-v1:0`,
+          `arn:${cdk.Aws.PARTITION}:bedrock:*::foundation-model/amazon.nova-lite-v1:0`,
           `arn:${cdk.Aws.PARTITION}:bedrock:${cdk.Aws.REGION}::foundation-model/anthropic.claude-3-haiku-20240307-v1:0`,
           `arn:${cdk.Aws.PARTITION}:bedrock:${cdk.Aws.REGION}::foundation-model/amazon.nova-lite-v1:0`,
         ],
