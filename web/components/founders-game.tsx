@@ -341,7 +341,7 @@ export function FoundersGame() {
         <header className="overflow-hidden rounded-[2rem] border border-white/25 bg-white/90 p-8 shadow-2xl shadow-slate-900/10 backdrop-blur">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#cb5549]">Future Founders</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#cb5549]">Founders. Faces. Names. Matches.</p>
               <h1 className="mt-3 text-4xl font-black tracking-tight text-[#0f1933] sm:text-6xl">
                 Future founders 2026
               </h1>

@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Future Founders Face Game",
+  title: "Future Founders 2026",
   description: "Learn names, faces, and conversation facts before Dogpatch Future Founders.",
 };
 
