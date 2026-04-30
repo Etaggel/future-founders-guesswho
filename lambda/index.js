@@ -53,7 +53,7 @@ exports.handler = async (event) => {
   if (path.startsWith("/ai/facts") && method === "POST") {
     const body = parseBody(event);
     const generated = await generateJson(
-      `Create a two-truths-and-one-lie quiz for this founder profile. Return JSON only with {"facts":[{"text":"...","truth":true}],"explanation":"..."}. Exactly two facts must be true and one false. Keep facts useful for in-person conversation. Profile: ${JSON.stringify(body.profile).slice(0, 5000)}`,
+      `Create a two-truths-and-one-lie quiz for this founder profile. Return JSON only with {"facts":[{"text":"...","truth":true}],"explanation":"..."}. Exactly two facts must be true and one false. Keep facts useful for in-person conversation. Do not include the founder's name, first name, LinkedIn handle, or company-specific identity clue that gives away the answer. Refer to the founder as "This person" when needed. Profile: ${JSON.stringify(body.profile).slice(0, 5000)}`,
       fallbackFacts(body.profile),
     );
     return respond(200, generated);
@@ -312,7 +312,7 @@ function stringArray(value, fallback, limit) {
 }
 
 function fallbackFacts(profile) {
-  const facts = (profile?.extra_facts || []).slice(0, 2).map((x) => ({ text: x.fact, truth: true }));
+  const facts = (profile?.extra_facts || []).slice(0, 2).map((x) => ({ text: sanitizeFactForProfile(x.fact, profile), truth: true }));
   return {
     facts: [...facts, { text: "Has never worked with teams outside Ireland.", truth: false }].slice(0, 3),
     explanation: "Fallback quiz generated from local profile facts.",
@@ -413,6 +413,27 @@ function profileFactsForIdea(profile) {
     ...(profile?.profile_summary?.interests || []).map((interest) => `Interested in ${interest}`),
     ...(profile?.extra_facts || []).map((item) => item.fact),
   ].filter(Boolean).slice(0, 3);
+}
+
+function sanitizeFactForProfile(fact, profile) {
+  return nameTokens(profile).reduce(
+    (text, token) => text.replace(new RegExp(`\\b${escapeRegExp(token)}\\b`, "giu"), "This person"),
+    fact || "",
+  );
+}
+
+function nameTokens(profile) {
+  const names = [profile?.identified_person?.name, profile?.likely_match?.name]
+    .filter(Boolean)
+    .map((name) => name.replace(/^Likely\s+/iu, "").replace(/\s*\(.+\)$/u, "").trim())
+    .filter(Boolean);
+  return Array.from(new Set(names.flatMap((name) => [name, name.split(/\s+/u)[0]])))
+    .filter((token) => token.length > 1)
+    .sort((a, b) => b.length - a.length);
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
 }
 
 const COMMON_IDEA_TERMS = new Set([

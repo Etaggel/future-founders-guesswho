@@ -41,18 +41,30 @@ export function pickNewAndWeak(
 
 export function buildEasyOptions(pool: Attendee[], target: Attendee): Attendee[] {
   const others = pool.filter((a) => a.id !== target.id);
-  const distractors = shuffle(others).slice(0, 2);
+  const targetGender = attendeeGender(target);
+  const preferred = targetGender ? others.filter((attendee) => attendeeGender(attendee) === targetGender) : [];
+  const distractors = shuffle(preferred).slice(0, 2);
+  if (distractors.length < 2) {
+    distractors.push(...shuffle(others.filter((attendee) => !distractors.some((chosen) => chosen.id === attendee.id))).slice(0, 2 - distractors.length));
+  }
   return shuffle([target, ...distractors]);
 }
 
 export function buildFactsChallenge(attendee: Attendee): FactsChallenge {
-  const facts = (attendee.extra_facts ?? []).map((x) => x.fact).slice(0, 3);
+  const facts = (attendee.extra_facts ?? []).map((x) => sanitizeFactForAttendee(x.fact, attendee)).slice(0, 3);
   while (facts.length < 2) {
     facts.push("Enjoys building startup projects from scratch.");
   }
   const lie = `Has never worked with teams outside Ireland.`;
   const options = shuffle([...facts.slice(0, 2), lie]);
   return { options, lieIndex: options.findIndex((x) => x === lie) };
+}
+
+export function sanitizeFactForAttendee(fact: string, attendee: Attendee): string {
+  return nameTokens(attendee).reduce(
+    (text, token) => text.replace(new RegExp(`\\b${escapeRegExp(token)}\\b`, "giu"), "This person"),
+    fact,
+  );
 }
 
 export function scoreRound(opts: {
@@ -81,4 +93,23 @@ export function shuffle<T>(items: T[]): T[] {
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
+}
+
+function attendeeGender(attendee: Attendee): string | null {
+  const gender = attendee.identified_person?.gender || attendee.likely_match?.gender;
+  return gender ? gender.trim().toLowerCase() : null;
+}
+
+function nameTokens(attendee: Attendee): string[] {
+  const names = [attendee.identified_person?.name, attendee.likely_match?.name]
+    .filter((name): name is string => Boolean(name))
+    .map((name) => name.replace(/^Likely\s+/iu, "").replace(/\s*\(.+\)$/u, "").trim())
+    .filter(Boolean);
+  return Array.from(new Set(names.flatMap((name) => [name, name.split(/\s+/u)[0]])))
+    .filter((token) => token.length > 1)
+    .sort((a, b) => b.length - a.length);
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
 }

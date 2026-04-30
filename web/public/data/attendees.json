@@ -9,6 +9,7 @@
     "name": "Likely Shubha Saha (or very close match)",
     "confidence": 0.75,
     "linkedin_url": null,
+    "gender": "female",
     "company": "Aurora Flight Sciences",
     "previous_company": "Wisk Aero",
     "role": "Systems Engineer",
@@ -396,6 +397,7 @@
     "confidence": 0.88,
     "linkedin_url": "https://ie.linkedin.com/in/dan-moss-robotics",
     "photo_url": "https://media.licdn.com/dms/image/v2/D4D03AQGHjDKZVKQiXA/profile-displayphoto-crop_800_800/B4DZup.vBNHQAI-/0/1768083354351?e=1779321600&v=beta&t=G7vob6bMkyJWuJ0L4ZhDGjjYqnQk4GO-07DmcQlaRz4",
+    "gender": "male",
     "company": "Manna Air Delivery",
     "role": "Head of System Integrations"
   },
@@ -522,6 +524,7 @@
     "confidence": 0.97,
     "linkedin_url": "https://ie.linkedin.com/in/liam-murphy-48903425",
     "photo_url": "https://media.licdn.com/dms/image/v2/C4E03AQGjKELznHcQGQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1637143662130?e=1779321600&v=beta&t=LWx5fGA82gcSkcafS9QcGwY0TxaN5KsUZcB8wT1_sAE",
+    "gender": "male",
     "company": "Wachsman",
     "role": "Global President"
   },
@@ -777,6 +780,7 @@
     "confidence": 0.93,
     "linkedin_url": "https://www.linkedin.com/in/elainedeehan/",
     "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQEUpPXlxiPPEQ/profile-displayphoto-shrink_800_800/B4EZnSs_JvGcAc-/0/1760176633262?e=1779321600&v=beta&t=trvMFUC7GYWfyChZx_j0hTgeMLWFXUBDMAFaOdcv9hI",
+    "gender": "female",
     "companies": [
       "Monzo",
       "Total Processing"
@@ -924,6 +928,7 @@
     "confidence": 0.88,
     "linkedin_url": "https://www.linkedin.com/in/oisin-tm/",
     "photo_url": "https://media.licdn.com/dms/image/v2/D4D03AQEv4gdjUOQbnQ/profile-displayphoto-crop_800_800/B4DZzjyXXiH4AI-/0/1773348158303?e=1779321600&v=beta&t=tVSKxqqlfGTIFII-deP2EVeMdAMduoQDG64KPwe-HnA",
+    "gender": "male",
     "website": "https://caideiseach.com"
   },
 
@@ -1656,6 +1661,7 @@
     "linkedin_url": "https://www.linkedin.com/in/juliecurrid/",
     "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQFtkHn-ZVXltg/profile-displayphoto-crop_800_800/B4EZ1EBoyJIkAI-/0/1774962774622?e=1779321600&v=beta&t=jOVCK3T20CHGoN5S-NpWS0yFTUswRqKSynNNSbRtB0k",
     "confidence": 1.0,
+    "gender": "female",
     "companies": [
       "GoContractor",
       "Zutec",
@@ -1803,6 +1809,7 @@
     "linkedin_url": "https://www.linkedin.com/in/georgemendes/",
     "photo_url": "https://media.licdn.com/dms/image/v2/C4E03AQFA8mH51pSpSQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1578349255285?e=1779321600&v=beta&t=Na7N0hlBeEQID2NCYxroAuPMDh48JMnPRoi6NzpVZpY",
     "confidence": 1.0,
+    "gender": "male",
     "company": "Wolfberg",
     "previous_companies": [
       "Boston Consulting Group",
@@ -1947,6 +1954,7 @@
     "confidence": 0.96,
     "linkedin_url": "https://ie.linkedin.com/in/manuelloureiro",
     "photo_url": "https://media.licdn.com/dms/image/v2/C5603AQE27-z02-bUGA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1554731969797?e=1779321600&v=beta&t=Wti20TiKJG6ONRDgznjlMUt5t_7hTzLScPZZXggCDSI",
+    "gender": "male",
     "company": "Aer Lingus",
     "previous_company": "Huawei Ireland Research Center",
     "role": "Lead AI Engineer",
@@ -2096,6 +2104,7 @@
     "confidence": 1.0,
     "linkedin_url": "https://www.linkedin.com/in/lyndonleggate/",
     "photo_url": "https://media.licdn.com/dms/image/v2/C4E03AQFd_VJS3456hQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1579634991180?e=1779321600&v=beta&t=naSq2tEkm5I9FAKaypIffJZeY3ZbQFRfQPGfkEJloSs",
+    "gender": "male",
     "roles": [
       "CTO, Automotive Marketplace Startup",
       "AWS Hero (AI)",
@@ -2674,6 +2683,7 @@
     "confidence": 0.96,
     "linkedin_url": "https://www.linkedin.com/in/alice-shaughnessy-90ba12195",
     "photo_url": "https://media.licdn.com/dms/image/v2/D5603AQE-ik1c7MLKUw/profile-displayphoto-crop_800_800/B56ZeHcoIVHQAQ-/0/1750324118602?e=1779321600&v=beta&t=poaXhGuU5fPFFj3mvPRSCdpqg6iH1Lfafup_GmDymlQ",
+    "gender": "female",
     "company": "Luminate",
     "previous_company": "Mirr",
     "role": "Clinical Engineering Specialist",
@@ -3122,6 +3132,7 @@
     "previous_company": "Tomnod",
     "role": "Director of Climate, Weather & Geospatial AI",
     "notes": "Direct match across Google/X climate-weather-geospatial AI leadership, ML PhD, Tomnod founder/CTO exit, Dublin origin, and Genghis Khan tomb signal",
+    "gender": "male",
     "photo_url": "https://media.licdn.com/dms/image/v2/C4E03AQF_xzyvVafPSg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1517727182067?e=1779321600&v=beta&t=DBNFZeoBpcVqHVzvBXS-L6bjktcGpEBWZeYCdWJSjNg"
   },
 
@@ -3569,6 +3580,7 @@
     ],
     "role": "Director of Real Estate, Workplace & IT",
     "notes": "Direct match across Slack Workplace Manager/Regional Workplace Manager history, Personio workplace/real-estate leadership, and public workplace systems writing",
+    "gender": "male",
     "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQH1CihCfJMUXA/profile-displayphoto-crop_800_800/B4EZgFdD2SGcAQ-/0/1752438161416?e=1779321600&v=beta&t=0P0mlNlU63oAVgAFSocXa6_HBA2io_U2MMpMX6Lm2fE"
   },
 
