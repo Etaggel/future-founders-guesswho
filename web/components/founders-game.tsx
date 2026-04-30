@@ -18,6 +18,7 @@ import { Attendee, FactsChallenge, IdeaExplorerInsight, Mastery, MatchData, Rela
 type Mode = "learn" | "play-easy" | "play-hard" | "pairs";
 type AppView = "chooser" | "guess-who" | "match-maker" | "idea-explorer";
 type PairChallenge = { question: string; answerIds: number[]; explanation?: string };
+type PreparedPairsQuestion = { pool: Attendee[]; challenge: PairChallenge };
 
 const STORAGE_KEY = "ff-game-progress-v1";
 const MATCH_RELATIONSHIP_FILTERS = [
@@ -44,6 +45,9 @@ export function FoundersGame() {
   const [pairAnswers, setPairAnswers] = useState<number[]>([]);
   const [pairResult, setPairResult] = useState<string>("");
   const [pairKey, setPairKey] = useState(0);
+  const [pairPool, setPairPool] = useState<Attendee[]>([]);
+  const [pairLoading, setPairLoading] = useState(false);
+  const [preloadedPair, setPreloadedPair] = useState<PreparedPairsQuestion | null>(null);
   const [runtimeConfig, setRuntimeConfig] = useState<RuntimeConfig | null>(null);
   const [authLoaded, setAuthLoaded] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -207,19 +211,39 @@ export function FoundersGame() {
     );
   }
 
-  function createPairsQuestion() {
-    const pool = shuffleForPrompt(attendees).slice(0, 8);
-    const challenge = buildLocalPairsChallenge(pool);
-    setPairQuestion(challenge.question);
-    setPairAnswers(challenge.answerIds);
+  async function createPairsQuestion() {
     setPairResult("");
-    setPairKey((key) => key + 1);
-    void loadAiPairs(pool);
+    if (preloadedPair) {
+      applyPairsQuestion(preloadedPair);
+      setPreloadedPair(null);
+      void preloadPairsQuestion();
+      return;
+    }
+    setPairLoading(true);
+    setPairQuestion("");
+    const prepared = await preparePairsQuestion();
+    applyPairsQuestion(prepared);
+    setPairLoading(false);
+    void preloadPairsQuestion();
   }
 
-  async function loadAiPairs(pool: Attendee[]) {
+  function applyPairsQuestion(prepared: PreparedPairsQuestion) {
+    setPairPool(prepared.pool);
+    setPairQuestion(prepared.challenge.question);
+    setPairAnswers(prepared.challenge.answerIds);
+    setPairKey((key) => key + 1);
+  }
+
+  async function preloadPairsQuestion() {
+    if (preloadedPair || !attendees.length) return;
+    setPreloadedPair(await preparePairsQuestion());
+  }
+
+  async function preparePairsQuestion(): Promise<PreparedPairsQuestion> {
+    const pool = shuffleForPrompt(attendees).slice(0, 8);
+    const fallback = buildLocalPairsChallenge(pool);
     const tokens = getTokens();
-    if (!runtimeConfig || !tokens?.access_token) return;
+    if (!runtimeConfig || !tokens?.access_token) return { pool, challenge: fallback };
     try {
       const response = await fetch(`${runtimeConfig.apiBaseUrl}ai/pairs`, {
         method: "POST",
@@ -229,16 +253,15 @@ export function FoundersGame() {
         },
         body: JSON.stringify({ profiles: pool }),
       });
-      if (!response.ok) return;
+      if (!response.ok) return { pool, challenge: fallback };
       const generated = (await response.json()) as { question?: string; answerIds?: number[] };
       if (generated.question && generated.answerIds?.length) {
-        setPairQuestion(generated.question);
-        setPairAnswers(generated.answerIds);
-        setPairKey((key) => key + 1);
+        return { pool, challenge: { question: generated.question, answerIds: generated.answerIds } };
       }
     } catch {
-      // Local category fallback remains active.
+      // Local category fallback remains active after loading.
     }
+    return { pool, challenge: fallback };
   }
 
   function scorePairs(chosen: number[]) {
@@ -319,7 +342,7 @@ export function FoundersGame() {
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#cb5549]">Future Founders</p>
               <h1 className="mt-3 text-4xl font-black tracking-tight text-[#0f1933] sm:text-6xl">
-                Choose your prep mode.
+                Future founders 2026
               </h1>
               <p className="mt-4 max-w-2xl text-lg text-slate-600">
                 Learn faces and facts, then study the compatibility map to spot warm intros, cofounder fits, and useful conversation angles.
@@ -347,7 +370,7 @@ export function FoundersGame() {
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/80">Match Maker</p>
             <h2 className="mt-4 text-3xl font-black">Relationship map and why it matters</h2>
             <p className="mt-3 text-white/90">Explore high-potential matches, shared domains, complementary gaps, and smart intro prompts.</p>
-            <span className="mt-8 inline-flex rounded-full bg-white px-5 py-3 font-semibold text-[#9b352d] transition group-hover:bg-[#0f1933] group-hover:text-white">Explore matches</span>
+            <span className="mt-8 inline-flex rounded-full bg-white px-5 py-3 font-semibold text-[#9b352d] transition group-hover:bg-[#0f1933] group-hover:text-white">Discover matches</span>
           </button>
 
           <button
@@ -462,7 +485,6 @@ export function FoundersGame() {
               <div>
               <p className="text-sm text-slate-600">Tagline clue:</p>
               <p>{playTarget.tagline}</p>
-              <LinkedInProfileLink attendee={playTarget} className="mt-3" />
               </div>
             </div>
 
@@ -483,12 +505,12 @@ export function FoundersGame() {
                 <input
                   value={hardGuess}
                   onChange={(e) => setHardGuess(e.target.value)}
-                  placeholder="Type full name..."
+                  placeholder="Type first name..."
                   className="w-full rounded-xl border px-3 py-2"
                 />
                 <button
                   className="mt-2 rounded-xl bg-[#1e2d40] px-3 py-2 text-white"
-                  onClick={() => submitPlay(hardGuess.trim().toLowerCase() === displayName(playTarget).toLowerCase())}
+                  onClick={() => submitPlay(hardGuess.trim().toLowerCase() === firstName(playTarget).toLowerCase())}
                 >
                   Reveal
                 </button>
@@ -520,7 +542,7 @@ export function FoundersGame() {
         )}
 
         {mode === "pairs" && (
-          <PairsPanel key={pairKey} attendees={studyPool} question={pairQuestion} onSubmit={scorePairs} result={pairResult} onNext={createPairsQuestion} />
+          <PairsPanel key={pairKey} attendees={pairPool} question={pairQuestion} loading={pairLoading} onSubmit={scorePairs} result={pairResult} onNext={createPairsQuestion} />
         )}
           </>
         )}
@@ -732,6 +754,10 @@ function founderDisplayName(attendee: Attendee) {
   return attendeePhoto(attendee) && linkedinUrl(attendee) ? displayName(attendee) : `Founder ${attendee.id}`;
 }
 
+function firstName(attendee: Attendee) {
+  return displayName(attendee).split(/\s+/u).filter(Boolean)[0] ?? displayName(attendee);
+}
+
 function linkedinUrl(attendee: Attendee) {
   return attendee.identified_person?.linkedin_url || attendee.likely_match?.linkedin_url || null;
 }
@@ -825,7 +851,12 @@ function Shell({ children }: { children: React.ReactNode }) {
   return (
     <main className="min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,#f7c36b_0,#f7c36b_18rem,transparent_18rem),radial-gradient(circle_at_top_right,#8fb7e8_0,#8fb7e8_20rem,transparent_20rem),linear-gradient(135deg,#f8fafc,#dce7f7_55%,#f7efe8)] px-4 py-6 text-[#0f1933] sm:px-6">
       <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.55),rgba(255,255,255,0))]" />
-      <div className="relative mx-auto max-w-6xl">{children}</div>
+      <div className="relative mx-auto max-w-6xl">
+        {children}
+        <footer className="mt-8 text-center text-xs font-semibold text-slate-500">
+          Created for fun by <span className="line-through">prisoner</span> founder #16 (Lyndon Leggate)
+        </footer>
+      </div>
     </main>
   );
 }
@@ -890,11 +921,10 @@ function GuessWhoModeButton({
 function LoginScreen({ runtimeConfig }: { runtimeConfig: RuntimeConfig | null }) {
   return (
     <Shell>
-      <section className="mx-auto mt-16 grid max-w-5xl overflow-hidden rounded-[2.25rem] border border-white/50 bg-white/90 shadow-2xl shadow-slate-900/15 backdrop-blur lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="p-8 sm:p-12">
-          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#cb5549]">Founders. Faces. Fits.</p>
+      <section className="mx-auto mt-20 max-w-2xl rounded-[2.25rem] border border-white/50 bg-white/90 p-8 text-center shadow-2xl shadow-slate-900/15 backdrop-blur sm:p-12">
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#cb5549]">Founders. Faces. Names. Matches.</p>
           <h1 className="mt-5 text-5xl font-black tracking-tight text-[#0f1933] sm:text-6xl">
-            Future Founders prep, unlocked by login.
+            Future Founders 2026
           </h1>
           <p className="mt-5 text-lg leading-8 text-slate-600">
             Sign in to learn names, rehearse conversation hooks, and explore compatibility insights before you meet everyone in the room.
@@ -909,24 +939,6 @@ function LoginScreen({ runtimeConfig }: { runtimeConfig: RuntimeConfig | null })
           {!runtimeConfig && (
             <p className="mt-3 text-sm text-amber-700">Login config is not available in this local build yet.</p>
           )}
-        </div>
-        <div className="bg-gradient-to-br from-[#0f1933] via-[#284b76] to-[#cb5549] p-8 text-white sm:p-12">
-          <div className="rounded-[2rem] border border-white/20 bg-white/10 p-6 backdrop-blur">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-white/70">What you get</p>
-            <div className="mt-6 space-y-5">
-              {[
-                ["Private prep", "Sign in before any attendee data or study tools are shown."],
-                ["Relationship insight", "Understand why a conversation might be worth having."],
-                ["Idea privacy", "Idea Explorer does not log your idea or store the generated matches."],
-              ].map(([title, body]) => (
-                <div key={title} className="rounded-2xl bg-white/10 p-4">
-                  <h2 className="font-bold">{title}</h2>
-                  <p className="mt-1 text-sm text-white/75">{body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
       </section>
     </Shell>
   );
@@ -1509,18 +1521,31 @@ function humanize(value: string) {
 function PairsPanel({
   attendees,
   question,
+  loading,
   onSubmit,
   result,
   onNext,
 }: {
   attendees: Attendee[];
   question: string;
+  loading: boolean;
   onSubmit: (chosen: number[]) => void;
   result: string;
   onNext: () => void;
 }) {
   const shown = attendees.slice(0, 8);
   const [picked, setPicked] = useState<number[]>([]);
+  if (loading || !question) {
+    return (
+      <section className="rounded-[2rem] border border-white/50 bg-white/90 p-8 text-center shadow-xl shadow-slate-900/10 backdrop-blur">
+        <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#cb5549]/10 text-[#cb5549]">
+          <div className="h-7 w-7 animate-spin rounded-full border-4 border-[#cb5549]/20 border-t-[#cb5549]" />
+        </div>
+        <p className="mt-5 text-sm font-semibold uppercase tracking-[0.25em] text-[#cb5549]">Pairs Game</p>
+        <h2 className="mt-2 text-2xl font-black text-[#0f1933]">Preparing a question...</h2>
+      </section>
+    );
+  }
   return (
     <section className="rounded-[2rem] border border-white/50 bg-white/90 p-6 shadow-xl shadow-slate-900/10 backdrop-blur">
       <p className="mb-3 text-sm uppercase tracking-wide">Pairs Game</p>
@@ -1545,7 +1570,7 @@ function PairsPanel({
       <button className="mt-4 rounded-xl bg-[#cb5549] px-3 py-2 text-white" onClick={() => onSubmit(picked)}>
         Check Answer
       </button>
-      <button className="ml-2 mt-4 rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700" onClick={onNext}>
+      <button className="ml-2 mt-4 rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700" onClick={() => { setPicked([]); onNext(); }}>
         Next Question
       </button>
       {result && <p className="mt-3 rounded-xl bg-slate-100 p-2 text-sm">{result}</p>}
