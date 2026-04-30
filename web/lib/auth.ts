@@ -6,16 +6,23 @@ type TokenSet = {
   access_token: string;
   id_token?: string;
   expires_in?: number;
+  expires_at?: number;
 };
 
 export function getTokens(): TokenSet | null {
   if (typeof window === "undefined") return null;
   const raw = localStorage.getItem(TOKEN_KEY);
-  return raw ? (JSON.parse(raw) as TokenSet) : null;
+  if (!raw) return null;
+  const tokens = JSON.parse(raw) as TokenSet;
+  if (isExpired(tokens)) {
+    clearTokens();
+    return null;
+  }
+  return tokens;
 }
 
 export function saveTokens(tokens: TokenSet) {
-  localStorage.setItem(TOKEN_KEY, JSON.stringify(tokens));
+  localStorage.setItem(TOKEN_KEY, JSON.stringify(withExpiry(tokens)));
 }
 
 export function clearTokens() {
@@ -65,6 +72,31 @@ export function logout(config: RuntimeConfig) {
     logout_uri: config.oauthLogoutUrl,
   });
   window.location.href = `${config.cognitoDomain}/logout?${params.toString()}`;
+}
+
+function withExpiry(tokens: TokenSet): TokenSet {
+  if (tokens.expires_at) return tokens;
+  if (tokens.expires_in) return { ...tokens, expires_at: Date.now() + tokens.expires_in * 1000 };
+  const jwtExpiry = jwtExpiresAt(tokens.access_token);
+  return jwtExpiry ? { ...tokens, expires_at: jwtExpiry } : tokens;
+}
+
+function isExpired(tokens: TokenSet) {
+  const expiresAt = tokens.expires_at ?? jwtExpiresAt(tokens.access_token);
+  if (!expiresAt) return false;
+  return Date.now() >= expiresAt - 30_000;
+}
+
+function jwtExpiresAt(token: string) {
+  const payload = token.split(".")[1];
+  if (!payload) return null;
+  try {
+    const normalized = payload.replace(/-/gu, "+").replace(/_/gu, "/");
+    const decoded = JSON.parse(atob(normalized)) as { exp?: number };
+    return decoded.exp ? decoded.exp * 1000 : null;
+  } catch {
+    return null;
+  }
 }
 
 function randomString(length: number): string {

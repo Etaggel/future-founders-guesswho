@@ -20,6 +20,13 @@ type AppView = "chooser" | "guess-who" | "match-maker" | "idea-explorer";
 type PairChallenge = { question: string; answerIds: number[]; explanation?: string };
 
 const STORAGE_KEY = "ff-game-progress-v1";
+const MATCH_RELATIONSHIP_FILTERS = [
+  { value: "all", label: "All match relationships" },
+  { value: "cofounder", label: "Cofounder fits" },
+  { value: "commercial-technical", label: "Commercial + technical" },
+  { value: "domain", label: "Shared domain peers" },
+  { value: "strategic", label: "Strategic partners" },
+] as const;
 
 export function FoundersGame() {
   const [attendees, setAttendees] = useState<Attendee[]>([]);
@@ -92,6 +99,23 @@ export function FoundersGame() {
       }).catch(() => undefined);
     }
   }, [mastery, runtimeConfig, score]);
+
+  useEffect(() => {
+    if (!authLoaded || !isSignedIn) return;
+    function checkToken() {
+      if (getTokens()) return;
+      setIsSignedIn(false);
+      setAppView("chooser");
+    }
+    const interval = window.setInterval(checkToken, 60_000);
+    window.addEventListener("focus", checkToken);
+    document.addEventListener("visibilitychange", checkToken);
+    return () => {
+      window.clearInterval(interval);
+      window.removeEventListener("focus", checkToken);
+      document.removeEventListener("visibilitychange", checkToken);
+    };
+  }, [authLoaded, isSignedIn]);
 
   useEffect(() => {
     if (!studyPool.length) return;
@@ -184,7 +208,7 @@ export function FoundersGame() {
   }
 
   function createPairsQuestion() {
-    const pool = shuffleForPrompt(learnedPool.length > 3 ? learnedPool : studyPool).slice(0, 8);
+    const pool = shuffleForPrompt(attendees).slice(0, 8);
     const challenge = buildLocalPairsChallenge(pool);
     setPairQuestion(challenge.question);
     setPairAnswers(challenge.answerIds);
@@ -346,7 +370,6 @@ export function FoundersGame() {
         <header className="mb-6 rounded-[2rem] border border-white/50 bg-white/90 p-5 shadow-xl shadow-slate-900/10 backdrop-blur">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <button className="mb-3 text-sm font-semibold text-[#5583b7] hover:text-[#0f1933]" onClick={() => setAppView("chooser")}>← Prep modes</button>
               <h1 className="text-3xl font-black">{appView === "guess-who" ? "Guess Who" : appView === "match-maker" ? "Match Maker" : "Idea Explorer"}</h1>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -362,11 +385,11 @@ export function FoundersGame() {
           <p className="mt-1 text-sm text-slate-600">
             Score: <strong>{score}</strong> | Learned: {studyPool.filter((a) => (mastery[a.id] ?? 0) > 0).length}/{studyPool.length} named profiles
           </p>
-          <div className="mt-4 flex gap-2">
-            <button className="rounded-xl bg-[#5583b7] px-3 py-2 text-white" onClick={() => setMode("learn")}>Learn</button>
-            <button className="rounded-xl bg-[#4fb77c] px-3 py-2 text-white" onClick={() => startPlay("play-easy")}>Play Easy</button>
-            <button className="rounded-xl bg-[#1e2d40] px-3 py-2 text-white" onClick={() => startPlay("play-hard")}>Play Hard</button>
-            <button className="rounded-xl bg-[#cb5549] px-3 py-2 text-white" onClick={() => { setMode("pairs"); createPairsQuestion(); }}>Pairs</button>
+          <div className="mt-4 grid gap-2 rounded-2xl bg-slate-100 p-2 sm:grid-cols-4">
+            <GuessWhoModeButton active={mode === "learn"} color="blue" label="Learn" detail="Study cards" onClick={() => setMode("learn")} />
+            <GuessWhoModeButton active={mode === "play-easy"} color="green" label="Play Easy" detail="Pick a name" onClick={() => startPlay("play-easy")} />
+            <GuessWhoModeButton active={mode === "play-hard"} color="navy" label="Play Hard" detail="Type recall" onClick={() => startPlay("play-hard")} />
+            <GuessWhoModeButton active={mode === "pairs"} color="red" label="Pairs" detail="Match traits" onClick={() => { setMode("pairs"); createPairsQuestion(); }} />
           </div>
             </>
           )}
@@ -588,7 +611,7 @@ function MatchGraphPanel({
   clusters,
   clusterFilter,
   typeFilter,
-  relationshipTypes,
+  relationshipFilters,
   onClusterFilter,
   onTypeFilter,
   onSelect,
@@ -599,7 +622,7 @@ function MatchGraphPanel({
   clusters: MatchData["insight_dimensions"]["highest_domain_density_clusters"];
   clusterFilter: string;
   typeFilter: string;
-  relationshipTypes: string[];
+  relationshipFilters: typeof MATCH_RELATIONSHIP_FILTERS;
   onClusterFilter: (cluster: string) => void;
   onTypeFilter: (type: string) => void;
   onSelect: (id: number | null) => void;
@@ -623,16 +646,11 @@ function MatchGraphPanel({
       <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#5583b7]">Relationship graph</p>
-          <h3 className="mt-2 text-2xl font-black">Filter the room by cluster and connection type.</h3>
+          <h3 className="mt-2 text-2xl font-black">Filter the room by cluster and match relationship.</h3>
         </div>
-        <div className="grid gap-2 sm:grid-cols-2">
-          <select className="rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold" value={clusterFilter} onChange={(event) => onClusterFilter(event.target.value)}>
-            <option value="all">All clusters</option>
-            {(clusters ?? []).map((cluster) => <option key={cluster.cluster} value={cluster.cluster}>{humanize(cluster.cluster)}</option>)}
-          </select>
+        <div>
           <select className="rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold" value={typeFilter} onChange={(event) => onTypeFilter(event.target.value)}>
-            <option value="all">All relationships</option>
-            {relationshipTypes.map((type) => <option key={type} value={type}>{humanize(type)}</option>)}
+            {relationshipFilters.map((filter) => <option key={filter.value} value={filter.value}>{filter.label}</option>)}
           </select>
         </div>
       </div>
@@ -710,6 +728,10 @@ function attendeePhoto(attendee: Attendee) {
   );
 }
 
+function founderDisplayName(attendee: Attendee) {
+  return attendeePhoto(attendee) && linkedinUrl(attendee) ? displayName(attendee) : `Founder ${attendee.id}`;
+}
+
 function linkedinUrl(attendee: Attendee) {
   return attendee.identified_person?.linkedin_url || attendee.likely_match?.linkedin_url || null;
 }
@@ -724,29 +746,20 @@ function profileFacts(attendee: Attendee) {
   return [attendee.tagline, ...(attendee.profile_summary?.interests ?? []).slice(0, 3).map((interest) => `Interested in ${interest}`)];
 }
 
-function initialsFor(attendee: Attendee) {
-  return displayName(attendee)
-    .split(/\s+/u)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0]?.toUpperCase())
-    .join("") || `#${attendee.id}`;
-}
-
 function FounderAvatar({ attendee, size = "md" }: { attendee: Attendee; size?: "sm" | "md" | "lg" | "xl" }) {
   const photo = attendeePhoto(attendee);
   const sizeClass = size === "xl" ? "h-56 w-56 text-5xl" : size === "lg" ? "h-20 w-20 text-2xl" : size === "sm" ? "h-10 w-10 text-sm" : "h-14 w-14 text-lg";
   if (photo) {
-    return <div className={`${sizeClass} rounded-full bg-cover bg-center shadow-inner ring-2 ring-white`} style={{ backgroundImage: `url(${photo})` }} aria-label={`${displayName(attendee)} photo`} />;
+    return <div className={`${sizeClass} rounded-full bg-cover bg-center shadow-inner ring-2 ring-white`} style={{ backgroundImage: `url(${photo})` }} aria-label={`${founderDisplayName(attendee)} photo`} />;
   }
-  const hue = (attendee.id * 47) % 360;
   return (
     <div
-      className={`${sizeClass} grid shrink-0 place-items-center rounded-full font-black text-white shadow-inner ring-1 ring-white/50`}
-      style={{ background: `linear-gradient(135deg, hsl(${hue} 72% 34%), hsl(${(hue + 42) % 360} 68% 54%))` }}
-      aria-label={`${displayName(attendee)} generated avatar`}
+      className={`${sizeClass} grid shrink-0 place-items-center rounded-full bg-slate-200 text-slate-500 shadow-inner ring-1 ring-white/70`}
+      aria-label={`${founderDisplayName(attendee)} silhouette avatar`}
     >
-      {initialsFor(attendee)}
+      <svg className="h-1/2 w-1/2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4Zm0 2c-3.33 0-6 1.67-6 3.75V20h12v-2.25C18 15.67 15.33 14 12 14Z" />
+      </svg>
     </div>
   );
 }
@@ -835,6 +848,41 @@ function SignOutButton({ onClick }: { onClick: () => void }) {
       onClick={onClick}
     >
       Sign Out
+    </button>
+  );
+}
+
+function GuessWhoModeButton({
+  active,
+  color,
+  label,
+  detail,
+  onClick,
+}: {
+  active: boolean;
+  color: "blue" | "green" | "navy" | "red";
+  label: string;
+  detail: string;
+  onClick: () => void;
+}) {
+  const activeColors = {
+    blue: "bg-[#5583b7] shadow-[#5583b7]/25",
+    green: "bg-[#4fb77c] shadow-[#4fb77c]/25",
+    navy: "bg-[#1e2d40] shadow-[#1e2d40]/25",
+    red: "bg-[#cb5549] shadow-[#cb5549]/25",
+  };
+  return (
+    <button
+      className={`rounded-xl px-4 py-3 text-left transition ${
+        active
+          ? `${activeColors[color]} text-white shadow-lg ring-2 ring-white`
+          : "bg-white text-slate-600 hover:-translate-y-0.5 hover:bg-slate-50"
+      }`}
+      onClick={onClick}
+      aria-pressed={active}
+    >
+      <span className="block font-black">{label}</span>
+      <span className={`mt-1 block text-xs ${active ? "text-white/75" : "text-slate-400"}`}>{active ? "Current mode" : detail}</span>
     </button>
   );
 }
@@ -973,7 +1021,7 @@ function IdeaExplorerPanel({
                     <div className="flex items-center gap-3">
                       {attendee && <FounderAvatar attendee={attendee} size="sm" />}
                       <div>
-                        <h4 className="text-xl font-black text-[#0f1933]">{attendee ? displayName(attendee) : recommendation.name}</h4>
+                        <h4 className="text-xl font-black text-[#0f1933]">{attendee ? founderDisplayName(attendee) : recommendation.name}</h4>
                         {attendee && <p className="mt-1 text-sm text-slate-500">{attendee.tagline}</p>}
                         {attendee && <LinkedInProfileLink attendee={attendee} className="mt-2" />}
                       </div>
@@ -1013,6 +1061,7 @@ function MatchMakerPanel({
   const [deepDiveEdge, setDeepDiveEdge] = useState<RelationshipEdge | null>(null);
   const [deepDive, setDeepDive] = useState<RelationshipInsight | null>(null);
   const [deepDiveLoading, setDeepDiveLoading] = useState(false);
+  const [profileExpanded, setProfileExpanded] = useState(false);
   const attendeeRailRef = useRef<HTMLDivElement | null>(null);
   const profileRef = useRef<HTMLDivElement | null>(null);
   const [railOverflow, setRailOverflow] = useState({ up: false, down: false });
@@ -1025,14 +1074,7 @@ function MatchMakerPanel({
     () => matchData?.insight_dimensions.highest_domain_density_clusters ?? [],
     [matchData],
   );
-  const clusterMemberIds = useMemo(() => {
-    if (clusterFilter === "all") return null;
-    return new Set(clusters.find((cluster) => cluster.cluster === clusterFilter)?.members ?? []);
-  }, [clusterFilter, clusters]);
-  const relationshipTypes = useMemo(
-    () => Array.from(new Set((matchData?.relationship_edges ?? []).map((edge) => edge.relationship_type))).sort(),
-    [matchData],
-  );
+  const clusterMemberIds = useMemo(() => clusterMemberSet(clusterFilter, clusters), [clusterFilter, clusters]);
   const visibleAttendees = useMemo(
     () => attendees.filter((attendee) => !clusterMemberIds || clusterMemberIds.has(attendee.id)),
     [attendees, clusterMemberIds],
@@ -1040,10 +1082,11 @@ function MatchMakerPanel({
   const visibleEdges = useMemo(
     () =>
       (matchData?.relationship_edges ?? [])
-        .filter((edge) => typeFilter === "all" || edge.relationship_type === typeFilter)
+        .filter((edge) => isHighPotentialMatchEdge(edge, profileById))
+        .filter((edge) => matchesRelationshipFilter(edge, typeFilter))
         .filter((edge) => !clusterMemberIds || (clusterMemberIds.has(edge.source) && clusterMemberIds.has(edge.target)))
         .sort((a, b) => b.score - a.score),
-    [clusterMemberIds, matchData, typeFilter],
+    [clusterMemberIds, matchData, profileById, typeFilter],
   );
   const selectedAttendee = selectedId ? attendeeById.get(selectedId) : undefined;
   const selectedProfile = selectedAttendee ? profileById.get(selectedAttendee.id) : undefined;
@@ -1065,6 +1108,7 @@ function MatchMakerPanel({
   }
 
   function handleSelect(id: number | null) {
+    setProfileExpanded(false);
     onSelect(id);
   }
 
@@ -1135,7 +1179,7 @@ function MatchMakerPanel({
     <div className="min-h-[calc(100vh-11rem)]">
       <aside className="sticky top-4 z-20 flex h-[calc(100vh-2rem)] flex-col rounded-[2rem] border border-white/50 bg-white/90 p-4 shadow-xl shadow-slate-900/10 backdrop-blur lg:fixed lg:left-[max(1.5rem,calc((100vw-64rem)/2))] lg:top-6 lg:h-[calc(100vh-3rem)] lg:w-[19rem]">
         <div className="flex items-center justify-between gap-3 px-2">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#cb5549]">Attendees</p>
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#cb5549]">Founders</p>
           <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-bold text-slate-500">{visibleAttendees.length}</span>
         </div>
         <button
@@ -1158,9 +1202,9 @@ function MatchMakerPanel({
                 onClick={() => handleSelect(attendee.id)}
               >
                 <FounderAvatar attendee={attendee} size="sm" />
-                <span>
-                  <p className="font-bold">{displayName(attendee)}</p>
-                  <p className={`mt-1 text-xs ${active ? "text-white/70" : "text-slate-500"}`}>{profileById.get(attendee.id)?.orientation ?? attendee.category}</p>
+                <span className="min-w-0">
+                  <p className="font-bold">{founderDisplayName(attendee)}</p>
+                  <p className={`mt-1 truncate text-xs ${active ? "text-white/70" : "text-slate-500"}`}>{attendee.tagline}</p>
                 </span>
               </button>
             );
@@ -1177,7 +1221,7 @@ function MatchMakerPanel({
           clusters={clusters}
           clusterFilter={clusterFilter}
           typeFilter={typeFilter}
-          relationshipTypes={relationshipTypes}
+          relationshipFilters={MATCH_RELATIONSHIP_FILTERS}
           onClusterFilter={setClusterFilter}
           onTypeFilter={setTypeFilter}
           onSelect={handleSelect}
@@ -1190,11 +1234,11 @@ function MatchMakerPanel({
           <div className="bg-gradient-to-br from-[#0f1933] via-[#274b78] to-[#cb5549] p-7 text-white">
             <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/65">Match profile</p>
+                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/65">Founder profile</p>
                 <div className="mt-3 flex items-center gap-4">
                   <FounderAvatar attendee={selectedAttendee} size="lg" />
                   <div>
-                    <h2 className="text-4xl font-black">{displayName(selectedAttendee)}</h2>
+                    <h2 className="text-4xl font-black">{founderDisplayName(selectedAttendee)}</h2>
                     <p className="mt-2 text-white/80">{selectedAttendee.tagline}</p>
                     <LinkedInProfileLink attendee={selectedAttendee} variant="dark" className="mt-4" />
                   </div>
@@ -1206,7 +1250,14 @@ function MatchMakerPanel({
               <SignalCard title="Strengths" values={selectedProfile.strengths.slice(0, 3)} />
               <SignalCard title="Needs" values={selectedProfile.needs.slice(0, 3)} />
             </div>
+            <button
+              className="mt-5 rounded-full bg-white px-5 py-3 text-sm font-black text-[#0f1933] shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5 hover:bg-[#f0c36a]"
+              onClick={() => setProfileExpanded((expanded) => !expanded)}
+            >
+              {profileExpanded ? "Collapse founder details" : "Learn more about this founder"}
+            </button>
           </div>
+          {profileExpanded && <FounderProfileDetails attendee={selectedAttendee} />}
           <div className="p-6">
             <h3 className="text-xl font-black">Best relationship paths</h3>
             <p className="mt-1 text-sm text-slate-600">
@@ -1267,7 +1318,7 @@ function RelationshipCard({
         <button className="flex items-center gap-3 text-left" onClick={(event) => { event.stopPropagation(); onSelect(otherId); }}>
           <FounderAvatar attendee={other} size="sm" />
           <span>
-          <span className="block text-lg font-black text-[#0f1933]">{displayName(other)}</span>
+          <span className="block text-lg font-black text-[#0f1933]">{founderDisplayName(other)}</span>
           <p className="mt-1 text-sm text-slate-500">{humanize(edge.relationship_type)}</p>
           <LinkedInProfileLink attendee={other} className="mt-2" />
           </span>
@@ -1284,6 +1335,55 @@ function RelationshipCard({
       </button>
       {expanded && <RelationshipDeepDive edge={edge} insight={insight} loading={loading} attendeeById={attendeeById} onCollapse={onCollapse} />}
     </article>
+  );
+}
+
+function FounderProfileDetails({ attendee }: { attendee: Attendee }) {
+  const highlights = attendee.profile_summary?.experience_highlights ?? [];
+  const interests = attendee.profile_summary?.interests ?? [];
+  const facts = attendee.extra_facts ?? [];
+  const starters = attendee.conversation_starters ?? [];
+  return (
+    <section className="border-b border-slate-100 bg-gradient-to-br from-white to-slate-50 p-6">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#5583b7]">Known profile details</p>
+          <h3 className="mt-2 text-2xl font-black text-[#0f1933]">More about {founderDisplayName(attendee)}</h3>
+        </div>
+        <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-bold text-slate-500">From founder JSON</span>
+      </div>
+
+      <div className="mt-5 grid gap-4 lg:grid-cols-2">
+        {attendee.profile_summary?.background && (
+          <DetailBlock title="Background" items={[attendee.profile_summary.background]} />
+        )}
+        {attendee.current_obsession && (
+          <DetailBlock title={`Current obsession${attendee.current_obsession.summary ? `: ${attendee.current_obsession.summary}` : ""}`} items={[attendee.current_obsession.details ?? attendee.current_obsession.summary ?? ""]} />
+        )}
+        {attendee.superpower && (
+          <DetailBlock title={`Superpower${attendee.superpower.summary ? `: ${attendee.superpower.summary}` : ""}`} items={[attendee.superpower.details ?? attendee.superpower.summary ?? ""]} />
+        )}
+        {highlights.length > 0 && <DetailBlock title="Experience highlights" items={highlights} />}
+        {interests.length > 0 && <DetailBlock title="Interests" items={interests} />}
+        {(attendee.ideal_cofounder?.traits ?? []).length > 0 && <DetailBlock title="Ideal cofounder" items={attendee.ideal_cofounder?.traits ?? []} />}
+        {(attendee.surprising_traits?.items ?? []).length > 0 && <DetailBlock title="Surprising traits" items={attendee.surprising_traits?.items ?? []} />}
+        {facts.length > 0 && <DetailBlock title="Useful facts" items={facts.map((fact) => fact.use_for_conversation ? `${fact.fact} — ${fact.use_for_conversation}` : fact.fact)} />}
+        {starters.length > 0 && <DetailBlock title="Conversation starters" items={starters} />}
+      </div>
+    </section>
+  );
+}
+
+function DetailBlock({ title, items }: { title: string; items: string[] }) {
+  const visibleItems = items.filter(Boolean).slice(0, 5);
+  if (!visibleItems.length) return null;
+  return (
+    <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
+      <p className="font-black text-[#0f1933]">{title}</p>
+      <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
+        {visibleItems.map((item) => <li key={item}>• {item}</li>)}
+      </ul>
+    </div>
   );
 }
 
@@ -1309,7 +1409,7 @@ function RelationshipDeepDive({
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#cb5549]">Pairing insight</p>
           <h3 className="mt-2 text-2xl font-black">
-            {source ? displayName(source) : `Attendee #${edge.source}`} × {target ? displayName(target) : `Attendee #${edge.target}`}
+            {source ? founderDisplayName(source) : `Founder ${edge.source}`} × {target ? founderDisplayName(target) : `Founder ${edge.target}`}
           </h3>
           {insight?.cached && <p className="mt-2 text-sm font-semibold text-[#25734b]">Cached insight</p>}
         </div>
@@ -1349,13 +1449,37 @@ function relationshipEdgeKey(edge: RelationshipEdge) {
   return `${edge.source}-${edge.target}-${edge.relationship_type}`;
 }
 
+function isHighPotentialMatchEdge(edge: RelationshipEdge, profileById: Map<number, { high_potential_matches: number[] }>) {
+  const sourceProfile = profileById.get(edge.source);
+  const targetProfile = profileById.get(edge.target);
+  return Boolean(
+    sourceProfile?.high_potential_matches.includes(edge.target) ||
+    targetProfile?.high_potential_matches.includes(edge.source),
+  );
+}
+
+function matchesRelationshipFilter(edge: RelationshipEdge, filter: string) {
+  if (filter === "all") return true;
+  const type = edge.relationship_type;
+  if (filter === "cofounder") return /cofounder|complement|operator_builder|build_partner/u.test(type);
+  if (filter === "commercial-technical") return /commercial|technical|gtm|builder/u.test(type);
+  if (filter === "domain") return /peer|domain|climate|deeptech|health|energy|fintech|enterprise|hardware|systems/u.test(type);
+  if (filter === "strategic") return /strategic|venture|partner|commercialisation|strategy/u.test(type);
+  return true;
+}
+
+function clusterMemberSet(clusterFilter: string, clusters: MatchData["insight_dimensions"]["highest_domain_density_clusters"]) {
+  if (clusterFilter === "all") return null;
+  return new Set((clusters ?? []).find((cluster) => cluster.cluster === clusterFilter)?.members ?? []);
+}
+
 function buildRelationshipFallback(edge: RelationshipEdge, attendeeById: Map<number, Attendee>): RelationshipInsight {
   const source = attendeeById.get(edge.source);
   const target = attendeeById.get(edge.target);
   return {
     headline: `${humanize(edge.relationship_type)} with ${Math.round(edge.score * 100)}% fit`,
     common_ground: edge.reasons.slice(0, 3),
-    cofounder_fit: `Ask ${target ? displayName(target) : "the other attendee"} which part of ${source?.tagline ?? "this opportunity"} feels most useful or risky for their current work. Treat the score as a prompt, not a verdict.`,
+    cofounder_fit: `Ask ${target ? founderDisplayName(target) : "the other founder"} which part of ${source?.tagline ?? "this opportunity"} feels most useful or risky for their current work. Treat the score as a prompt, not a verdict.`,
     conversation_starters: [
       "What would make this connection useful in the next 30 days?",
       "Where do your assumptions about this market differ?",
@@ -1401,7 +1525,6 @@ function PairsPanel({
     <section className="rounded-[2rem] border border-white/50 bg-white/90 p-6 shadow-xl shadow-slate-900/10 backdrop-blur">
       <p className="mb-3 text-sm uppercase tracking-wide">Pairs Game</p>
       <h2 className="text-xl font-semibold">{question}</h2>
-      <p className="mt-2 text-sm text-slate-600">Generated from the named attendee pool with deterministic avatars because the dataset has no source photo URLs yet.</p>
       <div className="mt-4 grid gap-2 sm:grid-cols-4">
         {shown.map((a) => {
           const on = picked.includes(a.id);
@@ -1412,8 +1535,8 @@ function PairsPanel({
               className={`rounded-2xl border p-3 text-left transition ${on ? "bg-[#5583b7] text-white shadow-lg shadow-[#5583b7]/20" : "bg-white hover:-translate-y-0.5"}`}
             >
               <FounderAvatar attendee={a} size="sm" />
-              <p className="font-medium">{displayName(a)}</p>
-              <p className="text-xs opacity-80">{a.category}</p>
+              <p className="font-medium">{founderDisplayName(a)}</p>
+              <p className="line-clamp-2 text-xs opacity-80">{a.tagline}</p>
               <LinkedInProfileLink attendee={a} className="mt-2" />
             </button>
           );
