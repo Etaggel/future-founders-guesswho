@@ -39,6 +39,14 @@ export class FfGameStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.RETAIN,
     });
 
+    const pairInsightsTable = new dynamodb.Table(this, "PairInsightsTable", {
+      partitionKey: { name: "pairKey", type: dynamodb.AttributeType.STRING },
+      sortKey: { name: "inputSignature", type: dynamodb.AttributeType.STRING },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      encryption: dynamodb.TableEncryption.AWS_MANAGED,
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
+    });
+
     const userPool = new cognito.UserPool(this, "UserPool", {
       selfSignUpEnabled: true,
       signInAliases: { email: true },
@@ -106,9 +114,11 @@ export class FfGameStack extends cdk.Stack {
       timeout: cdk.Duration.seconds(15),
       environment: {
         PROGRESS_TABLE_NAME: progressTable.tableName,
+        PAIR_INSIGHTS_TABLE_NAME: pairInsightsTable.tableName,
       },
     });
     progressTable.grantReadWriteData(apiLambda);
+    pairInsightsTable.grantReadWriteData(apiLambda);
     apiLambda.addToRolePolicy(
       new iam.PolicyStatement({
         actions: ["bedrock:InvokeModel"],
