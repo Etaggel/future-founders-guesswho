@@ -3274,13 +3274,24 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.75,
-    "linkedin_url": null,
+    "name": "Oliver Rhode",
+    "confidence": 0.9,
+    "linkedin_url": "https://linkedin.com/in/oliver-rhode-450372220",
+    "gender": "male",
     "project": "https://climatemot.com",
     "previous_role": "Head of Climate Adaptation Finance (UK FCDO)",
     "current": "Imperial College MSc International Finance",
-    "notes": "Very narrow profile (FCDO climate finance lead + Climate MOT builder). Identity can be confirmed via domain or Imperial cohort search."
+    "notes": "Public LinkedIn result for Oliver Rhode matches British diplomat, FCDO Head of Climate Adaptation Finance, climate finance/geopolitics/policy focus, year out for university, and language background. Climate MOT site confirms the project but does not publish a founder name."
+  },
+
+  "identified_person": {
+    "name": "Oliver Rhode",
+    "confidence": 0.9,
+    "linkedin_url": "https://linkedin.com/in/oliver-rhode-450372220",
+    "photo_url": null,
+    "gender": "male",
+    "company": "Foreign, Commonwealth and Development Office",
+    "role": "Head of Climate Adaptation Finance"
   },
 
   "profile_summary": {
@@ -3410,9 +3421,8 @@
       "Startup transition"
     ],
     "uncertainties": [
-      "No public name tied to Climate MOT yet",
-      "Multiple diplomats fit partial profile",
-      "Requires domain lookup for exact identity"
+      "Climate MOT does not publicly name its founder",
+      "LinkedIn profile photo URL is blocked behind LinkedIn/authwall and has not been captured"
     ]
   }
 },
