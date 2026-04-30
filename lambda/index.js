@@ -74,6 +74,12 @@ exports.handler = async (event) => {
     return respond(200, generated);
   }
 
+  if (path.startsWith("/ai/idea-explorer") && method === "POST") {
+    const body = parseBody(event);
+    const generated = await getIdeaExplorerInsight(body);
+    return respond(200, generated);
+  }
+
   return respond(404, { error: "Not found" });
 };
 
@@ -158,6 +164,19 @@ async function getPairInsight(body) {
   return { ...payload, generatedAt };
 }
 
+async function getIdeaExplorerInsight(body) {
+  const idea = typeof body?.idea === "string" ? body.idea.trim() : "";
+  const profiles = Array.isArray(body?.profiles) ? body.profiles : [];
+  const fallback = fallbackIdeaExplorer(idea, profiles);
+  if (!idea || profiles.length === 0) return fallback;
+
+  return normalizeIdeaExplorerInsight(
+    await generateJson(ideaExplorerPrompt(idea, profiles), fallback),
+    fallback,
+    profiles,
+  );
+}
+
 function canonicalPairInput(sourceId, targetId, body) {
   const profiles = [
     { id: sourceId, attendee: insightProfile(body?.source), matchProfile: body?.sourceProfile || null },
@@ -193,6 +212,20 @@ Be specific, grounded, practical, and concise. If evidence is thin, say what to 
 Return JSON only with exactly this shape:
 {"headline":"short compelling summary","common_ground":["shared theme 1","shared theme 2","shared theme 3"],"cofounder_fit":"reasoning about complementarity and risks","conversation_starters":["question 1","question 2","question 3"],"business_opportunities":["realistic startup idea 1","realistic startup idea 2"]}
 Input data: ${JSON.stringify(input).slice(0, 10000)}`;
+}
+
+function ideaExplorerPrompt(idea, profiles) {
+  const input = {
+    idea_or_problem: idea.slice(0, 2500),
+    founders: profiles.map(insightProfile).filter(Boolean),
+  };
+  return `You are an AI reasoning layer for a private founder networking prep tool at an in-person Future Founders event.
+The user entered a business idea, problem, or market they want to explore. Compare it against every supplied founder profile.
+Use only the supplied profile data. Do not invent private facts, traction, funding, current projects, willingness to help, or relationships.
+Do not echo the user's idea back verbatim. Keep recommendations practical for an event conversation.
+Return JSON only with exactly this shape:
+{"headline":"short useful title","summary":"one concise paragraph","recommendations":[{"attendeeId":1,"relevance":"High","why":["grounded reason 1","grounded reason 2"],"questions":["question 1","question 2"],"evidence":["profile evidence 1","profile evidence 2"]}],"privacyNote":"This app does not store this idea or these generated matches."}
+Return 3 to 6 recommendations. Each attendeeId must be from the supplied founders list. Input data: ${JSON.stringify(input).slice(0, 18000)}`;
 }
 
 function insightProfile(profile) {
@@ -236,6 +269,36 @@ function normalizePairInsight(value, fallback) {
     business_opportunities: stringArray(value?.business_opportunities, fallback.business_opportunities, 2),
     generated: value?.generated !== false,
     reason: value?.reason,
+  };
+}
+
+function normalizeIdeaExplorerInsight(value, fallback, profiles) {
+  const validIds = new Set((profiles || []).map((profile) => Number(profile?.id)).filter(Boolean));
+  const rawRecommendations = Array.isArray(value?.recommendations) ? value.recommendations : [];
+  const recommendations = rawRecommendations
+    .map((item) => normalizeIdeaRecommendation(item, profiles))
+    .filter((item) => item && validIds.has(item.attendeeId))
+    .slice(0, 6);
+  return {
+    headline: stringValue(value?.headline, fallback.headline),
+    summary: stringValue(value?.summary, fallback.summary),
+    recommendations: recommendations.length ? recommendations : fallback.recommendations,
+    privacyNote: "This app does not log your idea, store it, or save these generated matches.",
+    generated: value?.generated !== false,
+  };
+}
+
+function normalizeIdeaRecommendation(item, profiles) {
+  const attendeeId = Number(item?.attendeeId ?? item?.id);
+  if (!attendeeId) return null;
+  const profile = (profiles || []).find((candidate) => Number(candidate?.id) === attendeeId);
+  return {
+    attendeeId,
+    name: stringValue(item?.name, profile ? profileName(profile) : `Attendee #${attendeeId}`),
+    relevance: stringValue(item?.relevance, "Relevant"),
+    why: stringArray(item?.why, [profile?.tagline || "Profile data suggests a useful conversation angle."], 3),
+    questions: stringArray(item?.questions, profile?.conversation_starters || ["What part of this problem feels most urgent from your perspective?"], 3),
+    evidence: stringArray(item?.evidence, profileFactsForIdea(profile), 3),
   };
 }
 
@@ -290,6 +353,84 @@ function fallbackRelationship(body) {
     generated: false,
   };
 }
+
+function fallbackIdeaExplorer(idea, profiles) {
+  const terms = Array.from(new Set((idea.toLowerCase().match(/[a-z0-9]{4,}/gu) || []).filter((term) => !COMMON_IDEA_TERMS.has(term))));
+  const scored = (profiles || [])
+    .map((profile) => ({ profile, score: ideaProfileScore(profile, terms) }))
+    .sort((a, b) => b.score - a.score || Number(a.profile?.id || 0) - Number(b.profile?.id || 0))
+    .slice(0, 5)
+    .map(({ profile, score }) => ({
+      attendeeId: Number(profile?.id),
+      name: profileName(profile),
+      relevance: score >= 3 ? "High" : score >= 1 ? "Medium" : "Exploratory",
+      why: [
+        profile?.tagline || "This founder has a useful profile angle for a first conversation.",
+        profile?.profile_summary?.background || "Use the conversation to validate whether their current priorities overlap with the idea.",
+      ].filter(Boolean).slice(0, 2),
+      questions: (profile?.conversation_starters || [
+        "What customer pain would you validate first here?",
+        "Which assumption would make or break this opportunity?",
+      ]).slice(0, 3),
+      evidence: profileFactsForIdea(profile),
+    }))
+    .filter((item) => item.attendeeId);
+
+  return {
+    headline: idea ? "Founder matches for your idea" : "Describe an idea to find founder matches",
+    summary: idea
+      ? "Fallback recommendations are based on profile keywords, categories, interests, and conversation starters while the AI insight service is unavailable."
+      : "Enter a business idea, customer problem, or market thesis to find useful founder conversations.",
+    recommendations: scored,
+    privacyNote: "This app does not log your idea, store it, or save these generated matches.",
+    generated: false,
+  };
+}
+
+function ideaProfileScore(profile, terms) {
+  const haystack = [
+    profile?.tagline,
+    profile?.category,
+    profile?.identified_person?.role,
+    profile?.identified_person?.company,
+    profile?.likely_match?.role,
+    profile?.likely_match?.company,
+    profile?.profile_summary?.background,
+    ...(profile?.profile_summary?.interests || []),
+    ...(profile?.extra_facts || []).map((item) => item.fact),
+    ...(profile?.conversation_starters || []),
+  ].filter(Boolean).join(" ").toLowerCase();
+  return terms.reduce((score, term) => score + (haystack.includes(term) ? 1 : 0), 0);
+}
+
+function profileName(profile) {
+  return profile?.identified_person?.name || profile?.likely_match?.name || `Attendee #${profile?.id || "?"}`;
+}
+
+function profileFactsForIdea(profile) {
+  return [
+    profile?.tagline,
+    ...(profile?.profile_summary?.interests || []).map((interest) => `Interested in ${interest}`),
+    ...(profile?.extra_facts || []).map((item) => item.fact),
+  ].filter(Boolean).slice(0, 3);
+}
+
+const COMMON_IDEA_TERMS = new Set([
+  "about",
+  "business",
+  "company",
+  "could",
+  "founder",
+  "idea",
+  "market",
+  "problem",
+  "product",
+  "startup",
+  "there",
+  "their",
+  "these",
+  "would",
+]);
 
 function respond(statusCode, body) {
   return { statusCode, headers: jsonHeaders, body: statusCode === 204 ? "" : JSON.stringify(body) };
