@@ -1108,7 +1108,7 @@ function RelationshipCard({
             <li key={reason}>• {reason}</li>
           ))}
         </ul>
-        <span className="mt-3 block text-sm font-semibold text-[#5583b7]">{expanded ? "Refresh relationship study" : "Study this relationship →"}</span>
+        <span className="mt-3 block text-sm font-semibold text-[#5583b7]">{expanded ? "Refresh pairing insight" : "Generate pairing insight →"}</span>
       </button>
       {expanded && <RelationshipDeepDive edge={edge} insight={insight} loading={loading} attendeeById={attendeeById} onCollapse={onCollapse} />}
     </article>
@@ -1135,25 +1135,27 @@ function RelationshipDeepDive({
     <section className="mt-5 rounded-[1.5rem] border border-[#8fb7e8]/30 bg-gradient-to-br from-slate-50 to-white p-5 shadow-inner">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#cb5549]">Relationship deep dive</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#cb5549]">Pairing insight</p>
           <h3 className="mt-2 text-2xl font-black">
             {source ? displayName(source) : `Attendee #${edge.source}`} × {target ? displayName(target) : `Attendee #${edge.target}`}
           </h3>
+          {insight?.cached && <p className="mt-2 text-sm font-semibold text-[#25734b]">Cached insight</p>}
         </div>
         <button className="grid h-9 w-9 place-items-center self-start rounded-full border border-slate-200 bg-white text-lg font-black text-slate-600 transition hover:bg-slate-100" onClick={onCollapse} aria-label="Close relationship study">
           ×
         </button>
       </div>
-      {loading && <p className="mt-4 rounded-2xl bg-slate-100 p-4 text-sm text-slate-600">Studying the relationship with AI...</p>}
+      {loading && <p className="mt-4 rounded-2xl bg-slate-100 p-4 text-sm text-slate-600">Generating pairing insight with AI...</p>}
       {insight && !loading && (
         <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_1fr]">
           <div className="rounded-2xl bg-[#0f1933] p-5 text-white">
             <p className="text-xl font-black">{insight.headline}</p>
-            <p className="mt-3 text-sm leading-6 text-white/80">{insight.openingMove}</p>
+            <p className="mt-4 text-xs font-bold uppercase tracking-[0.2em] text-white/50">Cofounder fit</p>
+            <p className="mt-3 text-sm leading-6 text-white/80">{insight.cofounder_fit}</p>
           </div>
-          <InsightList title="Why it works" items={insight.whyItWorks} />
-          <InsightList title="Watch outs" items={insight.watchOuts} />
-          <InsightList title="Useful questions" items={insight.usefulQuestions} />
+          <InsightList title="Common ground" items={insight.common_ground} />
+          <InsightList title="Conversation starters" items={insight.conversation_starters} />
+          <InsightList title="Business opportunities" items={insight.business_opportunities} />
         </div>
       )}
     </section>
@@ -1180,13 +1182,16 @@ function buildRelationshipFallback(edge: RelationshipEdge, attendeeById: Map<num
   const target = attendeeById.get(edge.target);
   return {
     headline: `${humanize(edge.relationship_type)} with ${Math.round(edge.score * 100)}% fit`,
-    openingMove: `Ask ${target ? displayName(target) : "the other attendee"} which part of ${source?.tagline ?? "this opportunity"} feels most useful or risky for their current work.`,
-    whyItWorks: edge.reasons.slice(0, 3),
-    watchOuts: ["Treat the score as a prompt, not a verdict.", "Check whether their current priorities match the inferred overlap before pitching."],
-    usefulQuestions: [
-      "What would make this collaboration useful in the next 30 days?",
+    common_ground: edge.reasons.slice(0, 3),
+    cofounder_fit: `Ask ${target ? displayName(target) : "the other attendee"} which part of ${source?.tagline ?? "this opportunity"} feels most useful or risky for their current work. Treat the score as a prompt, not a verdict.`,
+    conversation_starters: [
+      "What would make this connection useful in the next 30 days?",
       "Where do your assumptions about this market differ?",
-      "Who else in the room would make this conversation stronger?",
+      "Which skill gap would be most valuable to close with a collaborator?",
+    ],
+    business_opportunities: [
+      "A focused validation sprint around the strongest shared customer or domain signal in their profiles.",
+      "A lightweight tool or service that combines one founder's domain access with the other's execution strengths.",
     ],
     generated: false,
   };

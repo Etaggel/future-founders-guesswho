@@ -63,10 +63,12 @@ export type RelationshipEdge = {
 
 export type RelationshipInsight = {
   headline: string;
-  openingMove: string;
-  whyItWorks: string[];
-  watchOuts: string[];
-  usefulQuestions: string[];
+  common_ground: string[];
+  cofounder_fit: string;
+  conversation_starters: string[];
+  business_opportunities: string[];
+  cached?: boolean;
+  generatedAt?: string;
   generated?: boolean;
   reason?: string;
 };
