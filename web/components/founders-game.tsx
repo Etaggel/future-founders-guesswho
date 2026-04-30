@@ -6,7 +6,6 @@ import {
   buildFactsChallenge,
   displayName,
   isUncertain,
-  pickNewAndWeak,
   sanitizeFactForAttendee,
   scoreRound,
   shuffle,
@@ -22,14 +21,6 @@ type PairChallenge = { question: string; answerIds: number[]; explanation?: stri
 type PreparedPairsQuestion = { pool: Attendee[]; challenge: PairChallenge };
 
 const STORAGE_KEY = "ff-game-progress-v1";
-const MATCH_RELATIONSHIP_FILTERS = [
-  { value: "all", label: "All match relationships" },
-  { value: "cofounder", label: "Cofounder fits" },
-  { value: "commercial-technical", label: "Commercial + technical" },
-  { value: "domain", label: "Shared domain peers" },
-  { value: "strategic", label: "Strategic partners" },
-] as const;
-
 export function FoundersGame() {
   const [attendees, setAttendees] = useState<Attendee[]>([]);
   const [mode, setMode] = useState<Mode>("learn");
@@ -38,6 +29,8 @@ export function FoundersGame() {
   const [learnBatch, setLearnBatch] = useState<Attendee[]>([]);
   const [learnIndex, setLearnIndex] = useState(0);
   const [playTarget, setPlayTarget] = useState<Attendee | null>(null);
+  const [easyOptions, setEasyOptions] = useState<Attendee[]>([]);
+  const [easySelectedId, setEasySelectedId] = useState<number | null>(null);
   const [hardGuess, setHardGuess] = useState("");
   const [factsPick, setFactsPick] = useState<number[]>([]);
   const [factsChallenge, setFactsChallenge] = useState<FactsChallenge | null>(null);
@@ -126,11 +119,11 @@ export function FoundersGame() {
     if (!studyPool.length) return;
     if (mode === "learn" && learnBatch.length === 0) {
       window.setTimeout(() => {
-        setLearnBatch(pickNewAndWeak(studyPool, mastery));
+        setLearnBatch(shuffle(studyPool));
         setLearnIndex(0);
       }, 0);
     }
-  }, [studyPool, mode, learnBatch.length, mastery]);
+  }, [studyPool, mode, learnBatch.length]);
 
   const learnedPool = useMemo(
     () => attendees.filter((a) => isStudyReady(a) && (mastery[a.id] ?? 0) > 0),
@@ -140,22 +133,24 @@ export function FoundersGame() {
   const currentLearn = learnBatch[learnIndex];
   function completeLearnCard(correct: boolean) {
     if (!currentLearn) return;
-    setMastery((m) => ({
-      ...m,
-      [currentLearn.id]: updateMastery(m[currentLearn.id] ?? 0, correct),
-    }));
-    if (learnIndex >= learnBatch.length - 1) {
-      setLearnBatch([]);
+    if (correct) {
+      setMastery((m) => ({
+        ...m,
+        [currentLearn.id]: updateMastery(m[currentLearn.id] ?? 0, true),
+      }));
       startPlay("play-easy");
       return;
     }
-    setLearnIndex((x) => x + 1);
+    setLearnIndex((index) => nextRandomIndex(learnBatch.length, index));
   }
 
   function startPlay(nextMode: Mode) {
     const pool = learnedPool.length > 0 ? learnedPool : studyPool;
+    const easyOptionPool = learnedPool.length > 2 ? learnedPool : studyPool;
     const target = pool[Math.floor(Math.random() * pool.length)] ?? null;
     setPlayTarget(target);
+    setEasyOptions(target && nextMode === "play-easy" ? buildEasyOptions(easyOptionPool, target) : []);
+    setEasySelectedId(null);
     setFactsChallenge(target ? buildFactsChallenge(target) : null);
     setMode(nextMode);
     setHardGuess("");
@@ -192,6 +187,7 @@ export function FoundersGame() {
 
   function submitPlay(nameCorrect: boolean) {
     if (!playTarget || !factsChallenge) return;
+    if (factsResult) return;
     const trueIndexes = [0, 1, 2].filter((i) => i !== factsChallenge.lieIndex);
     const factsCorrectCount = factsPick.filter((x) => trueIndexes.includes(x)).length;
     const round = scoreRound({
@@ -205,11 +201,9 @@ export function FoundersGame() {
       ...m,
       [playTarget.id]: updateMastery(m[playTarget.id] ?? 0, nameCorrect && factsCorrectCount >= 2),
     }));
-    setFactsResult(
-      factsCorrectCount >= 2
-        ? `Nice. +${round} points. True facts locked in.`
-        : `Close. +${round} points. Keep reviewing this profile.`,
-    );
+    const nameResult = nameCorrect ? "Correct name." : `Not quite — it was ${displayName(playTarget)}.`;
+    const factsResultText = factsCorrectCount >= 2 ? "True facts locked in." : "Keep reviewing this profile.";
+    setFactsResult(`${nameResult} +${round} points. ${factsResultText}`);
   }
 
   async function createPairsQuestion() {
@@ -257,12 +251,12 @@ export function FoundersGame() {
       if (!response.ok) return { pool, challenge: fallback };
       const generated = (await response.json()) as { question?: string; answerIds?: number[] };
       if (generated.question && generated.answerIds?.length) {
-        return { pool, challenge: { question: generated.question, answerIds: generated.answerIds } };
+        return { pool, challenge: ensureMinimumPairAnswers({ question: generated.question, answerIds: generated.answerIds }, pool) };
       }
     } catch {
       // Local category fallback remains active after loading.
     }
-    return { pool, challenge: fallback };
+    return { pool, challenge: ensureMinimumPairAnswers(fallback, pool) };
   }
 
   function scorePairs(chosen: number[]) {
@@ -270,7 +264,7 @@ export function FoundersGame() {
     setPairResult(
       correct
         ? `Correct. ${chosen.length}/${pairAnswers.length} selected exactly.`
-        : `Not quite. Correct IDs: ${pairAnswers.join(", ")}.`,
+        : `Not quite. ${chosen.filter((id) => pairAnswers.includes(id)).length}/${pairAnswers.length} correct selections.`,
     );
     if (correct) setScore((s) => s + 30);
   }
@@ -490,16 +484,29 @@ export function FoundersGame() {
             </div>
 
             {mode === "play-easy" ? (
-              <div className="mt-4 grid gap-2 sm:grid-cols-3">
-                {buildEasyOptions(learnedPool.length > 2 ? learnedPool : studyPool, playTarget).map((x) => (
-                  <button
-                    key={x.id}
-                    className="rounded-xl border px-3 py-2 text-left"
-                    onClick={() => submitPlay(x.id === playTarget.id)}
-                  >
-                    {displayName(x)}
-                  </button>
-                ))}
+              <div className="mt-4">
+                <div className="grid gap-2 sm:grid-cols-3">
+                  {easyOptions.map((x) => {
+                    const selected = easySelectedId === x.id;
+                    return (
+                      <button
+                        key={x.id}
+                        className={`rounded-xl border px-3 py-2 text-left transition ${selected ? "border-[#4fb77c] bg-[#4fb77c]/10 ring-2 ring-[#4fb77c]/30" : "bg-white hover:bg-slate-50"}`}
+                        onClick={() => setEasySelectedId(x.id)}
+                        aria-pressed={selected}
+                      >
+                        {displayName(x)}
+                      </button>
+                    );
+                  })}
+                </div>
+                <button
+                  className="mt-3 rounded-xl bg-[#4fb77c] px-3 py-2 font-bold text-white disabled:cursor-not-allowed disabled:bg-slate-300"
+                  disabled={easySelectedId === null || Boolean(factsResult)}
+                  onClick={() => submitPlay(easySelectedId === playTarget.id)}
+                >
+                  Reveal
+                </button>
               </div>
             ) : (
               <div className="mt-4">
@@ -543,7 +550,7 @@ export function FoundersGame() {
         )}
 
         {mode === "pairs" && (
-          <PairsPanel key={pairKey} attendees={pairPool} question={pairQuestion} loading={pairLoading} onSubmit={scorePairs} result={pairResult} onNext={createPairsQuestion} />
+          <PairsPanel key={pairKey} attendees={pairPool} question={pairQuestion} answerIds={pairAnswers} loading={pairLoading} onSubmit={scorePairs} result={pairResult} onNext={createPairsQuestion} />
         )}
           </>
         )}
@@ -633,10 +640,7 @@ function MatchGraphPanel({
   selectedId,
   clusters,
   clusterFilter,
-  typeFilter,
-  relationshipFilters,
   onClusterFilter,
-  onTypeFilter,
   onSelect,
 }: {
   attendees: Attendee[];
@@ -644,10 +648,7 @@ function MatchGraphPanel({
   selectedId: number | null;
   clusters: MatchData["insight_dimensions"]["highest_domain_density_clusters"];
   clusterFilter: string;
-  typeFilter: string;
-  relationshipFilters: typeof MATCH_RELATIONSHIP_FILTERS;
   onClusterFilter: (cluster: string) => void;
-  onTypeFilter: (type: string) => void;
   onSelect: (id: number | null) => void;
 }) {
   const topNodes = attendees;
@@ -669,12 +670,7 @@ function MatchGraphPanel({
       <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#5583b7]">Relationship graph</p>
-          <h3 className="mt-2 text-2xl font-black">Filter the room by cluster and match relationship.</h3>
-        </div>
-        <div>
-          <select className="rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold" value={typeFilter} onChange={(event) => onTypeFilter(event.target.value)}>
-            {relationshipFilters.map((filter) => <option key={filter.value} value={filter.value}>{filter.label}</option>)}
-          </select>
+          <h3 className="mt-2 text-2xl font-black">Explore matches by founder and category.</h3>
         </div>
       </div>
       <div className="mt-5 grid gap-5 xl:grid-cols-[22rem_1fr]">
@@ -700,6 +696,7 @@ function MatchGraphPanel({
               const active = selectedId === attendee.id;
               return (
                 <g key={attendee.id} className="cursor-pointer" onClick={() => onSelect(attendee.id)}>
+                  <title>{founderDisplayName(attendee)}</title>
                   <circle cx={point.x} cy={point.y} r={active ? 16 : 12} fill={active ? "#f0c36a" : "#cb5549"} stroke="white" strokeWidth="2" />
                   <text x={point.x} y={point.y + 4} textAnchor="middle" className="fill-white text-[9px] font-black">{attendee.id}</text>
                 </g>
@@ -773,9 +770,9 @@ function profileFacts(attendee: Attendee) {
   return [attendee.tagline, ...(attendee.profile_summary?.interests ?? []).slice(0, 3).map((interest) => `Interested in ${interest}`)];
 }
 
-function FounderAvatar({ attendee, size = "md" }: { attendee: Attendee; size?: "sm" | "md" | "lg" | "xl" }) {
+function FounderAvatar({ attendee, size = "md" }: { attendee: Attendee; size?: "sm" | "md" | "lg" | "profile" | "xl" }) {
   const photo = attendeePhoto(attendee);
-  const sizeClass = size === "xl" ? "h-56 w-56 text-5xl" : size === "lg" ? "h-20 w-20 text-2xl" : size === "sm" ? "h-10 w-10 text-sm" : "h-14 w-14 text-lg";
+  const sizeClass = size === "xl" ? "h-56 w-56 text-5xl" : size === "profile" ? "h-32 w-32 text-4xl" : size === "lg" ? "h-20 w-20 text-2xl" : size === "sm" ? "h-10 w-10 text-sm" : "h-14 w-14 text-lg";
   if (photo) {
     return <div className={`${sizeClass} rounded-full bg-cover bg-center shadow-inner ring-2 ring-white`} style={{ backgroundImage: `url(${photo})` }} aria-label={`${founderDisplayName(attendee)} photo`} />;
   }
@@ -826,22 +823,30 @@ function buildLocalPairsChallenge(pool: Attendee[]): PairChallenge {
   for (const category of shuffle(categories)) {
     const answerIds = pool.filter((attendee) => attendee.category === category).map((attendee) => attendee.id);
     if (answerIds.length >= 2) {
-      return {
+      return ensureMinimumPairAnswers({
         question: `Select everyone whose profile is tagged ${category}.`,
         answerIds,
         explanation: "Fallback prompt generated from local categories.",
-      };
+      }, pool);
     }
   }
   const keyword = "AI";
   const answerIds = pool
     .filter((attendee) => `${attendee.tagline} ${attendee.profile_summary?.background ?? ""}`.toLowerCase().includes(keyword.toLowerCase()))
     .map((attendee) => attendee.id);
-  return {
+  return ensureMinimumPairAnswers({
     question: `Select everyone with ${keyword} in their profile clues.`,
     answerIds: answerIds.length ? answerIds : pool.slice(0, 2).map((attendee) => attendee.id),
     explanation: "Fallback prompt generated from local profile text.",
-  };
+  }, pool);
+}
+
+function ensureMinimumPairAnswers(challenge: PairChallenge, pool: Attendee[]): PairChallenge {
+  const validIds = new Set(pool.map((attendee) => attendee.id));
+  const answerIds = Array.from(new Set(challenge.answerIds.filter((id) => validIds.has(id))));
+  if (answerIds.length >= 2) return { ...challenge, answerIds };
+  const fillers = pool.map((attendee) => attendee.id).filter((id) => !answerIds.includes(id)).slice(0, 2 - answerIds.length);
+  return { ...challenge, answerIds: [...answerIds, ...fillers] };
 }
 
 function shuffleForPrompt(pool: Attendee[]) {
@@ -1070,12 +1075,12 @@ function MatchMakerPanel({
   runtimeConfig: RuntimeConfig | null;
 }) {
   const [clusterFilter, setClusterFilter] = useState<string>("all");
-  const [typeFilter, setTypeFilter] = useState<string>("all");
   const [deepDiveEdge, setDeepDiveEdge] = useState<RelationshipEdge | null>(null);
   const [deepDive, setDeepDive] = useState<RelationshipInsight | null>(null);
   const [deepDiveLoading, setDeepDiveLoading] = useState(false);
   const [profileExpanded, setProfileExpanded] = useState(false);
   const attendeeRailRef = useRef<HTMLDivElement | null>(null);
+  const graphRef = useRef<HTMLDivElement | null>(null);
   const profileRef = useRef<HTMLDivElement | null>(null);
   const [railOverflow, setRailOverflow] = useState({ up: false, down: false });
   const attendeeById = useMemo(() => new Map(attendees.map((attendee) => [attendee.id, attendee])), [attendees]);
@@ -1096,10 +1101,9 @@ function MatchMakerPanel({
     () =>
       (matchData?.relationship_edges ?? [])
         .filter((edge) => isHighPotentialMatchEdge(edge, profileById))
-        .filter((edge) => matchesRelationshipFilter(edge, typeFilter))
         .filter((edge) => !clusterMemberIds || (clusterMemberIds.has(edge.source) && clusterMemberIds.has(edge.target)))
         .sort((a, b) => b.score - a.score),
-    [clusterMemberIds, matchData, profileById, typeFilter],
+    [clusterMemberIds, matchData, profileById],
   );
   const selectedAttendee = selectedId ? attendeeById.get(selectedId) : undefined;
   const selectedProfile = selectedAttendee ? profileById.get(selectedAttendee.id) : undefined;
@@ -1123,20 +1127,25 @@ function MatchMakerPanel({
   function handleSelect(id: number | null) {
     setProfileExpanded(false);
     onSelect(id);
+    if (id !== null) {
+      window.requestAnimationFrame(() => {
+        profileRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  }
+
+  function handleGraphSelect(id: number | null) {
+    setProfileExpanded(false);
+    onSelect(id);
+    window.requestAnimationFrame(() => {
+      graphRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(updateRailOverflow);
     return () => window.cancelAnimationFrame(frame);
   }, [visibleAttendees.length, selectedId]);
-
-  useEffect(() => {
-    if (!selectedAttendee) return;
-    const frame = window.requestAnimationFrame(() => {
-      profileRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-    return () => window.cancelAnimationFrame(frame);
-  }, [selectedAttendee]);
 
   async function studyRelationship(edge: RelationshipEdge) {
     setDeepDiveEdge(edge);
@@ -1227,18 +1236,17 @@ function MatchMakerPanel({
       </aside>
 
       <section className="mt-5 space-y-5 lg:ml-[20.25rem] lg:mt-0">
-        <MatchGraphPanel
-          attendees={visibleAttendees}
-          edges={visibleEdges}
-          selectedId={selectedId}
-          clusters={clusters}
-          clusterFilter={clusterFilter}
-          typeFilter={typeFilter}
-          relationshipFilters={MATCH_RELATIONSHIP_FILTERS}
-          onClusterFilter={setClusterFilter}
-          onTypeFilter={setTypeFilter}
-          onSelect={handleSelect}
-        />
+        <div ref={graphRef} className="scroll-mt-6">
+          <MatchGraphPanel
+            attendees={visibleAttendees}
+            edges={visibleEdges}
+            selectedId={selectedId}
+            clusters={clusters}
+            clusterFilter={clusterFilter}
+            onClusterFilter={setClusterFilter}
+            onSelect={handleGraphSelect}
+          />
+        </div>
 
         {!selectedAttendee || !selectedProfile ? (
           <MatchMakerLanding matchData={matchData} attendees={attendees} visibleEdges={visibleEdges} clusters={clusters} onSelect={handleSelect} />
@@ -1249,7 +1257,7 @@ function MatchMakerPanel({
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/65">Founder profile</p>
                 <div className="mt-3 flex items-center gap-4">
-                  <FounderAvatar attendee={selectedAttendee} size="lg" />
+                  <FounderAvatar attendee={selectedAttendee} size="profile" />
                   <div>
                     <h2 className="text-4xl font-black">{founderDisplayName(selectedAttendee)}</h2>
                     <p className="mt-2 text-white/80">{selectedAttendee.tagline}</p>
@@ -1360,8 +1368,7 @@ function FounderProfileDetails({ attendee }: { attendee: Attendee }) {
     <section className="border-b border-slate-100 bg-gradient-to-br from-white to-slate-50 p-6">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#5583b7]">Known profile details</p>
-          <h3 className="mt-2 text-2xl font-black text-[#0f1933]">More about {founderDisplayName(attendee)}</h3>
+          <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-[#5583b7]">More about {founderDisplayName(attendee)}</h3>
         </div>
       </div>
 
@@ -1393,7 +1400,7 @@ function DetailBlock({ title, items }: { title: string; items: string[] }) {
     <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
       <p className="font-black text-[#0f1933]">{title}</p>
       <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
-        {visibleItems.map((item) => <li key={item}>• {item}</li>)}
+        {visibleItems.map((item) => <li key={item}>• {capitalizeFirst(item)}</li>)}
       </ul>
     </div>
   );
@@ -1470,16 +1477,6 @@ function isHighPotentialMatchEdge(edge: RelationshipEdge, profileById: Map<numbe
   );
 }
 
-function matchesRelationshipFilter(edge: RelationshipEdge, filter: string) {
-  if (filter === "all") return true;
-  const type = edge.relationship_type;
-  if (filter === "cofounder") return /cofounder|complement|operator_builder|build_partner/u.test(type);
-  if (filter === "commercial-technical") return /commercial|technical|gtm|builder/u.test(type);
-  if (filter === "domain") return /peer|domain|climate|deeptech|health|energy|fintech|enterprise|hardware|systems/u.test(type);
-  if (filter === "strategic") return /strategic|venture|partner|commercialisation|strategy/u.test(type);
-  return true;
-}
-
 function clusterMemberSet(clusterFilter: string, clusters: MatchData["insight_dimensions"]["highest_domain_density_clusters"]) {
   if (clusterFilter === "all") return null;
   return new Set((clusters ?? []).find((cluster) => cluster.cluster === clusterFilter)?.members ?? []);
@@ -1518,9 +1515,21 @@ function humanize(value: string) {
   return value.replace(/_/gu, " ").replace(/\b\w/gu, (letter) => letter.toUpperCase());
 }
 
+function capitalizeFirst(value: string) {
+  const trimmed = value.trim();
+  return trimmed ? `${trimmed[0].toUpperCase()}${trimmed.slice(1)}` : trimmed;
+}
+
+function nextRandomIndex(length: number, currentIndex: number) {
+  if (length <= 1) return 0;
+  const next = Math.floor(Math.random() * (length - 1));
+  return next >= currentIndex ? next + 1 : next;
+}
+
 function PairsPanel({
   attendees,
   question,
+  answerIds,
   loading,
   onSubmit,
   result,
@@ -1528,6 +1537,7 @@ function PairsPanel({
 }: {
   attendees: Attendee[];
   question: string;
+  answerIds: number[];
   loading: boolean;
   onSubmit: (chosen: number[]) => void;
   result: string;
@@ -1535,6 +1545,7 @@ function PairsPanel({
 }) {
   const shown = attendees.slice(0, 8);
   const [picked, setPicked] = useState<number[]>([]);
+  const [submitted, setSubmitted] = useState<number[] | null>(null);
   if (loading || !question) {
     return (
       <section className="rounded-[2rem] border border-white/50 bg-white/90 p-8 text-center shadow-xl shadow-slate-900/10 backdrop-blur">
@@ -1553,24 +1564,43 @@ function PairsPanel({
       <div className="mt-4 grid gap-2 sm:grid-cols-4">
         {shown.map((a) => {
           const on = picked.includes(a.id);
+          const revealed = submitted !== null;
+          const isCorrectAnswer = answerIds.includes(a.id);
+          const wasPicked = submitted?.includes(a.id) ?? false;
+          const feedbackClass = !revealed
+            ? on
+              ? "bg-[#5583b7] text-white shadow-lg shadow-[#5583b7]/20"
+              : "bg-white hover:-translate-y-0.5"
+            : wasPicked && isCorrectAnswer
+              ? "border-[#4fb77c] bg-[#4fb77c]/15 ring-2 ring-[#4fb77c]/40"
+              : wasPicked
+                ? "border-[#cb5549] bg-[#cb5549]/10 ring-2 ring-[#cb5549]/35"
+                : isCorrectAnswer
+                  ? "border-[#f0c36a] bg-[#f0c36a]/20 ring-2 ring-[#f0c36a]/45"
+                  : "bg-white opacity-60";
           return (
             <button
               key={a.id}
-              onClick={() => setPicked((prev) => (on ? prev.filter((x) => x !== a.id) : [...prev, a.id]))}
-              className={`rounded-2xl border p-3 text-left transition ${on ? "bg-[#5583b7] text-white shadow-lg shadow-[#5583b7]/20" : "bg-white hover:-translate-y-0.5"}`}
+              onClick={() => !revealed && setPicked((prev) => (on ? prev.filter((x) => x !== a.id) : [...prev, a.id]))}
+              className={`rounded-2xl border p-3 text-left transition ${feedbackClass}`}
             >
               <FounderAvatar attendee={a} size="sm" />
               <p className="font-medium">{founderDisplayName(a)}</p>
               <p className="line-clamp-2 text-xs opacity-80">{a.tagline}</p>
+              {revealed && (wasPicked || isCorrectAnswer) && (
+                <p className="mt-2 rounded-full bg-white/70 px-2 py-1 text-xs font-black text-[#0f1933]">
+                  {wasPicked && isCorrectAnswer ? "You picked correctly" : wasPicked ? "Your pick" : isCorrectAnswer ? "Correct answer" : ""}
+                </p>
+              )}
               <LinkedInProfileLink attendee={a} className="mt-2" />
             </button>
           );
         })}
       </div>
-      <button className="mt-4 rounded-xl bg-[#cb5549] px-3 py-2 text-white" onClick={() => onSubmit(picked)}>
+      <button className="mt-4 rounded-xl bg-[#cb5549] px-3 py-2 text-white disabled:cursor-not-allowed disabled:bg-slate-300" disabled={submitted !== null} onClick={() => { setSubmitted(picked); onSubmit(picked); }}>
         Check Answer
       </button>
-      <button className="ml-2 mt-4 rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700" onClick={() => { setPicked([]); onNext(); }}>
+      <button className="ml-2 mt-4 rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700" onClick={() => { setPicked([]); setSubmitted(null); onNext(); }}>
         Next Question
       </button>
       {result && <p className="mt-3 rounded-xl bg-slate-100 p-2 text-sm">{result}</p>}
