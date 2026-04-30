@@ -4,7 +4,9 @@ const { DynamoDBDocumentClient, GetCommand, PutCommand } = require("@aws-sdk/lib
 const crypto = require("node:crypto");
 
 const bedrock = new BedrockRuntimeClient({});
-const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({}));
+const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({}), {
+  marshallOptions: { removeUndefinedValues: true },
+});
 
 const jsonHeaders = {
   "content-type": "application/json",
