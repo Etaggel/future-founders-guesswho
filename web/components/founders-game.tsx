@@ -1,5 +1,6 @@
 "use client";
 
+import type { FormEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   buildEasyOptions,
@@ -21,6 +22,9 @@ type PairChallenge = { question: string; answerIds: number[]; explanation?: stri
 type PreparedPairsQuestion = { pool: Attendee[]; challenge: PairChallenge };
 
 const STORAGE_KEY = "ff-game-progress-v1";
+const CONTENT_PASSWORD = "FutureFounders2026!?";
+const CONTENT_UNLOCK_KEY = "ff-game-content-unlocked-v1";
+
 export function FoundersGame() {
   const [attendees, setAttendees] = useState<Attendee[]>([]);
   const [mode, setMode] = useState<Mode>("learn");
@@ -45,6 +49,7 @@ export function FoundersGame() {
   const [runtimeConfig, setRuntimeConfig] = useState<RuntimeConfig | null>(null);
   const [authLoaded, setAuthLoaded] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isContentUnlocked, setIsContentUnlocked] = useState(false);
   const [appView, setAppView] = useState<AppView>("chooser");
   const [matchData, setMatchData] = useState<MatchData | null>(null);
   const [selectedMatchId, setSelectedMatchId] = useState<number | null>(null);
@@ -67,6 +72,7 @@ export function FoundersGame() {
       setRuntimeConfig(config);
       const tokens = getTokens();
       setIsSignedIn(Boolean(tokens?.access_token));
+      setIsContentUnlocked(loadContentUnlock());
       setAuthLoaded(true);
       if (config && tokens?.access_token) {
         fetch(`${config.apiBaseUrl}progress`, {
@@ -103,6 +109,7 @@ export function FoundersGame() {
     function checkToken() {
       if (getTokens()) return;
       setIsSignedIn(false);
+      setIsContentUnlocked(false);
       setAppView("chooser");
     }
     const interval = window.setInterval(checkToken, 60_000);
@@ -327,6 +334,10 @@ export function FoundersGame() {
 
   if (!isSignedIn) {
     return <LoginScreen runtimeConfig={runtimeConfig} />;
+  }
+
+  if (!isContentUnlocked) {
+    return <ContentPasswordScreen onUnlock={() => setIsContentUnlocked(true)} />;
   }
 
   if (appView === "chooser") {
@@ -730,6 +741,15 @@ function loadLocalProgress(): { mastery: Mastery; score: number } {
   }
 }
 
+function loadContentUnlock() {
+  if (typeof window === "undefined") return false;
+  return localStorage.getItem(CONTENT_UNLOCK_KEY) === "true";
+}
+
+function saveContentUnlock() {
+  localStorage.setItem(CONTENT_UNLOCK_KEY, "true");
+}
+
 function isNamed(attendee: Attendee) {
   const name = attendee.identified_person?.name || attendee.likely_match?.name;
   return Boolean(name && !name.startsWith("Likely "));
@@ -945,6 +965,57 @@ function LoginScreen({ runtimeConfig }: { runtimeConfig: RuntimeConfig | null })
           {!runtimeConfig && (
             <p className="mt-3 text-sm text-amber-700">Login config is not available in this local build yet.</p>
           )}
+      </section>
+    </Shell>
+  );
+}
+
+function ContentPasswordScreen({ onUnlock }: { onUnlock: () => void }) {
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  function submitPassword(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (password === CONTENT_PASSWORD) {
+      saveContentUnlock();
+      onUnlock();
+      return;
+    }
+    setError("That password is not correct. Check the punctuation and try again.");
+  }
+
+  return (
+    <Shell>
+      <section className="mx-auto mt-20 max-w-2xl rounded-[2.25rem] border border-white/50 bg-white/90 p-8 text-center shadow-2xl shadow-slate-900/15 backdrop-blur sm:p-12">
+        <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#cb5549]">One more step</p>
+        <h1 className="mt-5 text-4xl font-black tracking-tight text-[#0f1933] sm:text-5xl">
+          Enter the event password
+        </h1>
+        <p className="mt-5 text-lg leading-8 text-slate-600">
+          This content is sensitive, so please enter the shared Future Founders password before opening the game.
+        </p>
+        <form className="mx-auto mt-8 max-w-md" onSubmit={submitPassword}>
+          <label className="sr-only" htmlFor="content-password">Event password</label>
+          <input
+            id="content-password"
+            type="password"
+            autoComplete="current-password"
+            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-[#0f1933] shadow-inner outline-none transition focus:border-[#5583b7] focus:ring-4 focus:ring-[#5583b7]/15"
+            value={password}
+            onChange={(event) => {
+              setPassword(event.target.value);
+              if (error) setError("");
+            }}
+            placeholder="Event password"
+          />
+          {error && <p className="mt-3 rounded-2xl bg-amber-100 p-3 text-sm font-semibold text-amber-900">{error}</p>}
+          <button
+            className="mt-5 w-full rounded-full bg-[#0f1933] px-7 py-4 text-base font-bold text-white shadow-xl shadow-[#0f1933]/25 transition hover:-translate-y-0.5 hover:bg-[#cb5549]"
+            type="submit"
+          >
+            Unlock the game
+          </button>
+        </form>
       </section>
     </Shell>
   );
