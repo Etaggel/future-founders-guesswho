@@ -33,6 +33,7 @@ export function FoundersGame() {
   const [learnBatch, setLearnBatch] = useState<Attendee[]>([]);
   const [learnIndex, setLearnIndex] = useState(0);
   const [playTarget, setPlayTarget] = useState<Attendee | null>(null);
+  const [playSeenIds, setPlaySeenIds] = useState<number[]>([]);
   const [easyOptions, setEasyOptions] = useState<Attendee[]>([]);
   const [easySelectedId, setEasySelectedId] = useState<number | null>(null);
   const [hardGuess, setHardGuess] = useState("");
@@ -59,6 +60,7 @@ export function FoundersGame() {
   const [ideaError, setIdeaError] = useState("");
 
   const studyPool = useMemo(() => attendees.filter(isStudyReady), [attendees]);
+  const playPool = useMemo(() => attendees.filter(isPlayable), [attendees]);
 
   useEffect(() => {
     fetch("/data/attendees.json")
@@ -132,11 +134,6 @@ export function FoundersGame() {
     }
   }, [studyPool, mode, learnBatch.length]);
 
-  const learnedPool = useMemo(
-    () => attendees.filter((a) => isStudyReady(a) && (mastery[a.id] ?? 0) > 0),
-    [attendees, mastery],
-  );
-
   const currentLearn = learnBatch[learnIndex];
   function completeLearnCard(correct: boolean) {
     if (!currentLearn) return;
@@ -152,18 +149,20 @@ export function FoundersGame() {
   }
 
   function startPlay(nextMode: Mode) {
-    const pool = learnedPool.length > 0 ? learnedPool : studyPool;
-    const easyOptionPool = learnedPool.length > 2 ? learnedPool : studyPool;
-    const target = pool[Math.floor(Math.random() * pool.length)] ?? null;
-    setPlayTarget(target);
-    setEasyOptions(target && nextMode === "play-easy" ? buildEasyOptions(easyOptionPool, target) : []);
+    const pool = playPool.length > 0 ? playPool : studyPool;
+    const unseenPool = pool.filter((attendee) => !playSeenIds.includes(attendee.id));
+    const candidatePool = unseenPool.length > 0 ? unseenPool : pool;
+    const nextTarget = candidatePool[Math.floor(Math.random() * candidatePool.length)] ?? null;
+    setPlayTarget(nextTarget);
+    setPlaySeenIds(nextTarget ? (unseenPool.length > 0 ? [...playSeenIds, nextTarget.id] : [nextTarget.id]) : []);
+    setEasyOptions(nextTarget && nextMode === "play-easy" ? buildEasyOptions(pool, nextTarget) : []);
     setEasySelectedId(null);
-    setFactsChallenge(target ? buildFactsChallenge(target) : null);
+    setFactsChallenge(nextTarget ? buildFactsChallenge(nextTarget) : null);
     setMode(nextMode);
     setHardGuess("");
     setFactsPick([]);
     setFactsResult("");
-    if (target) void loadAiFacts(target);
+    if (nextTarget) void loadAiFacts(nextTarget);
   }
 
   async function loadAiFacts(target: Attendee) {
@@ -208,7 +207,7 @@ export function FoundersGame() {
       ...m,
       [playTarget.id]: updateMastery(m[playTarget.id] ?? 0, nameCorrect && factsCorrectCount >= 2),
     }));
-    const nameResult = nameCorrect ? "Correct name." : `Not quite — it was ${displayName(playTarget)}.`;
+    const nameResult = nameCorrect ? `Correct name: ${displayName(playTarget)}.` : `Not quite — it was ${displayName(playTarget)}.`;
     const factsResultText = factsCorrectCount >= 2 ? "True facts locked in." : "Keep reviewing this profile.";
     setFactsResult(`${nameResult} +${round} points. ${factsResultText}`);
   }
@@ -237,12 +236,12 @@ export function FoundersGame() {
   }
 
   async function preloadPairsQuestion() {
-    if (preloadedPair || !attendees.length) return;
+    if (preloadedPair || !playPool.length) return;
     setPreloadedPair(await preparePairsQuestion());
   }
 
   async function preparePairsQuestion(): Promise<PreparedPairsQuestion> {
-    const pool = shuffleForPrompt(attendees).slice(0, 8);
+    const pool = shuffleForPrompt(playPool).slice(0, 8);
     const fallback = buildLocalPairsChallenge(pool);
     const tokens = getTokens();
     if (!runtimeConfig || !tokens?.access_token) return { pool, challenge: fallback };
@@ -499,25 +498,29 @@ export function FoundersGame() {
                 <div className="grid gap-2 sm:grid-cols-3">
                   {easyOptions.map((x) => {
                     const selected = easySelectedId === x.id;
+                    const revealed = Boolean(factsResult);
+                    const correct = x.id === playTarget.id;
                     return (
                       <button
                         key={x.id}
-                        className={`rounded-xl border px-3 py-2 text-left transition ${selected ? "border-[#4fb77c] bg-[#4fb77c]/10 ring-2 ring-[#4fb77c]/30" : "bg-white hover:bg-slate-50"}`}
-                        onClick={() => setEasySelectedId(x.id)}
+                        className={`rounded-xl border px-3 py-2 text-left transition ${
+                          revealed && correct
+                            ? "border-[#4fb77c] bg-[#4fb77c]/15 ring-2 ring-[#4fb77c]/40"
+                            : revealed && selected
+                              ? "border-[#cb5549] bg-[#cb5549]/10 ring-2 ring-[#cb5549]/35"
+                              : selected
+                                ? "border-[#4fb77c] bg-[#4fb77c]/10 ring-2 ring-[#4fb77c]/30"
+                                : "bg-white hover:bg-slate-50"
+                        }`}
+                        onClick={() => !revealed && setEasySelectedId(x.id)}
                         aria-pressed={selected}
                       >
                         {displayName(x)}
+                        {revealed && correct && <span className="mt-1 block text-xs font-black text-[#25734b]">Correct name</span>}
                       </button>
                     );
                   })}
                 </div>
-                <button
-                  className="mt-3 rounded-xl bg-[#4fb77c] px-3 py-2 font-bold text-white disabled:cursor-not-allowed disabled:bg-slate-300"
-                  disabled={easySelectedId === null || Boolean(factsResult)}
-                  onClick={() => submitPlay(easySelectedId === playTarget.id)}
-                >
-                  Reveal
-                </button>
               </div>
             ) : (
               <div className="mt-4">
@@ -525,14 +528,9 @@ export function FoundersGame() {
                   value={hardGuess}
                   onChange={(e) => setHardGuess(e.target.value)}
                   placeholder="Type first name..."
+                  disabled={Boolean(factsResult)}
                   className="w-full rounded-xl border px-3 py-2"
                 />
-                <button
-                  className="mt-2 rounded-xl bg-[#1e2d40] px-3 py-2 text-white"
-                  onClick={() => submitPlay(hardGuess.trim().toLowerCase() === firstName(playTarget).toLowerCase())}
-                >
-                  Reveal
-                </button>
               </div>
             )}
 
@@ -544,16 +542,34 @@ export function FoundersGame() {
                     <input
                       type="checkbox"
                       checked={factsPick.includes(i)}
+                      disabled={Boolean(factsResult)}
                       onChange={(e) => {
                         setFactsPick((prev) =>
                           e.target.checked ? [...prev, i].slice(0, 2) : prev.filter((x) => x !== i),
                         );
                       }}
                     />
-                    <span>{fact}</span>
+                    <span className="flex-1">{fact}</span>
+                    {factsResult && (
+                      <span className={`rounded-full px-2 py-1 text-xs font-black ${i === factsChallenge.lieIndex ? "bg-[#cb5549]/10 text-[#9b352d]" : "bg-[#4fb77c]/15 text-[#25734b]"}`}>
+                        {i === factsChallenge.lieIndex ? "Lie" : "Truth"}
+                      </span>
+                    )}
                   </label>
                 ))}
               </div>
+              <button
+                className={`mt-3 rounded-xl px-3 py-2 font-bold text-white disabled:cursor-not-allowed disabled:bg-slate-300 ${mode === "play-easy" ? "bg-[#4fb77c]" : "bg-[#1e2d40]"}`}
+                disabled={
+                  Boolean(factsResult) ||
+                  factsPick.length !== 2 ||
+                  (mode === "play-easy" && easySelectedId === null) ||
+                  (mode === "play-hard" && !hardGuess.trim())
+                }
+                onClick={() => submitPlay(mode === "play-easy" ? easySelectedId === playTarget.id : hardGuess.trim().toLowerCase() === firstName(playTarget).toLowerCase())}
+              >
+                Reveal Answers!
+              </button>
               {factsResult && <p className="mt-3 rounded-xl bg-slate-100 p-2 text-sm">{factsResult}</p>}
               <button className="mt-3 rounded-xl border px-3 py-2" onClick={() => startPlay(mode)}>Next Round</button>
             </div>
@@ -784,6 +800,10 @@ function isStudyReady(attendee: Attendee) {
   return isNamed(attendee);
 }
 
+function isPlayable(attendee: Attendee) {
+  return isNamed(attendee) && Boolean(attendeePhoto(attendee));
+}
+
 function profileFacts(attendee: Attendee) {
   const facts = (attendee.extra_facts ?? []).map((item) => item.fact).slice(0, 4);
   if (facts.length) return facts;
@@ -865,7 +885,7 @@ function ensureMinimumPairAnswers(challenge: PairChallenge, pool: Attendee[]): P
   const validIds = new Set(pool.map((attendee) => attendee.id));
   const answerIds = Array.from(new Set(challenge.answerIds.filter((id) => validIds.has(id))));
   if (answerIds.length >= 2) return { ...challenge, answerIds };
-  const fillers = pool.map((attendee) => attendee.id).filter((id) => !answerIds.includes(id)).slice(0, 2 - answerIds.length);
+  const fillers = shuffle(pool.map((attendee) => attendee.id).filter((id) => !answerIds.includes(id))).slice(0, 2 - answerIds.length);
   return { ...challenge, answerIds: [...answerIds, ...fillers] };
 }
 
@@ -1420,7 +1440,7 @@ function RelationshipCard({
       <button className="mt-3 block w-full rounded-2xl bg-slate-50 p-3 text-left transition hover:bg-[#eef5ff]" onClick={() => onStudy(edge)}>
         <ul className="space-y-1 text-sm text-slate-600">
           {edge.reasons.slice(0, 3).map((reason) => (
-            <li key={reason}>• {reason}</li>
+            <li key={reason}>• {capitalizeFirst(reason)}</li>
           ))}
         </ul>
         <span className="mt-3 block text-sm font-semibold text-[#5583b7]">{expanded ? "Refresh pairing insight" : "Generate pairing insight →"}</span>
@@ -1529,7 +1549,7 @@ function InsightList({ title, items }: { title: string; items: string[] }) {
     <div className="rounded-2xl border border-slate-100 bg-slate-50 p-5">
       <p className="font-black text-[#0f1933]">{title}</p>
       <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
-        {items.slice(0, 4).map((item) => <li key={item}>• {item}</li>)}
+        {items.slice(0, 4).map((item) => <li key={item}>• {capitalizeFirst(item)}</li>)}
       </ul>
     </div>
   );
@@ -1614,7 +1634,7 @@ function PairsPanel({
   result: string;
   onNext: () => void;
 }) {
-  const shown = attendees.slice(0, 8);
+  const shown = useMemo(() => shuffle(attendees).slice(0, 8), [attendees]);
   const [picked, setPicked] = useState<number[]>([]);
   const [submitted, setSubmitted] = useState<number[] | null>(null);
   if (loading || !question) {
