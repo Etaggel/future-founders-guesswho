@@ -127,12 +127,24 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.25,
-    "linkedin_url": null,
+    "name": "Ellen Leonard Bates",
+    "confidence": 0.99,
+    "linkedin_url": "https://www.linkedin.com/in/ellenleonardbates",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQHRDnbMzQ9GkA/profile-displayphoto-scale_200_200/B4EZj3AIC6GwAg-/0/1756490663062?e=2147483647&v=beta&t=MmROq995ez4Qc58dG2BC4Geibif2vBf5J4TvGM3IezE",
+    "gender": "female",
     "company": "Previously Diageo, Mars, AB InBev, Ferrero, etc.",
     "role": "Senior Commercial Strategy / Consumer Insights Leader",
-    "notes": "Highly distinctive career path (multi-region FMCG + CHIMP project + neurodivergent ERG founder), but no single high-confidence public LinkedIn match yet. Likely senior but not highly public-facing."
+    "notes": "User-reviewed match. Public snippets strongly connect Ellen Leonard Bates to Diageo, ADHD/autism, and PRISM/neurodiversity ERG leadership; the broader multi-FMCG, CHIMP, Australia/NZ, and contract-brewing clues remain private-context signals."
+  },
+
+  "identified_person": {
+    "name": "Ellen Leonard Bates",
+    "confidence": 0.99,
+    "linkedin_url": "https://www.linkedin.com/in/ellenleonardbates",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQHRDnbMzQ9GkA/profile-displayphoto-scale_200_200/B4EZj3AIC6GwAg-/0/1756490663062?e=2147483647&v=beta&t=MmROq995ez4Qc58dG2BC4Geibif2vBf5J4TvGM3IezE",
+    "gender": "female",
+    "company": "Diageo",
+    "role": "Commercial Strategy / Partnerships Leader"
   },
 
   "profile_summary": {
@@ -201,12 +213,12 @@
     {
       "fact": "Has entrepreneurial experience outside corporate (contract brewing business)",
       "type": "experience",
-      "use_for_conversation": "Ask what he learned going from corporate to running a physical product business"
+      "use_for_conversation": "Ask what she learned going from corporate to running a physical product business"
     },
     {
       "fact": "Actively uses AI to augment personal productivity and manage executive function",
       "type": "operating_style",
-      "use_for_conversation": "Ask how he uses AI personally vs professionally"
+      "use_for_conversation": "Ask how she uses AI personally vs professionally"
     },
     {
       "fact": "Strong bias toward simplifying complexity into human-understandable outputs",
@@ -238,7 +250,7 @@
   ],
 
   "relationship_strategy": {
-    "best_angle": "Respect his experience + challenge his thinking",
+    "best_angle": "Respect her experience + challenge her thinking",
     "approach": [
       "Engage at a strategic level, not surface-level",
       "Avoid generic startup talk",
@@ -740,7 +752,7 @@
     {
       "fact": "Comfortable operating without engineering support due to no-code / AI tooling",
       "type": "operating_style",
-      "use_for_conversation": "Ask what she can now build solo that previously required a team"
+      "use_for_conversation": "Ask what he can now build solo that previously required a team"
     },
     {
       "fact": "Has hands-on experience designing CRM architecture and workflows, not just using them",
@@ -1256,15 +1268,26 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.6,
-    "linkedin_url": null,
+    "name": "Dan O'Brien",
+    "confidence": 0.82,
+    "linkedin_url": "https://ie.linkedin.com/in/danjohnobrien",
+    "photo_url": "https://media.licdn.com/dms/image/v2/C4D03AQF7Bwpt5jYvrQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1625507660325?e=2147483647&v=beta&t=_s9yujQtW2AM3I2Ir8GG1bt7ZIApZ6JPQJMdj_LPGFc",
     "companies": [
       "Wayflyer",
       "Home energy services startup (Ireland)"
     ],
     "role": "Founder / MD + former GTM leader",
-    "notes": "Strong candidate likely exists among early Wayflyer commercial hires who later founded an Irish home energy services company (heat pumps / boilers). Narrowable with targeted LinkedIn search."
+    "notes": "User-reviewed best match. Public snippets identify Dan O'Brien as an early/first Wayflyer sales or revenue hire; the Irish home-energy services clue remains less publicly corroborated."
+  },
+
+  "identified_person": {
+    "name": "Dan O'Brien",
+    "confidence": 0.82,
+    "linkedin_url": "https://ie.linkedin.com/in/danjohnobrien",
+    "photo_url": "https://media.licdn.com/dms/image/v2/C4D03AQF7Bwpt5jYvrQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1625507660325?e=2147483647&v=beta&t=_s9yujQtW2AM3I2Ir8GG1bt7ZIApZ6JPQJMdj_LPGFc",
+    "gender": "male",
+    "company": "Wayflyer / HappyStack",
+    "role": "Founder and Commercial Operator"
   },
 
   "profile_summary": {
@@ -1803,7 +1826,7 @@
     {
       "fact": "Shifting from marketing-led roles to data and product-focused thinking",
       "type": "career_shift",
-      "use_for_conversation": "Ask what changed in how he thinks about value creation"
+      "use_for_conversation": "Ask what changed in how she thinks about value creation"
     },
     {
       "fact": "Strong understanding of enterprise SaaS buying cycles",
