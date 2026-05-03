@@ -1,6 +1,6 @@
 "use client";
 
-import type { FormEvent } from "react";
+import type { FormEvent, RefObject } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   buildEasyOptions,
@@ -42,6 +42,7 @@ export function FoundersGame() {
   const [factsResult, setFactsResult] = useState<string>("");
   const [pairQuestion, setPairQuestion] = useState<string>("");
   const [pairAnswers, setPairAnswers] = useState<number[]>([]);
+  const [pairExplanation, setPairExplanation] = useState<string>("");
   const [pairResult, setPairResult] = useState<string>("");
   const [pairKey, setPairKey] = useState(0);
   const [pairPool, setPairPool] = useState<Attendee[]>([]);
@@ -59,6 +60,8 @@ export function FoundersGame() {
   const [ideaInsight, setIdeaInsight] = useState<IdeaExplorerInsight | null>(null);
   const [ideaLoading, setIdeaLoading] = useState(false);
   const [ideaError, setIdeaError] = useState("");
+  const learnCardRef = useRef<HTMLElement | null>(null);
+  const playCardRef = useRef<HTMLElement | null>(null);
 
   const studyPool = useMemo(() => attendees.filter(isStudyReady), [attendees]);
   const playPool = useMemo(() => attendees.filter(isPlayable), [attendees]);
@@ -136,6 +139,13 @@ export function FoundersGame() {
   }, [studyPool, mode, learnBatch.length]);
 
   const currentLearn = learnBatch[learnIndex];
+
+  function scrollToRef(ref: RefObject<HTMLElement | null>) {
+    window.requestAnimationFrame(() => {
+      ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
   function completeLearnCard(correct: boolean) {
     if (!currentLearn) return;
     if (correct) {
@@ -143,13 +153,14 @@ export function FoundersGame() {
         ...m,
         [currentLearn.id]: updateMastery(m[currentLearn.id] ?? 0, true),
       }));
-      startPlay("play-easy");
+      startPlay("play-easy", true);
       return;
     }
     setLearnIndex((index) => nextRandomIndex(learnBatch.length, index));
+    scrollToRef(learnCardRef);
   }
 
-  function startPlay(nextMode: Mode) {
+  function startPlay(nextMode: Mode, scrollAfterStart = false) {
     const pool = playPool.length > 0 ? playPool : studyPool;
     const unseenPool = pool.filter((attendee) => !playSeenIds.includes(attendee.id));
     const candidatePool = unseenPool.length > 0 ? unseenPool : pool;
@@ -164,6 +175,7 @@ export function FoundersGame() {
     setFactsPick([]);
     setFactsResult("");
     if (nextTarget) void loadAiFacts(nextTarget);
+    if (scrollAfterStart) scrollToRef(playCardRef);
   }
 
   async function loadAiFacts(target: Attendee) {
@@ -233,6 +245,7 @@ export function FoundersGame() {
     setPairPool(prepared.pool);
     setPairQuestion(prepared.challenge.question);
     setPairAnswers(prepared.challenge.answerIds);
+    setPairExplanation(prepared.challenge.explanation ?? "");
     setPairKey((key) => key + 1);
   }
 
@@ -268,10 +281,15 @@ export function FoundersGame() {
 
   function scorePairs(chosen: number[]) {
     const correct = chosen.every((id) => pairAnswers.includes(id)) && chosen.length === pairAnswers.length;
+    const answerNames = pairAnswers
+      .map((id) => pairPool.find((attendee) => attendee.id === id))
+      .filter((attendee): attendee is Attendee => Boolean(attendee))
+      .map(founderDisplayName);
+    const explanation = pairExplanation || `The correct answers were ${answerNames.join(", ")} because their profiles match the prompt's category or evidence.`;
     setPairResult(
       correct
-        ? `Correct. ${chosen.length}/${pairAnswers.length} selected exactly.`
-        : `Not quite. ${chosen.filter((id) => pairAnswers.includes(id)).length}/${pairAnswers.length} correct selections.`,
+        ? `Correct. ${chosen.length}/${pairAnswers.length} selected exactly. ${explanation}`
+        : `Not quite. ${chosen.filter((id) => pairAnswers.includes(id)).length}/${pairAnswers.length} correct selections. ${explanation}`,
     );
     if (correct) setScore((s) => s + 30);
   }
@@ -353,14 +371,14 @@ export function FoundersGame() {
   if (appView === "chooser") {
     return (
       <Shell>
-        <header className="overflow-hidden rounded-[2rem] border border-white/25 bg-white/90 p-8 shadow-2xl shadow-slate-900/10 backdrop-blur">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <header className="overflow-hidden rounded-[2rem] border border-white/25 bg-white/90 p-8 text-center shadow-2xl shadow-slate-900/10 backdrop-blur lg:text-left">
+          <div className="flex flex-col items-center gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#cb5549]">Founders. Faces. Names. Matches.</p>
               <h1 className="mt-3 text-4xl font-black tracking-tight text-[#0f1933] sm:text-6xl">
-                Future founders 2026
+                Future Founders 2026
               </h1>
-              <p className="mt-4 max-w-2xl text-lg text-slate-600">
+              <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 lg:mx-0">
                 Learn faces and facts, then study the compatibility map to spot warm intros, cofounder fits, and useful conversation angles.
               </p>
             </div>
@@ -484,7 +502,7 @@ export function FoundersGame() {
         {appView === "guess-who" && (
           <>
         {mode === "learn" && currentLearn && (
-          <section className="overflow-hidden rounded-[1.5rem] border border-white/50 bg-white/90 shadow-xl shadow-slate-900/10 backdrop-blur sm:rounded-[2rem]">
+          <section ref={learnCardRef} className="scroll-mt-6 overflow-hidden rounded-[1.5rem] border border-white/50 bg-white/90 shadow-xl shadow-slate-900/10 backdrop-blur sm:rounded-[2rem]">
             <div className="grid gap-0 lg:grid-cols-[18rem_1fr]">
               <div className="flex flex-col items-center bg-gradient-to-br from-[#0f1933] via-[#274b78] to-[#cb5549] p-5 text-center text-white sm:p-6 lg:items-start lg:text-left">
                 <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-white/65">Learn mode</p>
@@ -517,7 +535,7 @@ export function FoundersGame() {
         )}
 
         {(mode === "play-easy" || mode === "play-hard") && playTarget && factsChallenge && (
-          <section className="rounded-[1.5rem] border border-white/50 bg-white/90 p-5 shadow-xl shadow-slate-900/10 backdrop-blur sm:rounded-[2rem] sm:p-6">
+          <section ref={playCardRef} className="scroll-mt-6 rounded-[1.5rem] border border-white/50 bg-white/90 p-5 shadow-xl shadow-slate-900/10 backdrop-blur sm:rounded-[2rem] sm:p-6">
             <p className="mb-2 text-sm uppercase tracking-wide">{mode === "play-easy" ? "Play Easy" : "Play Hard"}</p>
             <h2 className="text-2xl font-semibold">Who is this attendee?</h2>
             <div className="mt-3 flex flex-col items-center gap-4 rounded-2xl border bg-gradient-to-br from-white to-slate-50 p-4 text-center sm:flex-row sm:items-center sm:text-left">
@@ -593,20 +611,22 @@ export function FoundersGame() {
                   </label>
                 ))}
               </div>
-              <button
-                className={`mt-3 rounded-xl px-3 py-2 font-bold text-white disabled:cursor-not-allowed disabled:bg-slate-300 ${mode === "play-easy" ? "bg-[#4fb77c]" : "bg-[#1e2d40]"}`}
-                disabled={
-                  Boolean(factsResult) ||
-                  factsPick.length !== 2 ||
-                  (mode === "play-easy" && easySelectedId === null) ||
-                  (mode === "play-hard" && !hardGuess.trim())
-                }
-                onClick={() => submitPlay(mode === "play-easy" ? easySelectedId === playTarget.id : hardGuess.trim().toLowerCase() === firstName(playTarget).toLowerCase())}
-              >
-                Reveal Answers!
-              </button>
+              <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <button
+                  className={`rounded-xl px-3 py-2 font-bold text-white disabled:cursor-not-allowed disabled:bg-slate-300 ${mode === "play-easy" ? "bg-[#4fb77c]" : "bg-[#1e2d40]"}`}
+                  disabled={
+                    Boolean(factsResult) ||
+                    factsPick.length !== 2 ||
+                    (mode === "play-easy" && easySelectedId === null) ||
+                    (mode === "play-hard" && !hardGuess.trim())
+                  }
+                  onClick={() => submitPlay(mode === "play-easy" ? easySelectedId === playTarget.id : hardGuess.trim().toLowerCase() === firstName(playTarget).toLowerCase())}
+                >
+                  Reveal Answers!
+                </button>
+                <button className="self-end rounded-xl border px-3 py-2 sm:self-auto" onClick={() => startPlay(mode, true)}>Next Round</button>
+              </div>
               {factsResult && <p className="mt-3 rounded-xl bg-slate-100 p-2 text-sm">{factsResult}</p>}
-              <button className="mt-3 rounded-xl border px-3 py-2" onClick={() => startPlay(mode)}>Next Round</button>
             </div>
           </section>
         )}
@@ -643,7 +663,7 @@ function MatchMakerLanding({
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#cb5549]">Map overview</p>
           <h2 className="mt-3 text-4xl font-black tracking-tight text-[#0f1933]">Start with the network, then choose a founder.</h2>
           <p className="mt-4 max-w-2xl text-slate-600">
-            This view shows compatibility paths without assuming Lyndon, or anyone else, is the default starting point. Use the filters above to reveal a cluster, then open a person or relationship to prepare a sharper conversation.
+            This view shows compatibility paths across the whole group. Use the filters above to reveal a cluster, then open a person or relationship to prepare a sharper conversation.
           </p>
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
             <MetricCard label="Profiles" value={String(matchData.attendees.length)} detail={`${namedCount} named`} />
@@ -733,6 +753,7 @@ function MatchGraphPanel({
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#5583b7]">Relationship graph</p>
           <h3 className="mt-2 text-xl font-black sm:text-2xl">Explore matches by founder and category.</h3>
+          <p className="mt-2 text-sm font-semibold text-slate-600">Tap a founder number to view their profile and matches!</p>
         </div>
       </div>
       <div className="mt-5 grid gap-5 xl:grid-cols-[22rem_1fr]">
@@ -766,7 +787,20 @@ function MatchGraphPanel({
             })}
           </svg>
         </div>
-        <div className="grid content-start gap-3 sm:grid-cols-2">
+        <div className="content-start">
+          <label className="text-sm font-bold text-[#0f1933] md:hidden" htmlFor="cluster-filter">Filter by cluster</label>
+          <select
+            id="cluster-filter"
+            className="mt-2 w-full rounded-2xl border border-slate-200 bg-white p-3 text-sm font-semibold text-slate-700 shadow-inner md:hidden"
+            value={clusterFilter}
+            onChange={(event) => onClusterFilter(event.target.value)}
+          >
+            <option value="all">All clusters</option>
+            {(clusters ?? []).map((cluster) => (
+              <option key={cluster.cluster} value={cluster.cluster}>{humanize(cluster.cluster)} ({cluster.members.length})</option>
+            ))}
+          </select>
+        <div className="hidden content-start gap-3 md:grid md:grid-cols-2">
           {(clusters ?? []).slice(0, 4).map((cluster) => (
             <button key={cluster.cluster} className={`rounded-2xl p-4 text-left ring-1 transition ${clusterFilter === cluster.cluster ? "bg-[#0f1933] text-white ring-[#0f1933]" : "bg-slate-50 ring-slate-100 hover:bg-white"}`} onClick={() => onClusterFilter(clusterFilter === cluster.cluster ? "all" : cluster.cluster)}>
               <p className="font-black">{humanize(cluster.cluster)}</p>
@@ -774,6 +808,7 @@ function MatchGraphPanel({
               <p className={`mt-2 text-sm ${clusterFilter === cluster.cluster ? "text-white/80" : "text-slate-600"}`}>{cluster.opportunities[0]}</p>
             </button>
           ))}
+        </div>
         </div>
       </div>
     </section>
@@ -901,7 +936,7 @@ function buildLocalPairsChallenge(pool: Attendee[]): PairChallenge {
       return ensureMinimumPairAnswers({
         question: `Select everyone whose profile is tagged ${category}.`,
         answerIds,
-        explanation: "Fallback prompt generated from local categories.",
+        explanation: `The correct answers share the ${category} profile tag, so they match the category in the prompt.`,
       }, pool);
     }
   }
@@ -912,7 +947,7 @@ function buildLocalPairsChallenge(pool: Attendee[]): PairChallenge {
   return ensureMinimumPairAnswers({
     question: `Select everyone with ${keyword} in their profile clues.`,
     answerIds: answerIds.length ? answerIds : pool.slice(0, 2).map((attendee) => attendee.id),
-    explanation: "Fallback prompt generated from local profile text.",
+    explanation: `The correct answers include ${keyword} in their tagline or profile background, which is the clue the prompt is testing.`,
   }, pool);
 }
 
@@ -1330,13 +1365,6 @@ function MatchMakerPanel({
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#cb5549]">Founders</p>
           <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-bold text-slate-500">{visibleAttendees.length}</span>
         </div>
-        <button
-          className={`mt-3 w-full rounded-2xl p-3 text-left transition ${selectedId === null ? "bg-[#cb5549] text-white shadow-lg shadow-[#cb5549]/20" : "bg-white hover:bg-slate-50"}`}
-          onClick={() => handleSelect(null)}
-        >
-          <p className="font-bold">Map overview</p>
-          <p className={`mt-1 text-xs ${selectedId === null ? "text-white/75" : "text-slate-500"}`}>Clusters, filters, and strongest paths</p>
-        </button>
         <div className="relative mt-3 lg:min-h-0 lg:flex-1">
           {railOverflow.up && <ScrollNudge direction="up" />}
           {railOverflow.down && <ScrollNudge direction="down" />}
@@ -1397,14 +1425,17 @@ function MatchMakerPanel({
               <SignalCard title="Strengths" values={selectedProfile.strengths.slice(0, 3)} />
               <SignalCard title="Needs" values={selectedProfile.needs.slice(0, 3)} />
             </div>
-            <button
-              className="mt-5 rounded-full bg-white px-5 py-3 text-sm font-black text-[#0f1933] shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5 hover:bg-[#f0c36a]"
-              onClick={() => setProfileExpanded((expanded) => !expanded)}
-            >
-              {profileExpanded ? "Collapse founder details" : "Learn more about this founder"}
-            </button>
+            {!profileExpanded && (
+              <button
+                className="mt-5 rounded-full bg-white px-5 py-3 text-sm font-black text-[#0f1933] shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5 hover:bg-[#f0c36a]"
+                onClick={() => setProfileExpanded(true)}
+                aria-expanded={profileExpanded}
+              >
+                + Learn more about this founder
+              </button>
+            )}
           </div>
-          {profileExpanded && <FounderProfileDetails attendee={selectedAttendee} />}
+          {profileExpanded && <FounderProfileDetails attendee={selectedAttendee} onCollapse={() => setProfileExpanded(false)} />}
           <div className="p-5 sm:p-6">
             <h3 className="text-xl font-black">Best relationship paths</h3>
             <p className="mt-1 text-sm text-slate-600">
@@ -1458,9 +1489,16 @@ function RelationshipCard({
 }) {
   const otherId = edge.source === selectedId ? edge.target : edge.source;
   const other = attendeeById.get(otherId);
+  const cardRef = useRef<HTMLElement | null>(null);
   if (!other) return null;
+  function handleStudy() {
+    onStudy(edge);
+    window.requestAnimationFrame(() => {
+      cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
   return (
-    <article className={`rounded-2xl border bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${expanded ? "border-[#5583b7] ring-2 ring-[#8fb7e8]/40" : "border-slate-100"}`}>
+    <article ref={cardRef} className={`scroll-mt-6 rounded-2xl border bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${expanded ? "border-[#5583b7] ring-2 ring-[#8fb7e8]/40" : "border-slate-100"}`}>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <button className="flex items-center gap-3 text-left" onClick={(event) => { event.stopPropagation(); onSelect(otherId); }}>
           <FounderAvatar attendee={other} size="sm" />
@@ -1472,7 +1510,7 @@ function RelationshipCard({
         </button>
         <span className="rounded-full bg-[#4fb77c]/15 px-3 py-1 text-sm font-bold text-[#25734b]">{Math.round(edge.score * 100)}% fit</span>
       </div>
-      <button className="mt-3 block w-full rounded-2xl bg-slate-50 p-3 text-left transition hover:bg-[#eef5ff]" onClick={() => onStudy(edge)}>
+      <button className="mt-3 block w-full rounded-2xl bg-slate-50 p-3 text-left transition hover:bg-[#eef5ff]" onClick={handleStudy}>
         <ul className="space-y-1 text-sm text-slate-600">
           {edge.reasons.slice(0, 3).map((reason) => (
             <li key={reason}>• {capitalizeFirst(reason)}</li>
@@ -1485,7 +1523,7 @@ function RelationshipCard({
   );
 }
 
-function FounderProfileDetails({ attendee }: { attendee: Attendee }) {
+function FounderProfileDetails({ attendee, onCollapse }: { attendee: Attendee; onCollapse: () => void }) {
   const highlights = attendee.profile_summary?.experience_highlights ?? [];
   const interests = attendee.profile_summary?.interests ?? [];
   const facts = attendee.extra_facts ?? [];
@@ -1514,6 +1552,15 @@ function FounderProfileDetails({ attendee }: { attendee: Attendee }) {
         {(attendee.surprising_traits?.items ?? []).length > 0 && <DetailBlock title="Surprising traits" items={attendee.surprising_traits?.items ?? []} />}
         {facts.length > 0 && <DetailBlock title="Useful facts" items={facts.map((fact) => fact.use_for_conversation ? `${fact.fact} — ${fact.use_for_conversation}` : fact.fact)} />}
         {starters.length > 0 && <DetailBlock title="Conversation starters" items={starters} />}
+      </div>
+      <div className="mt-6 flex justify-end">
+        <button
+          className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-black text-[#0f1933] shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-100"
+          onClick={onCollapse}
+          aria-expanded="true"
+        >
+          − Collapse founder details
+        </button>
       </div>
     </section>
   );
