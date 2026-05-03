@@ -867,6 +867,14 @@ function founderDisplayName(attendee: Attendee) {
   return attendeePhoto(attendee) && linkedinUrl(attendee) ? displayName(attendee) : `Founder ${attendee.id}`;
 }
 
+function founderPickerLabel(attendee: Attendee) {
+  return `${founderDisplayName(attendee)} (${attendee.id})`;
+}
+
+function isGenericAvatarPhoto(photo: string | null) {
+  return photo === "/silhouette.svg";
+}
+
 function firstName(attendee: Attendee) {
   return displayName(attendee).split(/\s+/u).filter(Boolean)[0] ?? displayName(attendee);
 }
@@ -892,7 +900,7 @@ function profileFacts(attendee: Attendee) {
 function FounderAvatar({ attendee, size = "md" }: { attendee: Attendee; size?: "sm" | "md" | "lg" | "profile" | "xl" }) {
   const photo = attendeePhoto(attendee);
   const sizeClass = size === "xl" ? "h-44 w-44 text-4xl sm:h-56 sm:w-56 sm:text-5xl" : size === "profile" ? "h-28 w-28 text-3xl sm:h-32 sm:w-32 sm:text-4xl" : size === "lg" ? "h-20 w-20 text-2xl" : size === "sm" ? "h-10 w-10 text-sm" : "h-14 w-14 text-lg";
-  if (photo) {
+  if (photo && !isGenericAvatarPhoto(photo)) {
     return <div className={`${sizeClass} shrink-0 rounded-full bg-cover bg-center shadow-inner ring-2 ring-white`} style={{ backgroundImage: `url(${photo})` }} aria-label={`${founderDisplayName(attendee)} photo`} />;
   }
   return (
@@ -1457,7 +1465,7 @@ function MatchMakerPanel({
               >
                 <FounderAvatar attendee={attendee} size="sm" />
                 <span className="min-w-0">
-                  <p className="font-bold">{founderDisplayName(attendee)}</p>
+                  <p className="font-bold">{founderPickerLabel(attendee)}</p>
                   <p className={`mt-1 truncate text-xs ${active ? "text-white/70" : "text-slate-500"}`}>{attendee.tagline}</p>
                 </span>
               </button>
