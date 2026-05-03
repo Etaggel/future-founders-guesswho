@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">Profile silhouette</title>
+  <desc id="desc">Generic person silhouette used when no profile photo is available.</desc>
+  <rect width="240" height="240" rx="32" fill="#e5e7eb"/>
+  <circle cx="120" cy="88" r="44" fill="#9ca3af"/>
+  <path d="M42 212c7-47 39-78 78-78s71 31 78 78" fill="#9ca3af"/>
+</svg>

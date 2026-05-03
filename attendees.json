@@ -4,11 +4,13 @@
   "id": 1,
   "tagline": "Systems Engineer & Deep Tech Builder | Aviation & Aerospace",
   "category": "Technical",
-
   "likely_match": {
-    "name": "Likely Shubha Saha (or very close match)",
-    "confidence": 0.75,
-    "linkedin_url": null,
+    "name": "Shireen Datta",
+    "linkedin_url": "https://www.linkedin.com/in/shireendatta/",
+	"photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQGMppOhQYOjeQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1715790714686?e=1779321600&v=beta&t=cQessGvxCxygiPnm8nKz-fID8ESLxv2w3ubgPg9-zTI",
+	"gender" : "female",
+    "confidence": 1.0,
+    "source": "confirmed",
     "company": "Aurora Flight Sciences",
     "previous_company": "Wisk Aero",
     "role": "Systems Engineer",
@@ -396,6 +398,7 @@
     "confidence": 0.88,
     "linkedin_url": "https://ie.linkedin.com/in/dan-moss-robotics",
 	"photo_url": "https://media.licdn.com/dms/image/v2/D4D03AQGHjDKZVKQiXA/profile-displayphoto-crop_800_800/B4DZup.vBNHQAI-/0/1768083354351?e=1779321600&v=beta&t=G7vob6bMkyJWuJ0L4ZhDGjjYqnQk4GO-07DmcQlaRz4",
+	"gender" : "male",
     "company": "Manna Air Delivery",
     "role": "Head of System Integrations"
   },
@@ -522,6 +525,7 @@
     "confidence": 0.97,
     "linkedin_url": "https://ie.linkedin.com/in/liam-murphy-48903425",
 "photo_url" : "https://media.licdn.com/dms/image/v2/C4E03AQGjKELznHcQGQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1637143662130?e=1779321600&v=beta&t=LWx5fGA82gcSkcafS9QcGwY0TxaN5KsUZcB8wT1_sAE",
+	"gender" : "male",
     "company": "Wachsman",
     "role": "Global President"
   },
@@ -777,6 +781,7 @@
     "confidence": 0.93,
     "linkedin_url": "https://www.linkedin.com/in/elainedeehan/",
 "photo_url" : "https://media.licdn.com/dms/image/v2/D4E03AQEUpPXlxiPPEQ/profile-displayphoto-shrink_800_800/B4EZnSs_JvGcAc-/0/1760176633262?e=1779321600&v=beta&t=trvMFUC7GYWfyChZx_j0hTgeMLWFXUBDMAFaOdcv9hI",
+	"gender" : "female",
     "companies": [
       "Monzo",
       "Total Processing"
@@ -924,6 +929,7 @@
     "confidence": 0.88,
     "linkedin_url": "https://www.linkedin.com/in/oisin-tm/",
 "photo_url" : "https://media.licdn.com/dms/image/v2/D4D03AQEv4gdjUOQbnQ/profile-displayphoto-crop_800_800/B4DZzjyXXiH4AI-/0/1773348158303?e=1779321600&v=beta&t=tVSKxqqlfGTIFII-deP2EVeMdAMduoQDG64KPwe-HnA",
+	"gender" : "male",
     "website": "https://caideiseach.com"
   },
 
@@ -1206,15 +1212,24 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.6,
-    "linkedin_url": null,
-    "companies": [
-      "Wayflyer",
-      "Home energy services startup (Ireland)"
-    ],
-    "role": "Founder / MD + former GTM leader",
-    "notes": "Strong candidate likely exists among early Wayflyer commercial hires who later founded an Irish home energy services company (heat pumps / boilers). Narrowable with targeted LinkedIn search."
+    "name": "Mark Finnerty",
+    "confidence": 1.0,
+    "linkedin_url": "https://www.linkedin.com/in/mark-finnerty-402b76103/",
+    "photo_url": "/silhouette.svg",
+    "gender": "male",
+    "company": "EnergyUpgrade.ie",
+    "role": "Co-Founder & Advisor",
+    "notes": "User-confirmed definite match. LinkedIn snippets match Director/Co-Founder at EnergyUpgrade.ie, heat pumps, gas boilers, solar panels, insulation, a 22-25 person team, and Wayflyer Growth Capital Markets leadership scaling deployed capital from €40M to €400M and driving roughly 300 new business deals. Uses local silhouette because the LinkedIn profile has no photo."
+  },
+
+  "identified_person": {
+    "name": "Mark Finnerty",
+    "confidence": 1.0,
+    "linkedin_url": "https://www.linkedin.com/in/mark-finnerty-402b76103/",
+    "photo_url": "/silhouette.svg",
+    "gender": "male",
+    "company": "EnergyUpgrade.ie",
+    "role": "Co-Founder & Advisor"
   },
 
   "profile_summary": {
@@ -1344,9 +1359,8 @@
       "Operator → founder transition"
     ],
     "uncertainties": [
-      "No company name for home services business",
-      "Multiple Wayflyer early hires fit partial profile",
-      "Identity requires cross-matching with energy startup founders"
+      "LinkedIn profile does not provide a profile photo, so the app uses a generic silhouette",
+      "Some founder-transition details remain from attendee notes rather than public snippets found"
     ]
   }
 },
@@ -1655,6 +1669,7 @@
     "name": "Julie Currid",
     "linkedin_url": "https://www.linkedin.com/in/juliecurrid/",
 	"photo_url" : "https://media.licdn.com/dms/image/v2/D4E03AQFtkHn-ZVXltg/profile-displayphoto-crop_800_800/B4EZ1EBoyJIkAI-/0/1774962774622?e=1779321600&v=beta&t=jOVCK3T20CHGoN5S-NpWS0yFTUswRqKSynNNSbRtB0k",
+	"gender" : "female",
     "confidence": 1.0,
     "companies": [
       "GoContractor",
@@ -1802,6 +1817,7 @@
     "name": "George Mendes",
     "linkedin_url": "https://www.linkedin.com/in/georgemendes/",
 	"photo_url" : "https://media.licdn.com/dms/image/v2/C4E03AQFA8mH51pSpSQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1578349255285?e=1779321600&v=beta&t=Na7N0hlBeEQID2NCYxroAuPMDh48JMnPRoi6NzpVZpY",
+	"gender" : "male",
     "confidence": 1.0,
     "company": "Wolfberg",
     "previous_companies": [
@@ -1947,6 +1963,7 @@
     "confidence": 0.96,
     "linkedin_url": "https://ie.linkedin.com/in/manuelloureiro",
 "photo_url" : "https://media.licdn.com/dms/image/v2/C5603AQE27-z02-bUGA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1554731969797?e=1779321600&v=beta&t=Wti20TiKJG6ONRDgznjlMUt5t_7hTzLScPZZXggCDSI",
+	"gender" : "male",
     "company": "Aer Lingus",
     "previous_company": "Huawei Ireland Research Center",
     "role": "Lead AI Engineer",
@@ -2096,6 +2113,7 @@
     "confidence": 1.0,
     "linkedin_url": "https://www.linkedin.com/in/lyndonleggate/",
 "photo_url" : "https://media.licdn.com/dms/image/v2/C4E03AQFd_VJS3456hQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1579634991180?e=1779321600&v=beta&t=naSq2tEkm5I9FAKaypIffJZeY3ZbQFRfQPGfkEJloSs",
+	"gender" : "male",
     "roles": [
       "CTO, Automotive Marketplace Startup",
       "AWS Hero (AI)",
@@ -2110,7 +2128,7 @@
       "AWS Hero (AI)",
       "Founded AWS DeepRacer global community (50,000+ members)",
       "Built Callouts app used in Coast Guard operations",
-      "Multiple startup attempts across fintech and AI"
+      "Multiple startup attempts across various domains"
     ],
     "interests": [
       "agentic AI",
@@ -2523,12 +2541,25 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.2,
-    "linkedin_url": null,
+    "name": "Sarah O'Neill",
+    "confidence": 0.97,
+    "linkedin_url": "https://www.linkedin.com/in/sarah-o-neill-294b8560/",
+    "photo_url": "https://assets.kpmg.com/is/image/kpmgcloud/ie-sarah-oneill:cq5dam-web-598-598?wid=562&hei=562",
+    "gender": "female",
     "location": "Ireland / UK / Global (currently Asia)",
-    "role": "Climate Strategy Advisor / Founder",
-    "notes": "Strong signals (Cambridge MPhil Dev Econ + TCD + climate advisory across F500/PE/government), but no unique identifiers. Likely from top-tier consulting or advisory (e.g. McKinsey/BCG/Big 4/think tank)."
+    "company": "KPMG Ireland",
+    "role": "Global Co-Lead Decarbonisation and Transition Planning",
+    "notes": "User-confirmed match. LinkedIn and KPMG profile match Global Co-Lead Decarbonisation and Transition Planning, KPMG Global Decarbonisation Hub, climate risk/strategy, Cambridge MPhil/Distinction, and prior international development/infrastructure climate work. TCD BA and current Asia market-research details remain attendee-note signals."
+  },
+
+  "identified_person": {
+    "name": "Sarah O'Neill",
+    "confidence": 0.97,
+    "linkedin_url": "https://www.linkedin.com/in/sarah-o-neill-294b8560/",
+    "photo_url": "https://assets.kpmg.com/is/image/kpmgcloud/ie-sarah-oneill:cq5dam-web-598-598?wid=562&hei=562",
+    "gender": "female",
+    "company": "KPMG Ireland",
+    "role": "Global Co-Lead Decarbonisation and Transition Planning"
   },
 
   "profile_summary": {
@@ -2658,9 +2689,8 @@
       "Founder transition"
     ],
     "uncertainties": [
-      "No company identifiers",
-      "Multiple candidates in climate advisory space",
-      "Likely mid-to-senior consultant without public profile"
+      "TCD BA detail remains from attendee notes rather than public snippets found",
+      "Current Asia market-research detail remains from attendee notes rather than public snippets found"
     ]
   }
 },
@@ -2674,6 +2704,7 @@
     "confidence": 0.96,
     "linkedin_url": "https://www.linkedin.com/in/alice-shaughnessy-90ba12195",
 "photo_url" : "https://media.licdn.com/dms/image/v2/D5603AQE-ik1c7MLKUw/profile-displayphoto-crop_800_800/B56ZeHcoIVHQAQ-/0/1750324118602?e=1779321600&v=beta&t=poaXhGuU5fPFFj3mvPRSCdpqg6iH1Lfafup_GmDymlQ",
+	"gender" : "female",
     "company": "Luminate",
     "previous_company": "Mirr",
     "role": "Clinical Engineering Specialist",
@@ -3119,6 +3150,7 @@
     "confidence": 0.97,
     "linkedin_url": "https://www.linkedin.com/in/luke-barrington-8866518",
 "photo_url" : "https://media.licdn.com/dms/image/v2/C4E03AQF_xzyvVafPSg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1517727182067?e=1779321600&v=beta&t=DBNFZeoBpcVqHVzvBXS-L6bjktcGpEBWZeYCdWJSjNg",
+	"gender" : "male",
     "company": "Google",
     "previous_company": "Tomnod",
     "role": "Director of Climate, Weather & Geospatial AI",
@@ -3564,6 +3596,7 @@
     "confidence": 0.96,
     "linkedin_url": "https://www.linkedin.com/in/ciaranchaney",
 "photo_url" : "https://media.licdn.com/dms/image/v2/D4E03AQH1CihCfJMUXA/profile-displayphoto-crop_800_800/B4EZgFdD2SGcAQ-/0/1752438161416?e=1779321600&v=beta&t=0P0mlNlU63oAVgAFSocXa6_HBA2io_U2MMpMX6Lm2fE",
+	"gender" : "male",
     "companies": [
       "Personio",
       "Slack"

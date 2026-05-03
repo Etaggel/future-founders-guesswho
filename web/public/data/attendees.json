@@ -1268,26 +1268,24 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": "Dan O'Brien",
-    "confidence": 0.82,
-    "linkedin_url": "https://ie.linkedin.com/in/danjohnobrien",
-    "photo_url": "https://media.licdn.com/dms/image/v2/C4D03AQF7Bwpt5jYvrQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1625507660325?e=2147483647&v=beta&t=_s9yujQtW2AM3I2Ir8GG1bt7ZIApZ6JPQJMdj_LPGFc",
-    "companies": [
-      "Wayflyer",
-      "Home energy services startup (Ireland)"
-    ],
-    "role": "Founder / MD + former GTM leader",
-    "notes": "User-reviewed best match. Public snippets identify Dan O'Brien as an early/first Wayflyer sales or revenue hire; the Irish home-energy services clue remains less publicly corroborated."
+    "name": "Mark Finnerty",
+    "confidence": 1.0,
+    "linkedin_url": "https://www.linkedin.com/in/mark-finnerty-402b76103/",
+    "photo_url": "/silhouette.svg",
+    "gender": "male",
+    "company": "EnergyUpgrade.ie",
+    "role": "Co-Founder & Advisor",
+    "notes": "User-confirmed definite match. LinkedIn snippets match Director/Co-Founder at EnergyUpgrade.ie, heat pumps, gas boilers, solar panels, insulation, a 22-25 person team, and Wayflyer Growth Capital Markets leadership scaling deployed capital from €40M to €400M and driving roughly 300 new business deals. Uses local silhouette because the LinkedIn profile has no photo."
   },
 
   "identified_person": {
-    "name": "Dan O'Brien",
-    "confidence": 0.82,
-    "linkedin_url": "https://ie.linkedin.com/in/danjohnobrien",
-    "photo_url": "https://media.licdn.com/dms/image/v2/C4D03AQF7Bwpt5jYvrQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1625507660325?e=2147483647&v=beta&t=_s9yujQtW2AM3I2Ir8GG1bt7ZIApZ6JPQJMdj_LPGFc",
+    "name": "Mark Finnerty",
+    "confidence": 1.0,
+    "linkedin_url": "https://www.linkedin.com/in/mark-finnerty-402b76103/",
+    "photo_url": "/silhouette.svg",
     "gender": "male",
-    "company": "Wayflyer / HappyStack",
-    "role": "Founder and Commercial Operator"
+    "company": "EnergyUpgrade.ie",
+    "role": "Co-Founder & Advisor"
   },
 
   "profile_summary": {
@@ -1417,9 +1415,8 @@
       "Operator → founder transition"
     ],
     "uncertainties": [
-      "No company name for home services business",
-      "Multiple Wayflyer early hires fit partial profile",
-      "Identity requires cross-matching with energy startup founders"
+      "LinkedIn profile does not provide a profile photo, so the app uses a generic silhouette",
+      "Some founder-transition details remain from attendee notes rather than public snippets found"
     ]
   }
 },
@@ -2648,12 +2645,25 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.2,
-    "linkedin_url": null,
+    "name": "Sarah O'Neill",
+    "confidence": 0.97,
+    "linkedin_url": "https://www.linkedin.com/in/sarah-o-neill-294b8560/",
+    "photo_url": "https://assets.kpmg.com/is/image/kpmgcloud/ie-sarah-oneill:cq5dam-web-598-598?wid=562&hei=562",
+    "gender": "female",
     "location": "Ireland / UK / Global (currently Asia)",
-    "role": "Climate Strategy Advisor / Founder",
-    "notes": "Strong signals (Cambridge MPhil Dev Econ + TCD + climate advisory across F500/PE/government), but no unique identifiers. Likely from top-tier consulting or advisory (e.g. McKinsey/BCG/Big 4/think tank)."
+    "company": "KPMG Ireland",
+    "role": "Global Co-Lead Decarbonisation and Transition Planning",
+    "notes": "User-confirmed match. LinkedIn and KPMG profile match Global Co-Lead Decarbonisation and Transition Planning, KPMG Global Decarbonisation Hub, climate risk/strategy, Cambridge MPhil/Distinction, and prior international development/infrastructure climate work. TCD BA and current Asia market-research details remain attendee-note signals."
+  },
+
+  "identified_person": {
+    "name": "Sarah O'Neill",
+    "confidence": 0.97,
+    "linkedin_url": "https://www.linkedin.com/in/sarah-o-neill-294b8560/",
+    "photo_url": "https://assets.kpmg.com/is/image/kpmgcloud/ie-sarah-oneill:cq5dam-web-598-598?wid=562&hei=562",
+    "gender": "female",
+    "company": "KPMG Ireland",
+    "role": "Global Co-Lead Decarbonisation and Transition Planning"
   },
 
   "profile_summary": {
@@ -2783,9 +2793,8 @@
       "Founder transition"
     ],
     "uncertainties": [
-      "No company identifiers",
-      "Multiple candidates in climate advisory space",
-      "Likely mid-to-senior consultant without public profile"
+      "TCD BA detail remains from attendee notes rather than public snippets found",
+      "Current Asia market-research detail remains from attendee notes rather than public snippets found"
     ]
   }
 },
