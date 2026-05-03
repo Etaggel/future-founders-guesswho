@@ -52,6 +52,7 @@ export function FoundersGame() {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [isContentUnlocked, setIsContentUnlocked] = useState(false);
   const [appView, setAppView] = useState<AppView>("chooser");
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [matchData, setMatchData] = useState<MatchData | null>(null);
   const [selectedMatchId, setSelectedMatchId] = useState<number | null>(null);
   const [ideaText, setIdeaText] = useState("");
@@ -288,6 +289,16 @@ export function FoundersGame() {
   function openMatchMaker() {
     setSelectedMatchId(null);
     setAppView("match-maker");
+    setMobileNavOpen(false);
+  }
+
+  function openAppView(view: AppView) {
+    if (view === "match-maker") {
+      openMatchMaker();
+      return;
+    }
+    setAppView(view);
+    setMobileNavOpen(false);
   }
 
   async function exploreIdea() {
@@ -395,25 +406,49 @@ export function FoundersGame() {
   return (
     <Shell>
       <div className="mx-auto max-w-5xl">
-        <header className="mb-6 rounded-[2rem] border border-white/50 bg-white/90 p-5 shadow-xl shadow-slate-900/10 backdrop-blur">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <header className="mb-4 rounded-[1.5rem] border border-white/50 bg-white/90 p-4 shadow-xl shadow-slate-900/10 backdrop-blur sm:mb-6 sm:rounded-[2rem] sm:p-5">
+          <div className="flex items-start justify-between gap-4 md:items-center">
             <div>
-              <h1 className="text-3xl font-black">{appView === "guess-who" ? "Guess Who" : appView === "match-maker" ? "Match Maker" : "Idea Explorer"}</h1>
+              <h1 className="text-2xl font-black sm:text-3xl">{appView === "guess-who" ? "Guess Who" : appView === "match-maker" ? "Match Maker" : "Idea Explorer"}</h1>
             </div>
-            <div className="flex flex-wrap gap-2">
-              <button className={`rounded-full px-4 py-2 text-sm font-semibold ${appView === "guess-who" ? "bg-[#0f1933] text-white" : "bg-white text-slate-700"}`} onClick={() => setAppView("guess-who")}>Guess Who</button>
-              <button className={`rounded-full px-4 py-2 text-sm font-semibold ${appView === "match-maker" ? "bg-[#cb5549] text-white" : "bg-white text-slate-700"}`} onClick={openMatchMaker}>Match Maker</button>
-              <button className={`rounded-full px-4 py-2 text-sm font-semibold ${appView === "idea-explorer" ? "bg-[#4fb77c] text-white" : "bg-white text-slate-700"}`} onClick={() => setAppView("idea-explorer")}>Idea Explorer</button>
-              <SignOutButton onClick={handleSignOut} />
+            <div className="flex shrink-0 flex-wrap justify-end gap-2">
+              <button
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-black text-slate-700 shadow-sm md:hidden"
+                onClick={() => setMobileNavOpen((open) => !open)}
+                aria-expanded={mobileNavOpen}
+                aria-controls="mobile-game-nav"
+              >
+                <span className="grid gap-1" aria-hidden="true">
+                  <span className="block h-0.5 w-4 rounded-full bg-current" />
+                  <span className="block h-0.5 w-4 rounded-full bg-current" />
+                  <span className="block h-0.5 w-4 rounded-full bg-current" />
+                </span>
+                Menu
+              </button>
+              <div className="hidden flex-wrap gap-2 md:flex">
+                <button className={`rounded-full px-4 py-2 text-sm font-semibold ${appView === "guess-who" ? "bg-[#0f1933] text-white" : "bg-white text-slate-700"}`} onClick={() => openAppView("guess-who")}>Guess Who</button>
+                <button className={`rounded-full px-4 py-2 text-sm font-semibold ${appView === "match-maker" ? "bg-[#cb5549] text-white" : "bg-white text-slate-700"}`} onClick={openMatchMaker}>Match Maker</button>
+                <button className={`rounded-full px-4 py-2 text-sm font-semibold ${appView === "idea-explorer" ? "bg-[#4fb77c] text-white" : "bg-white text-slate-700"}`} onClick={() => openAppView("idea-explorer")}>Idea Explorer</button>
+                <SignOutButton onClick={handleSignOut} />
+              </div>
             </div>
           </div>
+
+          {mobileNavOpen && (
+            <div id="mobile-game-nav" className="mt-4 grid gap-2 rounded-2xl bg-slate-100 p-2 md:hidden">
+              <button className={`rounded-xl px-4 py-3 text-left text-sm font-black ${appView === "guess-who" ? "bg-[#0f1933] text-white" : "bg-white text-slate-700"}`} onClick={() => openAppView("guess-who")}>Guess Who</button>
+              <button className={`rounded-xl px-4 py-3 text-left text-sm font-black ${appView === "match-maker" ? "bg-[#cb5549] text-white" : "bg-white text-slate-700"}`} onClick={openMatchMaker}>Match Maker</button>
+              <button className={`rounded-xl px-4 py-3 text-left text-sm font-black ${appView === "idea-explorer" ? "bg-[#4fb77c] text-white" : "bg-white text-slate-700"}`} onClick={() => openAppView("idea-explorer")}>Idea Explorer</button>
+              <SignOutButton onClick={handleSignOut} />
+            </div>
+          )}
 
           {appView === "guess-who" && (
             <>
           <p className="mt-1 text-sm text-slate-600">
             Score: <strong>{score}</strong> | Learned: {studyPool.filter((a) => (mastery[a.id] ?? 0) > 0).length}/{studyPool.length} named profiles
           </p>
-          <div className="mt-4 grid gap-2 rounded-2xl bg-slate-100 p-2 sm:grid-cols-4">
+          <div className="mt-4 grid grid-cols-2 gap-2 rounded-2xl bg-slate-100 p-2 sm:grid-cols-4">
             <GuessWhoModeButton active={mode === "learn"} color="blue" label="Learn" detail="Study cards" onClick={() => setMode("learn")} />
             <GuessWhoModeButton active={mode === "play-easy"} color="green" label="Play Easy" detail="Pick a name" onClick={() => startPlay("play-easy")} />
             <GuessWhoModeButton active={mode === "play-hard"} color="navy" label="Play Hard" detail="Type recall" onClick={() => startPlay("play-hard")} />
@@ -449,15 +484,15 @@ export function FoundersGame() {
         {appView === "guess-who" && (
           <>
         {mode === "learn" && currentLearn && (
-          <section className="overflow-hidden rounded-[2rem] border border-white/50 bg-white/90 shadow-xl shadow-slate-900/10 backdrop-blur">
+          <section className="overflow-hidden rounded-[1.5rem] border border-white/50 bg-white/90 shadow-xl shadow-slate-900/10 backdrop-blur sm:rounded-[2rem]">
             <div className="grid gap-0 lg:grid-cols-[18rem_1fr]">
-              <div className="bg-gradient-to-br from-[#0f1933] via-[#274b78] to-[#cb5549] p-6 text-white">
+              <div className="flex flex-col items-center bg-gradient-to-br from-[#0f1933] via-[#274b78] to-[#cb5549] p-5 text-center text-white sm:p-6 lg:items-start lg:text-left">
                 <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-white/65">Learn mode</p>
                 <FounderAvatar attendee={currentLearn} size="xl" />
               </div>
-              <div className="p-6">
+              <div className="p-5 sm:p-6">
                 <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#cb5549]">Study this founder</p>
-                <h2 className="mt-2 text-4xl font-black tracking-tight text-[#0f1933]">{displayName(currentLearn)}</h2>
+                <h2 className="mt-2 text-3xl font-black tracking-tight text-[#0f1933] sm:text-4xl">{displayName(currentLearn)}</h2>
                 <p className="mt-2 text-lg text-slate-700">{currentLearn.tagline}</p>
                 <LinkedInProfileLink attendee={currentLearn} className="mt-4" />
                 <p className="mt-5 text-sm leading-6 text-slate-600">{currentLearn.profile_summary?.background}</p>
@@ -482,10 +517,10 @@ export function FoundersGame() {
         )}
 
         {(mode === "play-easy" || mode === "play-hard") && playTarget && factsChallenge && (
-          <section className="rounded-[2rem] border border-white/50 bg-white/90 p-6 shadow-xl shadow-slate-900/10 backdrop-blur">
+          <section className="rounded-[1.5rem] border border-white/50 bg-white/90 p-5 shadow-xl shadow-slate-900/10 backdrop-blur sm:rounded-[2rem] sm:p-6">
             <p className="mb-2 text-sm uppercase tracking-wide">{mode === "play-easy" ? "Play Easy" : "Play Hard"}</p>
             <h2 className="text-2xl font-semibold">Who is this attendee?</h2>
-            <div className="mt-3 flex flex-col gap-4 rounded-2xl border bg-gradient-to-br from-white to-slate-50 p-4 sm:flex-row sm:items-center">
+            <div className="mt-3 flex flex-col items-center gap-4 rounded-2xl border bg-gradient-to-br from-white to-slate-50 p-4 text-center sm:flex-row sm:items-center sm:text-left">
               <FounderAvatar attendee={playTarget} size="xl" />
               <div>
               <p className="text-sm text-slate-600">Tagline clue:</p>
@@ -651,7 +686,7 @@ function ScrollNudge({ direction }: { direction: "up" | "down" }) {
   const isUp = direction === "up";
   return (
     <div
-      className={`pointer-events-none absolute left-0 right-1 z-10 flex justify-center ${isUp ? "top-0 bg-gradient-to-b from-white via-white/90 to-transparent pb-5 pt-1" : "bottom-0 bg-gradient-to-t from-white via-white/90 to-transparent pb-1 pt-5"}`}
+      className={`pointer-events-none absolute left-0 right-1 z-10 hidden justify-center lg:flex ${isUp ? "top-0 bg-gradient-to-b from-white via-white/90 to-transparent pb-5 pt-1" : "bottom-0 bg-gradient-to-t from-white via-white/90 to-transparent pb-1 pt-5"}`}
       aria-hidden="true"
     >
       <span className="grid h-7 w-7 place-items-center rounded-full bg-[#0f1933] text-xs font-black text-white shadow-lg shadow-slate-900/20">
@@ -693,16 +728,16 @@ function MatchGraphPanel({
   );
   const graphEdges = edges.filter((edge) => positions.has(edge.source) && positions.has(edge.target));
   return (
-    <section className="rounded-[2rem] border border-white/50 bg-white/90 p-5 shadow-xl shadow-slate-900/10 backdrop-blur">
+    <section className="rounded-[1.5rem] border border-white/50 bg-white/90 p-4 shadow-xl shadow-slate-900/10 backdrop-blur sm:rounded-[2rem] sm:p-5">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#5583b7]">Relationship graph</p>
-          <h3 className="mt-2 text-2xl font-black">Explore matches by founder and category.</h3>
+          <h3 className="mt-2 text-xl font-black sm:text-2xl">Explore matches by founder and category.</h3>
         </div>
       </div>
       <div className="mt-5 grid gap-5 xl:grid-cols-[22rem_1fr]">
-        <div className="relative overflow-hidden rounded-[1.75rem] bg-[#0f1933] p-2 text-white shadow-inner">
-          <svg viewBox="0 0 300 300" className="h-80 w-full">
+        <div className="relative overflow-hidden rounded-[1.5rem] bg-[#0f1933] p-2 text-white shadow-inner sm:rounded-[1.75rem]">
+          <svg viewBox="0 0 300 300" className="h-72 w-full sm:h-80">
             <defs>
               <radialGradient id="graphGlow" cx="50%" cy="50%" r="50%">
                 <stop offset="0%" stopColor="#8fb7e8" stopOpacity="0.35" />
@@ -812,9 +847,9 @@ function profileFacts(attendee: Attendee) {
 
 function FounderAvatar({ attendee, size = "md" }: { attendee: Attendee; size?: "sm" | "md" | "lg" | "profile" | "xl" }) {
   const photo = attendeePhoto(attendee);
-  const sizeClass = size === "xl" ? "h-56 w-56 text-5xl" : size === "profile" ? "h-32 w-32 text-4xl" : size === "lg" ? "h-20 w-20 text-2xl" : size === "sm" ? "h-10 w-10 text-sm" : "h-14 w-14 text-lg";
+  const sizeClass = size === "xl" ? "h-44 w-44 text-4xl sm:h-56 sm:w-56 sm:text-5xl" : size === "profile" ? "h-28 w-28 text-3xl sm:h-32 sm:w-32 sm:text-4xl" : size === "lg" ? "h-20 w-20 text-2xl" : size === "sm" ? "h-10 w-10 text-sm" : "h-14 w-14 text-lg";
   if (photo) {
-    return <div className={`${sizeClass} rounded-full bg-cover bg-center shadow-inner ring-2 ring-white`} style={{ backgroundImage: `url(${photo})` }} aria-label={`${founderDisplayName(attendee)} photo`} />;
+    return <div className={`${sizeClass} shrink-0 rounded-full bg-cover bg-center shadow-inner ring-2 ring-white`} style={{ backgroundImage: `url(${photo})` }} aria-label={`${founderDisplayName(attendee)} photo`} />;
   }
   return (
     <div
@@ -1290,7 +1325,7 @@ function MatchMakerPanel({
 
   return (
     <div className="min-h-[calc(100vh-11rem)]">
-      <aside className="sticky top-4 z-20 flex h-[calc(100vh-2rem)] flex-col rounded-[2rem] border border-white/50 bg-white/90 p-4 shadow-xl shadow-slate-900/10 backdrop-blur lg:fixed lg:left-[max(1.5rem,calc((100vw-64rem)/2))] lg:top-6 lg:h-[calc(100vh-3rem)] lg:w-[19rem]">
+      <aside className="sticky top-2 z-20 rounded-[1.5rem] border border-white/50 bg-white/95 p-3 shadow-xl shadow-slate-900/10 backdrop-blur sm:rounded-[2rem] sm:p-4 lg:fixed lg:left-[max(1.5rem,calc((100vw-64rem)/2))] lg:top-6 lg:flex lg:h-[calc(100vh-3rem)] lg:w-[19rem] lg:flex-col">
         <div className="flex items-center justify-between gap-3 px-2">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#cb5549]">Founders</p>
           <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-bold text-slate-500">{visibleAttendees.length}</span>
@@ -1302,16 +1337,16 @@ function MatchMakerPanel({
           <p className="font-bold">Map overview</p>
           <p className={`mt-1 text-xs ${selectedId === null ? "text-white/75" : "text-slate-500"}`}>Clusters, filters, and strongest paths</p>
         </button>
-        <div className="relative mt-3 min-h-0 flex-1">
+        <div className="relative mt-3 lg:min-h-0 lg:flex-1">
           {railOverflow.up && <ScrollNudge direction="up" />}
           {railOverflow.down && <ScrollNudge direction="down" />}
-        <div ref={attendeeRailRef} className="h-full space-y-2 overflow-auto pr-1 [scrollbar-gutter:stable]" onScroll={updateRailOverflow}>
+        <div ref={attendeeRailRef} className="flex gap-2 overflow-x-auto pb-1 [scrollbar-gutter:stable] lg:block lg:h-full lg:space-y-2 lg:overflow-auto lg:pb-0 lg:pr-1" onScroll={updateRailOverflow}>
           {visibleAttendees.map((attendee) => {
             const active = attendee.id === selectedId;
             return (
               <button
                 key={attendee.id}
-                className={`flex w-full items-center gap-3 rounded-2xl p-3 text-left transition ${active ? "bg-[#0f1933] text-white shadow-lg shadow-[#0f1933]/20" : "bg-white hover:bg-slate-50"}`}
+                className={`flex min-w-[15rem] items-center gap-3 rounded-2xl p-3 text-left transition lg:min-w-0 lg:w-full ${active ? "bg-[#0f1933] text-white shadow-lg shadow-[#0f1933]/20" : "bg-white hover:bg-slate-50"}`}
                 onClick={() => handleSelect(attendee.id)}
               >
                 <FounderAvatar attendee={attendee} size="sm" />
@@ -1326,7 +1361,7 @@ function MatchMakerPanel({
         </div>
       </aside>
 
-      <section className="mt-5 space-y-5 lg:ml-[20.25rem] lg:mt-0">
+      <section className="mt-4 space-y-4 sm:mt-5 sm:space-y-5 lg:ml-[20.25rem] lg:mt-0">
         <div ref={graphRef} className="scroll-mt-6">
           <MatchGraphPanel
             attendees={visibleAttendees}
@@ -1342,15 +1377,15 @@ function MatchMakerPanel({
         {!selectedAttendee || !selectedProfile ? (
           <MatchMakerLanding matchData={matchData} attendees={attendees} visibleEdges={visibleEdges} clusters={clusters} onSelect={handleSelect} />
         ) : (
-        <div ref={profileRef} className="scroll-mt-6 overflow-hidden rounded-[2rem] border border-white/50 bg-white/90 shadow-xl shadow-slate-900/10 backdrop-blur">
-          <div className="bg-gradient-to-br from-[#0f1933] via-[#274b78] to-[#cb5549] p-7 text-white">
+        <div ref={profileRef} className="scroll-mt-6 overflow-hidden rounded-[1.5rem] border border-white/50 bg-white/90 shadow-xl shadow-slate-900/10 backdrop-blur sm:rounded-[2rem]">
+          <div className="bg-gradient-to-br from-[#0f1933] via-[#274b78] to-[#cb5549] p-5 text-white sm:p-7">
             <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/65">Founder profile</p>
-                <div className="mt-3 flex items-center gap-4">
+                <div className="mt-3 flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
                   <FounderAvatar attendee={selectedAttendee} size="profile" />
                   <div>
-                    <h2 className="text-4xl font-black">{founderDisplayName(selectedAttendee)}</h2>
+                    <h2 className="text-3xl font-black sm:text-4xl">{founderDisplayName(selectedAttendee)}</h2>
                     <p className="mt-2 text-white/80">{selectedAttendee.tagline}</p>
                     <LinkedInProfileLink attendee={selectedAttendee} variant="dark" className="mt-4" />
                   </div>
@@ -1370,7 +1405,7 @@ function MatchMakerPanel({
             </button>
           </div>
           {profileExpanded && <FounderProfileDetails attendee={selectedAttendee} />}
-          <div className="p-6">
+          <div className="p-5 sm:p-6">
             <h3 className="text-xl font-black">Best relationship paths</h3>
             <p className="mt-1 text-sm text-slate-600">
               Treat these as conversation intelligence, not a ranking of people. The best use is spotting where help, domain depth, or founder complementarity is likely.
@@ -1652,7 +1687,7 @@ function PairsPanel({
     <section className="rounded-[2rem] border border-white/50 bg-white/90 p-6 shadow-xl shadow-slate-900/10 backdrop-blur">
       <p className="mb-3 text-sm uppercase tracking-wide">Pairs Game</p>
       <h2 className="text-xl font-semibold">{question}</h2>
-      <div className="mt-4 grid gap-2 sm:grid-cols-4">
+      <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
         {shown.map((a) => {
           const on = picked.includes(a.id);
           const revealed = submitted !== null;
