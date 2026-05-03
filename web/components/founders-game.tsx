@@ -18,7 +18,8 @@ import { Attendee, FactsChallenge, IdeaExplorerInsight, Mastery, MatchData, Rela
 
 type Mode = "learn" | "play-easy" | "play-hard" | "pairs";
 type AppView = "chooser" | "guess-who" | "match-maker" | "idea-explorer";
-type PairChallenge = { question: string; answerIds: number[]; explanation?: string };
+type PairAnswerRationale = { attendeeId: number; rationale: string };
+type PairChallenge = { question: string; answerIds: number[]; explanation?: string; rationales?: PairAnswerRationale[] };
 type PreparedPairsQuestion = { pool: Attendee[]; challenge: PairChallenge };
 
 const STORAGE_KEY = "ff-game-progress-v1";
@@ -245,7 +246,7 @@ export function FoundersGame() {
     setPairPool(prepared.pool);
     setPairQuestion(prepared.challenge.question);
     setPairAnswers(prepared.challenge.answerIds);
-    setPairExplanation(prepared.challenge.explanation ?? "");
+    setPairExplanation(formatPairExplanation(prepared.challenge, prepared.pool));
     setPairKey((key) => key + 1);
   }
 
@@ -269,9 +270,17 @@ export function FoundersGame() {
         body: JSON.stringify({ profiles: pool }),
       });
       if (!response.ok) return { pool, challenge: fallback };
-      const generated = (await response.json()) as { question?: string; answerIds?: number[] };
+      const generated = (await response.json()) as { question?: string; answerIds?: number[]; explanation?: string; rationales?: PairAnswerRationale[] };
       if (generated.question && generated.answerIds?.length) {
-        return { pool, challenge: ensureMinimumPairAnswers({ question: generated.question, answerIds: generated.answerIds }, pool) };
+        return {
+          pool,
+          challenge: ensureMinimumPairAnswers({
+            question: generated.question,
+            answerIds: generated.answerIds,
+            explanation: generated.explanation,
+            rationales: generated.rationales,
+          }, pool),
+        };
       }
     } catch {
       // Local category fallback remains active after loading.
@@ -936,7 +945,11 @@ function buildLocalPairsChallenge(pool: Attendee[]): PairChallenge {
       return ensureMinimumPairAnswers({
         question: `Select everyone whose profile is tagged ${category}.`,
         answerIds,
-        explanation: `The correct answers share the ${category} profile tag, so they match the category in the prompt.`,
+        explanation: `The correct answers share the ${category} profile tag, with supporting evidence in each profile.`,
+        rationales: answerIds.map((id) => ({
+          attendeeId: id,
+          rationale: localPairRationale(pool.find((attendee) => attendee.id === id), category),
+        })),
       }, pool);
     }
   }
@@ -947,16 +960,81 @@ function buildLocalPairsChallenge(pool: Attendee[]): PairChallenge {
   return ensureMinimumPairAnswers({
     question: `Select everyone with ${keyword} in their profile clues.`,
     answerIds: answerIds.length ? answerIds : pool.slice(0, 2).map((attendee) => attendee.id),
-    explanation: `The correct answers include ${keyword} in their tagline or profile background, which is the clue the prompt is testing.`,
+    explanation: `The correct answers have ${keyword} signals in their profile evidence.`,
+    rationales: (answerIds.length ? answerIds : pool.slice(0, 2).map((attendee) => attendee.id)).map((id) => ({
+      attendeeId: id,
+      rationale: localPairRationale(pool.find((attendee) => attendee.id === id), keyword),
+    })),
   }, pool);
 }
 
 function ensureMinimumPairAnswers(challenge: PairChallenge, pool: Attendee[]): PairChallenge {
   const validIds = new Set(pool.map((attendee) => attendee.id));
   const answerIds = Array.from(new Set(challenge.answerIds.filter((id) => validIds.has(id))));
-  if (answerIds.length >= 2) return { ...challenge, answerIds };
+  const rationales = normalizePairRationales(challenge.rationales, answerIds);
+  if (answerIds.length >= 2) return { ...challenge, answerIds, rationales };
   const fillers = shuffle(pool.map((attendee) => attendee.id).filter((id) => !answerIds.includes(id))).slice(0, 2 - answerIds.length);
-  return { ...challenge, answerIds: [...answerIds, ...fillers] };
+  const filledAnswerIds = [...answerIds, ...fillers];
+  return {
+    ...challenge,
+    answerIds: filledAnswerIds,
+    rationales: [
+      ...rationales,
+      ...fillers.map((id) => ({
+        attendeeId: id,
+        rationale: localPairRationale(pool.find((attendee) => attendee.id === id), challenge.question),
+      })),
+    ],
+  };
+}
+
+function normalizePairRationales(rationales: PairAnswerRationale[] | undefined, answerIds: number[]): PairAnswerRationale[] {
+  if (!rationales?.length) return [];
+  const answerIdSet = new Set(answerIds);
+  return rationales
+    .map((item) => ({ attendeeId: Number(item.attendeeId), rationale: item.rationale?.trim() ?? "" }))
+    .filter((item) => answerIdSet.has(item.attendeeId) && item.rationale.length > 0);
+}
+
+function formatPairExplanation(challenge: PairChallenge, pool: Attendee[]): string {
+  const answerIdSet = new Set(challenge.answerIds);
+  const rationaleById = new Map(normalizePairRationales(challenge.rationales, challenge.answerIds).map((item) => [item.attendeeId, item.rationale]));
+  const rationaleLines = pool
+    .filter((attendee) => answerIdSet.has(attendee.id))
+    .map((attendee) => `${founderDisplayName(attendee)}: ${rationaleById.get(attendee.id) || localPairRationale(attendee, challenge.question)}`);
+  if (rationaleLines.length) {
+    return `${challenge.explanation?.trim() || "Why these answers fit:"} ${rationaleLines.join(" ")}`;
+  }
+  return challenge.explanation?.trim() ?? "";
+}
+
+function localPairRationale(attendee: Attendee | undefined, clue: string): string {
+  if (!attendee) return "Their supplied profile has the closest available match to this prompt.";
+  const evidence = profileEvidenceSnippets(attendee);
+  const clueTerms = significantTerms(clue);
+  const matched = evidence.find((snippet) => clueTerms.some((term) => snippet.toLowerCase().includes(term)));
+  return matched || evidence[0] || "Their supplied profile has the closest available match to this prompt.";
+}
+
+function profileEvidenceSnippets(attendee: Attendee): string[] {
+  return [
+    attendee.tagline,
+    attendee.profile_summary?.background,
+    ...(attendee.profile_summary?.experience_highlights ?? []),
+    ...(attendee.profile_summary?.interests ?? []).map((interest) => `Interest: ${interest}`),
+    attendee.current_obsession?.summary,
+    attendee.current_obsession?.details,
+    attendee.superpower?.summary,
+    attendee.superpower?.details,
+    ...(attendee.extra_facts ?? []).map((fact) => fact.fact),
+  ].filter((snippet): snippet is string => Boolean(snippet?.trim())).slice(0, 12);
+}
+
+function significantTerms(value: string): string[] {
+  const stopWords = new Set(["select", "everyone", "whose", "profile", "profiles", "tagged", "with", "their", "this", "that", "from", "what", "which", "have", "has", "are", "the", "and", "for", "you"]);
+  return Array.from(new Set(value.toLowerCase().match(/[a-z0-9]{3,}/gu) ?? []))
+    .filter((term) => !stopWords.has(term))
+    .slice(0, 8);
 }
 
 function shuffleForPrompt(pool: Attendee[]) {

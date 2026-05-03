@@ -61,11 +61,9 @@ exports.handler = async (event) => {
 
   if (path.startsWith("/ai/pairs") && method === "POST") {
     const body = parseBody(event);
-    const generated = await generateJson(
-      `Create one pairs-selection quiz from these attendee profiles. Return JSON only with {"question":"...","answerIds":[1,2],"explanation":"..."}. The question should identify a useful shared trait, company type, category, interest, or conversation angle. Profiles: ${JSON.stringify(body.profiles).slice(0, 7000)}`,
-      fallbackPairs(body.profiles),
-    );
-    return respond(200, generated);
+    const fallback = fallbackPairs(body.profiles);
+    const generated = await generateJson(pairsPrompt(body.profiles), fallback);
+    return respond(200, normalizePairsQuiz(generated, fallback, body.profiles));
   }
 
   if (path.startsWith("/ai/relationship") && method === "POST") {
@@ -228,6 +226,17 @@ Return JSON only with exactly this shape:
 Return 3 to 6 recommendations. Each attendeeId must be from the supplied founders list. Input data: ${JSON.stringify(input).slice(0, 18000)}`;
 }
 
+function pairsPrompt(profiles) {
+  const input = (profiles || []).map(insightProfile).filter(Boolean);
+  return `You create pairs-selection quiz rounds for a founder networking prep game.
+Use only the supplied profile data. Do not invent credentials, interests, company history, private facts, or relationships.
+Create one question where the correct answers are the founders sharing a meaningful evidence-backed trait, domain, interest, experience pattern, or conversation angle.
+Prefer a non-obvious but fair clue over a literal category label when the profile evidence supports it.
+Return JSON only with exactly this shape:
+{"question":"Select everyone who ...","answerIds":[1,2],"explanation":"One short sentence explaining the shared signal.","rationales":[{"attendeeId":1,"rationale":"One concise sentence citing the relevant profile evidence for this founder."}]}
+Return 2 to 4 answerIds, all from the supplied founders. Include one rationale for every answerId, and each rationale must mention the specific profile evidence that justifies that answer. Profiles: ${JSON.stringify(input).slice(0, 12000)}`;
+}
+
 function insightProfile(profile) {
   if (!profile) return null;
   return {
@@ -288,6 +297,28 @@ function normalizeIdeaExplorerInsight(value, fallback, profiles) {
   };
 }
 
+function normalizePairsQuiz(value, fallback, profiles) {
+  const validIds = new Set((profiles || []).map((profile) => Number(profile?.id)).filter(Boolean));
+  const answerIds = Array.from(new Set((Array.isArray(value?.answerIds) ? value.answerIds : [])
+    .map((id) => Number(id))
+    .filter((id) => validIds.has(id))))
+    .slice(0, 4);
+  const safeAnswerIds = answerIds.length >= 2 ? answerIds : fallback.answerIds;
+  const safeAnswerIdSet = new Set(safeAnswerIds);
+  const rationales = (Array.isArray(value?.rationales) ? value.rationales : [])
+    .map((item) => ({ attendeeId: Number(item?.attendeeId), rationale: stringValue(item?.rationale, "") }))
+    .filter((item) => safeAnswerIdSet.has(item.attendeeId) && item.rationale)
+    .slice(0, safeAnswerIds.length);
+  return {
+    question: stringValue(value?.question, fallback.question),
+    answerIds: safeAnswerIds,
+    explanation: stringValue(value?.explanation, fallback.explanation),
+    rationales: rationales.length === safeAnswerIds.length ? rationales : fallback.rationales,
+    generated: value?.generated !== false,
+    reason: value?.reason,
+  };
+}
+
 function normalizeIdeaRecommendation(item, profiles) {
   const attendeeId = Number(item?.attendeeId ?? item?.id);
   if (!attendeeId) return null;
@@ -321,10 +352,18 @@ function fallbackFacts(profile) {
 
 function fallbackPairs(profiles) {
   const technical = (profiles || []).filter((p) => p.category === "Technical").map((p) => p.id);
+  const answerIds = technical.length >= 2 ? technical : (profiles || []).slice(0, 2).map((p) => p.id);
   return {
     question: "Select everyone whose profile is currently tagged Technical.",
-    answerIds: technical,
-    explanation: "Fallback pairs prompt based on the dataset category field.",
+    answerIds,
+    explanation: "The shared signal is the Technical profile tag, backed by each founder's technical background or build-oriented profile details.",
+    rationales: answerIds.map((id) => {
+      const profile = (profiles || []).find((candidate) => Number(candidate?.id) === Number(id));
+      return {
+        attendeeId: Number(id),
+        rationale: profile?.profile_summary?.background || profile?.tagline || "Their supplied profile carries the strongest available technical signal in this round.",
+      };
+    }),
   };
 }
 
