@@ -4,17 +4,27 @@
   "id": 1,
   "tagline": "Systems Engineer & Deep Tech Builder | Aviation & Aerospace",
   "category": "Technical",
+
   "likely_match": {
     "name": "Shireen Datta",
+    "confidence": 0.96,
     "linkedin_url": "https://www.linkedin.com/in/shireendatta/",
-	"photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQGMppOhQYOjeQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1715790714686?e=1779321600&v=beta&t=cQessGvxCxygiPnm8nKz-fID8ESLxv2w3ubgPg9-zTI",
-	"gender" : "female",
-    "confidence": 1.0,
-    "source": "confirmed",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQGMppOhQYOjeQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1715790714686?e=1779321600&v=beta&t=cQessGvxCxygiPnm8nKz-fID8ESLxv2w3ubgPg9-zTI",
+    "gender": "female",
     "company": "Aurora Flight Sciences",
     "previous_company": "Wisk Aero",
     "role": "Systems Engineer",
-    "notes": "Very rare combination of Trinity + Georgia Tech + Wisk Gen6 + Aurora Switzerland strongly narrows identity"
+    "notes": "LinkedIn profile directly matches Aurora Flight Sciences, Georgia Tech, Wisk Gen 6 aircraft systems work, Lucerne/Switzerland location, and ESA Spin Your Thesis hypergravity research. Trinity and ninjutsu remain private-event-only signals."
+  },
+
+  "identified_person": {
+    "name": "Shireen Datta",
+    "confidence": 0.96,
+    "linkedin_url": "https://www.linkedin.com/in/shireendatta/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQGMppOhQYOjeQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1715790714686?e=1779321600&v=beta&t=cQessGvxCxygiPnm8nKz-fID8ESLxv2w3ubgPg9-zTI",
+    "gender": "female",
+    "company": "Aurora Flight Sciences",
+    "role": "Aerospace Systems Engineer"
   },
 
   "profile_summary": {
@@ -117,12 +127,22 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.25,
-    "linkedin_url": null,
-    "company": "Previously Diageo, Mars, AB InBev, Ferrero, etc.",
-    "role": "Senior Commercial Strategy / Consumer Insights Leader",
-    "notes": "Highly distinctive career path (multi-region FMCG + CHIMP project + neurodivergent ERG founder), but no single high-confidence public LinkedIn match yet. Likely senior but not highly public-facing."
+    "name": "Keith Allen",
+    "confidence": 0.99,
+    "linkedin_url": "https://www.linkedin.com/in/keifallen/",
+    "gender": "male",
+    "company": "Diageo",
+    "role": "Senior Category Development Manager",
+    "notes": "Published Future Founders cohort list identifies this attendee as Keith Allen. Public LinkedIn snippets match Diageo, Mars, AB InBev, Ferrero, Britvic, and category/insights leadership signals."
+  },
+
+  "identified_person": {
+    "name": "Keith Allen",
+    "confidence": 0.99,
+    "linkedin_url": "https://www.linkedin.com/in/keifallen/",
+    "gender": "male",
+    "company": "Diageo",
+    "role": "Senior Category Development Manager"
   },
 
   "profile_summary": {
@@ -191,12 +211,12 @@
     {
       "fact": "Has entrepreneurial experience outside corporate (contract brewing business)",
       "type": "experience",
-      "use_for_conversation": "Ask what he learned going from corporate to running a physical product business"
+      "use_for_conversation": "Ask what she learned going from corporate to running a physical product business"
     },
     {
       "fact": "Actively uses AI to augment personal productivity and manage executive function",
       "type": "operating_style",
-      "use_for_conversation": "Ask how he uses AI personally vs professionally"
+      "use_for_conversation": "Ask how she uses AI personally vs professionally"
     },
     {
       "fact": "Strong bias toward simplifying complexity into human-understandable outputs",
@@ -228,7 +248,7 @@
   ],
 
   "relationship_strategy": {
-    "best_angle": "Respect his experience + challenge his thinking",
+    "best_angle": "Respect her experience + challenge her thinking",
     "approach": [
       "Engage at a strategic level, not surface-level",
       "Avoid generic startup talk",
@@ -267,12 +287,24 @@
   "category": "Technical",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.35,
-    "linkedin_url": null,
+    "name": "Sud Sunkaraneni",
+    "confidence": 0.91,
+    "linkedin_url": "https://www.linkedin.com/in/sud-sunkaraneni-08560718/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQH1imFEWRHEQQ/profile-displayphoto-shrink_800_800/B4EZZi59yLHEAg-/0/1745416085135?e=1779321600&v=beta&t=gLqWYNdwhulrTdG3JHBeUSdk5TNKxfgNp9oXTNTHGKE",
+    "gender": "male",
     "company": null,
     "role": "Technical Lead / Founder-type profile",
-    "notes": "Multiple overlapping signals (BuildFlow, BrokerKit, MBA+AI MSc) but no single high-confidence public match yet"
+    "notes": "LinkedIn profile and public PharmaFlow site match Technical Lead, Executive MBA, MSc AI '26, BuildFlow founder posts, and 14 years building technology for regulated industries. BrokerKit remains unverified publicly."
+  },
+
+  "identified_person": {
+    "name": "Sud Sunkaraneni",
+    "confidence": 0.91,
+    "linkedin_url": "https://www.linkedin.com/in/sud-sunkaraneni-08560718/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQH1imFEWRHEQQ/profile-displayphoto-shrink_800_800/B4EZZi59yLHEAg-/0/1745416085135?e=1779321600&v=beta&t=gLqWYNdwhulrTdG3JHBeUSdk5TNKxfgNp9oXTNTHGKE",
+    "gender": "male",
+    "company": "Health Innovation Labs",
+    "role": "Technical Lead"
   },
 
   "profile_summary": {
@@ -397,8 +429,18 @@
     "name": "Dan Moss",
     "confidence": 0.88,
     "linkedin_url": "https://ie.linkedin.com/in/dan-moss-robotics",
-	"photo_url": "https://media.licdn.com/dms/image/v2/D4D03AQGHjDKZVKQiXA/profile-displayphoto-crop_800_800/B4DZup.vBNHQAI-/0/1768083354351?e=1779321600&v=beta&t=G7vob6bMkyJWuJ0L4ZhDGjjYqnQk4GO-07DmcQlaRz4",
-	"gender" : "male",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4D03AQGHjDKZVKQiXA/profile-displayphoto-crop_800_800/B4DZup.vBNHQAI-/0/1768083354351?e=1779321600&v=beta&t=G7vob6bMkyJWuJ0L4ZhDGjjYqnQk4GO-07DmcQlaRz4",
+    "gender": "male",
+    "company": "Manna Air Delivery",
+    "role": "Head of System Integrations"
+  },
+
+  "identified_person": {
+    "name": "Dan Moss",
+    "confidence": 0.88,
+    "linkedin_url": "https://ie.linkedin.com/in/dan-moss-robotics",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4D03AQGHjDKZVKQiXA/profile-displayphoto-crop_800_800/B4DZup.vBNHQAI-/0/1768083354351?e=1779321600&v=beta&t=G7vob6bMkyJWuJ0L4ZhDGjjYqnQk4GO-07DmcQlaRz4",
+    "gender": "male",
     "company": "Manna Air Delivery",
     "role": "Head of System Integrations"
   },
@@ -524,8 +566,8 @@
     "name": "Liam Murphy",
     "confidence": 0.97,
     "linkedin_url": "https://ie.linkedin.com/in/liam-murphy-48903425",
-"photo_url" : "https://media.licdn.com/dms/image/v2/C4E03AQGjKELznHcQGQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1637143662130?e=1779321600&v=beta&t=LWx5fGA82gcSkcafS9QcGwY0TxaN5KsUZcB8wT1_sAE",
-	"gender" : "male",
+    "photo_url": "https://media.licdn.com/dms/image/v2/C4E03AQGjKELznHcQGQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1637143662130?e=1779321600&v=beta&t=LWx5fGA82gcSkcafS9QcGwY0TxaN5KsUZcB8wT1_sAE",
+    "gender": "male",
     "company": "Wachsman",
     "role": "Global President"
   },
@@ -632,12 +674,22 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.4,
-    "linkedin_url": null,
-    "company": "Formerly Intercom, Salesforce",
-    "role": "Head of EMEA Commercial / GTM Leader",
-    "notes": "Distinct profile (Finnish-Irish + Intercom early EMEA + Salesforce Nordics + logistics startup), but no single high-confidence public match yet"
+    "name": "Leena Kaloinen",
+    "confidence": 0.82,
+    "linkedin_url": "https://www.linkedin.com/in/leenakaloinen/",
+    "gender": "female",
+    "company": "Roadie",
+    "role": "Head of Sales",
+    "notes": "Published Future Founders cohort list identifies this attendee as Leena Kaloinen. Public LinkedIn snippets match Dublin-based Head of Sales at Roadie / Backstage IDP. Earlier Ciaran Nolan inference was not on the organiser list."
+  },
+
+  "identified_person": {
+    "name": "Leena Kaloinen",
+    "confidence": 0.82,
+    "linkedin_url": "https://www.linkedin.com/in/leenakaloinen/",
+    "gender": "female",
+    "company": "Roadie",
+    "role": "Head of Sales"
   },
 
   "profile_summary": {
@@ -696,7 +748,7 @@
     {
       "fact": "Comfortable operating without engineering support due to no-code / AI tooling",
       "type": "operating_style",
-      "use_for_conversation": "Ask what she can now build solo that previously required a team"
+      "use_for_conversation": "Ask what he can now build solo that previously required a team"
     },
     {
       "fact": "Has hands-on experience designing CRM architecture and workflows, not just using them",
@@ -780,8 +832,8 @@
     "name": "Elaine Deehan",
     "confidence": 0.93,
     "linkedin_url": "https://www.linkedin.com/in/elainedeehan/",
-"photo_url" : "https://media.licdn.com/dms/image/v2/D4E03AQEUpPXlxiPPEQ/profile-displayphoto-shrink_800_800/B4EZnSs_JvGcAc-/0/1760176633262?e=1779321600&v=beta&t=trvMFUC7GYWfyChZx_j0hTgeMLWFXUBDMAFaOdcv9hI",
-	"gender" : "female",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQEUpPXlxiPPEQ/profile-displayphoto-shrink_800_800/B4EZnSs_JvGcAc-/0/1760176633262?e=1779321600&v=beta&t=trvMFUC7GYWfyChZx_j0hTgeMLWFXUBDMAFaOdcv9hI",
+    "gender": "female",
     "companies": [
       "Monzo",
       "Total Processing"
@@ -925,11 +977,11 @@
   "category": "Technical",
 
   "identified_person": {
-    "name": "Oisín Thomas",
+    "name": "Oisín Thomas Morrin",
     "confidence": 0.88,
-    "linkedin_url": "https://www.linkedin.com/in/oisin-tm/",
-"photo_url" : "/images/attendees/oisin-thomas.png",
-	"gender" : "male",
+    "linkedin_url": "https://www.linkedin.com/in/oisin-thomas-morrin/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4D03AQFZkY1ooq-zFA/profile-displayphoto-crop_800_800/B4DZ3imjXKGwAI-/0/1777623252228?e=1779321600&v=beta&t=AGRGAZEZM-LoldtqH3TxlNOGrcZ1Okciu5rFKcnZ9Gk",
+    "gender": "male",
     "website": "https://caideiseach.com"
   },
 
@@ -1065,12 +1117,21 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.2,
-    "linkedin_url": null,
-    "company": "Real Estate Investment Firm (Ireland/UK likely)",
+    "name": "Derek Poppinga",
+    "confidence": 0.98,
+    "linkedin_url": "https://www.linkedin.com/in/derekpoppinga/",
+    "company": "MM Capital",
     "role": "Managing Director",
-    "notes": "Insufficient unique identifiers. Likely senior but not public-facing. Multiple candidates across Irish real estate investment firms."
+    "notes": "Published Future Founders cohort list identifies this attendee as Derek Poppinga. Public MM Capital and LinkedIn snippets match Managing Director, real estate investment, founder/co-founder, Morgan Stanley/Bridgewater/H.I.G. background, and Trinity/King's Inns education signals."
+  },
+
+  "identified_person": {
+    "name": "Derek Poppinga",
+    "confidence": 0.98,
+    "linkedin_url": "https://www.linkedin.com/in/derekpoppinga/",
+    "gender": "male",
+    "company": "MM Capital",
+    "role": "Managing Director"
   },
 
   "profile_summary": {
@@ -1370,12 +1431,22 @@
   "category": "Technical",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.45,
-    "linkedin_url": null,
-    "location": "Dublin (with African tech background)",
-    "role": "Serial Founder / Product Leader / EIR",
-    "notes": "Distinct combination of African startup experience + digital addressing + Dogpatch + Antler EIR narrows pool significantly but no single confirmed identity yet"
+    "name": "Wesley Chege",
+    "confidence": 0.93,
+    "linkedin_url": "https://www.linkedin.com/in/weschege/",
+    "gender": "male",
+    "location": "Kenya / Ireland",
+    "role": "Product Leader and Startup Coach",
+    "notes": "Published Future Founders cohort list identifies this attendee as Wesley Chege. Public LinkedIn snippets match product/startup coaching, emerging markets, OkHi digital addressing, Sendy product leadership, and software engineering signals. Earlier Chisepo Chirwa/Bosso inference was not on the organiser list."
+  },
+
+  "identified_person": {
+    "name": "Wesley Chege",
+    "confidence": 0.93,
+    "linkedin_url": "https://www.linkedin.com/in/weschege/",
+    "gender": "male",
+    "company": "Jumba / OkHi / Sendy",
+    "role": "Product Leader and Startup Coach"
   },
 
   "profile_summary": {
@@ -1516,12 +1587,24 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.5,
-    "linkedin_url": null,
+    "name": "Gennadiy Nissenbaum",
+    "confidence": 0.9,
+    "linkedin_url": "https://www.linkedin.com/in/nissenbaum/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/C4E03AQHWT1nFP8rbZg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1592774058881?e=1779321600&v=beta&t=cqLuot7xD9Dl7E9ek8tByV_EJFzL-kx8qCiZGUOAA5w",
+    "gender": "male",
     "companies": ["Google", "ABRT VC"],
     "role": "Global Startups & Digital Natives Sales Leader",
-    "notes": "Distinct signals (15y Google + StartupX + ABRT VC + Kyiv background + weather MSc) narrow the pool significantly, but no single high-confidence public match without deeper verification."
+    "notes": "LinkedIn and public SVOD profile match senior Google Ireland sales/customer-success leadership, Google for Entrepreneurs/startup ecosystem work, software engineering, startup co-founding, and venture-capital background."
+  },
+
+  "identified_person": {
+    "name": "Gennadiy Nissenbaum",
+    "confidence": 0.9,
+    "linkedin_url": "https://www.linkedin.com/in/nissenbaum/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/C4E03AQHWT1nFP8rbZg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1592774058881?e=1779321600&v=beta&t=cqLuot7xD9Dl7E9ek8tByV_EJFzL-kx8qCiZGUOAA5w",
+    "gender": "male",
+    "company": "Google",
+    "role": "Head of Sales & Customer Success"
   },
 
   "profile_summary": {
@@ -1668,9 +1751,9 @@
   "identified_person": {
     "name": "Julie Currid",
     "linkedin_url": "https://www.linkedin.com/in/juliecurrid/",
-	"photo_url" : "https://media.licdn.com/dms/image/v2/D4E03AQFtkHn-ZVXltg/profile-displayphoto-crop_800_800/B4EZ1EBoyJIkAI-/0/1774962774622?e=1779321600&v=beta&t=jOVCK3T20CHGoN5S-NpWS0yFTUswRqKSynNNSbRtB0k",
-	"gender" : "female",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQFtkHn-ZVXltg/profile-displayphoto-crop_800_800/B4EZ1EBoyJIkAI-/0/1774962774622?e=1779321600&v=beta&t=jOVCK3T20CHGoN5S-NpWS0yFTUswRqKSynNNSbRtB0k",
     "confidence": 1.0,
+    "gender": "female",
     "companies": [
       "GoContractor",
       "Zutec",
@@ -1743,7 +1826,7 @@
     {
       "fact": "Shifting from marketing-led roles to data and product-focused thinking",
       "type": "career_shift",
-      "use_for_conversation": "Ask what changed in how he thinks about value creation"
+      "use_for_conversation": "Ask what changed in how she thinks about value creation"
     },
     {
       "fact": "Strong understanding of enterprise SaaS buying cycles",
@@ -1816,9 +1899,9 @@
   "identified_person": {
     "name": "George Mendes",
     "linkedin_url": "https://www.linkedin.com/in/georgemendes/",
-	"photo_url" : "https://media.licdn.com/dms/image/v2/C4E03AQFA8mH51pSpSQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1578349255285?e=1779321600&v=beta&t=Na7N0hlBeEQID2NCYxroAuPMDh48JMnPRoi6NzpVZpY",
-	"gender" : "male",
+    "photo_url": "https://media.licdn.com/dms/image/v2/C4E03AQFA8mH51pSpSQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1578349255285?e=1779321600&v=beta&t=Na7N0hlBeEQID2NCYxroAuPMDh48JMnPRoi6NzpVZpY",
     "confidence": 1.0,
+    "gender": "male",
     "company": "Wolfberg",
     "previous_companies": [
       "Boston Consulting Group",
@@ -1959,11 +2042,11 @@
   "category": "Technical",
 
   "identified_person": {
-    "name": "Manuel Valentim Loureiro",
+    "name": "Manuel Loureiro",
     "confidence": 0.96,
     "linkedin_url": "https://ie.linkedin.com/in/manuelloureiro",
-"photo_url" : "https://media.licdn.com/dms/image/v2/C5603AQE27-z02-bUGA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1554731969797?e=1779321600&v=beta&t=Wti20TiKJG6ONRDgznjlMUt5t_7hTzLScPZZXggCDSI",
-	"gender" : "male",
+    "photo_url": "https://media.licdn.com/dms/image/v2/C5603AQE27-z02-bUGA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1554731969797?e=1779321600&v=beta&t=Wti20TiKJG6ONRDgznjlMUt5t_7hTzLScPZZXggCDSI",
+    "gender": "male",
     "company": "Aer Lingus",
     "previous_company": "Huawei Ireland Research Center",
     "role": "Lead AI Engineer",
@@ -2112,8 +2195,8 @@
     "name": "Lyndon Leggate",
     "confidence": 1.0,
     "linkedin_url": "https://www.linkedin.com/in/lyndonleggate/",
-"photo_url" : "https://media.licdn.com/dms/image/v2/C4E03AQFd_VJS3456hQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1579634991180?e=1779321600&v=beta&t=naSq2tEkm5I9FAKaypIffJZeY3ZbQFRfQPGfkEJloSs",
-	"gender" : "male",
+    "photo_url": "https://media.licdn.com/dms/image/v2/C4E03AQFd_VJS3456hQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1579634991180?e=1779321600&v=beta&t=naSq2tEkm5I9FAKaypIffJZeY3ZbQFRfQPGfkEJloSs",
+    "gender": "male",
     "roles": [
       "CTO, Automotive Marketplace Startup",
       "AWS Hero (AI)",
@@ -2128,7 +2211,7 @@
       "AWS Hero (AI)",
       "Founded AWS DeepRacer global community (50,000+ members)",
       "Built Callouts app used in Coast Guard operations",
-      "Multiple startup attempts across various domains"
+      "Multiple startup attempts across fintech and AI"
     ],
     "interests": [
       "agentic AI",
@@ -2243,12 +2326,24 @@
   "category": "Technical",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.35,
-    "linkedin_url": null,
-    "company": "Global Biopharma (multiple)",
-    "role": "Senior Process / Manufacturing Engineer",
-    "notes": "Distinct signals (Irish international tag rugby captain + Lean Six Sigma Black Belt + sterile biologics manufacturing + recent 5-month travel break) narrow the pool, but no single high-confidence public match without deeper cross-referencing."
+    "name": "Catherine Galvin",
+    "confidence": 0.98,
+    "linkedin_url": "https://www.linkedin.com/in/catherinegalvinmeng/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/C5603AQGzOl2f_6FwbA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1516957036551?e=1779321600&v=beta&t=P0RXRpZJFo2sncz9Pvf-TmW4LOFu21YK9XTdcMMSW24",
+    "gender": "female",
+    "company": "Amgen Ireland",
+    "role": "Fill Finish Manufacturing / Chartered Chemical Engineer",
+    "notes": "LinkedIn profile directly matches 7+ years Irish pharma/biotech, sterile biologics fill-finish, Grade A syringe filling isolator ownership, Lean Six Sigma Black Belt, 24/7 shift team of 20, motorbikes, DIY, and captain of the Irish Women's Tag Rugby Team. Public UCD sources also match Intel Masters in Chemical Engineering."
+  },
+
+  "identified_person": {
+    "name": "Catherine Galvin",
+    "confidence": 0.98,
+    "linkedin_url": "https://www.linkedin.com/in/catherinegalvinmeng/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/C5603AQGzOl2f_6FwbA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1516957036551?e=1779321600&v=beta&t=P0RXRpZJFo2sncz9Pvf-TmW4LOFu21YK9XTdcMMSW24",
+    "gender": "female",
+    "company": "Amgen Ireland",
+    "role": "Fill Finish Manufacturing Engineer"
   },
 
   "profile_summary": {
@@ -2393,12 +2488,24 @@
   "category": "Technical",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.25,
-    "linkedin_url": null,
+    "name": "Ha Eun Ruppelt",
+    "confidence": 0.98,
+    "linkedin_url": "https://www.linkedin.com/in/ha-eun-ruppelt/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQHby9lc2CQO0Q/profile-displayphoto-crop_800_800/B4EZfqU5TXHgAI-/0/1751983042605?e=1779321600&v=beta&t=yerQWOi6-IZokiSuUbtTTmUA1j-STODaS-W3UidjLUk",
+    "gender": "female",
     "location": "Ireland (global background)",
     "role": "Senior Operations Leader / Founder",
-    "notes": "Signals (23+ years maritime/energy ops, IESE Global EMBA, KIA background, recent Korea/Japan research) narrow the pool but no single high-confidence public match."
+    "notes": "LinkedIn profile exactly matches 23+ years in maritime and energy, IESE Global Executive MBA, silver economy focus, deliberate sabbatical, and recent Korea/Japan aging-society research."
+  },
+
+  "identified_person": {
+    "name": "Ha Eun Ruppelt",
+    "confidence": 0.98,
+    "linkedin_url": "https://www.linkedin.com/in/ha-eun-ruppelt/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQHby9lc2CQO0Q/profile-displayphoto-crop_800_800/B4EZfqU5TXHgAI-/0/1751983042605?e=1779321600&v=beta&t=yerQWOi6-IZokiSuUbtTTmUA1j-STODaS-W3UidjLUk",
+    "gender": "female",
+    "company": "Self-Employed",
+    "role": "Entrepreneur-in-Formation"
   },
 
   "profile_summary": {
@@ -2700,15 +2807,15 @@
   "category": "Technical",
 
   "identified_person": {
-    "name": "Alice Shaughnessy",
+    "name": "Shocks Alice",
     "confidence": 0.96,
     "linkedin_url": "https://www.linkedin.com/in/alice-shaughnessy-90ba12195",
-"photo_url" : "https://media.licdn.com/dms/image/v2/D5603AQE-ik1c7MLKUw/profile-displayphoto-crop_800_800/B56ZeHcoIVHQAQ-/0/1750324118602?e=1779321600&v=beta&t=poaXhGuU5fPFFj3mvPRSCdpqg6iH1Lfafup_GmDymlQ",
-	"gender" : "female",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D5603AQE-ik1c7MLKUw/profile-displayphoto-crop_800_800/B56ZeHcoIVHQAQ-/0/1750324118602?e=1779321600&v=beta&t=poaXhGuU5fPFFj3mvPRSCdpqg6iH1Lfafup_GmDymlQ",
+    "gender": "female",
     "company": "Luminate",
     "previous_company": "Mirr",
     "role": "Clinical Engineering Specialist",
-    "notes": "Direct match across Luminate Clinical Engineering Specialist, Lily/Lilac device work, software/prototyping responsibilities, and Mirr founder history"
+    "notes": "Published Future Founders cohort list names this attendee as Shocks Alice. Public LinkedIn/SciFest snippets connect the same person to Alice Shaughnessy, Luminate Clinical Engineering, Lily/Lilac device work, software/prototyping responsibilities, Mirr founder history, and aliceshocks.com."
   },
 
   "profile_summary": {
@@ -2849,12 +2956,24 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.45,
-    "linkedin_url": null,
+    "name": "Stephen McNulty",
+    "confidence": 0.96,
+    "linkedin_url": "https://www.linkedin.com/in/stephen-mcnulty-459628a/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQGSmaCe4s3JyA/profile-displayphoto-crop_800_800/B4EZvV4YBsKkAI-/0/1768819884925?e=1779321600&v=beta&t=VJAugfQ9VUNe8eJTrZYQ7BGAVMsI43DYP9SEOk0QGKM",
+    "gender": "male",
     "location": "Ireland",
     "role": "Founder / Venture Builder / EI Business Partner",
-    "notes": "Distinct signals (10y deep-tech founder, ~€7M raised, Enterprise Ireland Business Partner since ~2013, environmental monitoring + AI pivot) narrow pool significantly, but multiple plausible matches without a single definitive fingerprint."
+    "notes": "LinkedIn and Ambisense public sources match Enterprise Ireland Business Partner since 2013, Co-founder/CEO of Ambisense for 10 years, environmental/deep-tech commercialisation, and current venture-building/advisory work."
+  },
+
+  "identified_person": {
+    "name": "Stephen McNulty",
+    "confidence": 0.96,
+    "linkedin_url": "https://www.linkedin.com/in/stephen-mcnulty-459628a/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQGSmaCe4s3JyA/profile-displayphoto-crop_800_800/B4EZvV4YBsKkAI-/0/1768819884925?e=1779321600&v=beta&t=VJAugfQ9VUNe8eJTrZYQ7BGAVMsI43DYP9SEOk0QGKM",
+    "gender": "male",
+    "company": "Inventive Leap Ltd",
+    "role": "Entrepreneur, Founder, Advisor"
   },
 
   "profile_summary": {
@@ -2997,12 +3116,24 @@
   "category": "Technical",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.55,
-    "linkedin_url": null,
+    "name": "Aness Qawlaq",
+    "confidence": 0.97,
+    "linkedin_url": "https://www.linkedin.com/in/aness-qawlaq/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQG37XrGg4aDxQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1682539267683?e=1779321600&v=beta&t=umtnCRZX8FSl9RXDcDa2gQOedzPXcjtEhwyh7UiYbnk",
+    "gender": "male",
     "location": "Ireland/UK/EU (likely)",
     "role": "Digital Design Engineer (Quantum Computing) / Technical Co-Founder",
-    "notes": "Strong narrowing signals (quantum silicon startup + IEEE-SOCC tiny-RAM transformer + Microsoft stints + Patch accelerator + Passionfruit co-founder). Exact identity requires paper/author cross-reference."
+    "notes": "LinkedIn profile and public sources match Equal1 quantum computing, KWT-Tiny IEEE-SOCC transformer in 64kB RAM, Microsoft hackathon, Patch participation, and Passionfruit/Strive co-founder evidence."
+  },
+
+  "identified_person": {
+    "name": "Aness Qawlaq",
+    "confidence": 0.97,
+    "linkedin_url": "https://www.linkedin.com/in/aness-qawlaq/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQG37XrGg4aDxQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1682539267683?e=1779321600&v=beta&t=umtnCRZX8FSl9RXDcDa2gQOedzPXcjtEhwyh7UiYbnk",
+    "gender": "male",
+    "company": "Equal1",
+    "role": "Building Quantum Computers"
   },
 
   "profile_summary": {
@@ -3149,12 +3280,12 @@
     "name": "Luke Barrington",
     "confidence": 0.97,
     "linkedin_url": "https://www.linkedin.com/in/luke-barrington-8866518",
-"photo_url" : "https://media.licdn.com/dms/image/v2/C4E03AQF_xzyvVafPSg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1517727182067?e=1779321600&v=beta&t=DBNFZeoBpcVqHVzvBXS-L6bjktcGpEBWZeYCdWJSjNg",
-	"gender" : "male",
     "company": "Google",
     "previous_company": "Tomnod",
     "role": "Director of Climate, Weather & Geospatial AI",
-    "notes": "Direct match across Google/X climate-weather-geospatial AI leadership, ML PhD, Tomnod founder/CTO exit, Dublin origin, and Genghis Khan tomb signal"
+    "notes": "Direct match across Google/X climate-weather-geospatial AI leadership, ML PhD, Tomnod founder/CTO exit, Dublin origin, and Genghis Khan tomb signal",
+    "gender": "male",
+    "photo_url": "https://media.licdn.com/dms/image/v2/C4E03AQF_xzyvVafPSg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1517727182067?e=1779321600&v=beta&t=DBNFZeoBpcVqHVzvBXS-L6bjktcGpEBWZeYCdWJSjNg"
   },
 
   "profile_summary": {
@@ -3295,13 +3426,24 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.75,
-    "linkedin_url": null,
+    "name": "Olly Rhode",
+    "confidence": 0.9,
+    "linkedin_url": "https://linkedin.com/in/oliver-rhode-450372220",
+    "gender": "male",
     "project": "https://climatemot.com",
     "previous_role": "Head of Climate Adaptation Finance (UK FCDO)",
     "current": "Imperial College MSc International Finance",
-    "notes": "Very narrow profile (FCDO climate finance lead + Climate MOT builder). Identity can be confirmed via domain or Imperial cohort search."
+    "notes": "Published Future Founders cohort list names this attendee as Olly Rhode. Public LinkedIn result for Oliver Rhode matches British diplomat, FCDO Head of Climate Adaptation Finance, climate finance/geopolitics/policy focus, year out for university, and language background. Climate MOT site confirms the project but does not publish a founder name."
+  },
+
+  "identified_person": {
+    "name": "Olly Rhode",
+    "confidence": 0.9,
+    "linkedin_url": "https://linkedin.com/in/oliver-rhode-450372220",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQHfH-xwPJyT1A/profile-displayphoto-crop_800_800/B4EZm.QuQXHcAI-/0/1759833679803?e=1779321600&v=beta&t=i60z4fKfgMV6YcZCMEVKBiXHSha6XCBQDLU_pGMYcVU",
+    "gender": "male",
+    "company": "Foreign, Commonwealth and Development Office",
+    "role": "Head of Climate Adaptation Finance"
   },
 
   "profile_summary": {
@@ -3431,9 +3573,8 @@
       "Startup transition"
     ],
     "uncertainties": [
-      "No public name tied to Climate MOT yet",
-      "Multiple diplomats fit partial profile",
-      "Requires domain lookup for exact identity"
+      "Climate MOT does not publicly name its founder",
+      "LinkedIn profile photo URL is blocked behind LinkedIn/authwall and has not been captured"
     ]
   }
 },
@@ -3443,16 +3584,28 @@
   "category": "Technical",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.65,
-    "linkedin_url": null,
+    "name": "Patrick Lu",
+    "confidence": 0.93,
+    "linkedin_url": "https://www.linkedin.com/in/patrick-lu/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQGLhCa42Tq21A/profile-displayphoto-crop_800_800/B4EZoli5q8GcAI-/0/1761566500242?e=1779321600&v=beta&t=n70dG9Jpqky4GuljVMWTDVWMwbcY68OrOs6GG54eboc",
+    "gender": "male",
     "companies": [
       "Protex AI",
       "Source.ag",
       "WP Engine"
     ],
     "role": "Senior Software Engineer",
-    "notes": "Distinct career path (WP Engine → Source.ag → Protex AI) combined with Irish context and heat pump interest narrows to a small set of candidates"
+    "notes": "LinkedIn profile directly matches Ireland-based software engineer at Protex AI with recent Source.ag and WP Engine history. Heat-pump interest is from attendee notes rather than public LinkedIn."
+  },
+
+  "identified_person": {
+    "name": "Patrick Lu",
+    "confidence": 0.93,
+    "linkedin_url": "https://www.linkedin.com/in/patrick-lu/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQGLhCa42Tq21A/profile-displayphoto-crop_800_800/B4EZoli5q8GcAI-/0/1761566500242?e=1779321600&v=beta&t=n70dG9Jpqky4GuljVMWTDVWMwbcY68OrOs6GG54eboc",
+    "gender": "male",
+    "company": "Protex AI",
+    "role": "Software Engineer"
   },
 
   "profile_summary": {
@@ -3595,14 +3748,14 @@
     "name": "Ciaran Chaney",
     "confidence": 0.96,
     "linkedin_url": "https://www.linkedin.com/in/ciaranchaney",
-"photo_url" : "https://media.licdn.com/dms/image/v2/D4E03AQH1CihCfJMUXA/profile-displayphoto-crop_800_800/B4EZgFdD2SGcAQ-/0/1752438161416?e=1779321600&v=beta&t=0P0mlNlU63oAVgAFSocXa6_HBA2io_U2MMpMX6Lm2fE",
-	"gender" : "male",
     "companies": [
       "Personio",
       "Slack"
     ],
     "role": "Director of Real Estate, Workplace & IT",
-    "notes": "Direct match across Slack Workplace Manager/Regional Workplace Manager history, Personio workplace/real-estate leadership, and public workplace systems writing"
+    "notes": "Direct match across Slack Workplace Manager/Regional Workplace Manager history, Personio workplace/real-estate leadership, and public workplace systems writing",
+    "gender": "male",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQH1CihCfJMUXA/profile-displayphoto-crop_800_800/B4EZgFdD2SGcAQ-/0/1752438161416?e=1779321600&v=beta&t=0P0mlNlU63oAVgAFSocXa6_HBA2io_U2MMpMX6Lm2fE"
   },
 
   "profile_summary": {

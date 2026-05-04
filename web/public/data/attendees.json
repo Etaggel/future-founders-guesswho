@@ -127,24 +127,22 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": "Ellen Leonard Bates",
+    "name": "Keith Allen",
     "confidence": 0.99,
-    "linkedin_url": "https://www.linkedin.com/in/ellenleonardbates",
-    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQHRDnbMzQ9GkA/profile-displayphoto-scale_200_200/B4EZj3AIC6GwAg-/0/1756490663062?e=2147483647&v=beta&t=MmROq995ez4Qc58dG2BC4Geibif2vBf5J4TvGM3IezE",
-    "gender": "female",
-    "company": "Previously Diageo, Mars, AB InBev, Ferrero, etc.",
-    "role": "Senior Commercial Strategy / Consumer Insights Leader",
-    "notes": "User-reviewed match. Public snippets strongly connect Ellen Leonard Bates to Diageo, ADHD/autism, and PRISM/neurodiversity ERG leadership; the broader multi-FMCG, CHIMP, Australia/NZ, and contract-brewing clues remain private-context signals."
+    "linkedin_url": "https://www.linkedin.com/in/keifallen/",
+    "gender": "male",
+    "company": "Diageo",
+    "role": "Senior Category Development Manager",
+    "notes": "Published Future Founders cohort list identifies this attendee as Keith Allen. Public LinkedIn snippets match Diageo, Mars, AB InBev, Ferrero, Britvic, and category/insights leadership signals."
   },
 
   "identified_person": {
-    "name": "Ellen Leonard Bates",
+    "name": "Keith Allen",
     "confidence": 0.99,
-    "linkedin_url": "https://www.linkedin.com/in/ellenleonardbates",
-    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQHRDnbMzQ9GkA/profile-displayphoto-scale_200_200/B4EZj3AIC6GwAg-/0/1756490663062?e=2147483647&v=beta&t=MmROq995ez4Qc58dG2BC4Geibif2vBf5J4TvGM3IezE",
-    "gender": "female",
+    "linkedin_url": "https://www.linkedin.com/in/keifallen/",
+    "gender": "male",
     "company": "Diageo",
-    "role": "Commercial Strategy / Partnerships Leader"
+    "role": "Senior Category Development Manager"
   },
 
   "profile_summary": {
@@ -676,24 +674,22 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": "Ciaran Nolan",
+    "name": "Leena Kaloinen",
     "confidence": 0.82,
-    "linkedin_url": "https://www.linkedin.com/in/ciarannolan/",
-    "photo_url": "https://media.licdn.com/dms/image/v2/C4D03AQFEBslnp7hSRw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1616601648241?e=1779321600&v=beta&t=PxA26rpBIEdct-bhyiR8z1YdCBHPMjXqOzkYw-lRhy0",
-    "gender": "male",
-    "company": "Formerly Intercom, Salesforce",
-    "role": "Head of EMEA Commercial / GTM Leader",
-    "notes": "LinkedIn and public search match senior Intercom EMEA sales leadership and earlier Salesforce EMEA roles. Finnish-Irish and logistics-startup details remain unverified publicly."
+    "linkedin_url": "https://www.linkedin.com/in/leenakaloinen/",
+    "gender": "female",
+    "company": "Roadie",
+    "role": "Head of Sales",
+    "notes": "Published Future Founders cohort list identifies this attendee as Leena Kaloinen. Public LinkedIn snippets match Dublin-based Head of Sales at Roadie / Backstage IDP. Earlier Ciaran Nolan inference was not on the organiser list."
   },
 
   "identified_person": {
-    "name": "Ciaran Nolan",
+    "name": "Leena Kaloinen",
     "confidence": 0.82,
-    "linkedin_url": "https://www.linkedin.com/in/ciarannolan/",
-    "photo_url": "https://media.licdn.com/dms/image/v2/C4D03AQFEBslnp7hSRw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1616601648241?e=1779321600&v=beta&t=PxA26rpBIEdct-bhyiR8z1YdCBHPMjXqOzkYw-lRhy0",
-    "gender": "male",
-    "company": "Intercom",
-    "role": "Sales Leader"
+    "linkedin_url": "https://www.linkedin.com/in/leenakaloinen/",
+    "gender": "female",
+    "company": "Roadie",
+    "role": "Head of Sales"
   },
 
   "profile_summary": {
@@ -981,10 +977,10 @@
   "category": "Technical",
 
   "identified_person": {
-    "name": "Oisín Thomas",
+    "name": "Oisín Thomas Morrin",
     "confidence": 0.88,
-    "linkedin_url": "https://www.linkedin.com/in/oisin-tm/",
-    "photo_url": "/images/attendees/oisin-thomas.png",
+    "linkedin_url": "https://www.linkedin.com/in/oisin-thomas-morrin/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4D03AQFZkY1ooq-zFA/profile-displayphoto-crop_800_800/B4DZ3imjXKGwAI-/0/1777623252228?e=1779321600&v=beta&t=AGRGAZEZM-LoldtqH3TxlNOGrcZ1Okciu5rFKcnZ9Gk",
     "gender": "male",
     "website": "https://caideiseach.com"
   },
@@ -1121,12 +1117,21 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": null,
-    "confidence": 0.2,
-    "linkedin_url": null,
-    "company": "Real Estate Investment Firm (Ireland/UK likely)",
+    "name": "Derek Poppinga",
+    "confidence": 0.98,
+    "linkedin_url": "https://www.linkedin.com/in/derekpoppinga/",
+    "company": "MM Capital",
     "role": "Managing Director",
-    "notes": "Insufficient unique identifiers. Likely senior but not public-facing. Multiple candidates across Irish real estate investment firms."
+    "notes": "Published Future Founders cohort list identifies this attendee as Derek Poppinga. Public MM Capital and LinkedIn snippets match Managing Director, real estate investment, founder/co-founder, Morgan Stanley/Bridgewater/H.I.G. background, and Trinity/King's Inns education signals."
+  },
+
+  "identified_person": {
+    "name": "Derek Poppinga",
+    "confidence": 0.98,
+    "linkedin_url": "https://www.linkedin.com/in/derekpoppinga/",
+    "gender": "male",
+    "company": "MM Capital",
+    "role": "Managing Director"
   },
 
   "profile_summary": {
@@ -1426,24 +1431,22 @@
   "category": "Technical",
 
   "likely_match": {
-    "name": "Chisepo Chirwa",
+    "name": "Wesley Chege",
     "confidence": 0.93,
-    "linkedin_url": "https://www.linkedin.com/in/chisepo-chirwa/",
-    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQHNhNgojDGEIA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718224537710?e=1779321600&v=beta&t=9H8i_fBADPJYJESefAshFpI_-WFkyw2Tuki6fmyo7LU",
+    "linkedin_url": "https://www.linkedin.com/in/weschege/",
     "gender": "male",
-    "location": "San Francisco Bay Area / Zambia",
-    "role": "Co-Founder & CEO, Bosso",
-    "notes": "LinkedIn and public Africa Tech Summit/UNDP profiles match Bosso, AI-powered construction procurement, embedded finance, Africa housing gap, serial-founder background, and prior retail/POS startup. Dogpatch/Antler and digital-addressing clues remain unverified and may have been noisy/merged notes."
+    "location": "Kenya / Ireland",
+    "role": "Product Leader and Startup Coach",
+    "notes": "Published Future Founders cohort list identifies this attendee as Wesley Chege. Public LinkedIn snippets match product/startup coaching, emerging markets, OkHi digital addressing, Sendy product leadership, and software engineering signals. Earlier Chisepo Chirwa/Bosso inference was not on the organiser list."
   },
 
   "identified_person": {
-    "name": "Chisepo Chirwa",
+    "name": "Wesley Chege",
     "confidence": 0.93,
-    "linkedin_url": "https://www.linkedin.com/in/chisepo-chirwa/",
-    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQHNhNgojDGEIA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718224537710?e=1779321600&v=beta&t=9H8i_fBADPJYJESefAshFpI_-WFkyw2Tuki6fmyo7LU",
+    "linkedin_url": "https://www.linkedin.com/in/weschege/",
     "gender": "male",
-    "company": "Bosso",
-    "role": "Co-Founder & CEO"
+    "company": "Jumba / OkHi / Sendy",
+    "role": "Product Leader and Startup Coach"
   },
 
   "profile_summary": {
@@ -2039,7 +2042,7 @@
   "category": "Technical",
 
   "identified_person": {
-    "name": "Manuel Valentim Loureiro",
+    "name": "Manuel Loureiro",
     "confidence": 0.96,
     "linkedin_url": "https://ie.linkedin.com/in/manuelloureiro",
     "photo_url": "https://media.licdn.com/dms/image/v2/C5603AQE27-z02-bUGA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1554731969797?e=1779321600&v=beta&t=Wti20TiKJG6ONRDgznjlMUt5t_7hTzLScPZZXggCDSI",
@@ -2804,7 +2807,7 @@
   "category": "Technical",
 
   "identified_person": {
-    "name": "Alice Shaughnessy",
+    "name": "Shocks Alice",
     "confidence": 0.96,
     "linkedin_url": "https://www.linkedin.com/in/alice-shaughnessy-90ba12195",
     "photo_url": "https://media.licdn.com/dms/image/v2/D5603AQE-ik1c7MLKUw/profile-displayphoto-crop_800_800/B56ZeHcoIVHQAQ-/0/1750324118602?e=1779321600&v=beta&t=poaXhGuU5fPFFj3mvPRSCdpqg6iH1Lfafup_GmDymlQ",
@@ -2812,7 +2815,7 @@
     "company": "Luminate",
     "previous_company": "Mirr",
     "role": "Clinical Engineering Specialist",
-    "notes": "Direct match across Luminate Clinical Engineering Specialist, Lily/Lilac device work, software/prototyping responsibilities, and Mirr founder history"
+    "notes": "Published Future Founders cohort list names this attendee as Shocks Alice. Public LinkedIn/SciFest snippets connect the same person to Alice Shaughnessy, Luminate Clinical Engineering, Lily/Lilac device work, software/prototyping responsibilities, Mirr founder history, and aliceshocks.com."
   },
 
   "profile_summary": {
@@ -3113,7 +3116,7 @@
   "category": "Technical",
 
   "likely_match": {
-    "name": "Aness Al-Qawlaq",
+    "name": "Aness Qawlaq",
     "confidence": 0.97,
     "linkedin_url": "https://www.linkedin.com/in/aness-qawlaq/",
     "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQG37XrGg4aDxQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1682539267683?e=1779321600&v=beta&t=umtnCRZX8FSl9RXDcDa2gQOedzPXcjtEhwyh7UiYbnk",
@@ -3124,7 +3127,7 @@
   },
 
   "identified_person": {
-    "name": "Aness Al-Qawlaq",
+    "name": "Aness Qawlaq",
     "confidence": 0.97,
     "linkedin_url": "https://www.linkedin.com/in/aness-qawlaq/",
     "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQG37XrGg4aDxQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1682539267683?e=1779321600&v=beta&t=umtnCRZX8FSl9RXDcDa2gQOedzPXcjtEhwyh7UiYbnk",
@@ -3423,18 +3426,18 @@
   "category": "Commercial",
 
   "likely_match": {
-    "name": "Oliver Rhode",
+    "name": "Olly Rhode",
     "confidence": 0.9,
     "linkedin_url": "https://linkedin.com/in/oliver-rhode-450372220",
     "gender": "male",
     "project": "https://climatemot.com",
     "previous_role": "Head of Climate Adaptation Finance (UK FCDO)",
     "current": "Imperial College MSc International Finance",
-    "notes": "Public LinkedIn result for Oliver Rhode matches British diplomat, FCDO Head of Climate Adaptation Finance, climate finance/geopolitics/policy focus, year out for university, and language background. Climate MOT site confirms the project but does not publish a founder name."
+    "notes": "Published Future Founders cohort list names this attendee as Olly Rhode. Public LinkedIn result for Oliver Rhode matches British diplomat, FCDO Head of Climate Adaptation Finance, climate finance/geopolitics/policy focus, year out for university, and language background. Climate MOT site confirms the project but does not publish a founder name."
   },
 
   "identified_person": {
-    "name": "Oliver Rhode",
+    "name": "Olly Rhode",
     "confidence": 0.9,
     "linkedin_url": "https://linkedin.com/in/oliver-rhode-450372220",
     "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQHfH-xwPJyT1A/profile-displayphoto-crop_800_800/B4EZm.QuQXHcAI-/0/1759833679803?e=1779321600&v=beta&t=i60z4fKfgMV6YcZCMEVKBiXHSha6XCBQDLU_pGMYcVU",
