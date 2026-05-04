@@ -130,6 +130,7 @@
     "name": "Keith Allen",
     "confidence": 0.99,
     "linkedin_url": "https://www.linkedin.com/in/keifallen/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQGeMUDF0jcYLg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1685005014139?e=1779321600&v=beta&t=YZlkE1XdMwBuvuGAusQxXvWZ2scY0_tJUGOHLiJPx-M",
     "gender": "male",
     "company": "Diageo",
     "role": "Senior Category Development Manager",
@@ -140,6 +141,7 @@
     "name": "Keith Allen",
     "confidence": 0.99,
     "linkedin_url": "https://www.linkedin.com/in/keifallen/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4E03AQGeMUDF0jcYLg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1685005014139?e=1779321600&v=beta&t=YZlkE1XdMwBuvuGAusQxXvWZ2scY0_tJUGOHLiJPx-M",
     "gender": "male",
     "company": "Diageo",
     "role": "Senior Category Development Manager"
@@ -677,6 +679,7 @@
     "name": "Leena Kaloinen",
     "confidence": 0.82,
     "linkedin_url": "https://www.linkedin.com/in/leenakaloinen/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4D03AQEU_BVTsV71IQ/profile-displayphoto-crop_800_800/B4DZxNGXvhJkAI-/0/1770820046464?e=1779321600&v=beta&t=VDV-OFQa0Ehb7a3O-3t5QiUJ4m-NHABO9uru15mxsUE",
     "gender": "female",
     "company": "Roadie",
     "role": "Head of Sales",
@@ -687,6 +690,7 @@
     "name": "Leena Kaloinen",
     "confidence": 0.82,
     "linkedin_url": "https://www.linkedin.com/in/leenakaloinen/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4D03AQEU_BVTsV71IQ/profile-displayphoto-crop_800_800/B4DZxNGXvhJkAI-/0/1770820046464?e=1779321600&v=beta&t=VDV-OFQa0Ehb7a3O-3t5QiUJ4m-NHABO9uru15mxsUE",
     "gender": "female",
     "company": "Roadie",
     "role": "Head of Sales"
@@ -1120,6 +1124,7 @@
     "name": "Derek Poppinga",
     "confidence": 0.98,
     "linkedin_url": "https://www.linkedin.com/in/derekpoppinga/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/C4E03AQFYGjqB2dVlng/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1599812908760?e=1779321600&v=beta&t=MHFFMB10GuH0VqLBKD08aJZgjqJ3W-WuvGB13nKGxuA",
     "company": "MM Capital",
     "role": "Managing Director",
     "notes": "Published Future Founders cohort list identifies this attendee as Derek Poppinga. Public MM Capital and LinkedIn snippets match Managing Director, real estate investment, founder/co-founder, Morgan Stanley/Bridgewater/H.I.G. background, and Trinity/King's Inns education signals."
@@ -1129,6 +1134,7 @@
     "name": "Derek Poppinga",
     "confidence": 0.98,
     "linkedin_url": "https://www.linkedin.com/in/derekpoppinga/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/C4E03AQFYGjqB2dVlng/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1599812908760?e=1779321600&v=beta&t=MHFFMB10GuH0VqLBKD08aJZgjqJ3W-WuvGB13nKGxuA",
     "gender": "male",
     "company": "MM Capital",
     "role": "Managing Director"
@@ -1434,6 +1440,7 @@
     "name": "Wesley Chege",
     "confidence": 0.93,
     "linkedin_url": "https://www.linkedin.com/in/weschege/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4D03AQEZU4nsC8EgMQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1714932960256?e=1779321600&v=beta&t=cUwQPHYh_10PAkYzW8ib_NgrPz9oejSKQE3EkNNSbiI",
     "gender": "male",
     "location": "Kenya / Ireland",
     "role": "Product Leader and Startup Coach",
@@ -1444,6 +1451,7 @@
     "name": "Wesley Chege",
     "confidence": 0.93,
     "linkedin_url": "https://www.linkedin.com/in/weschege/",
+    "photo_url": "https://media.licdn.com/dms/image/v2/D4D03AQEZU4nsC8EgMQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1714932960256?e=1779321600&v=beta&t=cUwQPHYh_10PAkYzW8ib_NgrPz9oejSKQE3EkNNSbiI",
     "gender": "male",
     "company": "Jumba / OkHi / Sendy",
     "role": "Product Leader and Startup Coach"
@@ -2807,7 +2815,7 @@
   "category": "Technical",
 
   "identified_person": {
-    "name": "Shocks Alice",
+    "name": "Alice Shaughnessy",
     "confidence": 0.96,
     "linkedin_url": "https://www.linkedin.com/in/alice-shaughnessy-90ba12195",
     "photo_url": "https://media.licdn.com/dms/image/v2/D5603AQE-ik1c7MLKUw/profile-displayphoto-crop_800_800/B56ZeHcoIVHQAQ-/0/1750324118602?e=1779321600&v=beta&t=poaXhGuU5fPFFj3mvPRSCdpqg6iH1Lfafup_GmDymlQ",
@@ -2815,7 +2823,7 @@
     "company": "Luminate",
     "previous_company": "Mirr",
     "role": "Clinical Engineering Specialist",
-    "notes": "Published Future Founders cohort list names this attendee as Shocks Alice. Public LinkedIn/SciFest snippets connect the same person to Alice Shaughnessy, Luminate Clinical Engineering, Lily/Lilac device work, software/prototyping responsibilities, Mirr founder history, and aliceshocks.com."
+    "notes": "Published Future Founders cohort list names this attendee as Alice Shaughnessy. Public LinkedIn/SciFest snippets connect the same person to Alice Shaughnessy, Luminate Clinical Engineering, Lily/Lilac device work, software/prototyping responsibilities, Mirr founder history, and aliceshocks.com."
   },
 
   "profile_summary": {
