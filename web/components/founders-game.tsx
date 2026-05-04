@@ -195,9 +195,10 @@ export function FoundersGame() {
       const generated = (await response.json()) as { facts?: Array<{ text: string; truth: boolean }> };
       const facts = generated.facts ?? [];
       if (facts.length === 3) {
+        const shuffledFacts = shuffle(facts);
         setFactsChallenge({
-          options: facts.map((fact) => sanitizeFactForAttendee(fact.text, target)),
-          lieIndex: facts.findIndex((fact) => !fact.truth),
+          options: shuffledFacts.map((fact) => sanitizeFactForAttendee(fact.text, target)),
+          lieIndex: shuffledFacts.findIndex((fact) => !fact.truth),
         });
       }
     } catch {
@@ -864,7 +865,7 @@ function attendeePhoto(attendee: Attendee) {
 }
 
 function founderDisplayName(attendee: Attendee) {
-  return attendeePhoto(attendee) && linkedinUrl(attendee) ? displayName(attendee) : `Founder ${attendee.id}`;
+  return isNamed(attendee) ? displayName(attendee) : `Founder ${attendee.id}`;
 }
 
 function founderPickerLabel(attendee: Attendee) {
